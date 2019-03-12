@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	<!-- Servlet 1 -->
+	<servlet>
+		<description>Sample Servlet</description>
+		<servlet-name>Servlet1</servlet-name>
+		<servlet-class>aiss.Servlet1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet1</servlet-name>
+		<url-pattern>/servlet1</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Servlet 2 (Form processing) -->
+    <servlet>
+		<description>Servlet 2 (request info)</description>
+		<servlet-name>Servlet2</servlet-name>
+		<servlet-class>aiss.Servlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet2</servlet-name>
+		<url-pattern>/servlet2</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Servlet 3 (Contact list) -->
+	<servlet>
+		<description></description>
+		<display-name>Servlet3</display-name>
+		<servlet-name>Servlet3</servlet-name>
+		<servlet-class>aiss.Servlet3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet3</servlet-name>
+		<url-pattern>/contacts</url-pattern>
+	</servlet-mapping>
+
+</web-app>
