@@ -7,12 +7,25 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<groupId>aiss</groupId>
-	<artifactId>lab2-java-server</artifactId>
+	<artifactId>project_name</artifactId>
+
+	<!-- Restlet repository -->
+	<repositories>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Restlet repository</name>
+			<url>https://maven.restlet.com</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<appengine.version>1.9.71</appengine.version>	<!-- AppEngine version -->
 		<servlet.version>2.5</servlet.version>	<!-- Servlet version -->
 		<jslt.version>1.2</jslt.version>	<!-- JSLT version -->
+		<restlet.version>2.3.7</restlet.version> <!-- Restlet version -->
+		<resteasy.version>2.3.5.Final</resteasy.version> <!-- RESTEasy version -->
+		<jackson.version>2.8.2</jackson.version> <!-- Jackson version -->
+		<google.client.version>1.20.0</google.client.version> <!-- Google HTTP Client version -->
 		<junit.version>4.12</junit.version> <!-- JUnit version -->
 		<mockito.version>2.0.2-beta</mockito.version> <!-- Mockito version -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,13 +73,82 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<!-- Jackson 2 core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- Restlet -->
+		<dependency>
+			<groupId>org.restlet.jse</groupId>
+			<artifactId>org.restlet</artifactId>
+			<version>${restlet.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.restlet.jse</groupId>
+			<artifactId>org.restlet.ext.jackson</artifactId>
+			<version>${restlet.version}</version>
+		</dependency>
+
+		<!-- RESTEasy -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+		<!-- Google HTTP Client Library -->
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client</artifactId>
+			<version>${google.client.version}</version>
+		</dependency>
+
+		<!-- Google HTTP Client Library (AppEngine extension) -->
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-appengine</artifactId>
+			<version>${google.client.version}</version>
+		</dependency>
+
+		<!-- Jackson module for Google HTTP Client -->
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client-jackson2</artifactId>
+			<version>${google.client.version}</version>
+		</dependency>
+
+		<!-- Google OAuth Client Library -->
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-servlet</artifactId>
+			<version>${google.client.version}</version>
+		</dependency>
+		
+		<!-- Apache Jetty for Logging -->
+		<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>apache-jsp</artifactId>
+		    <version>9.4.15.v20190215</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 
 		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
 		<plugins>
-			
+
 			<!-- Maven AppEngine plugin -->
 			<plugin>
 				<groupId>com.google.appengine</groupId>
@@ -77,16 +159,17 @@
 					<version>${app.version}</version>
 					<!-- Comment in the below snippet to bind to all IPs instead of just 
 						localhost -->
-					<!--  <address>0.0.0.0</address> --> 
+					<!-- <address>0.0.0.0</address> -->
 					<port>8090</port>
 					<!-- Comment in the below snippet to enable local debugging with a remote 
 						debugger like those included with Eclipse or IntelliJ -->
-					<!-- jvmFlags> <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag> 
-						</jvmFlags -->
+					<jvmFlags>
+						<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+					</jvmFlags>
 				</configuration>
 			</plugin>
 
-			<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static)-->
+			<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static) -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -122,11 +205,31 @@
 				</executions>
 			</plugin>
 
+			<!-- Code Coverage report generation -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-code-coverage-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static)-->
+				<!-- Hot reload of Java and static files (http://stackoverflow.com/questions/21345177/is-there-any-way-to-trigger-the-maven-appengine-devserver-to-auto-refresh-static) -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
