@@ -1,0 +1,4 @@
+Falta poner <<component>> encima de todos los nombres del diagrama de componentes.
+
+Falta poner los dispositivos donde se va a ejecutar (móviles, ordenadores, consolas, etc.
+debajo de <<device>> en la caja de la izquierda.
