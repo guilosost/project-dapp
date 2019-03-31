@@ -1,0 +1,16 @@
+.title {
+    text-align: -webkit-center;
+    font-size:65px;
+    color: white;
+    font-family: perpetua;
+}
+
+.logo-izq {
+    float: left;
+    vertical-align: top;
+}
+
+.logo-dch {
+    float: right;
+    vertical-align: top;
+}
