@@ -1,0 +1,12 @@
+.facebook-button {
+    margin-right: 0;
+    margin-left: 0;
+    margin: 4px;
+    flex: 1 auto;
+    border-color: transparent;
+    background-color: #385499;
+    color: #FFF;
+    background-image: none;
+    border-radius: 5px !important;
+    text-align: center !important;
+}
