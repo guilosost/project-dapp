@@ -1,0 +1,41 @@
+{
+	"Facebook": {
+		"tokenUrl": "https://graph.facebook.com/oauth/access_token",
+		"clientId": "261823598101084",
+		"clientSecret": "3483fcbfadefb84eeffd6c4fd9fe3d4d",
+		"authorizationFormUrl": "https://www.facebook.com/dialog/oauth",
+		"scopes": [
+			"publish_to_groups",
+			"user_age_range",
+			"user_gender",
+			"user_likes",
+			"user_location",
+			"user_photos",
+			"user_tagged_places",
+			"user_posts",
+			"manage_pages",
+			"publish_pages"
+		]
+	},
+	"Twitter": {
+		"tokenUrl": "",
+		"clientId": "",
+		"clientSecret": "",
+		"authorizationFormUrl": "",
+		"scopes": []
+	},
+	"Reddit": {
+		"tokenUrl": "",
+		"clientId": "",
+		"clientSecret": "",
+		"authorizationFormUrl": "",
+		"scopes": []
+	},
+	"Pinterest": {
+		"tokenUrl": "",
+		"clientId": "",
+		"clientSecret": "",
+		"authorizationFormUrl": "",
+		"scopes": []
+	}
+}		
