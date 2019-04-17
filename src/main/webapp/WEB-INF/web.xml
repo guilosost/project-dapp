@@ -1,14 +1,306 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <servlet>
-    <servlet-name>HelloWorld</servlet-name>
-    <servlet-class>aiss.HelloWorldServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HelloWorld</servlet-name>
-    <url-pattern>/helloworld</url-pattern>
-  </servlet-mapping>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<!-- WEBAPP SERVLETS -->
+	<!-- Facebook post -->
+	<servlet>
+		<servlet-name>FacebookPostController</servlet-name>
+		<servlet-class>aiss.controller.FacebookPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookPostController</servlet-name>
+		<url-pattern>/facebookPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Facebook search -->
+	<servlet>
+		<servlet-name>FacebookSearchController</servlet-name>
+		<servlet-class>aiss.controller.FacebookSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookSearchController</servlet-name>
+		<url-pattern>/facebookSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Facebook get -->
+	<servlet>
+		<servlet-name>FacebookGetController</servlet-name>
+		<servlet-class>aiss.controller.FacebookGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookGetController</servlet-name>
+		<url-pattern>/facebookGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Facebook stats -->
+	<servlet>
+		<servlet-name>FacebookStatsController</servlet-name>
+		<servlet-class>aiss.controller.FacebookStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookStatsController</servlet-name>
+		<url-pattern>/facebookStatsController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Twitter post -->
+	<servlet>
+		<servlet-name>TwitterPostController</servlet-name>
+		<servlet-class>aiss.controller.TwitterPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterPostController</servlet-name>
+		<url-pattern>/twitterPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Twitter search -->
+	<servlet>
+		<servlet-name>TwitterSearchController</servlet-name>
+		<servlet-class>aiss.controller.TwitterSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterSearchController</servlet-name>
+		<url-pattern>/twitterSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Twitter get -->
+	<servlet>
+		<servlet-name>TwitterGetController</servlet-name>
+		<servlet-class>aiss.controller.TwitterGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterGetController</servlet-name>
+		<url-pattern>/twitterGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Twitter stats -->
+	<servlet>
+		<servlet-name>TwitterStatsController</servlet-name>
+		<servlet-class>aiss.controller.TwitterStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterStatsController</servlet-name>
+		<url-pattern>/twitterStatsController</url-pattern>
+	</servlet-mapping>
+
+	<!-- Reddit post -->
+	<servlet>
+		<servlet-name>RedditPostController</servlet-name>
+		<servlet-class>aiss.controller.RedditPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditPostController</servlet-name>
+		<url-pattern>/redditPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Reddit search -->
+	<servlet>
+		<servlet-name>RedditSearchController</servlet-name>
+		<servlet-class>aiss.controller.RedditSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditSearchController</servlet-name>
+		<url-pattern>/redditSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Reddit get -->
+	<servlet>
+		<servlet-name>RedditGetController</servlet-name>
+		<servlet-class>aiss.controller.RedditGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditGetController</servlet-name>
+		<url-pattern>/redditGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Reddit stats -->
+	<servlet>
+		<servlet-name>RedditStatsController</servlet-name>
+		<servlet-class>aiss.controller.RedditStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditStatsController</servlet-name>
+		<url-pattern>/redditStatsController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Pinterest post -->
+	<servlet>
+		<servlet-name>PinterestPostController</servlet-name>
+		<servlet-class>aiss.controller.PinterestPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestPostController</servlet-name>
+		<url-pattern>/pinterestPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Pinterest search -->
+	<servlet>
+		<servlet-name>PinterestSearchController</servlet-name>
+		<servlet-class>aiss.controller.PinterestSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestSearchController</servlet-name>
+		<url-pattern>/pinterestSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Pinterest get -->
+	<servlet>
+		<servlet-name>PinterestGetController</servlet-name>
+		<servlet-class>aiss.controller.PinterestGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestGetController</servlet-name>
+		<url-pattern>/pinterestGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Pinterest stats -->
+	<servlet>
+		<servlet-name>PinterestStatsController</servlet-name>
+		<servlet-class>aiss.controller.PinterestStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestStatsController</servlet-name>
+		<url-pattern>/pinterestStatsController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- OAUTH SERVLETS For each OAuth 2.0 service, you need to create two servlets: 
+		one for the initiation and another for the callback. After sucess the token 
+		for the provider will be available in the session scope under the name <provider>-token. 
+		E.g.: Spotify-token. Those servlets support 2 parameters: - provider: which 
+		is mandatory and specifies the configuration from the OAuthConfig.json file 
+		which will be applied. - onSuccess: which is optional specifies the behaviour 
+		of the servlet after an successful authorization. If you specify close as 
+		the value of the parameter, the page will close. If you specify redirect:XXXX, 
+		the page will be redirected to XXXX. WARNING: The url-patterns of all the 
+		servlets mus be disjoint. Our recommendation is that if you expecify X as 
+		the provider, the url-pattern of the initiation servlet could be /AuthController/X, 
+		and the url-pattern of the callback servlet must be /oauth2callback/X. -->
+
+	<!-- Facebook oAuth2 servlets -->
+	<!-- FacebookAuthController -->
+	<servlet>
+		<description />
+		<servlet-name>FacebookAuthController</servlet-name>
+		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Facebook</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookAuthController</servlet-name>
+		<url-pattern>/AuthController/Facebook</url-pattern>
+	</servlet-mapping>
+	<!--FacebookOAuth2Callback -->
+	<servlet>
+		<description />
+		<servlet-name>FacebookOAuth2Callback</servlet-name>
+		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Facebook</param-value>
+		</init-param>
+		<init-param>
+			<param-name>onSuccess</param-name>
+			<param-value>redirect:/FacebookFileList</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookOAuth2Callback</servlet-name>
+		<url-pattern>/oauth2callback/Facebook</url-pattern>
+	</servlet-mapping>
+
+	<!--   Twitter oAuth2 servlets    -->
+    <!-- TwitterAuthController-->
+    <servlet>
+        <description/>
+        <servlet-name>TwitterAuthController</servlet-name>
+        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Twitter</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TwitterAuthController</servlet-name>
+        <url-pattern>/AuthController/Twitter</url-pattern>
+    </servlet-mapping>
+    <!--TwitterOAuth2Callback-->
+    <servlet>
+        <description/>
+        <servlet-name>TwitterOAuth2Callback</servlet-name>
+        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Twitter</param-value>
+        </init-param>
+        <init-param>
+            <param-name>onSuccess</param-name>
+            <param-value>redirect:/TwitterFileList</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TwitterOAuth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/Twitter</url-pattern> 
+    </servlet-mapping>
+    
+    <!--   Reddit oAuth2 servlets    -->
+    <!-- RedditAuthController-->
+    <servlet>
+        <description/>
+        <servlet-name>RedditAuthController</servlet-name>
+        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Reddit</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RedditAuthController</servlet-name>
+        <url-pattern>/AuthController/Reddit</url-pattern>
+    </servlet-mapping>
+    <!--RedditOAuth2Callback-->
+    <servlet>
+        <description/>
+        <servlet-name>RedditOAuth2Callback</servlet-name>
+        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Reddit</param-value>
+        </init-param>
+        <init-param>
+            <param-name>onSuccess</param-name>
+            <param-value>redirect:/RedditFileList</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RedditOAuth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/Reddit</url-pattern> 
+    </servlet-mapping>
+    
+    <!--   Pinterest oAuth2 servlets    -->
+    <!-- PinterestAuthController-->
+    <servlet>
+        <description/>
+        <servlet-name>PinterestAuthController</servlet-name>
+        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Pinterest</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PinterestAuthController</servlet-name>
+        <url-pattern>/AuthController/Pinterest</url-pattern>
+    </servlet-mapping>
+    <!--PinterestOAuth2Callback-->
+    <servlet>
+        <description/>
+        <servlet-name>PinterestOAuth2Callback</servlet-name>
+        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+        <init-param>
+            <param-name>provider</param-name>
+            <param-value>Pinterest</param-value>
+        </init-param>
+        <init-param>
+            <param-name>onSuccess</param-name>
+            <param-value>redirect:/PinterestFileList</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PinterestOAuth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/Pinterest</url-pattern> 
+    </servlet-mapping>
 </web-app>
