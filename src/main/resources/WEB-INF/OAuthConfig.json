@@ -14,8 +14,7 @@
 			"user_tagged_places",
 			"user_posts",
 			"manage_pages",
-			"publish_pages"
-		]
+			"publish_pages"]
 	},
 	"Twitter": {
 		"tokenUrl": "",
@@ -25,11 +24,11 @@
 		"scopes": []
 	},
 	"Reddit": {
-		"tokenUrl": "",
-		"clientId": "",
-		"clientSecret": "",
-		"authorizationFormUrl": "",
-		"scopes": []
+		"tokenUrl": "https://www.reddit.com/api/v1/access_token",
+		"clientId": "qMPo05YQ-pRrEA",
+		"clientSecret": "4Y0opSlfkIMmbXfUpyRtTsIxaEE",
+		"authorizationFormUrl": "https://www.reddit.com/api/v1/authorize",
+		"scopes": ["mysubreddits","identity","read","save","submit","history","modtraffic"]
 	},
 	"Pinterest": {
 		"tokenUrl": "",
