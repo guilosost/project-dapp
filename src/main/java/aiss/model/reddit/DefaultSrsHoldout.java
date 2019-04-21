@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "variant",
     "experiment_id"
 })
-public class MwebChatXpromo {
+public class DefaultSrsHoldout {
 
     @JsonProperty("owner")
     private String owner;

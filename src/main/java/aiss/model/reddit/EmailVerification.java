@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "variant",
     "experiment_id"
 })
-public class MwebXpromoRevampV3 {
+public class EmailVerification {
 
     @JsonProperty("owner")
     private String owner;
