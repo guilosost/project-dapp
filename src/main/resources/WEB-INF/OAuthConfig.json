@@ -17,10 +17,10 @@
 			"publish_pages"]
 	},
 	"Twitter": {
-		"tokenUrl": "",
-		"clientId": "",
-		"clientSecret": "",
-		"authorizationFormUrl": "",
+		"tokenUrl": "https://api.twitter.com/oauth/access_token",
+		"clientId": "4va3M0ihjNFxmwvt0qmwopkpE",
+		"clientSecret": "3Hfbg3j7Qn1LcPMlvHvOJ4d41H3ITJVVDTo8JX6AP9j2j0wrEq",
+		"authorizationFormUrl": "https://api.twitter.com/oauth/authorize",
 		"scopes": []
 	},
 	"Reddit": {
