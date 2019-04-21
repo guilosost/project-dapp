@@ -35,6 +35,10 @@
 		"clientId": "",
 		"clientSecret": "",
 		"authorizationFormUrl": "",
+		"tokenUrl": "https://api.pinterest.com/v1/oauth/token",
+		"clientId": "5028724436140871503",
+		"clientSecret": "bd93af17139148b8309721cf48b02944722b5992cf3226a1fd5f9eaa2712ebdd",
+		"authorizationFormUrl": "https://api.pinterest.com/oauth/",
 		"scopes": []
 	}
 }		
