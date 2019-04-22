@@ -48,7 +48,7 @@
 
 <body>
 
-    <fb:login-button scope="public_profile,publish_pages,manage_pages,email,user_age" onlogin="checkLoginState();">
+    <fb:login-button scope="public_profile,publish_pages,manage_pages,email" onlogin="checkLoginState();">
     </fb:login-button>
     <div class="fb-login-button" data-width="280" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
 </body>
