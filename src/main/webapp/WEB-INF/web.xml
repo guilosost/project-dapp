@@ -4,8 +4,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<!-- Reddit post -->
+	<servlet>
+		<servlet-name>RedditNewPostController</servlet-name>
+		<servlet-class>aiss.controller.RedditNewPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditNewPostController</servlet-name>
+		<url-pattern>/redditNewPostController</url-pattern>
+	</servlet-mapping>
 	
 	<!-- OAUTH SERVLETS For each OAuth 2.0 service, you need to create two servlets: 
 		one for the initiation and another for the callback. After sucess the token 
@@ -46,7 +56,7 @@
 		</init-param>
 		<init-param>
 			<param-name>onSuccess</param-name>
-			<param-value>redirect:/FacebookFileList</param-value>
+			<param-value>redirect:index.html</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -80,7 +90,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect:/TwitterFileList</param-value>
+            <param-value>redirect:index.html</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -114,7 +124,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect:/RedditFileList</param-value>
+            <param-value>redirect:index.html</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -148,7 +158,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect:/PinterestFileList</param-value>
+            <param-value>redirect:index.html</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

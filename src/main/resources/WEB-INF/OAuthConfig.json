@@ -27,7 +27,7 @@
 		"tokenUrl": "https://www.reddit.com/api/v1/access_token",
 		"clientId": "qMPo05YQ-pRrEA",
 		"clientSecret": "4Y0opSlfkIMmbXfUpyRtTsIxaEE",
-		"authorizationFormUrl": "https://www.reddit.com/api/v1/authorize",
+		"authorizationFormUrl": "https://ssl.reddit.com/api/v1/authorize",
 		"scopes": ["mysubreddits","identity","read","save","submit","history","modtraffic"]
 	},
 	"Pinterest": {

@@ -75,12 +75,12 @@
 
 	<!-- Reddit post -->
 	<servlet>
-		<servlet-name>RedditPostController</servlet-name>
-		<servlet-class>aiss.controller.RedditPostController</servlet-class>
+		<servlet-name>RedditNewPostController</servlet-name>
+		<servlet-class>aiss.controller.RedditNewPostController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>RedditPostController</servlet-name>
-		<url-pattern>/redditPostController</url-pattern>
+		<servlet-name>RedditNewPostController</servlet-name>
+		<url-pattern>/redditNewPostController</url-pattern>
 	</servlet-mapping>
 	<!-- Reddit search -->
 	<servlet>
