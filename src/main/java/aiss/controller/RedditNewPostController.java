@@ -28,7 +28,7 @@ public class RedditNewPostController extends HttpServlet {
 				post.getData().setSubreddit("u/migyanari");
 				gdResource.postSubreddit(post, content);
 				req.setAttribute("message", "Post '" + title + "' added to " + post.getData().getSubreddit() + "!");
-				req.getRequestDispatcher("index.html").forward(req, resp);
+				req.getRequestDispatcher("index.jsp").forward(req, resp);
 			} else {
 				req.setAttribute("message", "You must provide a valid title for file");
 				req.setAttribute("content", content);
