@@ -21,7 +21,7 @@
 		"clientId": "4va3M0ihjNFxmwvt0qmwopkpE",
 		"clientSecret": "3Hfbg3j7Qn1LcPMlvHvOJ4d41H3ITJVVDTo8JX6AP9j2j0wrEq",
 		"authorizationFormUrl": "https://api.twitter.com/oauth/authorize",
-		"scopes": []
+		"scopes": ["write"]
 	},
 	"Reddit": {
 		"tokenUrl": "https://www.reddit.com/api/v1/access_token",
@@ -32,8 +32,8 @@
 	},
 	"Pinterest": {
 		"tokenUrl": "https://api.pinterest.com/v1/oauth/token",
-		"clientId": "5028724436140871503",
-		"clientSecret": "bd93af17139148b8309721cf48b02944722b5992cf3226a1fd5f9eaa2712ebdd",
+		"clientId": "5029082703461399939",
+		"clientSecret": "ab6a2c0932f9bb30008791e9785d6123c039fd33c1cc5b73db2f9b50bd209fe5",
 		"authorizationFormUrl": "https://api.pinterest.com/oauth/",
 		"scopes": ["read_public","write_public"]
 	}

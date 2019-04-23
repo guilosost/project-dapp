@@ -44,8 +44,8 @@ public class TwitterNewPostController extends HttpServlet {
 				req.getRequestDispatcher("newPost.jsp").forward(req, resp);
 			}
 		} else {
-			log.info("Trying to access Reddit without an access token, redirecting to OAuth servlet");
-			req.getRequestDispatcher("/AuthController/Reddit").forward(req, resp);
+			log.info("Trying to access Twitter without an access token, redirecting to OAuth servlet");
+			req.getRequestDispatcher("/AuthController/Twitter").forward(req, resp);
 		}
 
 	}

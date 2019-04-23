@@ -27,22 +27,22 @@ public class TwitterResource {
 	public String postTweet(Tweet post, String text) {
 
 		ClientResource cr = null;
-		Data_ datos = null;
+		Tweet datos = null;
 		try {
 			cr = new ClientResource(uri + "?access_token=" + access_token);
 			Tweet newPost = cr.post(post, Tweet.class);
-			
+			datos = newPost;
 			// https://www.reddit.com/api/submit?
 			// access_token=qMPo05YQ-pRrEA&sr=u/migyanari&api_type=json&title=pppp&text=pro.json&kind=t3
 			cr = new ClientResource(uri + "/api/submit?access_token=" + access_token + "&kind=t3&api_type=json&sr="
-					+ datos.getSubreddit() + "&title=" + datos.getTitle() + "&text=" + datos.getSelftext());
+					+ newPost.getCreatedAt() + "&title=" + newPost.getIdStr() + "&text=" + newPost.getText());
 			Map<String, Object> headers = cr.getRequestAttributes();
 			headers.put("Content-Type", "text/plain");
 			cr.put(text);
 		} catch (ResourceException re) {
 			log.warning("Error when inserting file: " + cr.getResponse().getStatus());
 		}
-		return datos.getSelftext();
+		return datos.getText();
 	}
 
 }
