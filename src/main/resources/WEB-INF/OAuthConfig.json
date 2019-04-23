@@ -1,40 +1,10 @@
 {
-	"Facebook": {
-		"tokenUrl": "https://graph.facebook.com/oauth/access_token",
-		"clientId": "261823598101084",
-		"clientSecret": "3483fcbfadefb84eeffd6c4fd9fe3d4d",
-		"authorizationFormUrl": "https://www.facebook.com/dialog/oauth",
-		"scopes": [
-			"publish_to_groups",
-			"user_age_range",
-			"user_gender",
-			"user_likes",
-			"user_location",
-			"user_photos",
-			"user_tagged_places",
-			"user_posts",
-			"manage_pages",
-			"publish_pages"]
-	},
-	"Twitter": {
-		"tokenUrl": "https://api.twitter.com/oauth/access_token",
-		"clientId": "4va3M0ihjNFxmwvt0qmwopkpE",
-		"clientSecret": "3Hfbg3j7Qn1LcPMlvHvOJ4d41H3ITJVVDTo8JX6AP9j2j0wrEq",
-		"authorizationFormUrl": "https://api.twitter.com/oauth/authorize",
-		"scopes": []
-	},
-	"Reddit": {
-		"tokenUrl": "https://www.reddit.com/api/v1/access_token",
-		"clientId": "qMPo05YQ-pRrEA",
-		"clientSecret": "4Y0opSlfkIMmbXfUpyRtTsIxaEE",
-		"authorizationFormUrl": "https://ssl.reddit.com/api/v1/authorize",
-		"scopes": ["mysubreddits","identity","read","save","submit","history","modtraffic"]
-	},
-	"Pinterest": {
-		"tokenUrl": "https://api.pinterest.com/v1/oauth/token",
-		"clientId": "5028724436140871503",
-		"clientSecret": "bd93af17139148b8309721cf48b02944722b5992cf3226a1fd5f9eaa2712ebdd",
-		"authorizationFormUrl": "https://api.pinterest.com/oauth/",
+	"Imgur": {
+		"tokenUrl": "https://api.imgur.com/oauth2/token",
+		"clientId": "2b23b9de0b878a4",
+		"clientSecret": "112d62797eb213d30840887b657663c3279b696d",
+		"authorizationFormUrl": "https://api.imgur.com/oauth2/authorize",
 		"scopes": []
 	}
+
 }		
