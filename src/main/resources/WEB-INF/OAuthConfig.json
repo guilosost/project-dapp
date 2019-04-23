@@ -5,6 +5,13 @@
 		"clientSecret": "112d62797eb213d30840887b657663c3279b696d",
 		"authorizationFormUrl": "https://api.imgur.com/oauth2/authorize",
 		"scopes": []
+	},
+	
+	"DeviantArt": {
+		"tokenUrl": "https://www.deviantart.com/oauth2/token",
+		"clientId": "9647",
+		"clientSecret": "973ec3441a2a6ea308ae95ab86269251",
+		"authorizationFormUrl": "https://www.deviantart.com/oauth2/authorize",
+		"scopes": ["browse"]
 	}
-
 }		

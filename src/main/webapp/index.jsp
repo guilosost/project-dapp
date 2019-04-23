@@ -28,6 +28,9 @@
 		<li>Guillermo Losada Ostos (guilosost@alum.us.es)</li>
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
+	
+	<a href="deviantArtSearch.jsp">Prueba Búsqueda de DeviantArt</a>
+            <br>
 
 	<h2>Tokens de OAuth</h2>
 	<ul>
@@ -38,6 +41,10 @@
 		<li><strong>Imgur:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["Imgur-token"]}' /></li>
+			</ul></li>
+			<li><strong>DeviantArt:</strong>
+			<ul>
+				<li><c:out value='${sessionScope["DeviantArt-token"]}' /></li>
 			</ul></li>
 	</ul>
 
