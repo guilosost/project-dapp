@@ -1,177 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	
-	<!-- Reddit post -->
-	<servlet>
-		<servlet-name>RedditNewPostController</servlet-name>
-		<servlet-class>aiss.controller.RedditNewPostController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RedditNewPostController</servlet-name>
-		<url-pattern>/redditNewPostController</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>PinterestNewPostController</servlet-name>
-		<servlet-class>aiss.controller.PinterestNewPostController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PinterestNewPostController</servlet-name>
-		<url-pattern>/pinterestNewPostController</url-pattern>
-	</servlet-mapping>
-	
-	<!-- OAUTH SERVLETS For each OAuth 2.0 service, you need to create two servlets: 
-		one for the initiation and another for the callback. After sucess the token 
-		for the provider will be available in the session scope under the name <provider>-token. 
-		E.g.: Spotify-token. Those servlets support 2 parameters: - provider: which 
-		is mandatory and specifies the configuration from the OAuthConfig.json file 
-		which will be applied. - onSuccess: which is optional specifies the behaviour 
-		of the servlet after an successful authorization. If you specify close as 
-		the value of the parameter, the page will close. If you specify redirect:XXXX, 
-		the page will be redirected to XXXX. WARNING: The url-patterns of all the 
-		servlets mus be disjoint. Our recommendation is that if you expecify X as 
-		the provider, the url-pattern of the initiation servlet could be /AuthController/X, 
-		and the url-pattern of the callback servlet must be /oauth2callback/X. -->
-
-	<!-- Facebook oAuth2 servlets -->
-	<!-- FacebookAuthController -->
-	<servlet>
-		<description />
-		<servlet-name>FacebookAuthController</servlet-name>
-		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
-		<init-param>
-			<param-name>provider</param-name>
-			<param-value>Facebook</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FacebookAuthController</servlet-name>
-		<url-pattern>/AuthController/Facebook</url-pattern>
-	</servlet-mapping>
-	<!--FacebookOAuth2Callback -->
-	<servlet>
-		<description />
-		<servlet-name>FacebookOAuth2Callback</servlet-name>
-		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
-		<init-param>
-			<param-name>provider</param-name>
-			<param-value>Facebook</param-value>
-		</init-param>
-		<init-param>
-			<param-name>onSuccess</param-name>
-			<param-value>redirect:index.html</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FacebookOAuth2Callback</servlet-name>
-		<url-pattern>/oauth2callback/Facebook</url-pattern>
-	</servlet-mapping>
-
-	<!--   Twitter oAuth2 servlets    -->
-    <!-- TwitterAuthController-->
-    <servlet>
-        <description/>
-        <servlet-name>TwitterAuthController</servlet-name>
-        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
-        <init-param>
-            <param-name>provider</param-name>
-            <param-value>Twitter</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TwitterAuthController</servlet-name>
-        <url-pattern>/AuthController/Twitter</url-pattern>
-    </servlet-mapping>
-    <!--TwitterOAuth2Callback-->
-    <servlet>
-        <description/>
-        <servlet-name>TwitterOAuth2Callback</servlet-name>
-        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
-        <init-param>
-            <param-name>provider</param-name>
-            <param-value>Twitter</param-value>
-        </init-param>
-        <init-param>
-            <param-name>onSuccess</param-name>
-            <param-value>redirect:index.html</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TwitterOAuth2Callback</servlet-name>
-        <url-pattern>/oauth2callback/Twitter</url-pattern> 
-    </servlet-mapping>
-    
-    <!--   Reddit oAuth2 servlets    -->
-    <!-- RedditAuthController-->
-    <servlet>
-        <description/>
-        <servlet-name>RedditAuthController</servlet-name>
-        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
-        <init-param>
-            <param-name>provider</param-name>
-            <param-value>Reddit</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RedditAuthController</servlet-name>
-        <url-pattern>/AuthController/Reddit</url-pattern>
-    </servlet-mapping>
-    <!--RedditOAuth2Callback-->
-    <servlet>
-        <description/>
-        <servlet-name>RedditOAuth2Callback</servlet-name>
-        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
-        <init-param>
-            <param-name>provider</param-name>
-            <param-value>Reddit</param-value>
-        </init-param>
-        <init-param>
-            <param-name>onSuccess</param-name>
-            <param-value>redirect:index.html?state=ok</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RedditOAuth2Callback</servlet-name>
-        <url-pattern>/oauth2callback/Reddit</url-pattern> 
-    </servlet-mapping>
-    
-    <!--   Pinterest oAuth2 servlets    -->
-    <!-- PinterestAuthController-->
-    <servlet>
-        <description/>
-        <servlet-name>PinterestAuthController</servlet-name>
-        <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
-        <init-param>
-            <param-name>provider</param-name>
-            <param-value>Pinterest</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>PinterestAuthController</servlet-name>
-        <url-pattern>/AuthController/Pinterest</url-pattern>
-    </servlet-mapping>
-    <!--PinterestOAuth2Callback-->
-    <servlet>
-        <description/>
-        <servlet-name>PinterestOAuth2Callback</servlet-name>
-        <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
-        <init-param>
-            <param-name>provider</param-name>
-            <param-value>Pinterest</param-value>
-        </init-param>
-        <init-param>
-            <param-name>onSuccess</param-name>
-            <param-value>redirect:index.html</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>PinterestOAuth2Callback</servlet-name>
-        <url-pattern>/oauth2callback/Pinterest</url-pattern> 
-    </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>RedditNewPostController</servlet-name>
+    <servlet-class>aiss.controller.RedditNewPostController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedditNewPostController</servlet-name>
+    <url-pattern>/redditNewPostController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PinterestNewPostController</servlet-name>
+    <servlet-class>aiss.controller.PinterestNewPostController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PinterestNewPostController</servlet-name>
+    <url-pattern>/pinterestNewPostController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>FacebookAuthController</servlet-name>
+    <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Facebook</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacebookAuthController</servlet-name>
+    <url-pattern>/AuthController/Facebook</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>FacebookOAuth2Callback</servlet-name>
+    <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Facebook</param-value>
+    </init-param>
+    <init-param>
+      <param-name>onSuccess</param-name>
+      <param-value>redirect:index.html</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FacebookOAuth2Callback</servlet-name>
+    <url-pattern>/oauth2callback/Facebook</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>TwitterAuthController</servlet-name>
+    <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Twitter</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TwitterAuthController</servlet-name>
+    <url-pattern>/AuthController/Twitter</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>TwitterOAuth2Callback</servlet-name>
+    <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Twitter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>onSuccess</param-name>
+      <param-value>redirect:index.html</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TwitterOAuth2Callback</servlet-name>
+    <url-pattern>/oauth2callback/Twitter</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>RedditAuthController</servlet-name>
+    <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Reddit</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedditAuthController</servlet-name>
+    <url-pattern>/AuthController/Reddit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>RedditOAuth2Callback</servlet-name>
+    <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Reddit</param-value>
+    </init-param>
+    <init-param>
+      <param-name>onSuccess</param-name>
+      <param-value>redirect:index.html?state=ok</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedditOAuth2Callback</servlet-name>
+    <url-pattern>/oauth2callback/Reddit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>PinterestAuthController</servlet-name>
+    <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Pinterest</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PinterestAuthController</servlet-name>
+    <url-pattern>/AuthController/Pinterest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <servlet-name>PinterestOAuth2Callback</servlet-name>
+    <servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+    <init-param>
+      <param-name>provider</param-name>
+      <param-value>Pinterest</param-value>
+    </init-param>
+    <init-param>
+      <param-name>onSuccess</param-name>
+      <param-value>redirect:index.html</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PinterestOAuth2Callback</servlet-name>
+    <url-pattern>/oauth2callback/Pinterest</url-pattern>
+  </servlet-mapping>
 </web-app>
