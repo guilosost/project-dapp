@@ -22,9 +22,10 @@
                 <li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
             </ul>
 
-            <a href="login.jsp">Inicio de sesión</a>
-            <br>
+           
             <a href="newPost.jsp">Prueba Post de Reddit</a>
+          <br>
+            <a href="newPostTwitter.jsp">Prueba Post de Twitter</a>
 
             <h2> Tokens de OAuth </h2>
             <ul>
