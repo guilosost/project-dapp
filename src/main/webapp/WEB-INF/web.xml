@@ -12,14 +12,6 @@
     <url-pattern>/redditNewPostController</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>PinterestNewPostController</servlet-name>
-    <servlet-class>aiss.controller.PinterestNewPostController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PinterestNewPostController</servlet-name>
-    <url-pattern>/pinterestNewPostController</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description></description>
     <servlet-name>FacebookAuthController</servlet-name>
     <servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
@@ -102,7 +94,7 @@
     </init-param>
     <init-param>
       <param-name>onSuccess</param-name>
-      <param-value>redirect:index.html?state=ok</param-value>
+      <param-value>redirect:index.html</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

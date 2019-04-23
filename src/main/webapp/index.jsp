@@ -16,7 +16,7 @@
 
 	<p>Este proyecto va enfocado a facilitar la publicación de imágenes
 		en el ámbito digital. La aplicación reúne cuatro aplicaciones de
-		almacenamiento de imágenes que pueden usarse para agilizar la publicación. La
+		image hosting service que pueden usarse para agilizar la publicación. La
 		idea es poder publicar en todas las páginas de una sola vez y
 		obtener las estadísticas del alcance de estas publicaciones y la
 		reacción que ha causado en los receptores, para así poder perfilar el
@@ -29,22 +29,15 @@
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
 
-
-	<a href="newPost.jsp">Prueba Post de Reddit</a>
-	<br>
-	<a href="PinterestPost.jsp">Prueba Post de Pinterest</a>
-	<br>
-	<a href="newPostTwitter.jsp">Prueba Post de Twitter</a>
-
 	<h2>Tokens de OAuth</h2>
 	<ul>
-		<li><strong>Reddit:</strong>
+		<li><strong>Unslpash:</strong>
 			<ul>
-				<li><c:out value='${sessionScope["Reddit-token"]}' /></li>
+				<li><c:out value='${sessionScope["Unslpash-token"]}' /></li>
 			</ul></li>
-		<li><strong>Pinterest:</strong>
+		<li><strong>Imgur:</strong>
 			<ul>
-				<li><c:out value='${sessionScope["Pinterest-token"]}' /></li>
+				<li><c:out value='${sessionScope["Imgur-token"]}' /></li>
 			</ul></li>
 	</ul>
 
