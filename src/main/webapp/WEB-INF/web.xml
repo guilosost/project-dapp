@@ -3,14 +3,7 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>RedditNewPostController</servlet-name>
-    <servlet-class>aiss.controller.RedditNewPostController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RedditNewPostController</servlet-name>
-    <url-pattern>/redditNewPostController</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <description></description>
     <servlet-name>FacebookAuthController</servlet-name>
