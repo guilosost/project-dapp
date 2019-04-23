@@ -25,6 +25,8 @@
             <a href="login.jsp">Inicio de sesión</a>
             <br>
             <a href="newPost.jsp">Prueba Post de Reddit</a>
+            <br>
+            <a href="PinterestPost.jsp">Prueba Post de Pinterest</a>
 
             <h2> Tokens de OAuth </h2>
             <ul>
@@ -32,6 +34,12 @@
                     <ul>
                         <li>
                             <c:out value='${sessionScope["Reddit-token"]}' /> </li>
+                    </ul>
+                </li>
+                <li><strong>Pinterest:</strong>
+                    <ul>
+                        <li>
+                            <c:out value='${sessionScope["Pinterest-token"]}' /> </li>
                     </ul>
                 </li>
             </ul>

@@ -17,6 +17,15 @@
 		<url-pattern>/redditNewPostController</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>PinterestNewPostController</servlet-name>
+		<servlet-class>aiss.controller.PinterestNewPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestNewPostController</servlet-name>
+		<url-pattern>/pinterestNewPostController</url-pattern>
+	</servlet-mapping>
+	
 	<!-- OAUTH SERVLETS For each OAuth 2.0 service, you need to create two servlets: 
 		one for the initiation and another for the callback. After sucess the token 
 		for the provider will be available in the session scope under the name <provider>-token. 
@@ -124,7 +133,7 @@
         </init-param>
         <init-param>
             <param-name>onSuccess</param-name>
-            <param-value>redirect:index.html</param-value>
+            <param-value>redirect:index.html?state=ok</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
