@@ -33,6 +33,9 @@
 	<br>
 	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
 	<br>
+	<a href="imgurSearch.jsp">Prueba Búsqueda de DeviantArt</a>
+
+	
 
 	<h2>Tokens de OAuth</h2>
 	<ul>
