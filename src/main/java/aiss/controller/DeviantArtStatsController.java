@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.deviantart.Result;
+import aiss.model.deviantart.DeviantArtResult;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DeviantArtResource;
 
@@ -29,7 +29,7 @@ public class DeviantArtStatsController extends HttpServlet {
 			DeviantArtResource spResource = new DeviantArtResource(deviantArtToken);
 			SearchDeviantArt deviantArtStats = spResource.getDeviantArtStats();
 
-			for (Result r : deviantArtStats.getResults()) {
+			for (DeviantArtResult r : deviantArtStats.getResults()) {
 
 				log.log(Level.FINE, r.getStats().getFavourites().toString());
 			}

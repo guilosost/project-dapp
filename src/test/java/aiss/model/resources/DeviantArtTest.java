@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import org.junit.Test;
 
 import aiss.model.deviantart.DeviantArtUser;
-import aiss.model.deviantart.Result;
+import aiss.model.deviantart.DeviantArtResult;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DeviantArtResource;
 
@@ -39,7 +39,7 @@ public class DeviantArtTest {
 		assertFalse("The number of user photos is zero", stats.getResults().size() == 0);
 		
 		System.out.println("El usuario tiene " + stats.getResults().size() + " fotos");
-		for(Result r : stats.getResults()) {
+		for(DeviantArtResult r : stats.getResults()) {
 			System.out.println(r.getTitle() + "\n");
 		}
 
@@ -47,7 +47,7 @@ public class DeviantArtTest {
 		"The search for " + query + "'s photos returned " + daSearch.getResults().size()
 		+ " files.");
 		
-		for(Result r : daSearch.getResults()) {
+		for(DeviantArtResult r : daSearch.getResults()) {
 			System.out.println(r.getUrl());
 		}
 	}

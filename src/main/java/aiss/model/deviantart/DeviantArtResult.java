@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "is_downloadable",
     "download_filesize"
 })
-public class Result {
+public class DeviantArtResult {
 
     @JsonProperty("deviationid")
     private String deviationid;

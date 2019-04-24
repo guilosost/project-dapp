@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "user",
     "tags"
 })
-public class Result {
+public class UnsplashResult {
 
     @JsonProperty("id")
     private String id;

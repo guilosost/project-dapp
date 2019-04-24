@@ -6,13 +6,14 @@ import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.imgur.ImgurImage;
 import aiss.model.resource.ImgurResource;
 
-public class ImgurGetImageController {
+public class ImgurGetImageController extends HttpServlet {
 	private static final Logger log = Logger.getLogger(ImgurNewPostController.class.getName());
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

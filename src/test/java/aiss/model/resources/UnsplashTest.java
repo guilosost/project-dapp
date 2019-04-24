@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import org.junit.Test;
 
 import aiss.model.resource.UnsplashResource;
-import aiss.model.unsplash.Result;
+import aiss.model.unsplash.UnsplashResult;
 import aiss.model.unsplash.SearchUnsplashPhotos;
 import aiss.model.unsplash.UnsplashUser;
 
@@ -39,13 +39,13 @@ public class UnsplashTest {
 		assertFalse("The number of user photos is zero", stats.getResults().size() == 0);
 
 		System.out.println("El usuario tiene " + stats.getResults().size() + " fotos");
-		for (Result r : stats.getResults()) {
+		for (UnsplashResult r : stats.getResults()) {
 			System.out.println(r.getId() + "\n");
 		}
 
 		System.out.println("The search for " + query + "'s photos returned " + uSearch.getResults().size() + " files.");
 
-		for (Result r : uSearch.getResults()) {
+		for (UnsplashResult r : uSearch.getResults()) {
 			System.out.println(r.getLinks().getPhotos());
 		}
 	}

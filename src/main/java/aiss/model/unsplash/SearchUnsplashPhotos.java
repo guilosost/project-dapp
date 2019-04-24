@@ -19,7 +19,7 @@ public class SearchUnsplashPhotos {
     @JsonProperty("total_pages")
     private Integer totalPages;
     @JsonProperty("results")
-    private List<Result> results = null;
+    private List<UnsplashResult> results = null;
 
     @JsonProperty("total")
     public Integer getTotal() {
@@ -42,12 +42,12 @@ public class SearchUnsplashPhotos {
     }
 
     @JsonProperty("results")
-    public List<Result> getResults() {
+    public List<UnsplashResult> getResults() {
         return results;
     }
 
     @JsonProperty("results")
-    public void setResults(List<Result> results) {
+    public void setResults(List<UnsplashResult> results) {
         this.results = results;
     }
 

@@ -8,62 +8,7 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-	<!-- Imgur Controllers -->
-	<servlet>
-		<servlet-name>ImgurNewPostController</servlet-name>
-		<servlet-class>aiss.controller.ImgurNewPostController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ImgurNewPostController</servlet-name>
-		<url-pattern>/ImgurNewPostController</url-pattern>
-	</servlet-mapping>
-
-
-	<!-- DeviantArt Controllers -->
-	<servlet>
-		<description></description>
-		<display-name>DeviantArtSearchController</display-name>
-		<servlet-name>DeviantArtSearchController</servlet-name>
-		<servlet-class>aiss.controller.DeviantArtSearchController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DeviantArtSearchController</servlet-name>
-		<url-pattern>/DeviantArtSearchController</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<description></description>
-		<display-name>DeviantArtStatsController</display-name>
-		<servlet-name>DeviantArtStatsController</servlet-name>
-		<servlet-class>aiss.controller.DeviantArtStatsController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DeviantArtStatsController</servlet-name>
-		<url-pattern>/DeviantArtStatsController</url-pattern>
-	</servlet-mapping>
-
-	<!-- Unsplash Controllers -->
-	<servlet>
-		<description></description>
-		<display-name>UnsplashtSearchController</display-name>
-		<servlet-name>UnsplashSearchController</servlet-name>
-		<servlet-class>aiss.controller.UnsplashSearchController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UnsplashSearchController</servlet-name>
-		<url-pattern>/UnsplashSearchController</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<description></description>
-		<display-name>UnsplashStatsController</display-name>
-		<servlet-name>UnsplashStatsController</servlet-name>
-		<servlet-class>aiss.controller.UnsplashStatsController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UnsplashStatsController</servlet-name>
-		<url-pattern>/UnsplashStatsController</url-pattern>
-	</servlet-mapping>
+	
 
 	<!-- Imgur Oauth -->
 	<servlet>

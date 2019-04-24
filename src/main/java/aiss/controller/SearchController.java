@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.deviantart.Result;
+import aiss.model.deviantart.DeviantArtResult;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.UnsplashResource;
@@ -35,7 +35,7 @@ public class SearchController extends HttpServlet {
 			DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
 			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query);
 
-			for (Result r : deviantArtImagesResults.getResults()) {
+			for (DeviantArtResult r : deviantArtImagesResults.getResults()) {
 
 				log.log(Level.FINE, r.getUrl());
 			}
@@ -56,7 +56,7 @@ public class SearchController extends HttpServlet {
 			UnsplashResource uResource = new UnsplashResource(unsplashToken);
 			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query);
 
-			for (aiss.model.unsplash.Result r : unsplashImagesResults.getResults()) {
+			for (aiss.model.unsplash.UnsplashResult r : unsplashImagesResults.getResults()) {
 
 				log.log(Level.FINE, r.getLinks().getPhotos());
 			}

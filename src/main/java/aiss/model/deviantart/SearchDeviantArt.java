@@ -27,7 +27,7 @@ public class SearchDeviantArt {
     @JsonProperty("estimated_total")
     private Integer estimatedTotal;
     @JsonProperty("results")
-    private List<Result> results = null;
+    private List<DeviantArtResult> results = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -62,12 +62,12 @@ public class SearchDeviantArt {
     }
 
     @JsonProperty("results")
-    public List<Result> getResults() {
+    public List<DeviantArtResult> getResults() {
         return results;
     }
 
     @JsonProperty("results")
-    public void setResults(List<Result> results) {
+    public void setResults(List<DeviantArtResult> results) {
         this.results = results;
     }
 
