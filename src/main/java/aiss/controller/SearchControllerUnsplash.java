@@ -23,6 +23,7 @@ public class SearchControllerUnsplash extends HttpServlet {
 		String unsplashToken = (String) req.getSession().getAttribute("Unsplash-token");
 		String query = req.getParameter("searchQuery").replace(" ", "_");
 		RequestDispatcher rd = null;
+		
 		// Search for images in Unsplash
 		log.log(Level.FINE, "Searching for Unsplash images that contain " + query);
 
@@ -43,5 +44,9 @@ public class SearchControllerUnsplash extends HttpServlet {
 			log.info("Trying to access Unsplash without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/Unsplash").forward(req, resp);
 		}
+	}
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 }
