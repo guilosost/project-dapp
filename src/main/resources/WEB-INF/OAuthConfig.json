@@ -13,5 +13,13 @@
 		"clientSecret": "973ec3441a2a6ea308ae95ab86269251",
 		"authorizationFormUrl": "https://www.deviantart.com/oauth2/authorize",
 		"scopes": ["browse"]
-	}
+	},
+		
+    "GoogleDrive": { 
+        "tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
+        "clientId": "133193217682-k72c1n6jor7io71cfgqhmvmcip27ldfr.apps.googleusercontent.com",
+        "clientSecret": "vwqy6s8p2wntG90Q1XA4qBSf",
+        "authorizationFormUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+        "scopes": ["https://www.googleapis.com/auth/photoslibrary"]
+    }
 }		

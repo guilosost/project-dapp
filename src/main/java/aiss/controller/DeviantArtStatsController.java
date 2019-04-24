@@ -21,12 +21,12 @@ public class DeviantArtStatsController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String accessToken = (String) req.getSession().getAttribute("DeviantArt-token");
+		String deviantArtToken = (String) req.getSession().getAttribute("DeviantArt-token");
 		RequestDispatcher rd = null;
 
-		if (accessToken != null && !"".equals(accessToken)) {
+		if (deviantArtToken != null && !"".equals(deviantArtToken)) {
 
-			DeviantArtResource spResource = new DeviantArtResource(accessToken);
+			DeviantArtResource spResource = new DeviantArtResource(deviantArtToken);
 			SearchDeviantArt deviantArtStats = spResource.getDeviantArtStats();
 
 			for (Result r : deviantArtStats.getResults()) {
