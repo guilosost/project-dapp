@@ -45,7 +45,7 @@
 	<!-- Unsplash Controllers -->
 	<servlet>
 		<description></description>
-		<display-name>UnsplashtSearchController</display-name>
+		<display-name>UnsplashSearchController</display-name>
 		<servlet-name>UnsplashSearchController</servlet-name>
 		<servlet-class>aiss.controller.UnsplashSearchController</servlet-class>
 	</servlet>
