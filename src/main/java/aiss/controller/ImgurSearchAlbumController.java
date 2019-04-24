@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.imgur.ImgurImage;
+import aiss.model.imgur.Gallery;
 import aiss.model.resource.ImgurResource;
 
-public class ImgurGetImageController extends HttpServlet {
+public class ImgurSearchAlbumController extends HttpServlet {
 	private static final Logger log = Logger.getLogger(ImgurNewPostController.class.getName());
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -21,11 +21,11 @@ public class ImgurGetImageController extends HttpServlet {
 		String accessToken = (String) req.getSession().getAttribute("Imgur-token");
 		String query = req.getParameter("searchQuery").replace(" ", "_");
 		RequestDispatcher rd = null;
-//Search for images in Imgur
+//Search for images in albums in Imgur
 		log.log(Level.FINE, "Searching images in Imgur that contains" + query);
 		if (accessToken != null && !"".equals(accessToken)) {
 			ImgurResource imResource = new ImgurResource(accessToken);
-			ImgurImage imagen = imResource.getImage(query);
+			Gallery imagen = imResource.getGallery(query);
 			log.log(Level.FINE, imagen.getId());
 
 			rd = req.getRequestDispatcher("/success.jsp");
