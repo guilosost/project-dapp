@@ -65,7 +65,7 @@ public class Result {
     @JsonProperty("current_user_collections")
     private List<Object> currentUserCollections = null;
     @JsonProperty("user")
-    private SearchPhotosUser user;
+    private SearchUserPhotos user;
     @JsonProperty("tags")
     private List<Tag> tags = null;
 
@@ -240,12 +240,12 @@ public class Result {
     }
 
     @JsonProperty("user")
-    public SearchPhotosUser getUser() {
+    public SearchUserPhotos getUser() {
         return user;
     }
 
     @JsonProperty("user")
-    public void setUser(SearchPhotosUser user) {
+    public void setUser(SearchUserPhotos user) {
         this.user = user;
     }
 

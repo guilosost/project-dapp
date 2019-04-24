@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "total_pages",
     "results"
 })
-public class SearchPhotosUnsplash {
+public class SearchUnsplashPhotos {
 
     @JsonProperty("total")
     private Integer total;

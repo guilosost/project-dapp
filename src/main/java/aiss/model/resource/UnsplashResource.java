@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import org.restlet.resource.ClientResource;
 
 import aiss.model.unsplash.Links;
-import aiss.model.unsplash.SearchPhotosUnsplash;
+import aiss.model.unsplash.SearchUnsplashPhotos;
 import aiss.model.unsplash.StatsTotal;
 import aiss.model.unsplash.UnsplashUser;
 
@@ -22,7 +22,7 @@ public class UnsplashResource {
 		this.access_token = access_token;
 	}
 
-	public SearchPhotosUnsplash getUnsplashImages(String query) throws UnsupportedEncodingException {
+	public SearchUnsplashPhotos getUnsplashImages(String query) throws UnsupportedEncodingException {
 
 		// Poner parámetro de entrada en formato correcto
 		String search = URLEncoder.encode(query, "UTF-8");
@@ -38,12 +38,12 @@ public class UnsplashResource {
 		ClientResource cr = new ClientResource(uri);
 
 		// Convertir JSON en .Java
-		SearchPhotosUnsplash unsplashSearch = cr.get(SearchPhotosUnsplash.class);
+		SearchUnsplashPhotos unsplashSearch = cr.get(SearchUnsplashPhotos.class);
 
 		return unsplashSearch;
 	}
 
-	public StatsTotal getUnsplashStats() throws UnsupportedEncodingException {
+	public SearchUnsplashPhotos getUnsplashStats() throws UnsupportedEncodingException {
 
 		// Crear la URL GET https://api.unsplash.com/stats/total
 
@@ -55,9 +55,9 @@ public class UnsplashResource {
 		ClientResource cr = new ClientResource(uri);
 
 		// Convertir JSON en .Java
-		StatsTotal deviantArtSearch = cr.get(StatsTotal.class);
+		SearchUnsplashPhotos unsplashSearch = cr.get(SearchUnsplashPhotos.class);
 
-		return deviantArtSearch;
+		return unsplashSearch;
 	}
 
 	public UnsplashUser getUnsplashUserInfo() throws UnsupportedEncodingException {

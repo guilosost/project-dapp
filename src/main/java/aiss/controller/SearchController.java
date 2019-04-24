@@ -14,7 +14,7 @@ import aiss.model.deviantart.Result;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.UnsplashResource;
-import aiss.model.unsplash.SearchPhotosUnsplash;
+import aiss.model.unsplash.SearchUnsplashPhotos;
 
 public class SearchController extends HttpServlet {
 
@@ -54,7 +54,7 @@ public class SearchController extends HttpServlet {
 		if (unsplashToken != null && !"".equals(unsplashToken)) {
 
 			UnsplashResource uResource = new UnsplashResource(unsplashToken);
-			SearchPhotosUnsplash unsplashImagesResults = uResource.getUnsplashImages(query);
+			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query);
 
 			for (aiss.model.unsplash.Result r : unsplashImagesResults.getResults()) {
 

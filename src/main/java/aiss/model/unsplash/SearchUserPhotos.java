@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "total_photos",
     "accepted_tos"
 })
-public class SearchPhotosUser {
+public class SearchUserPhotos {
 
     @JsonProperty("id")
     private String id;
