@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="style.css">
 <title>Success</title>
 </head>
 <body>
+
+
 
 	<fieldset id="deviantArt">
 		<legend>
@@ -23,9 +26,22 @@
 				)
 			</h3>
 			<img src='<c:out value="${deviantArtImage.preview.src}"/>'
-				height="10%" width="10%" />
+				height="20%" width="20%" />
 			<br>
 		</c:forEach>
+		</fieldset>
+
+		<fieldset id="flickr">
+			<legend>
+				Flickr search for
+				<c:out value="${param.searchQuery}" />
+			</legend>
+			<c:forEach items="${requestScope.photos.photo}" var="photo">
+			<h3><c:out value="${photo.title}" /></h3>
+				<img
+					src='http://farm<c:out value="${photo.farm}"/>.staticflickr.com/<c:out value="${photo.server}"/>/<c:out value="${photo.id}"/>_<c:out value="${photo.secret}"/>.jpg' 
+					height="20%" width="20%"/>
+			</c:forEach>
 	</fieldset>
 
 	<fieldset id="unsplash">

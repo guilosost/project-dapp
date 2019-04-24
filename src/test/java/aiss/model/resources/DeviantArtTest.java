@@ -18,7 +18,7 @@ public class DeviantArtTest {
 	@Test
 	public void getPhotosTest() throws UnsupportedEncodingException {
 		String query = "photo";
-		DeviantArtResource datos = new DeviantArtResource("47c35efb5b71b0d9dfe7d95a4ad2b3fc187f3b98391b6a54d2");
+		DeviantArtResource datos = new DeviantArtResource("2893a667131ee02143af06021e1a22e8f31e143d86436b8898");
 		SearchDeviantArt daSearch = datos.getDeviantArtImages(query);
 
 		assertNotNull("The search returned null", daSearch);
