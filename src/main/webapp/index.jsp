@@ -34,6 +34,9 @@
 	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
 	<br>
 
+	<a href="unsplashSearch.jsp">Prueba Búsqueda Unsplash</a>
+	<br>
+
 	<h2>Tokens de OAuth</h2>
 	<ul>
 		<li><strong>Unsplash:</strong>
@@ -48,7 +51,7 @@
 			<ul>
 				<li><c:out value='${sessionScope["DeviantArt-token"]}' /></li>
 			</ul></li>
-			<li><strong>GooglePhotos:</strong>
+		<li><strong>GooglePhotos:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["GooglePhotos-token"]}' /></li>
 			</ul></li>
