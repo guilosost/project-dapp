@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>DeviantArt Search</title>
+<title>Imgur Search</title>
 </head>
 <body>
 

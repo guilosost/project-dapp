@@ -1,8 +1,10 @@
 package aiss.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,22 +18,27 @@ public class ImgurGetImageController {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		String accessToken = (String) req.getSession().getAttribute("Imgur-token");
-
+		String query = req.getParameter("searchQuery").replace(" ", "_");
+		RequestDispatcher rd = null;
+//Search for images in Imgur
+		log.log(Level.FINE, "Searching images in Imgur that contains" + query);
 		if (accessToken != null && !"".equals(accessToken)) {
-
 			ImgurResource imResource = new ImgurResource(accessToken);
-			ImgurImage imagen = imResource.getImage();
+			ImgurImage imagen = imResource.getImage(query);
+			log.log(Level.FINE, imagen.getId());
 
-			if (imagen != null) {
-				req.setAttribute("Image", imagen);
-				req.getRequestDispatcher("/spotifyPlaylistsListing.jsp").forward(req, resp);
-			} else {
-				log.warning("no Image available");
-				req.getRequestDispatcher("/spotifyPlaylistNew").forward(req, resp);
-			}
-		} else {
+			rd = req.getRequestDispatcher("/success.jsp");
+			req.setAttribute("ImgurImage", imagen);
+			rd.forward(req, resp);
+		} else
+
+		{
 			log.info("Trying to access Imgur without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/Imgur").forward(req, resp);
 		}
+	}
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 }
