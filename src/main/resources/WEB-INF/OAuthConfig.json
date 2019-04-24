@@ -13,14 +13,5 @@
 		"clientSecret": "973ec3441a2a6ea308ae95ab86269251",
 		"authorizationFormUrl": "https://www.deviantart.com/oauth2/authorize",
 		"scopes": ["browse"]
-	} ,
-	
-		"Flickr":{
-		"tokerUrl":"https://www.flickr.com/services/oauth/request_token",
-		"clientId":"fdf3e6577583895b8d0a7b944b7a3868",
-		"clientSecret":"902ba89628a7c8b9",
-		"authorizationFormUrl":"https://www.flickr.com/services/oauth/authorize",
-		"scopes":[]
 	}
-	
 }		
