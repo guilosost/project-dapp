@@ -18,7 +18,7 @@ public class UnsplashTest {
 	public void getPhotosTest() throws UnsupportedEncodingException {
 		String query = "photo";
 		UnsplashResource datos = new UnsplashResource(
-				"d92b0da750428c099076f42dab906492c2abfca702adb6df524986224814bd1b");
+				"6cf067d06b0f174422f76814feec4e3782e756bd41a9460a42b2d0383035fa08");
 		SearchUnsplashPhotos uSearch = datos.getUnsplashImages(query);
 
 		assertNotNull("The search returned null", uSearch);
