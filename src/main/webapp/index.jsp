@@ -15,38 +15,42 @@
 	<h1>Project Dapp</h1>
 
 	<p>Este proyecto va enfocado a facilitar la publicación de imágenes
-		en el ámbito digital. La aplicación reúne cuatro aplicaciones de
-		image hosting service que pueden usarse para agilizar la publicación. La
-		idea es poder publicar en todas las páginas de una sola vez y
-		obtener las estadísticas del alcance de estas publicaciones y la
-		reacción que ha causado en los receptores, para así poder perfilar el
-		tipo de publicaciones que se harán en el futuro. Los integrantes del
-		grupo son:</p>
+		en el ámbito digital. La aplicación reúne cuatro aplicaciones de image
+		hosting service que pueden usarse para agilizar la publicación. La
+		idea es poder publicar en todas las páginas de una sola vez y obtener
+		las estadísticas del alcance de estas publicaciones y la reacción que
+		ha causado en los receptores, para así poder perfilar el tipo de
+		publicaciones que se harán en el futuro. Los integrantes del grupo
+		son:</p>
 	<ul>
 		<li>Gonzalo Álvarez García (gonalvgar@alum.us.es)</li>
 		<li>Alfonso Cadenas Morales (alfcadmor@alum.us.es)</li>
 		<li>Guillermo Losada Ostos (guilosost@alum.us.es)</li>
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
-	
+
 	<a href="deviantArtSearch.jsp">Prueba Búsqueda de DeviantArt</a>
-            <br>
+	<br>
 	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
-            <br>
+	<br>
 
 	<h2>Tokens de OAuth</h2>
 	<ul>
-		<li><strong>Unslpash:</strong>
+		<li><strong>Unsplash:</strong>
 			<ul>
-				<li><c:out value='${sessionScope["Unslpash-token"]}' /></li>
+				<li><c:out value='${sessionScope["Unsplash-token"]}' /></li>
 			</ul></li>
 		<li><strong>Imgur:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["Imgur-token"]}' /></li>
 			</ul></li>
-			<li><strong>DeviantArt:</strong>
+		<li><strong>DeviantArt:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["DeviantArt-token"]}' /></li>
+			</ul></li>
+			<li><strong>GooglePhotos:</strong>
+			<ul>
+				<li><c:out value='${sessionScope["GooglePhotos-token"]}' /></li>
 			</ul></li>
 	</ul>
 

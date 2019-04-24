@@ -21,6 +21,19 @@
 			<br>
 		</c:forEach>
 	</fieldset>
+	
+	<fieldset id="unsplash">
+		<legend>
+			Unsplash search for
+			<c:out value="${param.searchQuery}" />
+		</legend>
+		<c:forEach items="${requestScope.unsplashPhotos}"
+			var="deviantArtImage">
+			<h3><c:out value="${unsplashImage.title}" /> (<c:out value="${unsplashImage.publishedTime}" />)</h3>
+			<img src='<c:out value="${unsplashImage.preview.src}"/>'  height="10%" width="10%" />
+			<br>
+		</c:forEach>
+	</fieldset>
 
 </body>
 </html>

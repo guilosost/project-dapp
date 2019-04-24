@@ -42,6 +42,29 @@
 		<url-pattern>/DeviantArtStatsController</url-pattern>
 	</servlet-mapping>
 
+	<!-- Unsplash Controllers -->
+	<servlet>
+		<description></description>
+		<display-name>UnsplashtSearchController</display-name>
+		<servlet-name>UnsplashSearchController</servlet-name>
+		<servlet-class>aiss.controller.UnsplashSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UnsplashSearchController</servlet-name>
+		<url-pattern>/UnsplashSearchController</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>UnsplashStatsController</display-name>
+		<servlet-name>UnsplashStatsController</servlet-name>
+		<servlet-class>aiss.controller.UnsplashStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UnsplashStatsController</servlet-name>
+		<url-pattern>/UnsplashStatsController</url-pattern>
+	</servlet-mapping>
+
 	<!-- Imgur Oauth -->
 	<servlet>
 		<description></description>
@@ -104,5 +127,37 @@
 	<servlet-mapping>
 		<servlet-name>DeviantArtOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/DeviantArt</url-pattern>
+	</servlet-mapping>
+
+	<!-- Unsplash Oauth -->
+	<servlet>
+		<description></description>
+		<servlet-name>UnsplashAuthController</servlet-name>
+		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Unsplash</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UnsplashAuthController</servlet-name>
+		<url-pattern>/AuthController/Unsplash</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<servlet-name>UnsplashOAuth2Callback</servlet-name>
+		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Unsplash</param-value>
+		</init-param>
+		<init-param>
+			<param-name>onSuccess</param-name>
+			<param-value>redirect:index.html</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UnsplashOAuth2Callback</servlet-name>
+		<url-pattern>/oauth2callback/Unsplash</url-pattern>
 	</servlet-mapping>
 </web-app>
