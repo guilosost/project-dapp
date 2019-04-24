@@ -15,6 +15,7 @@ import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.UnsplashResource;
 import aiss.model.unsplash.SearchUnsplashPhotos;
+import aiss.model.unsplash.UnsplashResult;
 
 public class SearchController extends HttpServlet {
 
@@ -49,14 +50,14 @@ public class SearchController extends HttpServlet {
 		}
 
 		// Search for images in Unsplash
-		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
+		log.log(Level.FINE, "Searching for Unsplash images that contain " + query);
 
 		if (unsplashToken != null && !"".equals(unsplashToken)) {
 
 			UnsplashResource uResource = new UnsplashResource(unsplashToken);
 			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query);
 
-			for (aiss.model.unsplash.UnsplashResult r : unsplashImagesResults.getResults()) {
+			for (UnsplashResult r : unsplashImagesResults.getResults()) {
 
 				log.log(Level.FINE, r.getLinks().getPhotos());
 			}
