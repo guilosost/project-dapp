@@ -7,7 +7,7 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
+
 	<!-- Imgur Controllers -->
 	<servlet>
 		<servlet-name>ImgurNewPostController</servlet-name>
@@ -15,21 +15,33 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ImgurNewPostController</servlet-name>
-		<url-pattern>/imgurNewPostController</url-pattern>
+		<url-pattern>/ImgurNewPostController</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<!-- DeviantArt Controllers -->
 	<servlet>
+		<description></description>
+		<display-name>DeviantArtSearchController</display-name>
 		<servlet-name>DeviantArtSearchController</servlet-name>
 		<servlet-class>aiss.controller.DeviantArtSearchController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeviantArtSearchController</servlet-name>
-		<url-pattern>/deviantArtSearchController</url-pattern>
+		<url-pattern>/DeviantArtSearchController</url-pattern>
 	</servlet-mapping>
-	
-	
+
+	<servlet>
+		<description></description>
+		<display-name>DeviantArtStatsController</display-name>
+		<servlet-name>DeviantArtStatsController</servlet-name>
+		<servlet-class>aiss.controller.DeviantArtStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeviantArtStatsController</servlet-name>
+		<url-pattern>/DeviantArtStatsController</url-pattern>
+	</servlet-mapping>
+
 	<!-- Imgur Oauth -->
 	<servlet>
 		<description></description>
@@ -61,8 +73,8 @@
 		<servlet-name>ImgurOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/Imgur</url-pattern>
 	</servlet-mapping>
-	
-	<!-- DevianArt Oauth -->
+
+	<!-- DeviantArt Oauth -->
 	<servlet>
 		<description></description>
 		<servlet-name>DeviantArtAuthController</servlet-name>
@@ -74,7 +86,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeviantArtAuthController</servlet-name>
-		<url-pattern>/AuthController/DevianArt</url-pattern>
+		<url-pattern>/AuthController/DeviantArt</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<description></description>
@@ -90,7 +102,7 @@
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DevianArtOAuth2Callback</servlet-name>
+		<servlet-name>DeviantArtOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/DeviantArt</url-pattern>
 	</servlet-mapping>
 </web-app>

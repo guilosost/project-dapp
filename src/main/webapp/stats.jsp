@@ -5,19 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Success</title>
+<title>Stats</title>
 </head>
 <body>
 
 	<fieldset id="deviantArt">
 		<legend>
-			DeviantArt search for
-			<c:out value="${param.searchQuery}" />
+			DeviantArt User Stats
 		</legend>
-		<c:forEach items="${requestScope.deviantArtImages}"
-			var="deviantArtImage">
-			<h3><c:out value="${deviantArtImage.title}" /> (<c:out value="${deviantArtImage.publishedTime}" />)</h3>
-			<img src='<c:out value="${deviantArtImage.preview.src}"/>'  height="10%" width="10%" />
+		<c:forEach items="${requestScope.deviantArtStats}" var="deviantArtStats1">
+			<h3><c:out value="${deviantArtStats1.title}" /></h3>
+			<p>Comentarios: <c:out value="${deviantArtStats1.stats.comments}"/></p>
+			<p>Favoritos: <c:out value="${deviantArtStats1.stats.favourites}"/></p>
 			<br>
 		</c:forEach>
 	</fieldset>

@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.imgur.Image;
+import aiss.model.imgur.ImgurImage;
 import aiss.model.resource.ImgurResource;
 
 public class ImgurGetImageController {
@@ -20,7 +20,7 @@ public class ImgurGetImageController {
 		if (accessToken != null && !"".equals(accessToken)) {
 
 			ImgurResource imResource = new ImgurResource(accessToken);
-			Image imagen = imResource.getImage();
+			ImgurImage imagen = imResource.getImage();
 
 			if (imagen != null) {
 				req.setAttribute("Image", imagen);

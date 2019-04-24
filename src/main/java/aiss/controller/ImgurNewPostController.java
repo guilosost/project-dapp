@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.imgur.Image;
+import aiss.model.imgur.ImgurImage;
 import aiss.model.resource.ImgurResource;
 
 public class ImgurNewPostController extends HttpServlet {

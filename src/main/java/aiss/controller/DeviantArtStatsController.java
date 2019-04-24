@@ -14,36 +14,35 @@ import aiss.model.deviantart.Result;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DeviantArtResource;
 
-public class DeviantArtSearchController extends HttpServlet {
+public class DeviantArtStatsController extends HttpServlet {
 
-	private static final Logger log = Logger.getLogger(DeviantArtSearchController.class.getName());
+	private static final long serialVersionUID = -2421050068295083718L;
+	private static final Logger log = Logger.getLogger(DeviantArtStatsController.class.getName());
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String accessToken = (String) req.getSession().getAttribute("DeviantArt-token");
-		String query = req.getParameter("searchQuery").replace(" ", "_");
 		RequestDispatcher rd = null;
-
-		// Search for images in DeviantArt
-		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
 
 		if (accessToken != null && !"".equals(accessToken)) {
 
 			DeviantArtResource spResource = new DeviantArtResource(accessToken);
-			SearchDeviantArt deviantArtImagesResults = spResource.getDeviantArtImages(query);
+			SearchDeviantArt deviantArtStats = spResource.getDeviantArtStats();
 
-			for(Result r : deviantArtImagesResults.getResults()) {
+			for (Result r : deviantArtStats.getResults()) {
 
-				log.log(Level.FINE, r.getUrl());
+				log.log(Level.FINE, r.getStats().getFavourites().toString());
 			}
 
-			rd = req.getRequestDispatcher("/success.jsp");
-			req.setAttribute("deviantArtImages", deviantArtImagesResults.getResults());
+			rd = req.getRequestDispatcher("/stats.jsp");
+			req.setAttribute("deviantArtStats", deviantArtStats.getResults());
 			rd.forward(req, resp);
+
 		} else {
 			log.info("Trying to access DeviantArt without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/DeviantArt").forward(req, resp);
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

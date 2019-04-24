@@ -1,0 +1,149 @@
+<!-- WEBAPP SERVLETS -->
+	<!-- Facebook post -->
+	<servlet>
+		<servlet-name>FacebookPostController</servlet-name>
+		<servlet-class>aiss.controller.FacebookPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookPostController</servlet-name>
+		<url-pattern>/facebookPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Facebook search -->
+	<servlet>
+		<servlet-name>FacebookSearchController</servlet-name>
+		<servlet-class>aiss.controller.FacebookSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookSearchController</servlet-name>
+		<url-pattern>/facebookSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Facebook get -->
+	<servlet>
+		<servlet-name>FacebookGetController</servlet-name>
+		<servlet-class>aiss.controller.FacebookGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookGetController</servlet-name>
+		<url-pattern>/facebookGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Facebook stats -->
+	<servlet>
+		<servlet-name>FacebookStatsController</servlet-name>
+		<servlet-class>aiss.controller.FacebookStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookStatsController</servlet-name>
+		<url-pattern>/facebookStatsController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Twitter post -->
+	<servlet>
+		<servlet-name>TwitterPostController</servlet-name>
+		<servlet-class>aiss.controller.TwitterPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterPostController</servlet-name>
+		<url-pattern>/twitterPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Twitter search -->
+	<servlet>
+		<servlet-name>TwitterSearchController</servlet-name>
+		<servlet-class>aiss.controller.TwitterSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterSearchController</servlet-name>
+		<url-pattern>/twitterSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Twitter get -->
+	<servlet>
+		<servlet-name>TwitterGetController</servlet-name>
+		<servlet-class>aiss.controller.TwitterGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterGetController</servlet-name>
+		<url-pattern>/twitterGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Twitter stats -->
+	<servlet>
+		<servlet-name>TwitterStatsController</servlet-name>
+		<servlet-class>aiss.controller.TwitterStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitterStatsController</servlet-name>
+		<url-pattern>/twitterStatsController</url-pattern>
+	</servlet-mapping>
+
+	<!-- Reddit post -->
+	<servlet>
+		<servlet-name>RedditNewPostController</servlet-name>
+		<servlet-class>aiss.controller.RedditNewPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditNewPostController</servlet-name>
+		<url-pattern>/redditNewPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Reddit search -->
+	<servlet>
+		<servlet-name>RedditSearchController</servlet-name>
+		<servlet-class>aiss.controller.RedditSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditSearchController</servlet-name>
+		<url-pattern>/redditSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Reddit get -->
+	<servlet>
+		<servlet-name>RedditGetController</servlet-name>
+		<servlet-class>aiss.controller.RedditGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditGetController</servlet-name>
+		<url-pattern>/redditGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Reddit stats -->
+	<servlet>
+		<servlet-name>RedditStatsController</servlet-name>
+		<servlet-class>aiss.controller.RedditStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RedditStatsController</servlet-name>
+		<url-pattern>/redditStatsController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Pinterest post -->
+	<servlet>
+		<servlet-name>PinterestPostController</servlet-name>
+		<servlet-class>aiss.controller.PinterestPostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestPostController</servlet-name>
+		<url-pattern>/pinterestPostController</url-pattern>
+	</servlet-mapping>
+	<!-- Pinterest search -->
+	<servlet>
+		<servlet-name>PinterestSearchController</servlet-name>
+		<servlet-class>aiss.controller.PinterestSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestSearchController</servlet-name>
+		<url-pattern>/pinterestSearchController</url-pattern>
+	</servlet-mapping>
+	<!-- Pinterest get -->
+	<servlet>
+		<servlet-name>PinterestGetController</servlet-name>
+		<servlet-class>aiss.controller.PinterestGetController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestGetController</servlet-name>
+		<url-pattern>/pinterestGetController</url-pattern>
+	</servlet-mapping>
+	<!-- Pinterest stats -->
+	<servlet>
+		<servlet-name>PinterestStatsController</servlet-name>
+		<servlet-class>aiss.controller.PinterestStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PinterestStatsController</servlet-name>
+		<url-pattern>/pinterestStatsController</url-pattern>
+	</servlet-mapping>
+	

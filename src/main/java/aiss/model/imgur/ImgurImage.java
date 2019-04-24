@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "name",
     "link"
 })
-public class Image {
+public class ImgurImage {
 
     @JsonProperty("id")
     private String id;

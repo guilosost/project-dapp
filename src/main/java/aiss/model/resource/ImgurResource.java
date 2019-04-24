@@ -8,7 +8,7 @@ import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
-import aiss.model.imgur.Image;
+import aiss.model.imgur.ImgurImage;
 
 public class ImgurResource {
 
@@ -25,13 +25,13 @@ public class ImgurResource {
 	 *
 	 * @return Files
 	 */
-	public String postImage(Image post, String content) {
+	public String postImage(ImgurImage post, String content) {
 
 		ClientResource cr = null;
-		Image imagen = null;
+		ImgurImage imagen = null;
 		try {
 			cr = new ClientResource(uri + "?access_token=" + access_token);
-			Image newPost = cr.post(post, Image.class);
+			ImgurImage newPost = cr.post(post, ImgurImage.class);
 			imagen = newPost;
 			// https://www.reddit.com/api/submit?
 			// access_token=qMPo05YQ-pRrEA&sr=u/migyanari&api_type=json&title=pppp&text=pro.json&kind=t3
@@ -46,7 +46,7 @@ public class ImgurResource {
 		return imagen.getName();
 	}
 
-	public Image getImage() {
+	public ImgurImage getImage() {
 
 		String imageGetUrl = baseURL + "/3/image/";
 		ClientResource cr = new ClientResource(imageGetUrl);
@@ -55,9 +55,9 @@ public class ImgurResource {
 		chr.setRawValue(access_token);
 		cr.setChallengeResponse(chr);
 
-		Image imagen = null;
+		ImgurImage imagen = null;
 		try {
-			imagen = cr.get(Image.class);
+			imagen = cr.get(ImgurImage.class);
 			return imagen;
 
 		} catch (ResourceException re) {
