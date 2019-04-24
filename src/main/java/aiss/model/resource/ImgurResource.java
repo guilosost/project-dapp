@@ -46,9 +46,9 @@ public class ImgurResource {
 		return imagen.getName();
 	}
 
-	public ImgurImage getImage() {
+	public ImgurImage getImage(String name) {
 
-		String imageGetUrl = baseURL + "/3/image/";
+		String imageGetUrl = baseURL + name;
 		ClientResource cr = new ClientResource(imageGetUrl);
 
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
@@ -61,7 +61,7 @@ public class ImgurResource {
 			return imagen;
 
 		} catch (ResourceException re) {
-			log.warning("Error when retrieving Spotify playlists: " + cr.getResponse().getStatus());
+			log.warning("Error when getting image from Imgur: " + cr.getResponse().getStatus());
 			log.warning(imageGetUrl);
 			return null;
 		}
