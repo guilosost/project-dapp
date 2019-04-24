@@ -9,7 +9,8 @@
 <body>
 
 	<div id="searchDiv">
-		<form id="searchForm" action="ImgurGetImageController" method="post">
+		<form id="searchForm" action="ImgurSearchAlbumController"
+			method="post">
 			<input type="text" name="searchQuery" required /> <input
 				type="submit" name="searchBtn" title="search" value="search">
 		</form>

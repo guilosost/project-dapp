@@ -8,6 +8,7 @@ import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
+import aiss.model.imgur.Gallery;
 import aiss.model.imgur.ImgurImage;
 
 public class ImgurResource {
@@ -16,6 +17,7 @@ public class ImgurResource {
 	private final String baseURL = "https://api.imgur.com";
 	private final String access_token;
 	private final String uri = "https://www.imgur.com";
+//https://api.imgur.com/3/gallery/search/{{sort}}/{{window}}/{{page}}?q=cats
 
 	public ImgurResource(String access_token) {
 		this.access_token = access_token;
@@ -46,19 +48,19 @@ public class ImgurResource {
 		return imagen.getName();
 	}
 
-	public ImgurImage getImage(String name) {
+	public Gallery getGallery(String name) {
+		// /3/gallery/search/{{sort}}/{{window}}/{{page}}?q=cats
 
-		String imageGetUrl = baseURL + name;
+		String imageGetUrl = baseURL + "/3/gallery/search/" + name;
 		ClientResource cr = new ClientResource(imageGetUrl);
 
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
-		chr.setRawValue(access_token);
 		cr.setChallengeResponse(chr);
 
-		ImgurImage imagen = null;
+		Gallery galeria = null;
 		try {
-			imagen = cr.get(ImgurImage.class);
-			return imagen;
+			galeria = cr.get(Gallery.class);
+			return galeria;
 
 		} catch (ResourceException re) {
 			log.warning("Error when getting image from Imgur: " + cr.getResponse().getStatus());
