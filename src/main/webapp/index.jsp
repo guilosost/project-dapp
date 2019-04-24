@@ -36,7 +36,7 @@
 
 	<h2>Tokens de OAuth</h2>
 	<ul>
-		<li><strong>Unslpash:</strong>
+		<li><strong>Unsplash:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["Unslpash-token"]}' /></li>
 			</ul></li>
@@ -47,6 +47,10 @@
 			<li><strong>DeviantArt:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["DeviantArt-token"]}' /></li>
+			</ul></li>
+			<li><strong>GooglePhotos:</strong>
+			<ul>
+				<li><c:out value='${sessionScope["GooglePhotos-token"]}' /></li>
 			</ul></li>
 	</ul>
 
