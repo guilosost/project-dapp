@@ -48,6 +48,10 @@
 			<ul>
 				<li><c:out value='${sessionScope["DeviantArt-token"]}' /></li>
 			</ul></li>
+			<li><strong>GooglePhotos:</strong>
+			<ul>
+				<li><c:out value='${sessionScope["GooglePhotos-token"]}' /></li>
+			</ul></li>
 	</ul>
 
 </body>
