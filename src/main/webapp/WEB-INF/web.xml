@@ -54,17 +54,6 @@
 		<url-pattern>/UnsplashSearchController</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<description></description>
-		<display-name>UnsplashStatsController</display-name>
-		<servlet-name>UnsplashStatsController</servlet-name>
-		<servlet-class>aiss.controller.UnsplashStatsController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UnsplashStatsController</servlet-name>
-		<url-pattern>/UnsplashStatsController</url-pattern>
-	</servlet-mapping>
-
 	<!-- Imgur Oauth -->
 	<servlet>
 		<description></description>
