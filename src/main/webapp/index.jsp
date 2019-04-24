@@ -33,6 +33,9 @@
 	<br>
 	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
 	<br>
+	<a href="imgurSearch.jsp">Prueba Búsqueda de DeviantArt</a>
+
+	
 
 	<a href="unsplashSearch.jsp">Prueba Búsqueda Unsplash</a>
 	<br>
