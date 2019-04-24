@@ -30,6 +30,30 @@
 		<servlet-name>DeviantArtStatsController</servlet-name>
 		<url-pattern>/DeviantArtStatsController</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Imgur Controller -->
+	<servlet>
+		<description></description>
+		<display-name>ImgurGetImageController</display-name>
+		<servlet-name>ImgurGetImageController</servlet-name>
+		<servlet-class>aiss.controller.ImgurGetImageController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ImgurGetImageController</servlet-name>
+		<url-pattern>/ImgurGetImageController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Unsplash Controller -->
+	<servlet>
+		<description></description>
+		<display-name>SearchControllerUnsplash</display-name>
+		<servlet-name>SearchControllerUnsplash</servlet-name>
+		<servlet-class>aiss.controller.SearchControllerUnsplash</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchControllerUnsplash</servlet-name>
+		<url-pattern>/SearchControllerUnsplash</url-pattern>
+	</servlet-mapping>
 
 	<!-- Imgur Oauth -->
 	<servlet>
