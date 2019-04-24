@@ -8,7 +8,21 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-	
+	<!-- Imgur Controllers -->
+
+
+	<!-- DeviantArt Controllers -->
+
+	<servlet>
+		<description></description>
+		<display-name>DeviantArtStatsController</display-name>
+		<servlet-name>DeviantArtStatsController</servlet-name>
+		<servlet-class>aiss.controller.DeviantArtStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeviantArtStatsController</servlet-name>
+		<url-pattern>/DeviantArtStatsController</url-pattern>
+	</servlet-mapping>
 
 	<!-- Imgur Oauth -->
 	<servlet>
