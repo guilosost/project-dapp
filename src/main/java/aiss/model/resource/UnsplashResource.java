@@ -86,17 +86,13 @@ public class UnsplashResource {
 	}
 
 	public String getAccessToken() throws UnsupportedEncodingException {
-		String url = "https://unsplash.com/oauth/token?client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code=" + access_token + "&grant_type=authorization_code";
+		String url = "https://unsplash.com/oauth/token?client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code="
+				+ access_token + "&grant_type=authorization_code";
 		log.log(Level.FINE, "El access viene de :" + url);
-		//https://unsplash.com/oauth/token?client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0
-			//&client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1
-			//&redirect_uri=urn:ietf:wg:oauth:2.0:oob
-			//&code=0bc561451251313c5ae93eea399ea89fdd6d1cfbbcb6561a8e2babd596835aa8
-			//&grant_type=authorization_code
 
 		String result = "";
 		ClientResource cr = null;
-		
+
 		try {
 			cr = new ClientResource(url);
 			cr.setEntityBuffering(true);
@@ -106,67 +102,7 @@ public class UnsplashResource {
 			// ToDo: print useful log information before returning
 			log.warning("Error when creatin a Access Token: " + cr.getResponse().getStatus());
 		}
-//		String res = "";
-//
-//		String url = "https://unsplash.com/oauth/token?clientId=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&"
-//				+ "client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1&code=" + code
-//				+ "&grant_type=authorization_code";
-//
-//		String urlParameters = "client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&"
-//				+ "client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1&"
-//				+ "redirect_uri=urn:ietf:wg:oauth:2.0:oob&code=" + code + "grant_type=authorization_code";
-//		res = excutePost("https://unsplash.com/oauth/token", urlParameters);
-//		log.log(Level.INFO, "String del POST" + res);
-//		return res;
 		return result;
 	}
-//
-//	public static String excutePost(String targetURL, String urlParameters) {
-//		URL url;
-//		HttpURLConnection connection = null;
-//		try {
-//			// Create connection
-//			url = new URL(targetURL);
-//			connection = (HttpURLConnection) url.openConnection();
-//			connection.setRequestMethod("POST");
-//			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//
-//			connection.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));
-//			connection.setRequestProperty("Content-Language", "en-US");
-//
-//			connection.setUseCaches(false);
-//			connection.setDoInput(true);
-//			connection.setDoOutput(true);
-//
-//			// Send request
-//			DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-//			wr.writeBytes(urlParameters);
-//			wr.flush();
-//			wr.close();
-//
-//			// Get Response
-//			InputStream is = connection.getInputStream();
-//			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-//			String line;
-//			StringBuffer response = new StringBuffer();
-//			while ((line = rd.readLine()) != null) {
-//				response.append(line);
-//				response.append('\r');
-//			}
-//			rd.close();
-//			return response.toString();
-//
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//			return null;
-//
-//		} finally {
-//
-//			if (connection != null) {
-//				connection.disconnect();
-//			}
-//		}
-//	}
 
 }
