@@ -7,6 +7,17 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<servlet>
+		<description></description>
+		<display-name>LoginController</display-name>
+		<servlet-name>LoginController</servlet-name>
+		<servlet-class>aiss.controller.LoginController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginController</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
 
 	<!-- DevianArt Controllers -->
 	<servlet>
@@ -79,7 +90,7 @@
 		</init-param>
 		<init-param>
 			<param-name>onSuccess</param-name>
-			<param-value>redirect:index.html</param-value>
+			<param-value>redirect:/home</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -111,7 +122,7 @@
 		</init-param>
 		<init-param>
 			<param-name>onSuccess</param-name>
-			<param-value>redirect:index.html</param-value>
+			<param-value>redirect:/home</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -143,7 +154,7 @@
 		</init-param>
 		<init-param>
 			<param-name>onSuccess</param-name>
-			<param-value>redirect:index.html</param-value>
+			<param-value>redirect:/home</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

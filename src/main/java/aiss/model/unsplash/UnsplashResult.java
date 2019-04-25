@@ -1,7 +1,12 @@
 
 package aiss.model.unsplash;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -65,9 +70,11 @@ public class UnsplashResult {
     @JsonProperty("current_user_collections")
     private List<Object> currentUserCollections = null;
     @JsonProperty("user")
-    private SearchUserPhotos user;
+    private UnsplashUser user;
     @JsonProperty("tags")
     private List<Tag> tags = null;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("id")
     public String getId() {
@@ -240,12 +247,12 @@ public class UnsplashResult {
     }
 
     @JsonProperty("user")
-    public SearchUserPhotos getUser() {
+    public UnsplashUser getUser() {
         return user;
     }
 
     @JsonProperty("user")
-    public void setUser(SearchUserPhotos user) {
+    public void setUser(UnsplashUser user) {
         this.user = user;
     }
 
@@ -257,6 +264,16 @@ public class UnsplashResult {
     @JsonProperty("tags")
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

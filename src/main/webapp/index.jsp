@@ -29,13 +29,15 @@
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
 
-	<a href="deviantArtSearch.jsp">Prueba Búsqueda de DeviantArt</a>
+	<a href="search.jsp">Prueba de Búsqueda</a>
 	<br>
 	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
 	<br>
 	<a href="imgurSearch.jsp">Prueba Búsqueda de Imgur</a>
 	<br>
-	<a href="unsplashSearch.jsp">Prueba Búsqueda Unsplash</a>
+	<a href="/AuthController/DeviantArt">Login DeviantArt</a>
+	<br>
+	<a href="/AuthController/Unsplash">Login Unsplash</a>
 	<br>
 
 	<h2>Tokens de OAuth</h2>

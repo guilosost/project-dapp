@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
 <title>Success</title>
 </head>
 <body>
@@ -50,15 +51,15 @@
 			<c:out value="${param.searchQuery}" />
 		</legend>
 		<c:forEach items="${requestScope.unsplashPhotos}"
-			var="deviantArtImage">
+			var="unsplashImage">
 			<h3>
-				<c:out value="${unsplashImage.title}" />
+				<c:out value="${unsplashImage.description}" />
 				(
-				<c:out value="${unsplashImage.createdAt}" />
+				<c:out value="${unsplashImage.user.username}" />
 				)
 			</h3>
-			<img src='<c:out value="${unsplashImage.preview.src}"/>' height="10%"
-				width="10%" />
+			<img src='<c:out value="${unsplashImage.urls.thumb}"/>' height="20%"
+				width="20%" />
 			<br>
 		</c:forEach>
 	</fieldset>
