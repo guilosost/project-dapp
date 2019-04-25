@@ -2,7 +2,7 @@
 	"Imgur": {
 		"tokenUrl": "https://api.imgur.com/oauth2/token",
 		"clientId": "2b23b9de0b878a4",
-		"clientSecret": "112d62797eb213d30840887b657663c3279b696d",
+		"clientSecret": "3412cce7b4dbcc18ab751a5c0335c6b3ce77237a",
 		"authorizationFormUrl": "https://api.imgur.com/oauth2/authorize",
 		"scopes": []
 	},
