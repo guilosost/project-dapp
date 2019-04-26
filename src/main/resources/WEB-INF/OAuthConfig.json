@@ -1,8 +1,8 @@
 {
 	"Imgur": {
 		"tokenUrl": "https://api.imgur.com/oauth2/token",
-		"clientId": "2b23b9de0b878a4",
-		"clientSecret": "3412cce7b4dbcc18ab751a5c0335c6b3ce77237a",
+		"clientId": "88b9f143f2ceb36",
+		"clientSecret": "06aa3a53e3520d18652977531fbda31095dbcc65",
 		"authorizationFormUrl": "https://api.imgur.com/oauth2/authorize",
 		"scopes": []
 	},
@@ -15,7 +15,7 @@
 		"scopes": ["browse"]
 	},
 		
-    "GoogleDrive": { 
+    "GooglePhotos": { 
         "tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
         "clientId": "133193217682-k72c1n6jor7io71cfgqhmvmcip27ldfr.apps.googleusercontent.com",
         "clientSecret": "vwqy6s8p2wntG90Q1XA4qBSf",

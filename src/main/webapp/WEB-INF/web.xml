@@ -54,6 +54,7 @@
 		<url-pattern>/ImgurSearchAlbumController</url-pattern>
 	</servlet-mapping>
 	
+	
 	<!-- Unsplash Controller -->
 	<servlet>
 		<description></description>

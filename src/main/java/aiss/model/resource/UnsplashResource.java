@@ -38,8 +38,9 @@ public class UnsplashResource {
 
 		// Crear la URL
 		// https://api.unsplash.com/search/photos?page=1&query=nature&per_page=5&access_token=Alph4num3r1ct0k3nv4lu3
-		String uri = "https://api.unsplash.com/search/photos?page=1&query=" + search + "&per_page=5&client_id="
-				+ "f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0";
+		String uri = "https://api.unsplash.com/search/photos?page=1&query=" + search + "&per_page=5&access_token="
+				+ getAccessToken();
+		
 
 		log.log(Level.FINE, "Unsplash URI: " + uri);
 
@@ -86,6 +87,7 @@ public class UnsplashResource {
 	}
 
 	public String getAccessToken() throws UnsupportedEncodingException {
+		
 		String url = "https://unsplash.com/oauth/token?client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code="
 				+ access_token + "&grant_type=authorization_code";
 		log.log(Level.FINE, "El access viene de :" + url);
