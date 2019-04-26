@@ -38,8 +38,8 @@ public class UnsplashResource {
 
 		// Crear la URL
 		// https://api.unsplash.com/search/photos?page=1&query=nature&per_page=5&access_token=Alph4num3r1ct0k3nv4lu3
-		String uri = "https://api.unsplash.com/search/photos?page=1&query=" + search + "&per_page=5&access_token="
-				+ getAccessToken();
+		String uri = "https://api.unsplash.com/search/photos?page=1&query=" + search + "&per_page=5&client_id="
+				+ "f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0";
 		
 
 		log.log(Level.FINE, "Unsplash URI: " + uri);
