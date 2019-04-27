@@ -18,6 +18,7 @@
 		<servlet-name>LoginController</servlet-name>
 		<url-pattern>/home</url-pattern>
 	</servlet-mapping>
+	
 
 	<!-- DevianArt Controllers -->
 	<servlet>

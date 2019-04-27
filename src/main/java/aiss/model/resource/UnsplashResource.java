@@ -60,6 +60,7 @@ public class UnsplashResource {
 		String uri = "https://api.unsplash.com/stats/total?access_token=" + access_token;
 
 		log.log(Level.FINE, "Unsplash URI: " + uri);
+		log.log(Level.FINE, "Access Token: " + getAccessToken());
 
 		// Hacer petición al servicio REST (devuelve objeto JSON)
 		ClientResource cr = new ClientResource(uri);

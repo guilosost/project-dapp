@@ -1,6 +1,8 @@
 package aiss.model.resource;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.data.ChallengeResponse;
@@ -10,6 +12,7 @@ import org.restlet.resource.ResourceException;
 
 import aiss.model.imgur.Gallery;
 import aiss.model.imgur.ImgurImage;
+import aiss.model.unsplash.AccessToken;
 
 public class ImgurResource {
 
@@ -68,6 +71,27 @@ public class ImgurResource {
 			return null;
 		}
 
+	}
+	
+public String getAccessToken() throws UnsupportedEncodingException {
+		
+		String url = "https://unsplash.com/oauth/token?client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&client_secret=0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code="
+				+ access_token + "&grant_type=authorization_code";
+		log.log(Level.FINE, "El access viene de :" + url);
+
+		String result = "";
+		ClientResource cr = null;
+
+		try {
+			cr = new ClientResource(url);
+			cr.setEntityBuffering(true);
+			result = cr.post("", AccessToken.class).getAccessToken();
+
+		} catch (ResourceException re) {
+			// ToDo: print useful log information before returning
+			log.warning("Error when creatin a Imgur Access Token: " + cr.getResponse().getStatus());
+		}
+		return result;
 	}
 
 }
