@@ -8,14 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.imgur.ImgurImage;
-import aiss.model.resource.ImgurResource;
+public class LoginController extends HttpServlet {
 
-public class ImgurNewPostController extends HttpServlet {
-	private static final Logger log = Logger.getLogger(ImgurNewPostController.class.getName());
+	private static final long serialVersionUID = 6776329872517721173L;
+	private static final Logger log = Logger.getLogger(LoginController.class.getName());
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 
 	}
 
@@ -23,4 +24,5 @@ public class ImgurNewPostController extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		doGet(req, resp);
 	}
+
 }

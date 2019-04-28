@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
+.login {
+	
+}
+
 h1 {
   font-size: 2em;
   font-weight: bold;
@@ -14,7 +18,7 @@ h1 {
 
 fieldset {
 	border: 1px solid gray;
-	width:30%;
+	width:22%;
 	margin-right:1%;
 	float:left;
 }

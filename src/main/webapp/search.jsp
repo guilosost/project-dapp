@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
 <title>DeviantArt Search</title>
 </head>
 <body>

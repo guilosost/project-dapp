@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="shortcut icon" type="image/png" href="favicon.png" />
 <title>Success</title>
 </head>
 <body>
@@ -29,19 +30,21 @@
 				height="20%" width="20%" />
 			<br>
 		</c:forEach>
-		</fieldset>
+	</fieldset>
 
-		<fieldset id="flickr">
-			<legend>
-				Flickr search for
-				<c:out value="${param.searchQuery}" />
-			</legend>
-			<c:forEach items="${requestScope.photos.photo}" var="photo">
-			<h3><c:out value="${photo.title}" /></h3>
-				<img
-					src='http://farm<c:out value="${photo.farm}"/>.staticflickr.com/<c:out value="${photo.server}"/>/<c:out value="${photo.id}"/>_<c:out value="${photo.secret}"/>.jpg' 
-					height="20%" width="20%"/>
-			</c:forEach>
+	<fieldset id="flickr">
+		<legend>
+			Flickr search for
+			<c:out value="${param.searchQuery}" />
+		</legend>
+		<c:forEach items="${requestScope.photos.photo}" var="photo">
+			<h3>
+				<c:out value="${photo.title}" />
+			</h3>
+			<img
+				src='http://farm<c:out value="${photo.farm}"/>.staticflickr.com/<c:out value="${photo.server}"/>/<c:out value="${photo.id}"/>_<c:out value="${photo.secret}"/>.jpg'
+				height="20%" width="20%" />
+		</c:forEach>
 	</fieldset>
 
 	<fieldset id="unsplash">
@@ -49,17 +52,36 @@
 			Unsplash search for
 			<c:out value="${param.searchQuery}" />
 		</legend>
-		<c:forEach items="${requestScope.unsplashPhotos}"
-			var="deviantArtImage">
+		<c:forEach items="${requestScope.unsplashPhotos}" var="unsplashImage">
 			<h3>
-				<c:out value="${unsplashImage.title}" />
+				<c:out value="${unsplashImage.description}" />
 				(
-				<c:out value="${unsplashImage.createdAt}" />
+				<c:out value="${unsplashImage.user.username}" />
 				)
 			</h3>
-			<img src='<c:out value="${unsplashImage.preview.src}"/>' height="10%"
-				width="10%" />
+			<img src='<c:out value="${unsplashImage.urls.thumb}"/>' height="20%"
+				width="20%" />
 			<br>
+		</c:forEach>
+	</fieldset>
+
+	<fieldset id="imgur">
+		<legend>
+			Imgur search for
+			<c:out value="${param.searchQuery}" />
+		</legend>
+		<c:forEach items="${requestScope.imgurImages}" var="imgurDatum">
+			<c:forEach items="${imgurDatum.images}" var="imgurImages">
+				<h3>
+					<c:out value="${imgurDatum.title}" />
+					(
+					<c:out value="${imgurDatum.accountUrl}" />
+					)
+				</h3>
+				<img src='<c:out value="${imgurImages.link}"/>' height="20%"
+					width="20%" />
+				<br>
+			</c:forEach>
 		</c:forEach>
 	</fieldset>
 

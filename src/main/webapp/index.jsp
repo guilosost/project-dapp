@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Project Dapp</title>
+<link rel="stylesheet" type="text/css" href="css/button.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 </head>
 
@@ -29,13 +30,17 @@
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
 
-	<a href="deviantArtSearch.jsp">Prueba Búsqueda de DeviantArt</a>
+	<a href="search.jsp">Prueba de Búsqueda</a>
 	<br>
 	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
 	<br>
 	<a href="imgurSearch.jsp">Prueba Búsqueda de Imgur</a>
 	<br>
-	<a href="unsplashSearch.jsp">Prueba Búsqueda Unsplash</a>
+	<a href="/AuthController/DeviantArt">
+	<button class="deviantart-button" role="link">Login DevianArt</button></a>
+	<br>
+	<a href="/AuthController/Unsplash">
+	<button class="unsplash-button" role="link">Login Unsplash</button></a>
 	<br>
 
 	<h2>Tokens de OAuth</h2>

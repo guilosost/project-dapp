@@ -1,7 +1,11 @@
 
 package aiss.model.unsplash;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -24,20 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "total_collections",
     "total_likes",
     "total_photos",
-    "accepted_tos",
-    "followed_by_user",
-    "photos",
-    "badge",
-    "downloads",
-    "tags",
-    "followers_count",
-    "following_count",
-    "allow_messages",
-    "numeric_id",
-    "uid",
-    "uploads_remaining",
-    "unlimited_uploads",
-    "email"
+    "accepted_tos"
 })
 public class UnsplashUser {
 
@@ -56,13 +47,13 @@ public class UnsplashUser {
     @JsonProperty("twitter_username")
     private Object twitterUsername;
     @JsonProperty("portfolio_url")
-    private Object portfolioUrl;
+    private String portfolioUrl;
     @JsonProperty("bio")
-    private Object bio;
+    private String bio;
     @JsonProperty("location")
     private Object location;
     @JsonProperty("links")
-    private Links links;
+    private Links_ links;
     @JsonProperty("profile_image")
     private ProfileImage profileImage;
     @JsonProperty("instagram_username")
@@ -75,32 +66,8 @@ public class UnsplashUser {
     private Integer totalPhotos;
     @JsonProperty("accepted_tos")
     private Boolean acceptedTos;
-    @JsonProperty("followed_by_user")
-    private Boolean followedByUser;
-    @JsonProperty("photos")
-    private List<Object> photos = null;
-    @JsonProperty("badge")
-    private Object badge;
-    @JsonProperty("downloads")
-    private Integer downloads;
-    @JsonProperty("tags")
-    private Tags tags;
-    @JsonProperty("followers_count")
-    private Integer followersCount;
-    @JsonProperty("following_count")
-    private Integer followingCount;
-    @JsonProperty("allow_messages")
-    private Boolean allowMessages;
-    @JsonProperty("numeric_id")
-    private Integer numericId;
-    @JsonProperty("uid")
-    private String uid;
-    @JsonProperty("uploads_remaining")
-    private Integer uploadsRemaining;
-    @JsonProperty("unlimited_uploads")
-    private Boolean unlimitedUploads;
-    @JsonProperty("email")
-    private String email;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("id")
     public String getId() {
@@ -173,22 +140,22 @@ public class UnsplashUser {
     }
 
     @JsonProperty("portfolio_url")
-    public Object getPortfolioUrl() {
+    public String getPortfolioUrl() {
         return portfolioUrl;
     }
 
     @JsonProperty("portfolio_url")
-    public void setPortfolioUrl(Object portfolioUrl) {
+    public void setPortfolioUrl(String portfolioUrl) {
         this.portfolioUrl = portfolioUrl;
     }
 
     @JsonProperty("bio")
-    public Object getBio() {
+    public String getBio() {
         return bio;
     }
 
     @JsonProperty("bio")
-    public void setBio(Object bio) {
+    public void setBio(String bio) {
         this.bio = bio;
     }
 
@@ -203,12 +170,12 @@ public class UnsplashUser {
     }
 
     @JsonProperty("links")
-    public Links getLinks() {
+    public Links_ getLinks() {
         return links;
     }
 
     @JsonProperty("links")
-    public void setLinks(Links links) {
+    public void setLinks(Links_ links) {
         this.links = links;
     }
 
@@ -272,134 +239,14 @@ public class UnsplashUser {
         this.acceptedTos = acceptedTos;
     }
 
-    @JsonProperty("followed_by_user")
-    public Boolean getFollowedByUser() {
-        return followedByUser;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    @JsonProperty("followed_by_user")
-    public void setFollowedByUser(Boolean followedByUser) {
-        this.followedByUser = followedByUser;
-    }
-
-    @JsonProperty("photos")
-    public List<Object> getPhotos() {
-        return photos;
-    }
-
-    @JsonProperty("photos")
-    public void setPhotos(List<Object> photos) {
-        this.photos = photos;
-    }
-
-    @JsonProperty("badge")
-    public Object getBadge() {
-        return badge;
-    }
-
-    @JsonProperty("badge")
-    public void setBadge(Object badge) {
-        this.badge = badge;
-    }
-
-    @JsonProperty("downloads")
-    public Integer getDownloads() {
-        return downloads;
-    }
-
-    @JsonProperty("downloads")
-    public void setDownloads(Integer downloads) {
-        this.downloads = downloads;
-    }
-
-    @JsonProperty("tags")
-    public Tags getTags() {
-        return tags;
-    }
-
-    @JsonProperty("tags")
-    public void setTags(Tags tags) {
-        this.tags = tags;
-    }
-
-    @JsonProperty("followers_count")
-    public Integer getFollowersCount() {
-        return followersCount;
-    }
-
-    @JsonProperty("followers_count")
-    public void setFollowersCount(Integer followersCount) {
-        this.followersCount = followersCount;
-    }
-
-    @JsonProperty("following_count")
-    public Integer getFollowingCount() {
-        return followingCount;
-    }
-
-    @JsonProperty("following_count")
-    public void setFollowingCount(Integer followingCount) {
-        this.followingCount = followingCount;
-    }
-
-    @JsonProperty("allow_messages")
-    public Boolean getAllowMessages() {
-        return allowMessages;
-    }
-
-    @JsonProperty("allow_messages")
-    public void setAllowMessages(Boolean allowMessages) {
-        this.allowMessages = allowMessages;
-    }
-
-    @JsonProperty("numeric_id")
-    public Integer getNumericId() {
-        return numericId;
-    }
-
-    @JsonProperty("numeric_id")
-    public void setNumericId(Integer numericId) {
-        this.numericId = numericId;
-    }
-
-    @JsonProperty("uid")
-    public String getUid() {
-        return uid;
-    }
-
-    @JsonProperty("uid")
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    @JsonProperty("uploads_remaining")
-    public Integer getUploadsRemaining() {
-        return uploadsRemaining;
-    }
-
-    @JsonProperty("uploads_remaining")
-    public void setUploadsRemaining(Integer uploadsRemaining) {
-        this.uploadsRemaining = uploadsRemaining;
-    }
-
-    @JsonProperty("unlimited_uploads")
-    public Boolean getUnlimitedUploads() {
-        return unlimitedUploads;
-    }
-
-    @JsonProperty("unlimited_uploads")
-    public void setUnlimitedUploads(Boolean unlimitedUploads) {
-        this.unlimitedUploads = unlimitedUploads;
-    }
-
-    @JsonProperty("email")
-    public String getEmail() {
-        return email;
-    }
-
-    @JsonProperty("email")
-    public void setEmail(String email) {
-        this.email = email;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

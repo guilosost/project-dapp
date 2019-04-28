@@ -1,6 +1,11 @@
 
 package aiss.model.unsplash;
 
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,11 +14,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "self",
     "html",
-    "photos",
-    "likes",
-    "portfolio",
-    "following",
-    "followers"
+    "download",
+    "download_location"
 })
 public class Links {
 
@@ -21,16 +23,12 @@ public class Links {
     private String self;
     @JsonProperty("html")
     private String html;
-    @JsonProperty("photos")
-    private String photos;
-    @JsonProperty("likes")
-    private String likes;
-    @JsonProperty("portfolio")
-    private String portfolio;
-    @JsonProperty("following")
-    private String following;
-    @JsonProperty("followers")
-    private String followers;
+    @JsonProperty("download")
+    private String download;
+    @JsonProperty("download_location")
+    private String downloadLocation;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("self")
     public String getSelf() {
@@ -52,54 +50,34 @@ public class Links {
         this.html = html;
     }
 
-    @JsonProperty("photos")
-    public String getPhotos() {
-        return photos;
+    @JsonProperty("download")
+    public String getDownload() {
+        return download;
     }
 
-    @JsonProperty("photos")
-    public void setPhotos(String photos) {
-        this.photos = photos;
+    @JsonProperty("download")
+    public void setDownload(String download) {
+        this.download = download;
     }
 
-    @JsonProperty("likes")
-    public String getLikes() {
-        return likes;
+    @JsonProperty("download_location")
+    public String getDownloadLocation() {
+        return downloadLocation;
     }
 
-    @JsonProperty("likes")
-    public void setLikes(String likes) {
-        this.likes = likes;
+    @JsonProperty("download_location")
+    public void setDownloadLocation(String downloadLocation) {
+        this.downloadLocation = downloadLocation;
     }
 
-    @JsonProperty("portfolio")
-    public String getPortfolio() {
-        return portfolio;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    @JsonProperty("portfolio")
-    public void setPortfolio(String portfolio) {
-        this.portfolio = portfolio;
-    }
-
-    @JsonProperty("following")
-    public String getFollowing() {
-        return following;
-    }
-
-    @JsonProperty("following")
-    public void setFollowing(String following) {
-        this.following = following;
-    }
-
-    @JsonProperty("followers")
-    public String getFollowers() {
-        return followers;
-    }
-
-    @JsonProperty("followers")
-    public void setFollowers(String followers) {
-        this.followers = followers;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

@@ -31,25 +31,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "account_url",
     "account_id",
     "is_ad",
-    "tags",
     "in_most_viral",
+    "has_sound",
+    "tags",
+    "ad_type",
+    "ad_url",
+    "edited",
     "in_gallery",
     "link",
     "comment_count",
+    "favorite_count",
     "ups",
     "downs",
     "points",
-    "score",
-    "is_album"
+    "score"
 })
-public class Gallery {
+public class Image {
 
     @JsonProperty("id")
     private String id;
     @JsonProperty("title")
-    private String title;
+    private Object title;
     @JsonProperty("description")
-    private Object description;
+    private String description;
     @JsonProperty("datetime")
     private Integer datetime;
     @JsonProperty("type")
@@ -71,25 +75,35 @@ public class Gallery {
     @JsonProperty("favorite")
     private Boolean favorite;
     @JsonProperty("nsfw")
-    private Boolean nsfw;
+    private Object nsfw;
     @JsonProperty("section")
-    private String section;
+    private Object section;
     @JsonProperty("account_url")
     private Object accountUrl;
     @JsonProperty("account_id")
     private Object accountId;
     @JsonProperty("is_ad")
     private Boolean isAd;
-    @JsonProperty("tags")
-    private List<Object> tags = null;
     @JsonProperty("in_most_viral")
     private Boolean inMostViral;
+    @JsonProperty("has_sound")
+    private Boolean hasSound;
+    @JsonProperty("tags")
+    private List<Object> tags = null;
+    @JsonProperty("ad_type")
+    private Integer adType;
+    @JsonProperty("ad_url")
+    private String adUrl;
+    @JsonProperty("edited")
+    private String edited;
     @JsonProperty("in_gallery")
     private Boolean inGallery;
     @JsonProperty("link")
     private String link;
     @JsonProperty("comment_count")
     private Object commentCount;
+    @JsonProperty("favorite_count")
+    private Object favoriteCount;
     @JsonProperty("ups")
     private Object ups;
     @JsonProperty("downs")
@@ -97,9 +111,7 @@ public class Gallery {
     @JsonProperty("points")
     private Object points;
     @JsonProperty("score")
-    private Integer score;
-    @JsonProperty("is_album")
-    private Boolean isAlbum;
+    private Object score;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -114,22 +126,22 @@ public class Gallery {
     }
 
     @JsonProperty("title")
-    public String getTitle() {
+    public Object getTitle() {
         return title;
     }
 
     @JsonProperty("title")
-    public void setTitle(String title) {
+    public void setTitle(Object title) {
         this.title = title;
     }
 
     @JsonProperty("description")
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
     @JsonProperty("description")
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -234,22 +246,22 @@ public class Gallery {
     }
 
     @JsonProperty("nsfw")
-    public Boolean getNsfw() {
+    public Object getNsfw() {
         return nsfw;
     }
 
     @JsonProperty("nsfw")
-    public void setNsfw(Boolean nsfw) {
+    public void setNsfw(Object nsfw) {
         this.nsfw = nsfw;
     }
 
     @JsonProperty("section")
-    public String getSection() {
+    public Object getSection() {
         return section;
     }
 
     @JsonProperty("section")
-    public void setSection(String section) {
+    public void setSection(Object section) {
         this.section = section;
     }
 
@@ -283,6 +295,26 @@ public class Gallery {
         this.isAd = isAd;
     }
 
+    @JsonProperty("in_most_viral")
+    public Boolean getInMostViral() {
+        return inMostViral;
+    }
+
+    @JsonProperty("in_most_viral")
+    public void setInMostViral(Boolean inMostViral) {
+        this.inMostViral = inMostViral;
+    }
+
+    @JsonProperty("has_sound")
+    public Boolean getHasSound() {
+        return hasSound;
+    }
+
+    @JsonProperty("has_sound")
+    public void setHasSound(Boolean hasSound) {
+        this.hasSound = hasSound;
+    }
+
     @JsonProperty("tags")
     public List<Object> getTags() {
         return tags;
@@ -293,14 +325,34 @@ public class Gallery {
         this.tags = tags;
     }
 
-    @JsonProperty("in_most_viral")
-    public Boolean getInMostViral() {
-        return inMostViral;
+    @JsonProperty("ad_type")
+    public Integer getAdType() {
+        return adType;
     }
 
-    @JsonProperty("in_most_viral")
-    public void setInMostViral(Boolean inMostViral) {
-        this.inMostViral = inMostViral;
+    @JsonProperty("ad_type")
+    public void setAdType(Integer adType) {
+        this.adType = adType;
+    }
+
+    @JsonProperty("ad_url")
+    public String getAdUrl() {
+        return adUrl;
+    }
+
+    @JsonProperty("ad_url")
+    public void setAdUrl(String adUrl) {
+        this.adUrl = adUrl;
+    }
+
+    @JsonProperty("edited")
+    public String getEdited() {
+        return edited;
+    }
+
+    @JsonProperty("edited")
+    public void setEdited(String edited) {
+        this.edited = edited;
     }
 
     @JsonProperty("in_gallery")
@@ -331,6 +383,16 @@ public class Gallery {
     @JsonProperty("comment_count")
     public void setCommentCount(Object commentCount) {
         this.commentCount = commentCount;
+    }
+
+    @JsonProperty("favorite_count")
+    public Object getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    @JsonProperty("favorite_count")
+    public void setFavoriteCount(Object favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
 
     @JsonProperty("ups")
@@ -364,23 +426,13 @@ public class Gallery {
     }
 
     @JsonProperty("score")
-    public Integer getScore() {
+    public Object getScore() {
         return score;
     }
 
     @JsonProperty("score")
-    public void setScore(Integer score) {
+    public void setScore(Object score) {
         this.score = score;
-    }
-
-    @JsonProperty("is_album")
-    public Boolean getIsAlbum() {
-        return isAlbum;
-    }
-
-    @JsonProperty("is_album")
-    public void setIsAlbum(Boolean isAlbum) {
-        this.isAlbum = isAlbum;
     }
 
     @JsonAnyGetter

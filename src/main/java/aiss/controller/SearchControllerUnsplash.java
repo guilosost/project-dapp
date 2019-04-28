@@ -18,16 +18,12 @@ import aiss.model.unsplash.UnsplashResult;
 public class SearchControllerUnsplash extends HttpServlet {
 
 	private static final Logger log = Logger.getLogger(SearchControllerUnsplash.class.getName());
-	private static final String tokenURL = "https://unsplash.com/oauth/token";
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// String unsplashCode = (String)
-		// req.getSession().getAttribute("Unsplash-token");
-		String unsplashCode = "6cf067d06b0f174422f76814feec4e3782e756bd41a9460a42b2d0383035fa08";
-		String unsplashToken = UnsplashResource.getAccessToken(unsplashCode);
+		String unsplashCode = (String) req.getSession().getAttribute("Unsplash-token");
 
-		String query = req.getParameter("searchQuery").replace(" ", "_");
+		String query = req.getParameter("searchQuery");
 		RequestDispatcher rd = null;
 
 		// Search for images in Unsplash
@@ -39,13 +35,15 @@ public class SearchControllerUnsplash extends HttpServlet {
 			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query);
 
 			for (UnsplashResult r : unsplashImagesResults.getResults()) {
-
-				log.log(Level.FINE, r.getLinks().getPhotos());
+				log.log(Level.FINE, r.getLinks().getHtml());
 			}
 
-			rd = req.getRequestDispatcher("/success.jsp");
-			req.setAttribute("unsplashPhotos", unsplashImagesResults.getResults());
-			rd.forward(req, resp);
+			if (query != null && !"".equals(query)) {
+				rd = req.getRequestDispatcher("/success.jsp");
+				req.setAttribute("unsplashPhotos", unsplashImagesResults.getResults());
+				rd.forward(req, resp);
+			}
+			
 		} else {
 			log.info("Trying to access Unsplash without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/Unsplash").forward(req, resp);
