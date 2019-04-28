@@ -43,19 +43,6 @@
 		<url-pattern>/DeviantArtStatsController</url-pattern>
 	</servlet-mapping>
 	
-	<!-- Imgur Controller -->
-	<servlet>
-		<description></description>
-		<display-name>ImgurSearchAlbumController</display-name>
-		<servlet-name>ImgurSearchAlbumController</servlet-name>
-		<servlet-class>aiss.controller.ImgurSearchAlbumController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ImgurSearchAlbumController</servlet-name>
-		<url-pattern>/ImgurSearchAlbumController</url-pattern>
-	</servlet-mapping>
-	
-	
 	<!-- Unsplash Controller -->
 	<servlet>
 		<description></description>

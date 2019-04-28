@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript">First, parse the query string
+<script type="text/javascript">
+//First, parse the query string
 var params = {}, queryString = location.hash.substring(1),
     regex = /([^&=]+)=([^&]*)/g, m;
 while (m = regex.exec(queryString)) {
