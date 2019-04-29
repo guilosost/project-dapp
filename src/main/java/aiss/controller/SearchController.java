@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.flickr.PhotoSearch;
+import aiss.model.imgur.ImgurGallerySearch;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.FlickrResource;
+import aiss.model.resource.ImgurResource;
 import aiss.model.resource.UnsplashResource;
 import aiss.model.unsplash.SearchUnsplashPhotos;
 
@@ -39,6 +41,16 @@ public class SearchController extends HttpServlet {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("photos", flickrResults.getPhotos());
 		}
+		
+		// Search for photos in Imgur
+				log.log(Level.FINE, "Searching for Flickr photos that contain " + query1);
+				ImgurResource imgur = new ImgurResource("");
+				ImgurGallerySearch imgurResults = imgur.getImgurGallery(query);
+
+				if (imgurResults != null) {
+					rd = req.getRequestDispatcher("/success.jsp");
+					req.setAttribute("imgurImages", imgurResults.getData());
+				}
 
 		// Search for photos in Unsplash
 		log.log(Level.FINE, "Searching for Unsplash photos that contain " + query1);

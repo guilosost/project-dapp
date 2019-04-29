@@ -2,6 +2,7 @@
 package aiss.model.imgur;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -12,22 +13,48 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+    "data",
+    "success",
     "status"
 })
-public class UserFollow {
+public class ImgurGallerySearch {
 
+    @JsonProperty("data")
+    private List<Datum> data = null;
+    @JsonProperty("success")
+    private Boolean success;
     @JsonProperty("status")
-    private Boolean status;
+    private Integer status;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    @JsonProperty("data")
+    public List<Datum> getData() {
+        return data;
+    }
+
+    @JsonProperty("data")
+    public void setData(List<Datum> data) {
+        this.data = data;
+    }
+
+    @JsonProperty("success")
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    @JsonProperty("success")
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
     @JsonProperty("status")
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
     @JsonProperty("status")
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
