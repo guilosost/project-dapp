@@ -6,28 +6,33 @@
 		"authorizationFormUrl": "https://api.imgur.com/oauth2/authorize",
 		"scopes": []
 	},
-	
 	"DeviantArt": {
 		"tokenUrl": "https://www.deviantart.com/oauth2/token",
 		"clientId": "9647",
 		"clientSecret": "973ec3441a2a6ea308ae95ab86269251",
 		"authorizationFormUrl": "https://www.deviantart.com/oauth2/authorize",
-		"scopes": ["browse"]
+		"scopes": [
+			"browse"
+		]
 	},
-		
-    "GoogleDrive": { 
-        "tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
-        "clientId": "133193217682-k72c1n6jor7io71cfgqhmvmcip27ldfr.apps.googleusercontent.com",
-        "clientSecret": "vwqy6s8p2wntG90Q1XA4qBSf",
-        "authorizationFormUrl": "https://accounts.google.com/o/oauth2/v2/auth",
-        "scopes": ["https://www.googleapis.com/auth/photoslibrary"]
-    },
-	
+	"GoogleDrive": {
+		"tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
+		"clientId": "133193217682-k72c1n6jor7io71cfgqhmvmcip27ldfr.apps.googleusercontent.com",
+		"clientSecret": "vwqy6s8p2wntG90Q1XA4qBSf",
+		"authorizationFormUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+		"scopes": [
+			"https://www.googleapis.com/auth/photoslibrary"
+		]
+	},
 	"Unsplash": {
 		"tokenUrl": "https://unsplash.com/oauth/token",
 		"clientId": "f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0",
 		"clientSecret": "0fc50688e19388e6f6ca71c849676e7d52fb7c4b663cb25d43cfe2487954f4a1",
 		"authorizationFormUrl": "https://unsplash.com/oauth/authorize",
-		"scopes": ["public","read_user","read_photos"]
+		"scopes": [
+			"public",
+			"read_user",
+			"read_photos"
+		]
 	}
 }		

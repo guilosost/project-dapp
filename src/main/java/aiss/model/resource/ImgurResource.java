@@ -51,7 +51,7 @@ public class ImgurResource {
 	public Gallery getGallery(String name) {
 		// /3/gallery/search/{{sort}}/{{window}}/{{page}}?q=cats
 
-		String imageGetUrl = baseURL + "/3/gallery/search/" + name;
+		String imageGetUrl = baseURL + "/3/gallery/search/q=" + name;
 		ClientResource cr = new ClientResource(imageGetUrl);
 
 		ChallengeResponse chr = new ChallengeResponse(ChallengeScheme.HTTP_OAUTH_BEARER);
