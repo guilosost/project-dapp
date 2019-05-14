@@ -165,7 +165,7 @@ public class UnsplashResource {
 
 		} catch (ResourceException re) {
 			// ToDo: print useful log information before returning
-			log.warning("Error when creatin a Access Token: " + cr.getResponse().getStatus());
+			log.warning("Error when creating an Access Token: " + cr.getResponse().getStatus());
 		}
 		return result;
 	}

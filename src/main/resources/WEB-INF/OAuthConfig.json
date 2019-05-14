@@ -41,7 +41,7 @@
 		"scopes": [
 			"public",
 			"read_user",
-			"read_photos", "write_collections"
+			"read_photos"
 		]
 	}
 }		
