@@ -36,6 +36,8 @@
 	<br>
 	<a href="imgurSearch.jsp">Prueba Búsqueda de Imgur</a>
 	<br>
+	<a href="UnsplashCreateCollectionController">Prueba crear colección Unsplash</a>
+	<br>
 	<a href="/AuthController/DeviantArt">
 	<button class="deviantart-button" role="link">Login DevianArt</button></a>
 	<br>

@@ -25,6 +25,8 @@ public class SearchControllerUnsplash extends HttpServlet {
 
 		String query = req.getParameter("searchQuery");
 		RequestDispatcher rd = null;
+		String photoId = req.getParameter("id");
+		String collectionId = "4695823";// TODO
 
 		// Search for images in Unsplash
 		log.log(Level.FINE, "Searching for Unsplash images that contain " + query);
@@ -33,6 +35,8 @@ public class SearchControllerUnsplash extends HttpServlet {
 
 			UnsplashResource uResource = new UnsplashResource(unsplashCode);
 			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query);
+			uResource.addPhotoToCollection(photoId, collectionId);
+			req.getRequestDispatcher("/unplashImagesList").forward(req, resp);
 
 			for (UnsplashResult r : unsplashImagesResults.getResults()) {
 				log.log(Level.FINE, r.getLinks().getHtml());
@@ -43,7 +47,7 @@ public class SearchControllerUnsplash extends HttpServlet {
 				req.setAttribute("unsplashPhotos", unsplashImagesResults.getResults());
 				rd.forward(req, resp);
 			}
-			
+
 		} else {
 			log.info("Trying to access Unsplash without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/Unsplash").forward(req, resp);

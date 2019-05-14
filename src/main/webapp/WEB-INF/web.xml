@@ -54,6 +54,17 @@
 		<servlet-name>SearchControllerUnsplash</servlet-name>
 		<url-pattern>/SearchControllerUnsplash</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>UnsplashCreateCollectionController</display-name>
+		<servlet-name>UnsplashCreateCollectionController</servlet-name>
+		<servlet-class>aiss.controller.UnsplashCreateCollectionController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UnsplashCreateCollectionController</servlet-name>
+		<url-pattern>/UnsplashCreateCollectionController</url-pattern>
+	</servlet-mapping>
 
 	<!-- Imgur Oauth -->
 	<servlet>
