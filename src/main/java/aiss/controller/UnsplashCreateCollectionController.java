@@ -17,14 +17,11 @@ import aiss.model.unsplash.AccessToken;
 
 public class UnsplashCreateCollectionController extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1237286462568353357L;
 	private final Logger log = Logger.getLogger(UnsplashCreateCollectionController.class.getName());
 
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		String accessToken = (String) req.getSession().getAttribute("Unplash-token");
 //		String url = "https://unsplash.com/oauth/token?client_id=f2bf65c4a4fdb6a286ba98495ef14b36607d81f2305783f0ebe97f0aa28d8cf0&"
@@ -69,7 +66,7 @@ public class UnsplashCreateCollectionController extends HttpServlet {
 	}
 
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		doGet(req, resp);
 	}
 }
