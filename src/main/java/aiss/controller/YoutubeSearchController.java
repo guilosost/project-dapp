@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.resource.YoutubeResource;
-import aiss.model.youtube.SearchVideos;
+import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeSearchController extends HttpServlet {
 
@@ -25,7 +25,7 @@ public class YoutubeSearchController extends HttpServlet {
 
 		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
 		YoutubeResource youtube = new YoutubeResource(youtubeToken);
-		SearchVideos youtubeResults = youtube.searchYoutubeVideos(query);
+		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
 
 		if (youtubeResults.getItems() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");

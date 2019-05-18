@@ -132,14 +132,15 @@
 				var="dailysFavoritos">
 				<c:if
 					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'false'}">
-					
+
 					<button type="button"
 						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
 						<img src="images/favorite(icon).png" alt="icono_favoritos"
 							id="<c:out value="${dailymotionVideo.id}"/>">
 					</button>
-					
-					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>" name="<c:out value="${dailymotionVideo.id}"/>" value="Sí">
+
+					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
+						name="<c:out value="${dailymotionVideo.id}"/>" value="Sí">
 					<c:set var="conditionVariable" value="true" />
 				</c:if>
 				<c:if
@@ -150,8 +151,9 @@
 						<img src="images/unfavorite(icon).png" alt="icono_favoritos"
 							id="<c:out value="${dailymotionVideo.id}"/>">
 					</button>
-					
-					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>" name="<c:out value="${dailymotionVideo.id}"/>" value="No">
+
+					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
+						name="<c:out value="${dailymotionVideo.id}"/>" value="No">
 					<c:set var="conditionVariable" value="true" />
 				</c:if>
 			</c:forEach>
@@ -162,5 +164,58 @@
 
 	</fieldset>
 
+	<fieldset id="youtube">
+		<legend>
+			Youtube search for
+			<c:out value="${param.searchQuery}" />
+		</legend>
+		<p>${youtubeToken}</p>
+		<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
+			<h3>
+				<c:out value="${youtubeVideo.snippet.title}" />
+				(
+				<c:out value="${youtubeVideo.id}" />
+				)
+
+			</h3>
+			<iframe frameborder="0" width="340" height="130"
+				src='https://www.youtube.com/watch?v=<c:out value="${youtubeVideo.id}"/>'
+				allowfullscreen allow="autoplay"></iframe>
+
+			<c:set var="conditionVariable" value="false" />
+			<c:forEach items="${requestScope.dailymotionLikedVideos}"
+				var="dailysFavoritos">
+				<c:if
+					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'false'}">
+
+					<button type="button"
+						onclick="postAjax('https://www.googleapis.com/youtube/v3/videos/rate<c:out value="${youtubeVideo.id}"/>?access_token=${youtubeToken}', 'id=<c:out value="${youtubeVideo.id}"/>')">
+						<img src="images/favorite(icon).png" alt="icono_favoritos"
+							id="<c:out value="${youtubeVideo.id}"/>">
+					</button>
+
+					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
+						name="<c:out value="${dailymotionVideo.id}"/>" value="Sí">
+					<c:set var="conditionVariable" value="true" />
+				</c:if>
+				<c:if
+					test="${dailysFavoritos.id != dailymotionVideo.id  && conditionVariable == 'false'}">
+
+					<button type="button"
+						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
+						<img src="images/unfavorite(icon).png" alt="icono_favoritos"
+							id="<c:out value="${dailymotionVideo.id}"/>">
+					</button>
+
+					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
+						name="<c:out value="${dailymotionVideo.id}"/>" value="No">
+					<c:set var="conditionVariable" value="true" />
+				</c:if>
+			</c:forEach>
+			<br>
+			<br>
+		</c:forEach>
+
+	</fieldset>
 </body>
 </html>

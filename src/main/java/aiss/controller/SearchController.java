@@ -19,7 +19,9 @@ import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.FlickrResource;
 import aiss.model.resource.ImgurResource;
 import aiss.model.resource.UnsplashResource;
+import aiss.model.resource.YoutubeResource;
 import aiss.model.unsplash.SearchUnsplashPhotos;
+import aiss.model.youtube.YoutubeSearch;
 
 public class SearchController extends HttpServlet {
 
@@ -31,9 +33,11 @@ public class SearchController extends HttpServlet {
 		String devianArtToken = (String) req.getSession().getAttribute("DeviantArt-token");
 		String unsplashCode = (String) req.getSession().getAttribute("Unsplash-token");
 		String dailymotionToken = (String) req.getSession().getAttribute("Dailymotion-token");
+		String youtubeToken = (String) req.getSession().getAttribute("Youtube-token");
 		String query = req.getParameter("searchQuery").replace(" ", "_");
 		String query2 = req.getParameter("searchQuery").replace(" ", "+");
 		String query1 = req.getParameter("searchQuery");
+		String query3 = req.getParameter("searchQuery");
 		RequestDispatcher rd = null;
 
 		// Search for photos in Flickr
@@ -45,24 +49,34 @@ public class SearchController extends HttpServlet {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("photos", flickrResults.getPhotos());
 		}
-		
-		// Search for videos in Dailymotion
-				log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query1);
-				DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
-				DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
-				DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
 
-				if (dailymotionResults.getList() != null) {
-					rd = req.getRequestDispatcher("/success.jsp");
-					req.setAttribute("dailymotionVideos", dailymotionResults.getList());
-					req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
-					req.setAttribute("dailymotionToken", dailymotionToken);
-				}
-				
+		// Search for videos in Dailymotion
+		log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query1);
+		DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
+		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
+		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
+
+		if (dailymotionResults.getList() != null) {
+			rd = req.getRequestDispatcher("/success.jsp");
+			req.setAttribute("dailymotionVideos", dailymotionResults.getList());
+			req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
+			req.setAttribute("dailymotionToken", dailymotionToken);
+		}
+
+		// Search for videos in Youtube
+		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
+		YoutubeResource youtube = new YoutubeResource(youtubeToken);
+		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
+
+		if (youtubeResults.getItems() != null) {
+			rd = req.getRequestDispatcher("/success.jsp");
+			req.setAttribute("youtubeVideos", youtubeResults.getItems());
+			req.setAttribute("youtubeToken", youtubeToken);
+		}
 
 		// Search for photos in Unsplash
 		log.log(Level.FINE, "Searching for Unsplash photos that contain " + query1);
-		
+
 		if (unsplashCode != null && !"".equals(unsplashCode)) {
 			UnsplashResource uResource = new UnsplashResource(unsplashCode);
 			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query1);
