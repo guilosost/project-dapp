@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="shortcut icon" type="image/png" href="favicon.png" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Success</title>
 <script>
 
-	function postAjax(url1, data1) {
-		if(document.getElementById("like").value == "No") {
-			var input = document.getElementById("like").value = "Sí";
+	function postAjax(url1, elm) {
+		if(document.getElementById(elm).value == "No") {
+			var input = document.getElementById(elm).value == "Sí";
+			var image = document.getElementById(elm).src = "images/favorite(icon).png";
 	        const URL = url1;
 	        const Data = {};
 	        
@@ -31,8 +32,9 @@
 	        .then(res=>{console.log(res)})
 	        .catch(error=>console.log(error));
 	        
-		} else if(document.getElementById("like").value == "Sí") {
-			var input = document.getElementById("like").value = "No";
+		} else if(document.getElementById(elm).value == "Sí") {
+			var input = document.getElementById(elm).value == "No";
+			var image = document.getElementById(elm).src = "images/unfavorite(icon).png";
 	        const URL = url1;
 	        const Data = {};
 	        
@@ -130,16 +132,26 @@
 				var="dailysFavoritos">
 				<c:if
 					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'false'}">
-					<input type="button" id="like" name="like"
-						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'access_token=${dailymotionToken}')"
-						value="Sí">
+					
+					<button type="button"
+						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
+						<img src="images/favorite(icon).png" alt="icono_favoritos"
+							id="<c:out value="${dailymotionVideo.id}"/>">
+					</button>
+					
+					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>" name="<c:out value="${dailymotionVideo.id}"/>" value="Sí">
 					<c:set var="conditionVariable" value="true" />
 				</c:if>
 				<c:if
 					test="${dailysFavoritos.id != dailymotionVideo.id  && conditionVariable == 'false'}">
-					<input type="button" id="like" name="like"
-						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'access_token=${dailymotionToken}')"
-						value="No">
+
+					<button type="button"
+						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
+						<img src="images/unfavorite(icon).png" alt="icono_favoritos"
+							id="<c:out value="${dailymotionVideo.id}"/>">
+					</button>
+					
+					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>" name="<c:out value="${dailymotionVideo.id}"/>" value="No">
 					<c:set var="conditionVariable" value="true" />
 				</c:if>
 			</c:forEach>

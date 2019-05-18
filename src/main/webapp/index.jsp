@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Project Dapp</title>
 <link rel="stylesheet" type="text/css" href="css/button.css">
-<link rel="shortcut icon" type="image/png" href="favicon.png" />
+<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
 </head>
 
 <body>
