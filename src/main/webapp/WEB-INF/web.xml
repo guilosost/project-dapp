@@ -7,18 +7,6 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
-	<servlet>
-		<description></description>
-		<display-name>LoginController</display-name>
-		<servlet-name>LoginController</servlet-name>
-		<servlet-class>aiss.controller.LoginController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LoginController</servlet-name>
-		<url-pattern>/home</url-pattern>
-	</servlet-mapping>
-	
 
 	<!-- DevianArt Controllers -->
 	<servlet>
@@ -34,13 +22,25 @@
 
 	<servlet>
 		<description></description>
-		<display-name>DeviantArtStatsController</display-name>
-		<servlet-name>DeviantArtStatsController</servlet-name>
-		<servlet-class>aiss.controller.DeviantArtStatsController</servlet-class>
+		<display-name>StatsController</display-name>
+		<servlet-name>StatsController</servlet-name>
+		<servlet-class>aiss.controller.StatsController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DeviantArtStatsController</servlet-name>
-		<url-pattern>/DeviantArtStatsController</url-pattern>
+		<servlet-name>StatsController</servlet-name>
+		<url-pattern>/StatsController</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Dailymotion Controllers -->
+	<servlet>
+		<description></description>
+		<display-name>DailymotionStatsController</display-name>
+		<servlet-name>DailymotionStatsController</servlet-name>
+		<servlet-class>aiss.controller.DailymotionStatsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DailymotionStatsController</servlet-name>
+		<url-pattern>/DailymotionStatsController</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Unsplash Controller -->
@@ -66,36 +66,36 @@
 		<url-pattern>/UnsplashCreateCollectionController</url-pattern>
 	</servlet-mapping>
 
-	<!-- Imgur Oauth -->
+	<!-- Dailymotion Oauth -->
 	<servlet>
 		<description></description>
-		<servlet-name>ImgurAuthController</servlet-name>
+		<servlet-name>DailymotionAuthController</servlet-name>
 		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
 		<init-param>
 			<param-name>provider</param-name>
-			<param-value>Imgur</param-value>
+			<param-value>Dailymotion</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ImgurAuthController</servlet-name>
-		<url-pattern>/AuthController/Imgur</url-pattern>
+		<servlet-name>DailymotionAuthController</servlet-name>
+		<url-pattern>/AuthController/Dailymotion</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<description></description>
-		<servlet-name>ImgurOAuth2Callback</servlet-name>
+		<servlet-name>DailymotionOAuth2Callback</servlet-name>
 		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
 		<init-param>
 			<param-name>provider</param-name>
-			<param-value>Imgur</param-value>
+			<param-value>Dailymotion</param-value>
 		</init-param>
 		<init-param>
 			<param-name>onSuccess</param-name>
-			<param-value>redirect:/home</param-value>
+			<param-value>redirect:/index.jsp</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ImgurOAuth2Callback</servlet-name>
-		<url-pattern>/oauth2callback/Imgur</url-pattern>
+		<servlet-name>DailymotionOAuth2Callback</servlet-name>
+		<url-pattern>/oauth2callback/Dailymotion</url-pattern>
 	</servlet-mapping>
 
 	<!-- DeviantArt Oauth -->
@@ -122,7 +122,7 @@
 		</init-param>
 		<init-param>
 			<param-name>onSuccess</param-name>
-			<param-value>redirect:/home</param-value>
+			<param-value>redirect:/index.jsp</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

@@ -32,7 +32,9 @@
 
 	<a href="search.jsp">Prueba de Búsqueda</a>
 	<br>
-	<a href="DeviantArtStatsController">Prueba Stats de DeviantArt</a>
+	<a href="StatsController">Prueba Stats</a>
+	<br>
+	<a href="DailymotionStatsController">Prueba Stats de Dailymotion</a>
 	<br>
 	<a href="imgurSearch.jsp">Prueba Búsqueda de Imgur</a>
 	<br>
@@ -44,6 +46,9 @@
 	<a href="/AuthController/Unsplash">
 	<button class="unsplash-button" role="link">Login Unsplash</button></a>
 	<br>
+	<a href="/AuthController/Dailymotion">
+	<button class="unsplash-button" role="link">Login Dailymotion</button></a>
+	<br>
 
 	<h2>Tokens de OAuth</h2>
 	<ul>
@@ -51,9 +56,9 @@
 			<ul>
 				<li><c:out value='${sessionScope["Unsplash-token"]}' /></li>
 			</ul></li>
-		<li><strong>Imgur:</strong>
+		<li><strong>Dailymotion:</strong>
 			<ul>
-				<li><c:out value='${sessionScope["Imgur-token"]}' /></li>
+				<li><c:out value='${sessionScope["Dailymotion-token"]}' /></li>
 			</ul></li>
 		<li><strong>DeviantArt:</strong>
 			<ul>

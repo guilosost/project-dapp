@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.flickr.PhotoSearch;
 import aiss.model.imgur.ImgurGallerySearch;
+import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.FlickrResource;
 import aiss.model.resource.ImgurResource;
@@ -28,7 +30,9 @@ public class SearchController extends HttpServlet {
 
 		String devianArtToken = (String) req.getSession().getAttribute("DeviantArt-token");
 		String unsplashCode = (String) req.getSession().getAttribute("Unsplash-token");
+		String dailymotionToken = (String) req.getSession().getAttribute("Dailymotion-token");
 		String query = req.getParameter("searchQuery").replace(" ", "_");
+		String query2 = req.getParameter("searchQuery").replace(" ", "+");
 		String query1 = req.getParameter("searchQuery");
 		RequestDispatcher rd = null;
 
@@ -42,14 +46,15 @@ public class SearchController extends HttpServlet {
 			req.setAttribute("photos", flickrResults.getPhotos());
 		}
 		
-		// Search for photos in Imgur
-				log.log(Level.FINE, "Searching for Flickr photos that contain " + query1);
-				ImgurResource imgur = new ImgurResource("");
-				ImgurGallerySearch imgurResults = imgur.getImgurGallery(query);
+		// Search for photos in Dailymotion
+				log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query1);
+				DailymotionResource dailymotion = new DailymotionResource("");
+				DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
 
-				if (imgurResults != null) {
+				if (dailymotionResults.getList() != null) {
 					rd = req.getRequestDispatcher("/success.jsp");
-					req.setAttribute("imgurImages", imgurResults.getData());
+					req.setAttribute("dailymotionVideos", dailymotionResults.getList());
+					req.setAttribute("dailymotionToken", dailymotionToken);
 				}
 
 		// Search for photos in Unsplash

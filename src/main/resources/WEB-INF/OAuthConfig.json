@@ -15,13 +15,13 @@
 			"browse"
 		]
 	},
-	"GoogleDrive": {
-		"tokenUrl": "https://www.googleapis.com/oauth2/v4/token",
-		"clientId": "133193217682-k72c1n6jor7io71cfgqhmvmcip27ldfr.apps.googleusercontent.com",
-		"clientSecret": "vwqy6s8p2wntG90Q1XA4qBSf",
-		"authorizationFormUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+	"Dailymotion": {
+		"tokenUrl": "https://api.dailymotion.com/oauth/token",
+		"clientId": "2858767daf9244f3b325",
+		"clientSecret": "02558ab3645cd8dc6b98e27492dbb2deb20fb3a4",
+		"authorizationFormUrl": "https://www.dailymotion.com/oauth/authorize",
 		"scopes": [
-			"https://www.googleapis.com/auth/photoslibrary"
+			"userinfo, manage_likes"
 		]
 	},
 		
