@@ -30,7 +30,17 @@
 		<servlet-name>StatsController</servlet-name>
 		<url-pattern>/StatsController</url-pattern>
 	</servlet-mapping>
-	
+	<!-- Youtube Controllers -->
+	<servlet>
+		<description></description>
+		<display-name>YoutubeSearchController</display-name>
+		<servlet-name>YoutubeSearchController</servlet-name>
+		<servlet-class>aiss.controller.YoutubeSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>YoutubeSearchController</servlet-name>
+		<url-pattern>/YoutubeSearchController</url-pattern>
+	</servlet-mapping>
 	<!-- Dailymotion Controllers -->
 	<servlet>
 		<description></description>
@@ -53,17 +63,6 @@
 	<servlet-mapping>
 		<servlet-name>SearchControllerUnsplash</servlet-name>
 		<url-pattern>/SearchControllerUnsplash</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<description></description>
-		<display-name>UnsplashCreateCollectionController</display-name>
-		<servlet-name>UnsplashCreateCollectionController</servlet-name>
-		<servlet-class>aiss.controller.UnsplashCreateCollectionController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UnsplashCreateCollectionController</servlet-name>
-		<url-pattern>/UnsplashCreateCollectionController</url-pattern>
 	</servlet-mapping>
 
 	<!-- Dailymotion Oauth -->
@@ -97,7 +96,39 @@
 		<servlet-name>DailymotionOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/Dailymotion</url-pattern>
 	</servlet-mapping>
-
+	
+	<!-- Youtube Oauth -->
+	<servlet>
+		<description></description>
+		<servlet-name>YoutubeAuthController</servlet-name>
+		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Youtube</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>YoutubeAuthController</servlet-name>
+		<url-pattern>/AuthController/Youtube</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<servlet-name>YoutubeOAuth2Callback</servlet-name>
+		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
+		<init-param>
+			<param-name>provider</param-name>
+			<param-value>Youtube</param-value>
+		</init-param>
+		<init-param>
+			<param-name>onSuccess</param-name>
+			<param-value>redirect:/index.jsp</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>YoutubeOAuth2Callback</servlet-name>
+		<url-pattern>/oauth2callback/Youtube</url-pattern>
+	</servlet-mapping>	
+	
 	<!-- DeviantArt Oauth -->
 	<servlet>
 		<description></description>

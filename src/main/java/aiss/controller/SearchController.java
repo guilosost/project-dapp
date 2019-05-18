@@ -46,7 +46,7 @@ public class SearchController extends HttpServlet {
 			req.setAttribute("photos", flickrResults.getPhotos());
 		}
 		
-		// Search for photos in Dailymotion
+		// Search for videos in Dailymotion
 				log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query1);
 				DailymotionResource dailymotion = new DailymotionResource("");
 				DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
