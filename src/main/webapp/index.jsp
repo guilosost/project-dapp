@@ -38,7 +38,7 @@
 	<br>
 	<a href="imgurSearch.jsp">Prueba Búsqueda de Imgur</a>
 	<br>
-	<a href="UnsplashCreateCollectionController">Prueba crear colección Unsplash</a>
+	<a href="youtubeSearch.jsp">Prueba búsqueda Youtube</a>
 	<br>
 	<a href="/AuthController/DeviantArt">
 	<button class="deviantart-button" role="link">Login DevianArt</button></a>
@@ -49,6 +49,8 @@
 	<a href="/AuthController/Dailymotion">
 	<button class="unsplash-button" role="link">Login Dailymotion</button></a>
 	<br>
+	<a href="AuthController/Youtube">
+	<button class="unsplash-button" role="link">Login Youtube</button></a>
 
 	<h2>Tokens de OAuth</h2>
 	<ul>
@@ -67,6 +69,10 @@
 		<li><strong>GooglePhotos:</strong>
 			<ul>
 				<li><c:out value='${sessionScope["GooglePhotos-token"]}' /></li>
+			</ul></li>
+		<li><strong>Youtube:</strong>
+			<ul>
+				<li><c:out value='${sessionScope["Youtube-token"]}' /></li>
 			</ul></li>
 	</ul>
 

@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.resource.UnsplashResource;
-import aiss.model.unsplash.AccessToken;
 import aiss.model.unsplash.SearchUnsplashPhotos;
 import aiss.model.unsplash.UnsplashResult;
 
 public class SearchControllerUnsplash extends HttpServlet {
 
+	private static final long serialVersionUID = -3886962596912166837L;
 	private static final Logger log = Logger.getLogger(SearchControllerUnsplash.class.getName());
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,8 +25,6 @@ public class SearchControllerUnsplash extends HttpServlet {
 
 		String query = req.getParameter("searchQuery");
 		RequestDispatcher rd = null;
-		String photoId = req.getParameter("id");
-		String collectionId = "4695823";// TODO
 
 		// Search for images in Unsplash
 		log.log(Level.FINE, "Searching for Unsplash images that contain " + query);
@@ -35,8 +33,6 @@ public class SearchControllerUnsplash extends HttpServlet {
 
 			UnsplashResource uResource = new UnsplashResource(unsplashCode);
 			SearchUnsplashPhotos unsplashImagesResults = uResource.getUnsplashImages(query);
-			uResource.addPhotoToCollection(photoId, collectionId);
-			req.getRequestDispatcher("/unplashImagesList").forward(req, resp);
 
 			for (UnsplashResult r : unsplashImagesResults.getResults()) {
 				log.log(Level.FINE, r.getLinks().getHtml());
