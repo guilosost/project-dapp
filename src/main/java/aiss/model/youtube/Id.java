@@ -37,11 +37,6 @@ public class Id {
         this.kind = kind;
     }
 
-    public Id withKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
     @JsonProperty("videoId")
     public String getVideoId() {
         return videoId;
@@ -50,11 +45,6 @@ public class Id {
     @JsonProperty("videoId")
     public void setVideoId(String videoId) {
         this.videoId = videoId;
-    }
-
-    public Id withVideoId(String videoId) {
-        this.videoId = videoId;
-        return this;
     }
 
     @JsonProperty("channelId")
@@ -67,11 +57,6 @@ public class Id {
         this.channelId = channelId;
     }
 
-    public Id withChannelId(String channelId) {
-        this.channelId = channelId;
-        return this;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -80,11 +65,6 @@ public class Id {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public Id withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

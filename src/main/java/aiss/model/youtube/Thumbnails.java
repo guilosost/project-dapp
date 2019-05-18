@@ -37,11 +37,6 @@ public class Thumbnails {
         this._default = _default;
     }
 
-    public Thumbnails withDefault(Default _default) {
-        this._default = _default;
-        return this;
-    }
-
     @JsonProperty("medium")
     public Medium getMedium() {
         return medium;
@@ -50,11 +45,6 @@ public class Thumbnails {
     @JsonProperty("medium")
     public void setMedium(Medium medium) {
         this.medium = medium;
-    }
-
-    public Thumbnails withMedium(Medium medium) {
-        this.medium = medium;
-        return this;
     }
 
     @JsonProperty("high")
@@ -67,11 +57,6 @@ public class Thumbnails {
         this.high = high;
     }
 
-    public Thumbnails withHigh(High high) {
-        this.high = high;
-        return this;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -80,11 +65,6 @@ public class Thumbnails {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public Thumbnails withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

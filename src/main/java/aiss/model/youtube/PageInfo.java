@@ -34,11 +34,6 @@ public class PageInfo {
         this.totalResults = totalResults;
     }
 
-    public PageInfo withTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
-        return this;
-    }
-
     @JsonProperty("resultsPerPage")
     public Integer getResultsPerPage() {
         return resultsPerPage;
@@ -49,11 +44,6 @@ public class PageInfo {
         this.resultsPerPage = resultsPerPage;
     }
 
-    public PageInfo withResultsPerPage(Integer resultsPerPage) {
-        this.resultsPerPage = resultsPerPage;
-        return this;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -62,11 +52,6 @@ public class PageInfo {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public PageInfo withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

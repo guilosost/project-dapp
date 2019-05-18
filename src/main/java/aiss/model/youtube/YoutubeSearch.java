@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "pageInfo",
     "items"
 })
-public class SearchVideos {
+public class YoutubeSearch {
 
     @JsonProperty("kind")
     private String kind;
@@ -33,7 +33,7 @@ public class SearchVideos {
     @JsonProperty("pageInfo")
     private PageInfo pageInfo;
     @JsonProperty("items")
-    private List<Video> items = null;
+    private List<Item> items = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -47,11 +47,6 @@ public class SearchVideos {
         this.kind = kind;
     }
 
-    public SearchVideos withKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
     @JsonProperty("etag")
     public String getEtag() {
         return etag;
@@ -60,11 +55,6 @@ public class SearchVideos {
     @JsonProperty("etag")
     public void setEtag(String etag) {
         this.etag = etag;
-    }
-
-    public SearchVideos withEtag(String etag) {
-        this.etag = etag;
-        return this;
     }
 
     @JsonProperty("nextPageToken")
@@ -77,11 +67,6 @@ public class SearchVideos {
         this.nextPageToken = nextPageToken;
     }
 
-    public SearchVideos withNextPageToken(String nextPageToken) {
-        this.nextPageToken = nextPageToken;
-        return this;
-    }
-
     @JsonProperty("regionCode")
     public String getRegionCode() {
         return regionCode;
@@ -90,11 +75,6 @@ public class SearchVideos {
     @JsonProperty("regionCode")
     public void setRegionCode(String regionCode) {
         this.regionCode = regionCode;
-    }
-
-    public SearchVideos withRegionCode(String regionCode) {
-        this.regionCode = regionCode;
-        return this;
     }
 
     @JsonProperty("pageInfo")
@@ -107,24 +87,14 @@ public class SearchVideos {
         this.pageInfo = pageInfo;
     }
 
-    public SearchVideos withPageInfo(PageInfo pageInfo) {
-        this.pageInfo = pageInfo;
-        return this;
-    }
-
     @JsonProperty("items")
-    public List<Video> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
     @JsonProperty("items")
-    public void setItems(List<Video> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
-    }
-
-    public SearchVideos withItems(List<Video> items) {
-        this.items = items;
-        return this;
     }
 
     @JsonAnyGetter
@@ -135,11 +105,6 @@ public class SearchVideos {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public SearchVideos withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

@@ -2,7 +2,6 @@
 package aiss.model.youtube;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -15,16 +14,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "kind",
     "etag",
-    "items"
+    "id",
+    "snippet"
 })
-public class VideoRating {
+public class Item {
 
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("etag")
     private String etag;
-    @JsonProperty("items")
-    private List<Video> items = null;
+    @JsonProperty("id")
+    private Id id;
+    @JsonProperty("snippet")
+    private Snippet snippet;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -38,11 +40,6 @@ public class VideoRating {
         this.kind = kind;
     }
 
-    public VideoRating withKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
     @JsonProperty("etag")
     public String getEtag() {
         return etag;
@@ -53,24 +50,24 @@ public class VideoRating {
         this.etag = etag;
     }
 
-    public VideoRating withEtag(String etag) {
-        this.etag = etag;
-        return this;
+    @JsonProperty("id")
+    public Id getId() {
+        return id;
     }
 
-    @JsonProperty("items")
-    public List<Video> getItems() {
-        return items;
+    @JsonProperty("id")
+    public void setId(Id id) {
+        this.id = id;
     }
 
-    @JsonProperty("items")
-    public void setItems(List<Video> items) {
-        this.items = items;
+    @JsonProperty("snippet")
+    public Snippet getSnippet() {
+        return snippet;
     }
 
-    public VideoRating withItems(List<Video> items) {
-        this.items = items;
-        return this;
+    @JsonProperty("snippet")
+    public void setSnippet(Snippet snippet) {
+        this.snippet = snippet;
     }
 
     @JsonAnyGetter
@@ -81,11 +78,6 @@ public class VideoRating {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public VideoRating withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
 
-import aiss.model.youtube.SearchVideos;
+import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeResource {
 
@@ -18,7 +18,7 @@ public class YoutubeResource {
 		this.access_token = access_token;
 	}
 
-	public SearchVideos searchYoutubeVideos(String query) throws UnsupportedEncodingException {
+	public YoutubeSearch searchYoutubeVideos(String query) throws UnsupportedEncodingException {
 		// Poner parámetro de entrada en formato correcto
 		String search = URLEncoder.encode(query, "UTF-8");
 
@@ -32,7 +32,7 @@ public class YoutubeResource {
 		ClientResource cr = new ClientResource(uri);
 
 		// Convertir JSON en .Java
-		SearchVideos youtubeSearch = cr.get(SearchVideos.class);
+		YoutubeSearch youtubeSearch = cr.get(YoutubeSearch.class);
 
 		return youtubeSearch;
 	}

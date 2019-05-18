@@ -49,11 +49,6 @@ public class Snippet {
         this.publishedAt = publishedAt;
     }
 
-    public Snippet withPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
-        return this;
-    }
-
     @JsonProperty("channelId")
     public String getChannelId() {
         return channelId;
@@ -62,11 +57,6 @@ public class Snippet {
     @JsonProperty("channelId")
     public void setChannelId(String channelId) {
         this.channelId = channelId;
-    }
-
-    public Snippet withChannelId(String channelId) {
-        this.channelId = channelId;
-        return this;
     }
 
     @JsonProperty("title")
@@ -79,11 +69,6 @@ public class Snippet {
         this.title = title;
     }
 
-    public Snippet withTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
     @JsonProperty("description")
     public String getDescription() {
         return description;
@@ -92,11 +77,6 @@ public class Snippet {
     @JsonProperty("description")
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Snippet withDescription(String description) {
-        this.description = description;
-        return this;
     }
 
     @JsonProperty("thumbnails")
@@ -109,11 +89,6 @@ public class Snippet {
         this.thumbnails = thumbnails;
     }
 
-    public Snippet withThumbnails(Thumbnails thumbnails) {
-        this.thumbnails = thumbnails;
-        return this;
-    }
-
     @JsonProperty("channelTitle")
     public String getChannelTitle() {
         return channelTitle;
@@ -122,11 +97,6 @@ public class Snippet {
     @JsonProperty("channelTitle")
     public void setChannelTitle(String channelTitle) {
         this.channelTitle = channelTitle;
-    }
-
-    public Snippet withChannelTitle(String channelTitle) {
-        this.channelTitle = channelTitle;
-        return this;
     }
 
     @JsonProperty("liveBroadcastContent")
@@ -139,11 +109,6 @@ public class Snippet {
         this.liveBroadcastContent = liveBroadcastContent;
     }
 
-    public Snippet withLiveBroadcastContent(String liveBroadcastContent) {
-        this.liveBroadcastContent = liveBroadcastContent;
-        return this;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -152,11 +117,6 @@ public class Snippet {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public Snippet withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

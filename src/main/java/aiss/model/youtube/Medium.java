@@ -37,11 +37,6 @@ public class Medium {
         this.url = url;
     }
 
-    public Medium withUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
     @JsonProperty("width")
     public Integer getWidth() {
         return width;
@@ -50,11 +45,6 @@ public class Medium {
     @JsonProperty("width")
     public void setWidth(Integer width) {
         this.width = width;
-    }
-
-    public Medium withWidth(Integer width) {
-        this.width = width;
-        return this;
     }
 
     @JsonProperty("height")
@@ -67,11 +57,6 @@ public class Medium {
         this.height = height;
     }
 
-    public Medium withHeight(Integer height) {
-        this.height = height;
-        return this;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -80,11 +65,6 @@ public class Medium {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public Medium withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

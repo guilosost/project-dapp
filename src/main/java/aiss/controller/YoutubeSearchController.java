@@ -24,7 +24,7 @@ public class YoutubeSearchController extends HttpServlet {
 		RequestDispatcher rd = null;
 
 		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
-		YoutubeResource youtube = new YoutubeResource("");
+		YoutubeResource youtube = new YoutubeResource(youtubeToken);
 		SearchVideos youtubeResults = youtube.searchYoutubeVideos(query);
 
 		if (youtubeResults.getItems() != null) {

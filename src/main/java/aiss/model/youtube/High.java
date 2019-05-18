@@ -37,11 +37,6 @@ public class High {
         this.url = url;
     }
 
-    public High withUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
     @JsonProperty("width")
     public Integer getWidth() {
         return width;
@@ -50,11 +45,6 @@ public class High {
     @JsonProperty("width")
     public void setWidth(Integer width) {
         this.width = width;
-    }
-
-    public High withWidth(Integer width) {
-        this.width = width;
-        return this;
     }
 
     @JsonProperty("height")
@@ -67,11 +57,6 @@ public class High {
         this.height = height;
     }
 
-    public High withHeight(Integer height) {
-        this.height = height;
-        return this;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -80,11 +65,6 @@ public class High {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public High withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }
