@@ -21,9 +21,9 @@ public class DailymotionTest {
 
 		assertNotNull("The search returned null", dailySearch);
 		assertNotNull("The search returned null", dailySearch.getList());
-		assertFalse("The number of photos of " + query + " is zero", dailySearch.getList().size() == 0);
+		assertFalse("The number of videos of " + query + " is zero", dailySearch.getList().size() == 0);
 
-		System.out.println("The search for " + query + "'s photos returned " + dailySearch.getList().size() + " datas.");
+		System.out.println("The search for " + query + "'s videos returned " + dailySearch.getList().size() + " datas.");
 
 		for (List l : dailySearch.getList()) {
 			System.out.println(l.getId());
@@ -35,5 +35,16 @@ public class DailymotionTest {
 		System.out.println("Username: " + dailyStats.getUsername());
 		System.out.println("Total Videos: " + dailyStats.getVideosTotal());
 		System.out.println("Total Views: " + dailyStats.getViewsTotal());
+		
+		DailymotionSearch dailyFavs = datos.getLikedVideos();
+		
+		assertNotNull("The search returned null", dailyFavs);
+		assertNotNull("The search returned null", dailyFavs.getList());
+		
+		System.out.println("The search for " + query + "'s videos returned " + dailyFavs.getList().size() + " datas.");
+
+		for (List l : dailyFavs.getList()) {
+			System.out.println(l.getId());
+		}
 	}
 }

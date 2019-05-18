@@ -25,7 +25,7 @@ public class DailymotionResource {
 		String search = URLEncoder.encode(query, "UTF-8");
 
 		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
-		String uri = "https://api.dailymotion.com/videos?search=" + search + "&limit=10&sort=random";
+		String uri = "https://api.dailymotion.com/videos?search=" + search + "&fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&limit=10";
 
 		log.log(Level.FINE, "Dailymotion URI: " + uri);
 
@@ -56,5 +56,35 @@ public class DailymotionResource {
 		DailymotionUserStats dailymotionStats = cr.get(DailymotionUserStats.class);
 
 		return dailymotionStats;
+	}
+	
+	public DailymotionSearch getBestOwnVideo() throws UnsupportedEncodingException {
+		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
+		String uri = "https://api.dailymotion.com/user/me/videos?fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&access_token=" + access_token;
+
+		log.log(Level.FINE, "Dailymotion Best Video URI: " + uri);
+
+		// Hacer petición al servicio REST (devuelve objeto JSON)
+		ClientResource cr = new ClientResource(uri);
+
+		// Convertir JSON en .Java
+		DailymotionSearch dailymotionBestVideo = cr.get(DailymotionSearch.class);
+
+		return dailymotionBestVideo;
+	}
+	
+	public DailymotionSearch getLikedVideos() throws UnsupportedEncodingException {
+		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
+		String uri = "https://api.dailymotion.com/user/me/likes?fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&access_token=" + access_token;
+
+		log.log(Level.FINE, "Dailymotion Liked Videos URI: " + uri);
+
+		// Hacer petición al servicio REST (devuelve objeto JSON)
+		ClientResource cr = new ClientResource(uri);
+
+		// Convertir JSON en .Java
+		DailymotionSearch dailymotionLikedVideos = cr.get(DailymotionSearch.class);
+
+		return dailymotionLikedVideos;
 	}
 }

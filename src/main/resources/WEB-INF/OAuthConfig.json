@@ -21,8 +21,9 @@
 		"clientSecret": "02558ab3645cd8dc6b98e27492dbb2deb20fb3a4",
 		"authorizationFormUrl": "https://www.dailymotion.com/oauth/authorize",
 		"scopes": [
-			"userinfo, manage_likes"
-		]
+			"userinfo",
+			"manage_likes",
+			"manage_comments"]
 	},
 		
     "GooglePhotos": { 

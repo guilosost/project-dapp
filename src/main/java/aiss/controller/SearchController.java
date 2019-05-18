@@ -48,14 +48,17 @@ public class SearchController extends HttpServlet {
 		
 		// Search for photos in Dailymotion
 				log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query1);
-				DailymotionResource dailymotion = new DailymotionResource("");
+				DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
 				DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
+				DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
 
 				if (dailymotionResults.getList() != null) {
 					rd = req.getRequestDispatcher("/success.jsp");
 					req.setAttribute("dailymotionVideos", dailymotionResults.getList());
+					req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
 					req.setAttribute("dailymotionToken", dailymotionToken);
 				}
+				
 
 		// Search for photos in Unsplash
 		log.log(Level.FINE, "Searching for Unsplash photos that contain " + query1);
