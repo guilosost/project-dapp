@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.dailymotion.DailymotionUserStats;
+import aiss.model.dailymotion.List;
 import aiss.model.deviantart.DeviantArtResult;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DailymotionResource;
@@ -50,11 +52,23 @@ public class StatsController extends HttpServlet {
 
 			DailymotionResource spResource = new DailymotionResource(dailymotionToken);
 			DailymotionUserStats dailymotionStats = spResource.getDailymotionStats();
+			DailymotionSearch dailyBestVideo = spResource.getBestOwnVideo();
+			
+			List bestVideo = null;
+			for (List daily : dailyBestVideo.getList()) {
+				if (bestVideo == null) {
+					bestVideo = daily;
+				} else if (bestVideo != null && daily.getViewsTotal() > bestVideo.getViewsTotal()) {
+					bestVideo = daily;
+				}
+			}
 
 			log.log(Level.FINE, "Username: " + dailymotionStats.getUsername());
 
 			rd = req.getRequestDispatcher("/stats.jsp");
 			req.setAttribute("dailymotionStats", dailymotionStats);
+			req.setAttribute("bestVideo", bestVideo);
+			req.setAttribute("dailymotionToken", dailymotionToken);
 			rd.forward(req, resp);
 
 		} else {

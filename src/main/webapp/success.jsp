@@ -7,31 +7,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Success</title>
 <script>
-	function postAjax(url, data) {
-        var input = document.getElementById("like").value = "Sí";
-		var params = typeof data == 'string' ? data : Object.keys(data).map(
-				function(k) {
-					return encodeURIComponent(k) + '='
-							+ encodeURIComponent(data[k])
-				}).join('&');
 
-		var xhr = window.XMLHttpRequest ? new XMLHttpRequest()
-				: new ActiveXObject("Microsoft.XMLHTTP");
-		xhr.open('POST', url);
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState > 3 && xhr.status == 200) {
-				success(xhr.responseText);
-			}
-		};
-		xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-		xhr.setRequestHeader('Content-Type',
-				'application/x-www-form-urlencoded');
-		xhr.send(params);
-		return xhr;
+	function postAjax(url1, data1) {
+		if(document.getElementById("like").value == "No") {
+			var input = document.getElementById("like").value = "Sí";
+	        const URL = url1;
+	        const Data = {};
+	        
+	        const othePram= {
+	        		header: {
+	        			"content-type":"application/json; charset=UTF-8"
+	        		},
+	        		body: Data,
+	        		method: "POST"
+	        };
+	        
+	        fetch(URL,othePram)
+	        .then(data=>{return data.json()})
+	        .then(res=>{console.log(res)})
+	        .catch(error=>console.log(error));
+	        
+		} else if(document.getElementById("like").value == "Sí") {
+			var input = document.getElementById("like").value = "No";
+	        const URL = url1;
+	        const Data = {};
+	        
+	        const othePram= {
+	        		header: {
+	        			"content-type":"application/json; charset=UTF-8"
+	        		},
+	        		body: Data,
+	        		method: "DELETE"
+	        };
+	        
+	        fetch(URL,othePram)
+	        .then(data=>{return data.json()})
+	        .then(res=>{console.log(res)})
+	        .catch(error=>console.log(error));
+		}
 	}
+	
 </script>
 </head>
 <body>
@@ -92,7 +111,7 @@
 			Dailymotion search for
 			<c:out value="${param.searchQuery}" />
 		</legend>
-			<p>${dailymotionToken}</p>
+		<p>${dailymotionToken}</p>
 		<c:forEach items="${requestScope.dailymotionVideos}"
 			var="dailymotionVideo">
 			<h3>
@@ -106,11 +125,29 @@
 				src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 				allowfullscreen allow="autoplay"></iframe>
 
-			<input type="button" id="like" name="like"
-				onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>', 'access_token=${dailymotionToken}')" value="No"><br>
+			<c:set var="conditionVariable" value="false" />
+			<c:forEach items="${requestScope.dailymotionLikedVideos}"
+				var="dailysFavoritos">
+				<c:if
+					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'false'}">
+					<input type="button" id="like" name="like"
+						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'access_token=${dailymotionToken}')"
+						value="Sí">
+					<c:set var="conditionVariable" value="true" />
+				</c:if>
+				<c:if
+					test="${dailysFavoritos.id != dailymotionVideo.id  && conditionVariable == 'false'}">
+					<input type="button" id="like" name="like"
+						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'access_token=${dailymotionToken}')"
+						value="No">
+					<c:set var="conditionVariable" value="true" />
+				</c:if>
+			</c:forEach>
 			<br>
-			<!-- No puedo meter en el método ${sessionScope["Dailymotion-token"]}, por eso está hecho con ${dailymotionToken}-->
+			<br>
 		</c:forEach>
+		<!-- No puedo meter en el método ${sessionScope["Dailymotion-token"]}, por eso está hecho con ${dailymotionToken}-->
+
 	</fieldset>
 
 </body>
