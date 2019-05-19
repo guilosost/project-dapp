@@ -12,6 +12,14 @@
 <title>Success</title>
 <script>
 
+function postCommentYoutube(url1, token1, channelId, text, videoId) {
+	const access_token = token1;
+	const chanid=channelId;
+	const vidid=videoId;
+	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
+	
+}
+
 function postFavDeviantArt(url1, token1, deviid) {
 	//var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 	const access_token1 = token1;

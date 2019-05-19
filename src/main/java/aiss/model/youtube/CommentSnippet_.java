@@ -12,63 +12,45 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "kind",
-    "etag",
-    "id"
+    "textOriginal",
+    "videoId"
 })
-public class Item {
+public class CommentSnippet_ {
 
-    @JsonProperty("kind")
-    private String kind;
-    @JsonProperty("etag")
-    private String etag;
-    @JsonProperty("id")
-    private String id;
+    @JsonProperty("textOriginal")
+    private String textOriginal;
+    @JsonProperty("videoId")
+    private String videoId;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("kind")
-    public String getKind() {
-        return kind;
+    @JsonProperty("textOriginal")
+    public String getTextOriginal() {
+        return textOriginal;
     }
 
-    @JsonProperty("kind")
-    public void setKind(String kind) {
-        this.kind = kind;
+    @JsonProperty("textOriginal")
+    public void setTextOriginal(String textOriginal) {
+        this.textOriginal = textOriginal;
     }
 
-    public Item withKind(String kind) {
-        this.kind = kind;
+    public CommentSnippet_ withTextOriginal(String textOriginal) {
+        this.textOriginal = textOriginal;
         return this;
     }
 
-    @JsonProperty("etag")
-    public String getEtag() {
-        return etag;
+    @JsonProperty("videoId")
+    public String getVideoId() {
+        return videoId;
     }
 
-    @JsonProperty("etag")
-    public void setEtag(String etag) {
-        this.etag = etag;
+    @JsonProperty("videoId")
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
 
-    public Item withEtag(String etag) {
-        this.etag = etag;
-        return this;
-    }
-
-    @JsonProperty("id")
-    public String getId() {
-        return id;
-    }
-
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Item withId(String id) {
-        this.id = id;
+    public CommentSnippet_ withVideoId(String videoId) {
+        this.videoId = videoId;
         return this;
     }
 
@@ -82,7 +64,7 @@ public class Item {
         this.additionalProperties.put(name, value);
     }
 
-    public Item withAdditionalProperty(String name, Object value) {
+    public CommentSnippet_ withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }

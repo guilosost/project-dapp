@@ -17,18 +17,36 @@
 	font-variant: small-caps;
 }
 
-.unsplash-button {
+.dailymotion-button {
 	margin-right: 0;
 	margin-left: 0;
 	margin: 4px;
 	flex: 1 auto;
 	border-color: #000000;
 	border-width: 0.5px;
-	background-color: #FFFFFF;
+	background-color: #00ccff;
 	background-image: none;
 	border-radius: 5px !important;
 	text-align: center !important;
-	color: #000000;
+	color: #000;
+	width: 400px;
+	height: 50px;
+	font-size: 25px;
+	font-family: Didot;
+	font-variant: small-caps;
+}
+
+.youtube-button {
+	margin-right: 0;
+	margin-left: 0;
+	margin: 4px;
+	flex: 1 auto;
+	border-color: #000000;
+	border-width: 0.5px;
+	background-color: #ff0000;
+	background-image: none;
+	border-radius: 5px !important;
+	text-align: center !important;
 	width: 400px;
 	height: 50px;
 	font-size: 25px;

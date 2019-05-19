@@ -24,6 +24,6 @@
         "clientId": "422826554439-e4l48fp8ahbci9fde6c2tcel9ooocdru.apps.googleusercontent.com",
         "clientSecret": "NLj0DsOjbbR4vapaY_f1qGv7",
         "authorizationFormUrl": "https://accounts.google.com/o/oauth2/auth",
-        "scopes": ["https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.upload"]
+        "scopes": ["https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube.force-ssl"]
     }
 }		

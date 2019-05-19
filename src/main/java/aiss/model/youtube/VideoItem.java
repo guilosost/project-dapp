@@ -14,16 +14,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "kind",
     "etag",
-    "id"
+    "id",
+    "snippet"
 })
-public class Item {
+public class VideoItem {
 
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("etag")
     private String etag;
     @JsonProperty("id")
-    private String id;
+    private Id id;
+    @JsonProperty("snippet")
+    private VideoSnippet snippet;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -37,11 +40,6 @@ public class Item {
         this.kind = kind;
     }
 
-    public Item withKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
     @JsonProperty("etag")
     public String getEtag() {
         return etag;
@@ -52,24 +50,24 @@ public class Item {
         this.etag = etag;
     }
 
-    public Item withEtag(String etag) {
-        this.etag = etag;
-        return this;
-    }
-
     @JsonProperty("id")
-    public String getId() {
+    public Id getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(String id) {
+    public void setId(Id id) {
         this.id = id;
     }
 
-    public Item withId(String id) {
-        this.id = id;
-        return this;
+    @JsonProperty("snippet")
+    public VideoSnippet getSnippet() {
+        return snippet;
+    }
+
+    @JsonProperty("snippet")
+    public void setSnippet(VideoSnippet snippet) {
+        this.snippet = snippet;
     }
 
     @JsonAnyGetter
@@ -80,11 +78,6 @@ public class Item {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    public Item withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

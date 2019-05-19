@@ -2,6 +2,7 @@
 package aiss.model.youtube;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -14,16 +15,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "kind",
     "etag",
-    "id"
+    "nextPageToken",
+    "pageInfo",
+    "items"
 })
-public class Item {
+public class YoutubeComment {
 
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("etag")
     private String etag;
-    @JsonProperty("id")
-    private String id;
+    @JsonProperty("nextPageToken")
+    private String nextPageToken;
+    @JsonProperty("pageInfo")
+    private PageInfo pageInfo;
+    @JsonProperty("items")
+    private List<VideoItem> items = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -37,7 +44,7 @@ public class Item {
         this.kind = kind;
     }
 
-    public Item withKind(String kind) {
+    public YoutubeComment withKind(String kind) {
         this.kind = kind;
         return this;
     }
@@ -52,23 +59,53 @@ public class Item {
         this.etag = etag;
     }
 
-    public Item withEtag(String etag) {
+    public YoutubeComment withEtag(String etag) {
         this.etag = etag;
         return this;
     }
 
-    @JsonProperty("id")
-    public String getId() {
-        return id;
+    @JsonProperty("nextPageToken")
+    public String getNextPageToken() {
+        return nextPageToken;
     }
 
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
+    @JsonProperty("nextPageToken")
+    public void setNextPageToken(String nextPageToken) {
+        this.nextPageToken = nextPageToken;
     }
 
-    public Item withId(String id) {
-        this.id = id;
+    public YoutubeComment withNextPageToken(String nextPageToken) {
+        this.nextPageToken = nextPageToken;
+        return this;
+    }
+
+    @JsonProperty("pageInfo")
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    @JsonProperty("pageInfo")
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+    }
+
+    public YoutubeComment withPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+        return this;
+    }
+
+    @JsonProperty("items")
+    public List<VideoItem> getItems() {
+        return items;
+    }
+
+    @JsonProperty("items")
+    public void setItems(List<VideoItem> items) {
+        this.items = items;
+    }
+
+    public YoutubeComment withItems(List<VideoItem> items) {
+        this.items = items;
         return this;
     }
 
@@ -82,7 +119,7 @@ public class Item {
         this.additionalProperties.put(name, value);
     }
 
-    public Item withAdditionalProperty(String name, Object value) {
+    public YoutubeComment withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }

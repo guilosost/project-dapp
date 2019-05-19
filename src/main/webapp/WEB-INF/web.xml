@@ -31,16 +31,7 @@
 		<url-pattern>/StatsController</url-pattern>
 	</servlet-mapping>
 	<!-- Youtube Controllers -->
-	<servlet>
-		<description></description>
-		<display-name>YoutubeSearchController</display-name>
-		<servlet-name>YoutubeSearchController</servlet-name>
-		<servlet-class>aiss.controller.YoutubeSearchController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>YoutubeSearchController</servlet-name>
-		<url-pattern>/YoutubeSearchController</url-pattern>
-	</servlet-mapping>
+
 	<!-- Dailymotion Controllers -->
 	<servlet>
 		<description></description>

@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import org.junit.Test;
 
 import aiss.model.resource.YoutubeResource;
-import aiss.model.youtube.Item;
+import aiss.model.youtube.VideoItem;
 import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeTest {
@@ -24,7 +24,7 @@ public class YoutubeTest {
 
 		System.out.println("The search for " + query + "'s videos returned " + dailySearch.getItems().size() + " datas.");
 
-		for (Item l : dailySearch.getItems()) {
+		for (VideoItem l : dailySearch.getItems()) {
 			System.out.println(l.getSnippet().getTitle());
 		}
 	}

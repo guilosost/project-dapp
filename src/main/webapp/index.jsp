@@ -13,7 +13,7 @@
 
 <body>
 
-	<h1>Project Dapp</h1>
+	<h1>Project DAPP</h1>
 
 	<p>Este proyecto va enfocado a facilitar la publicación de imágenes
 		en el ámbito digital. La aplicación reúne cuatro aplicaciones de image
@@ -42,16 +42,14 @@
 	<br>
 	<a href="DailymotionStatsController">Prueba Stats de Dailymotion</a>
 	<br>
-	<a href="youtubeSearch.jsp">Prueba búsqueda Youtube</a>
-	<br>
 	<a href="/AuthController/DeviantArt">
-	<button class="deviantart-button" role="link">Login DevianArt</button></a>
+	<button class="deviantart-button" role="link">Login DeviantArt</button></a>
 	<br>
 	<a href="/AuthController/Dailymotion">
-	<button class="unsplash-button" role="link">Login Dailymotion</button></a>
+	<button class="dailymotion-button" role="link">Login Dailymotion</button></a>
 	<br>
 	<a href="AuthController/Youtube">
-	<button class="unsplash-button" role="link">Login Youtube</button></a>
+	<button class="youtube-button" role="link">Login Youtube</button></a>
 
 	<h2>Tokens de OAuth</h2>
 	<ul>

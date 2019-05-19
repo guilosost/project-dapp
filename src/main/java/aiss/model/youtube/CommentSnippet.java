@@ -12,63 +12,45 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "kind",
-    "etag",
-    "id"
+    "channelId",
+    "topLevelComment"
 })
-public class Item {
+public class CommentSnippet {
 
-    @JsonProperty("kind")
-    private String kind;
-    @JsonProperty("etag")
-    private String etag;
-    @JsonProperty("id")
-    private String id;
+    @JsonProperty("channelId")
+    private String channelId;
+    @JsonProperty("topLevelComment")
+    private TopLevelComment topLevelComment;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("kind")
-    public String getKind() {
-        return kind;
+    @JsonProperty("channelId")
+    public String getChannelId() {
+        return channelId;
     }
 
-    @JsonProperty("kind")
-    public void setKind(String kind) {
-        this.kind = kind;
+    @JsonProperty("channelId")
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 
-    public Item withKind(String kind) {
-        this.kind = kind;
+    public CommentSnippet withChannelId(String channelId) {
+        this.channelId = channelId;
         return this;
     }
 
-    @JsonProperty("etag")
-    public String getEtag() {
-        return etag;
+    @JsonProperty("topLevelComment")
+    public TopLevelComment getTopLevelComment() {
+        return topLevelComment;
     }
 
-    @JsonProperty("etag")
-    public void setEtag(String etag) {
-        this.etag = etag;
+    @JsonProperty("topLevelComment")
+    public void setTopLevelComment(TopLevelComment topLevelComment) {
+        this.topLevelComment = topLevelComment;
     }
 
-    public Item withEtag(String etag) {
-        this.etag = etag;
-        return this;
-    }
-
-    @JsonProperty("id")
-    public String getId() {
-        return id;
-    }
-
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Item withId(String id) {
-        this.id = id;
+    public CommentSnippet withTopLevelComment(TopLevelComment topLevelComment) {
+        this.topLevelComment = topLevelComment;
         return this;
     }
 
@@ -82,7 +64,7 @@ public class Item {
         this.additionalProperties.put(name, value);
     }
 
-    public Item withAdditionalProperty(String name, Object value) {
+    public CommentSnippet withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }

@@ -9,7 +9,7 @@ import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
 import aiss.model.unsplash.AccessToken;
-import aiss.model.youtube.Item;
+import aiss.model.youtube.VideoItem;
 import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeResource {
@@ -41,7 +41,7 @@ public class YoutubeResource {
 		return youtubeSearch;
 	}
 
-	public void likeYoutubeVideo(Item video) {
+	public void likeYoutubeVideo(VideoItem video) {
 		// Creamos la URL a la que haremos POST:
 		// https://www.googleapis.com/youtube/v3/videos/rate?id=KWudofo499w&rating=like&
 		// access_token=ya29.GlsNB4c0aXgqJpI832sv1KT4Ag4940ZUFTWq5aJ2SzGtvK_AOLFV6ZculuLQQgSscUGu0AIhA-X2KDh3a4z2zytVbt2wQ0MX2weT27mccBBgxUTx5mo8B62EoYuW
@@ -62,9 +62,5 @@ public class YoutubeResource {
 		}
 
 	}
-
-	// Creamos la URL a la que haremos POST:
-	// https://www.googleapis.com/youtube/v3/videos/rate?id=KWudofo499w&rating=like&
-	// access_token=ya29.GlsNB4c0aXgqJpI832sv1KT4Ag4940ZUFTWq5aJ2SzGtvK_AOLFV6ZculuLQQgSscUGu0AIhA-X2KDh3a4z2zytVbt2wQ0MX2weT27mccBBgxUTx5mo8B62EoYuW
 
 }
