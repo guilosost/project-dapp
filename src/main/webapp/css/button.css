@@ -4,7 +4,8 @@
 	margin: 4px;
 	flex: 1 auto;
 	border-color: #000000;
-	border-width: 0.5px; background-color : #20C55D;
+	border-width: 0.5px;
+	background-color: #20C55D;
 	color: #000;
 	background-image: none;
 	border-radius: 5px !important;
@@ -13,7 +14,8 @@
 	width: 400px;
 	height: 50px;
 	font-size: 25px;
-	font-family: Didot;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Ubuntu, "Helvetica Neue", sans-serif;
 	font-variant: small-caps;
 }
 
@@ -32,7 +34,8 @@
 	width: 400px;
 	height: 50px;
 	font-size: 25px;
-	font-family: Didot;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Ubuntu, "Helvetica Neue", sans-serif;
 	font-variant: small-caps;
 }
 
@@ -50,6 +53,27 @@
 	width: 400px;
 	height: 50px;
 	font-size: 25px;
-	font-family: Didot;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Ubuntu, "Helvetica Neue", sans-serif;
 	font-variant: small-caps;
+}
+
+.stats-button {
+	margin-right: 0px;
+	margin-left: 552px;
+	margin-top: 5px;
+	flex: 1 auto;
+	border-color: #000000;
+	border-width: 0.5px;
+	background-color: white;
+	background-image: none;
+	border-radius: 5px !important;
+	text-align: center !important;
+	width: 400px;
+	height: 50px;
+	font-size: 25px;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+	font-variant: small-caps;
+	flex: 1 auto;
 }
