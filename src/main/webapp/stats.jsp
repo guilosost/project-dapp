@@ -15,8 +15,8 @@
 function postComentarioDA(url1, token1) {
 	const access_token1 = token1;
 	console.log(token1 + " ::::: " + url1);
-    const URL = url1 + "fave?access_token=" + access_token1;
-    const Data = document.getElementById("comentario").value;
+    const URL = url1 + "?access_token=" + access_token1;
+    const Data = "body=" + document.getElementById("comentario").value;
     console.log(Data);
     const othePram= {
         method: 'POST',
@@ -59,7 +59,7 @@ function postComentarioDA(url1, token1) {
 
 		<input id="comentario" name="comentario" type="text" maxlength="30"
 			value="" /> <br> <input type="button" id="like" name="like"
-			onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', 'access_token=${deviantArtToken}')">
+			onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', '${deviantArtToken}')">
 		<br>
 	</fieldset>
 
