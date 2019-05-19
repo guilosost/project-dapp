@@ -12,26 +12,26 @@
 <title>Stats</title>
 <script>
 
-function postAjax(url1, data1) {
-		var input = document.getElementById("comentario").value;
-		const coment = input;
-        const URL = url1;
-        const Data = {
-        		message: coment		
-        };
+function postComentarioDA(url1, token1) {
+	const access_token1 = token1;
+	console.log(deviid + ", " + token1 + " ::::: " + url1 + "fave");
+    const URL = url1 + "fave?access_token=" + access_token1;
+    const Data = document.getElementById(id);
+    console.log(Data);
+    const othePram= {
+        method: 'POST',
+        //mode: "no-cors",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+             },
+        body: Data
+       };
         
-        const othePram= {
-        		header: {
-        			"content-type":"application/json; charset=UTF-8"
-        		},
-        		body: Data,
-        		method: "POST"
-        };
-        
-        fetch(URL,othePram)
-        .then(data=>{return data.json()})
-        .then(res=>{console.log(res)})
-        .catch(error=>console.log(error));
+        //.then(response=>console.info(response.type))// opaque
+    fetch(URL,othePram)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error));
 }
 </script>
 </head>
@@ -39,21 +39,28 @@ function postAjax(url1, data1) {
 
 	<fieldset id="deviantArt">
 		<legend> DeviantArt User Stats </legend>
-		<c:forEach items="${requestScope.deviantArtStats}"
-			var="deviantArtStats1">
-			<h3>
-				<c:out value="${deviantArtStats1.title}" />
-			</h3>
-			<p>
-				Comentarios:
-				<c:out value="${deviantArtStats1.stats.comments}" />
-			</p>
-			<p>
-				Favoritos:
-				<c:out value="${deviantArtStats1.stats.favourites}" />
-			</p>
-			<br>
-		</c:forEach>
+		<h3>
+			${deviantArtUser.user.username} <img
+				src='${deviantArtUser.user.usericon}' height="10%" width="10%" />
+		</h3>
+		<p>Deviations: ${deviations}</p>
+		<p>Comentarios: ${deviantArtUser.stats.userComments}</p>
+		<p>Favoritos: ${deviantArtUser.stats.userFavourites}</p>
+		<p>Visitas al perfil: ${deviantArtUser.stats.profilePageviews}</p>
+		<p>Comentarios en el perfil:
+			${deviantArtUser.stats.profileComments}</p>
+
+		<h3>Mejor imagen: ${deviantArtBestImage.title}</h3>
+		<p>${deviantArtBestImage.deviationid}</p>
+		<img src='<c:out value="${deviantArtBestImage.preview.src}"/>'
+			height="40%" width="40%" />
+		<p>Comentarios: ${deviantArtBestImage.stats.comments}</p>
+		<p>Favoritos: ${deviantArtBestImage.stats.favourites}</p>
+
+		<input id="comentario" name="comentario" type="text" maxlength="30"
+			value="" /> <br> <input type="button" id="like" name="like"
+			onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', 'access_token=${deviantArtToken}')">
+		<br>
 	</fieldset>
 
 	<fieldset id="dailymotion">
@@ -63,6 +70,7 @@ function postAjax(url1, data1) {
 		<p>Followers: ${dailymotionStats.followersTotal}</p>
 		<p>Videos: ${dailymotionStats.videosTotal}</p>
 		<p>Total Views: ${dailymotionStats.viewsTotal}</p>
+		<p>Total Likes: ${totalLikes}</p>
 	</fieldset>
 
 	<fieldset id="dailymotion">
@@ -72,10 +80,7 @@ function postAjax(url1, data1) {
 		<iframe frameborder="0" width="340" height="130"
 			src='http://www.dailymotion.com/embed/video/${bestVideo.id}'
 			allowfullscreen allow="autoplay"></iframe>
-		<input id="comentario" name="comentario" type="text" maxlength="30"
-			value="" /> <br> <input type="button" id="like" name="like"
-			onclick="postAjax('https://api.dailymotion.com/video/<c:out value="${bestVideo.id}"/>/comments?access_token=${dailymotionToken}', 'access_token=${dailymotionToken}')"
-			value="No">
+
 		<p>Likes: ${bestVideo.likesTotal}</p>
 		<p>Views: ${bestVideo.viewsTotal}</p>
 	</fieldset>

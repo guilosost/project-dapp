@@ -16,9 +16,7 @@ public class DailymotionTest {
 	@Test
 	public void getDailymotionTest() throws UnsupportedEncodingException {
 		String query = "star+wars";
-		DailymotionResource datos = new DailymotionResource("ZjEBCQYEAF5WCk1dBAVMGRQZHEQWTgUBEQlWBUxPUQZa\r\n" + 
-				"\r\n" + 
-				"");
+		DailymotionResource datos = new DailymotionResource("Z3REAEFfQUYFGEZeEQlZCRREAwsaXBIEGVVHX15bW1EX");
 		DailymotionSearch dailySearch = datos.getDailymotionVideos(query);
 
 		assertNotNull("The search returned null", dailySearch);
@@ -48,5 +46,11 @@ public class DailymotionTest {
 		for (List l : dailyFavs.getList()) {
 			System.out.println(l.getId());
 		}
+		
+		List bestVideo = datos.getBestOwnVideo();
+		assertNotNull("The search returned null", bestVideo);
+
+		System.out.println("Title: " + bestVideo.getTitle());
+
 	}
 }

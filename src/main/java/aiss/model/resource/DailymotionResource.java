@@ -9,6 +9,7 @@ import org.restlet.resource.ClientResource;
 
 import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.dailymotion.DailymotionUserStats;
+import aiss.model.dailymotion.List;
 
 public class DailymotionResource {
 
@@ -58,8 +59,23 @@ public class DailymotionResource {
 		return dailymotionStats;
 	}
 	
-	public DailymotionSearch getBestOwnVideo() throws UnsupportedEncodingException {
-		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
+	public Integer getDailymotionTotalLikes() throws UnsupportedEncodingException {
+		String uri = "https://api.dailymotion.com/user/me/videos?fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&access_token=" + access_token;
+
+		// Convertir JSON en .Java
+		ClientResource cr = new ClientResource(uri);
+
+		DailymotionSearch dailymotionBestVideo = cr.get(DailymotionSearch.class);
+		
+		Integer likes = 0;
+		for (List daily : dailymotionBestVideo.getList()) {
+			likes += daily.getLikesTotal();
+		}
+		
+		return likes;
+	}
+	
+	public List getBestOwnVideo() throws UnsupportedEncodingException {
 		String uri = "https://api.dailymotion.com/user/me/videos?fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&access_token=" + access_token;
 
 		log.log(Level.FINE, "Dailymotion Best Video URI: " + uri);
@@ -69,8 +85,18 @@ public class DailymotionResource {
 
 		// Convertir JSON en .Java
 		DailymotionSearch dailymotionBestVideo = cr.get(DailymotionSearch.class);
+		
 
-		return dailymotionBestVideo;
+		List bestVideo = null;
+		for (List daily : dailymotionBestVideo.getList()) {
+			if (bestVideo == null) {
+				bestVideo = daily;
+			} else if (bestVideo != null && daily.getViewsTotal() > bestVideo.getViewsTotal()) {
+				bestVideo = daily;
+			}
+		}
+
+		return bestVideo;
 	}
 	
 	public DailymotionSearch getLikedVideos() throws UnsupportedEncodingException {

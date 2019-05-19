@@ -33,16 +33,6 @@
 	<!-- Youtube Controllers -->
 
 	<!-- Dailymotion Controllers -->
-	<servlet>
-		<description></description>
-		<display-name>DailymotionStatsController</display-name>
-		<servlet-name>DailymotionStatsController</servlet-name>
-		<servlet-class>aiss.controller.DailymotionStatsController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DailymotionStatsController</servlet-name>
-		<url-pattern>/DailymotionStatsController</url-pattern>
-	</servlet-mapping>
 
 	<!-- Dailymotion Oauth -->
 	<servlet>

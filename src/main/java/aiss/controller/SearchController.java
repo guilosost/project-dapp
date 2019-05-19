@@ -13,15 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.deviantart.GetFolderByID;
 import aiss.model.deviantart.SearchDeviantArt;
-import aiss.model.flickr.PhotoSearch;
-import aiss.model.imgur.ImgurGallerySearch;
 import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
-import aiss.model.resource.FlickrResource;
-import aiss.model.resource.ImgurResource;
-import aiss.model.resource.UnsplashResource;
 import aiss.model.resource.YoutubeResource;
-import aiss.model.unsplash.SearchUnsplashPhotos;
 import aiss.model.youtube.YoutubeSearch;
 
 public class SearchController extends HttpServlet {

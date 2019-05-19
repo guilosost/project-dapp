@@ -7,8 +7,9 @@ import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
 
-import aiss.model.deviantart.Folder;
+import aiss.model.deviantart.DeviantArtResult;
 import aiss.model.deviantart.DeviantArtUser;
+import aiss.model.deviantart.Folder;
 import aiss.model.deviantart.GetFolderByID;
 import aiss.model.deviantart.SearchDeviantArt;
 
@@ -42,14 +43,15 @@ public class DeviantArtResource {
 
 		return deviantArtSearch;
 	}
-	
+
 	public SearchDeviantArt getDeviantArtStats() throws UnsupportedEncodingException {
 
 		// Crear la URL GET https://www.deviantart.com/api/v1/oauth2/gallery/
 		// all?username=migyanari&mature_content=false
 
-		String uri = "https://www.deviantart.com/api/v1/oauth2/gallery/all?username=" + getDeviantArtUserInfo().getUser().getUsername()
-				+ "&mature_content=false&access_token=" + access_token;
+		String uri = "https://www.deviantart.com/api/v1/oauth2/gallery/all?username="
+				+ getDeviantArtUserInfo().getUser().getUsername() + "&mature_content=false&access_token="
+				+ access_token;
 
 		log.log(Level.FINE, "DeviantArt URI: " + uri);
 
@@ -61,23 +63,38 @@ public class DeviantArtResource {
 
 		return deviantArtSearch;
 	}
-	
+
+	public DeviantArtResult getBestDeviantImage() throws UnsupportedEncodingException {
+
+		DeviantArtResult result = null;
+		for (DeviantArtResult d : getDeviantArtStats().getResults()) {
+			if (result == null) {
+				result = d;
+			} else if (d.getStats().getFavourites() > result.getStats().getFavourites()) {
+				result = d;
+			}
+		}
+
+		return result;
+	}
+
 	public GetFolderByID getDeviantArtFavs() throws UnsupportedEncodingException {
 
-		// Crear la URL https://www.deviantart.com/api/v1/oauth2/collections/09A2E495-5D12-9F8B-D319-F97BAC80E7CC
+		// Crear la URL
+		// https://www.deviantart.com/api/v1/oauth2/collections/09A2E495-5D12-9F8B-D319-F97BAC80E7CC
 		// ?username=migyanari&mature_content=false
-		
+
 		DeviantArtUser user = getDeviantArtUserInfo();
 		log.log(Level.FINE, "Folder: " + user.getFolders().get(0).getName());
 		Folder result = user.getFolders().get(0);
-		for(Folder f : user.getFolders()) {
+		for (Folder f : user.getFolders()) {
 			log.log(Level.FINE, "Folder: " + f.getName());
-			if(f.getName() == "Featured") {
+			if (f.getName() == "Featured") {
 				result = f;
 			}
 		}
-		String uri = "https://www.deviantart.com/api/v1/oauth2/collections/" + result.getFolderid()
-				+ "?username=" + user.getUser().getUsername() + "&mature_content=false&access_token=" + access_token;
+		String uri = "https://www.deviantart.com/api/v1/oauth2/collections/" + result.getFolderid() + "?username="
+				+ user.getUser().getUsername() + "&mature_content=false&access_token=" + access_token;
 
 		log.log(Level.FINE, "DeviantArt Folder URI: " + uri);
 
@@ -95,7 +112,8 @@ public class DeviantArtResource {
 		// Crear la URL GET GET https://www.deviantart.com/api/v1/oauth2/user/profile/
 		// ?ext_collections=false&ext_galleries=false&mature_content=true
 
-		String uri = "https://www.deviantart.com/api/v1/oauth2/user/profile/?ext_collections=true&ext_galleries=false&mature_content=false&access_token=" + access_token;
+		String uri = "https://www.deviantart.com/api/v1/oauth2/user/profile/?ext_collections=true&ext_galleries=false&mature_content=false&access_token="
+				+ access_token;
 		log.log(Level.FINE, "DeviantArt User URI: " + uri);
 
 		// Hacer petición al servicio REST (devuelve objeto JSON)

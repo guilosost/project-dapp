@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.dailymotion.DailymotionUserStats;
 import aiss.model.dailymotion.List;
 import aiss.model.deviantart.DeviantArtResult;
+import aiss.model.deviantart.DeviantArtUser;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
@@ -21,7 +21,7 @@ import aiss.model.resource.DeviantArtResource;
 public class StatsController extends HttpServlet {
 
 	private static final long serialVersionUID = -2421050068295083718L;
-	private static final Logger log = Logger.getLogger(DeviantArtStatsController.class.getName());
+	private static final Logger log = Logger.getLogger(StatsController.class.getName());
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -33,14 +33,22 @@ public class StatsController extends HttpServlet {
 
 			DeviantArtResource spResource = new DeviantArtResource(deviantArtToken);
 			SearchDeviantArt deviantArtStats = spResource.getDeviantArtStats();
+			DeviantArtUser deviantUser = spResource.getDeviantArtUserInfo();
+			DeviantArtResult bestImage = spResource.getBestDeviantImage();
 
 			for (DeviantArtResult r : deviantArtStats.getResults()) {
 
 				log.log(Level.FINE, r.getStats().getFavourites().toString());
 			}
+			
+			log.log(Level.FINE, deviantUser.getUser().getUsername());
 
 //			rd = req.getRequestDispatcher("/stats.jsp");
+			req.setAttribute("deviantArtUser", deviantUser);
 			req.setAttribute("deviantArtStats", deviantArtStats.getResults());
+			req.setAttribute("deviations", deviantArtStats.getResults().size());
+			req.setAttribute("deviantArtBestImage", bestImage);
+			req.setAttribute("deviantArtToken", deviantArtToken);
 //			rd.forward(req, resp);
 
 		} else {
@@ -52,22 +60,16 @@ public class StatsController extends HttpServlet {
 
 			DailymotionResource spResource = new DailymotionResource(dailymotionToken);
 			DailymotionUserStats dailymotionStats = spResource.getDailymotionStats();
-			DailymotionSearch dailyBestVideo = spResource.getBestOwnVideo();
-			
-			List bestVideo = null;
-			for (List daily : dailyBestVideo.getList()) {
-				if (bestVideo == null) {
-					bestVideo = daily;
-				} else if (bestVideo != null && daily.getViewsTotal() > bestVideo.getViewsTotal()) {
-					bestVideo = daily;
-				}
-			}
+			List dailyBestVideo = spResource.getBestOwnVideo();
+			Integer totalLikes = spResource.getDailymotionTotalLikes();
 
 			log.log(Level.FINE, "Username: " + dailymotionStats.getUsername());
+			log.log(Level.FINE, "Title: " + dailyBestVideo.getTitle());
 
 			rd = req.getRequestDispatcher("/stats.jsp");
 			req.setAttribute("dailymotionStats", dailymotionStats);
-			req.setAttribute("bestVideo", bestVideo);
+			req.setAttribute("bestVideo", dailyBestVideo);
+			req.setAttribute("totalLikes", totalLikes);
 			req.setAttribute("dailymotionToken", dailymotionToken);
 			rd.forward(req, resp);
 
