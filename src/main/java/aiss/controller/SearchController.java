@@ -26,26 +26,15 @@ public class SearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String devianArtToken = (String) req.getSession().getAttribute("DeviantArt-token");
-//		String unsplashCode = (String) req.getSession().getAttribute("Unsplash-token");
 		String dailymotionToken = (String) req.getSession().getAttribute("Dailymotion-token");
 		String youtubeToken = (String) req.getSession().getAttribute("Youtube-token");
-		String query = req.getParameter("searchQuery").replace(" ", "_");
+		String query = req.getParameter("searchQuery");
+		String query1 = req.getParameter("searchQuery").replace(" ", "_");
 		String query2 = req.getParameter("searchQuery").replace(" ", "+");
-		String query1 = req.getParameter("searchQuery");
 		RequestDispatcher rd = null;
 
-//		// Search for photos in Flickr
-//		log.log(Level.FINE, "Searching for Flickr photos that contain " + query1);
-//		FlickrResource flickr = new FlickrResource();
-//		PhotoSearch flickrResults = flickr.getFlickrPhotos(query);
-//
-//		if (flickrResults != null) {
-//			rd = req.getRequestDispatcher("/success.jsp");
-//			req.setAttribute("photos", flickrResults.getPhotos());
-//		}
-
 		// Search for videos in Dailymotion
-		log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query1);
+		log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query);
 		DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
 		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
 		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
@@ -58,24 +47,24 @@ public class SearchController extends HttpServlet {
 			req.setAttribute("dailymotionWatchLaterVideos", dailymotionWatchLaterVideos.getList());
 			req.setAttribute("dailymotionToken", dailymotionToken);
 		}
-
-		// Search for videos in Youtube
-		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
-		YoutubeResource youtube = new YoutubeResource(youtubeToken);
-		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
-
-		if (youtubeResults.getVideoItems() != null) {
-			rd = req.getRequestDispatcher("/success.jsp");
-			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
-			req.setAttribute("youtubeToken", youtubeToken);
-		}
+//
+//		// Search for videos in Youtube
+//		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
+//		YoutubeResource youtube = new YoutubeResource(youtubeToken);
+//		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
+//
+//		if (youtubeResults.getVideoItems() != null) {
+//			rd = req.getRequestDispatcher("/success.jsp");
+//			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
+//			req.setAttribute("youtubeToken", youtubeToken);
+//		}
 
 		// Search for images in DeviantArt
-		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query1);
+		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
 
 		if (devianArtToken != null && !"".equals(devianArtToken)) {
 			DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
-			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query);
+			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1);
 			GetFolderByID deviantFavFolder = daResource.getDeviantArtFavs();
 
 			rd = req.getRequestDispatcher("/success.jsp");

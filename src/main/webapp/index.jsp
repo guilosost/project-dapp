@@ -42,6 +42,12 @@
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
 
+	<form id="searchForm" action="YoutubeSearchController" method="post">
+		<input style="margin-left: 100px" type="text" name="searchQuery"
+			required /> <input type="submit" name="searchBtn" title="search"
+			value="Youtube">
+	</form>
+
 	<ul id="button" class="logins">
 		<li style="float: left;"><a href="/AuthController/DeviantArt">
 				<button class="deviantart-button" role="link">Login

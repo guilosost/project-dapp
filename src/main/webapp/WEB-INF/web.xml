@@ -31,7 +31,16 @@
 		<url-pattern>/StatsController</url-pattern>
 	</servlet-mapping>
 	<!-- Youtube Controllers -->
-
+<servlet>
+		<description></description>
+		<display-name>YoutubeSearchController</display-name>
+		<servlet-name>YoutubeSearchController</servlet-name>
+		<servlet-class>aiss.controller.YoutubeSearchController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>YoutubeSearchController</servlet-name>
+		<url-pattern>/YoutubeSearchController</url-pattern>
+	</servlet-mapping>
 	<!-- Dailymotion Controllers -->
 
 	<!-- Dailymotion Oauth -->
@@ -128,37 +137,5 @@
 	<servlet-mapping>
 		<servlet-name>DeviantArtOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/DeviantArt</url-pattern>
-	</servlet-mapping>
-
-	<!-- Unsplash Oauth -->
-	<servlet>
-		<description></description>
-		<servlet-name>UnsplashAuthController</servlet-name>
-		<servlet-class>aiss.controller.oauth.GenericAuthController</servlet-class>
-		<init-param>
-			<param-name>provider</param-name>
-			<param-value>Unsplash</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UnsplashAuthController</servlet-name>
-		<url-pattern>/AuthController/Unsplash</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<description></description>
-		<servlet-name>UnsplashOAuth2Callback</servlet-name>
-		<servlet-class>aiss.controller.oauth.OAuth2Callback</servlet-class>
-		<init-param>
-			<param-name>provider</param-name>
-			<param-value>Unsplash</param-value>
-		</init-param>
-		<init-param>
-			<param-name>onSuccess</param-name>
-			<param-value>redirect:/home</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UnsplashOAuth2Callback</servlet-name>
-		<url-pattern>/oauth2callback/Unsplash</url-pattern>
 	</servlet-mapping>
 </web-app>
