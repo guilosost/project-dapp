@@ -25,7 +25,7 @@ public class DailymotionResource {
 		String search = URLEncoder.encode(query, "UTF-8");
 
 		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
-		String uri = "https://api.dailymotion.com/videos?search=" + search + "&fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&limit=10";
+		String uri = "https://api.dailymotion.com/videos?search=" + search + "&fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&limit=5";
 
 		log.log(Level.FINE, "Dailymotion URI: " + uri);
 
@@ -86,5 +86,20 @@ public class DailymotionResource {
 		DailymotionSearch dailymotionLikedVideos = cr.get(DailymotionSearch.class);
 
 		return dailymotionLikedVideos;
+	}
+	
+	public DailymotionSearch getWatchLaterVideos() throws UnsupportedEncodingException {
+		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
+		String uri = "https://api.dailymotion.com/user/me/watchlater?fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&access_token=" + access_token;
+
+		log.log(Level.FINE, "Dailymotion Watch Later Videos URI: " + uri);
+
+		// Hacer petición al servicio REST (devuelve objeto JSON)
+		ClientResource cr = new ClientResource(uri);
+
+		// Convertir JSON en .Java
+		DailymotionSearch dailymotionWatchLaterVideos = cr.get(DailymotionSearch.class);
+
+		return dailymotionWatchLaterVideos;
 	}
 }

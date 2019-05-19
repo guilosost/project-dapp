@@ -12,47 +12,62 @@
 <title>Success</title>
 <script>
 
-	function postAjax(url1, elm) {
-		if(document.getElementById(elm).value == "No") {
-			var input = document.getElementById(elm).value == "Sí";
-			var image = document.getElementById(elm).src = "images/favorite(icon).png";
-	        const URL = url1;
-	        const Data = {};
-	        
-	        const othePram= {
-	        		header: {
-	        			"content-type":"application/json; charset=UTF-8"
-	        		},
-	        		body: Data,
-	        		method: "POST"
-	        };
-	        
-	        fetch(URL,othePram)
-	        .then(data=>{return data.json()})
-	        .then(res=>{console.log(res)})
-	        .catch(error=>console.log(error));
-	        
-		} else if(document.getElementById(elm).value == "Sí") {
-			var input = document.getElementById(elm).value == "No";
-			var image = document.getElementById(elm).src = "images/unfavorite(icon).png";
-	        const URL = url1;
-	        const Data = {};
-	        
-	        const othePram= {
-	        		header: {
-	        			"content-type":"application/json; charset=UTF-8"
-	        		},
-	        		body: Data,
-	        		method: "DELETE"
-	        };
-	        
-	        fetch(URL,othePram)
-	        .then(data=>{return data.json()})
-	        .then(res=>{console.log(res)})
-	        .catch(error=>console.log(error));
-		}
+function postFavDeviantArt(url1, token1, deviid) {
+	//var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+	const access_token1 = token1;
+	const id = deviid;
+	console.log(deviid + ", " + token1 + " ::::: " + url1 + "fave");
+	if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
+			document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
+		var image = document.getElementById(id).src = "images/favorite(icon).png";
+        const URL = url1 + "fave";
+        const Data = {
+        		
+        		deviationid: id,
+        		access_token: access_token1
+        		
+        };
+        
+        const othePram= {
+        		header: {
+        			"content-type":"application/json; charset=UTF-8"
+        		},
+        		body: Data,
+        		method: "POST"
+        		
+        };
+        
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
+        
+	} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
+			document.getElementById(id).src == "https://project-dapp.appspot.com/images/favorite(icon).png") {
+		var image = document.getElementById(id).src = "images/unfavorite(icon).png";
+        const URL = url1 + "unfave";
+        const Data = {
+        		
+        		deviationid: id,
+        		access_token: access_token1
+        		
+        };
+        
+        const othePram= {
+        		header: {
+        			"content-type":"application/json; charset=UTF-8"
+        			},
+        		body: Data,
+        		method: "POST"
+        };
+        
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
 	}
-	
+}
+
 </script>
 </head>
 <body>
@@ -66,44 +81,34 @@
 			<h3>
 				<c:out value="${deviantArtImage.title}" />
 				(
-				<c:out value="${deviantArtImage.publishedTime}" />
+				<c:out value="${deviantArtImage.author.username}" />
 				)
 			</h3>
 			<img src='<c:out value="${deviantArtImage.preview.src}"/>'
 				height="20%" width="20%" />
-			<br>
-		</c:forEach>
-	</fieldset>
 
-	<fieldset id="flickr">
-		<legend>
-			Flickr search for
-			<c:out value="${param.searchQuery}" />
-		</legend>
-		<c:forEach items="${requestScope.photos.photo}" var="photo">
-			<h3>
-				<c:out value="${photo.title}" />
-			</h3>
-			<img
-				src='http://farm<c:out value="${photo.farm}"/>.staticflickr.com/<c:out value="${photo.server}"/>/<c:out value="${photo.id}"/>_<c:out value="${photo.secret}"/>.jpg'
-				height="20%" width="20%" />
-		</c:forEach>
-	</fieldset>
+			<c:set var="conditionVariable" value="no" />
+			<c:forEach items="${requestScope.deviantFavFolder}" var="deviantsFav">
+				<c:if
+					test="${deviantsFav.deviationid == deviantArtImage.deviationid  && conditionVariable == 'no'}">
 
-	<fieldset id="unsplash">
-		<legend>
-			Unsplash search for
-			<c:out value="${param.searchQuery}" />
-		</legend>
-		<c:forEach items="${requestScope.unsplashPhotos}" var="unsplashImage">
-			<h3>
-				<c:out value="${unsplashImage.description}" />
-				(
-				<c:out value="${unsplashImage.user.username}" />
-				)
-			</h3>
-			<img src='<c:out value="${unsplashImage.urls.thumb}"/>' height="20%"
-				width="20%" />
+					<button type="button"
+						onclick="postFavDeviantArt('https://www.deviantart.com/api/v1/oauth2/collections/', '<c:out value="${deviantArtToken}"/>','<c:out value="${deviantArtImage.deviationid}"/>')">
+						<img src="images/favorite(icon).png" alt="icono_favoritos"
+							id="<c:out value="${deviantArtImage.deviationid}"/>">
+					</button>
+
+					<c:set var="conditionVariable" value="true" />
+				</c:if>
+			</c:forEach>
+			<c:if test="${conditionVariable == 'no'}">
+
+				<button type="button"
+					onclick="postFavDeviantArt('https://www.deviantart.com/api/v1/oauth2/collections/', '<c:out value="${deviantArtToken}"/>','<c:out value="${deviantArtImage.deviationid}"/>')">
+					<img src="images/unfavorite(icon).png" alt="icono_favoritos"
+						id="<c:out value="${deviantArtImage.deviationid}"/>">
+				</button>
+			</c:if>
 			<br>
 		</c:forEach>
 	</fieldset>
@@ -127,36 +132,55 @@
 				src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 				allowfullscreen allow="autoplay"></iframe>
 
-			<c:set var="conditionVariable" value="false" />
+			<!-- Esto es el botón de Like -->
+			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionLikedVideos}"
 				var="dailysFavoritos">
 				<c:if
-					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'false'}">
+					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'no'}">
 
 					<button type="button"
-						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
+						onclick="postLikeDailymotion('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
 						<img src="images/favorite(icon).png" alt="icono_favoritos"
 							id="<c:out value="${dailymotionVideo.id}"/>">
 					</button>
 
-					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
-						name="<c:out value="${dailymotionVideo.id}"/>" value="Sí">
-					<c:set var="conditionVariable" value="true" />
-				</c:if>
-				<c:if
-					test="${dailysFavoritos.id != dailymotionVideo.id  && conditionVariable == 'false'}">
-
-					<button type="button"
-						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
-						<img src="images/unfavorite(icon).png" alt="icono_favoritos"
-							id="<c:out value="${dailymotionVideo.id}"/>">
-					</button>
-
-					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
-						name="<c:out value="${dailymotionVideo.id}"/>" value="No">
 					<c:set var="conditionVariable" value="true" />
 				</c:if>
 			</c:forEach>
+			<c:if test="${conditionVariable == 'no'}">
+
+				<button type="button"
+					onclick="postLikeDailymotion('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
+					<img src="images/unfavorite(icon).png" alt="icono_favoritos"
+						id="<c:out value="${dailymotionVideo.id}"/>">
+				</button>
+			</c:if>
+
+			<!-- Esto es el botón de WatchLater -->
+			<c:set var="conditionVariable" value="no" />
+			<c:forEach items="${requestScope.dailymotionWatchLaterVideos}"
+				var="dailysWL">
+				<c:if
+					test="${dailysWL.id == dailymotionVideo.id  && conditionVariable == 'no'}">
+
+					<button type="button"
+						onclick="postWTDailymotion('https://api.dailymotion.com/me/watchlater/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
+						<img src="images/watchlater(icon).png" alt="icono_watchlater"
+							id="<c:out value="${dailymotionVideo.id}"/>-wt">
+					</button>
+
+					<c:set var="conditionVariable" value="true" />
+				</c:if>
+			</c:forEach>
+			<c:if test="${conditionVariable == 'no'}">
+
+				<button type="button"
+					onclick="postWTDailymotion('https://api.dailymotion.com/me/watchlater/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
+					<img src="images/unwatchlater(icon).png" alt="icono_watchlater"
+						id="<c:out value="${dailymotionVideo.id}"/>-wt">
+				</button>
+			</c:if>
 			<br>
 			<br>
 		</c:forEach>
@@ -174,48 +198,109 @@
 			<h3>
 				<c:out value="${youtubeVideo.snippet.title}" />
 				(
-				<c:out value="${youtubeVideo.id}" />
+				<c:out value="${youtubeVideo.id.videoId}" />
 				)
 
 			</h3>
-			<iframe frameborder="0" width="340" height="130"
-				src='https://www.youtube.com/watch?v=<c:out value="${youtubeVideo.id}"/>'
+			<iframe frameborder="0" scrolling="no" marginheight="0"
+				marginwidth="0" width="340" height="130"
+				src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
 				allowfullscreen allow="autoplay"></iframe>
-
-			<c:set var="conditionVariable" value="false" />
-			<c:forEach items="${requestScope.dailymotionLikedVideos}"
-				var="dailysFavoritos">
-				<c:if
-					test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'false'}">
-
-					<button type="button"
-						onclick="postAjax('https://www.googleapis.com/youtube/v3/videos/rate<c:out value="${youtubeVideo.id}"/>?access_token=${youtubeToken}', 'id=<c:out value="${youtubeVideo.id}"/>')">
-						<img src="images/favorite(icon).png" alt="icono_favoritos"
-							id="<c:out value="${youtubeVideo.id}"/>">
-					</button>
-
-					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
-						name="<c:out value="${dailymotionVideo.id}"/>" value="Sí">
-					<c:set var="conditionVariable" value="true" />
-				</c:if>
-				<c:if
-					test="${dailysFavoritos.id != dailymotionVideo.id  && conditionVariable == 'false'}">
-
-					<button type="button"
-						onclick="postAjax('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', 'id=<c:out value="${dailymotionVideo.id}"/>')">
-						<img src="images/unfavorite(icon).png" alt="icono_favoritos"
-							id="<c:out value="${dailymotionVideo.id}"/>">
-					</button>
-
-					<input type="hidden" id="<c:out value="${dailymotionVideo.id}"/>"
-						name="<c:out value="${dailymotionVideo.id}"/>" value="No">
-					<c:set var="conditionVariable" value="true" />
-				</c:if>
-			</c:forEach>
 			<br>
 			<br>
 		</c:forEach>
 
 	</fieldset>
 </body>
+
+<script>
+	function postLikeDailymotion(url1, elm) {
+		const id = elm;
+		const emu = document.getElementById(id).src;
+		console.log(emu);
+		if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
+				document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
+			var image = document.getElementById(id).src = "images/favorite(icon).png";
+	        const URL = url1;
+	        const Data = {};
+	        
+	        const othePram= {
+	        		header: {
+	        			"content-type":"application/json; charset=UTF-8"
+	        		},
+	        		body: Data,
+	        		method: "POST"
+	        };
+	        
+	        fetch(URL,othePram)
+	        .then(data=>{return data.json()})
+	        .then(res=>{console.log(res)})
+	        .catch(error=>console.log(error));
+	        
+		} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
+				document.getElementById(id).src == "https://project-dapp.appspot.com/images/favorite(icon).png") {
+			var image = document.getElementById(id).src = "images/unfavorite(icon).png";
+	        const URL = url1;
+	        const Data = {};
+	        
+	        const othePram= {
+	        		header: {
+	        			"content-type":"application/json; charset=UTF-8"
+	        		},
+	        		body: Data,
+	        		method: "DELETE"
+	        };
+	        
+	        fetch(URL,othePram)
+	        .then(data=>{return data.json()})
+	        .then(res=>{console.log(res)})
+	        .catch(error=>console.log(error));
+		}
+	}
+	
+	function postWTDailymotion(url1, elm) {
+		const id = elm;
+		const emu = document.getElementById(id + "-wt").src;
+		console.log(emu);
+		if(document.getElementById(id + "-wt").src == "http://localhost:8090/images/unwatchlater(icon).png" ||
+				document.getElementById(id + "-wt").src == "https://project-dapp.appspot.com/images/unwatchlater(icon).png") {
+			var image = document.getElementById(id + "-wt").src = "images/watchlater(icon).png";
+	        const URL = url1;
+	        const Data = {};
+	        
+	        const othePram= {
+	        		header: {
+	        			"content-type":"application/json; charset=UTF-8"
+	        		},
+	        		body: Data,
+	        		method: "POST"
+	        };
+	        
+	        fetch(URL,othePram)
+	        .then(data=>{return data.json()})
+	        .then(res=>{console.log(res)})
+	        .catch(error=>console.log(error));
+	        
+		} else if(document.getElementById(id + "-wt").src == "http://localhost:8090/images/watchlater(icon).png" ||
+				document.getElementById(id + "-wt").src == "https://project-dapp.appspot.com/images/watchlater(icon).png") {
+			var image = document.getElementById(id + "-wt").src = "images/unwatchlater(icon).png";
+	        const URL = url1;
+	        const Data = {};
+	        
+	        const othePram= {
+	        		header: {
+	        			"content-type":"application/json; charset=UTF-8"
+	        		},
+	        		body: Data,
+	        		method: "DELETE"
+	        };
+	        
+	        fetch(URL,othePram)
+	        .then(data=>{return data.json()})
+	        .then(res=>{console.log(res)})
+	        .catch(error=>console.log(error));
+		}
+	}
+	
+</script>
 </html>

@@ -30,21 +30,22 @@
 		<li>Miguel Yanes Ariza (migyanari@alum.us.es)</li>
 	</ul>
 
-	<a href="search.jsp">Prueba de Búsqueda</a>
-	<br>
+
+	<div id="searchDiv">
+		<form id="searchForm" action="SearchController" method="post">
+			<input type="text" name="searchQuery" required /> <input
+				type="submit" name="searchBtn" title="search" value="search">
+		</form>
+	</div>
+	
 	<a href="StatsController">Prueba Stats</a>
 	<br>
 	<a href="DailymotionStatsController">Prueba Stats de Dailymotion</a>
-	<br>
-	<a href="imgurSearch.jsp">Prueba Búsqueda de Imgur</a>
 	<br>
 	<a href="youtubeSearch.jsp">Prueba búsqueda Youtube</a>
 	<br>
 	<a href="/AuthController/DeviantArt">
 	<button class="deviantart-button" role="link">Login DevianArt</button></a>
-	<br>
-	<a href="/AuthController/Unsplash">
-	<button class="unsplash-button" role="link">Login Unsplash</button></a>
 	<br>
 	<a href="/AuthController/Dailymotion">
 	<button class="unsplash-button" role="link">Login Dailymotion</button></a>

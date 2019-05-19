@@ -52,18 +52,6 @@
 		<servlet-name>DailymotionStatsController</servlet-name>
 		<url-pattern>/DailymotionStatsController</url-pattern>
 	</servlet-mapping>
-	
-	<!-- Unsplash Controller -->
-	<servlet>
-		<description></description>
-		<display-name>SearchControllerUnsplash</display-name>
-		<servlet-name>SearchControllerUnsplash</servlet-name>
-		<servlet-class>aiss.controller.SearchControllerUnsplash</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SearchControllerUnsplash</servlet-name>
-		<url-pattern>/SearchControllerUnsplash</url-pattern>
-	</servlet-mapping>
 
 	<!-- Dailymotion Oauth -->
 	<servlet>

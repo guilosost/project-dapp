@@ -2,7 +2,9 @@
 package aiss.model.deviantart;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,7 +29,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "cover_photo",
     "profile_pic",
     "last_status",
-    "user_stats"
+    "stats",
+    "collections"
 })
 public class DeviantArtUser {
 
@@ -61,8 +64,10 @@ public class DeviantArtUser {
     private Object profilePic;
     @JsonProperty("last_status")
     private Object lastStatus;
-    @JsonProperty("user_stats")
-    private UserStats userStats;
+    @JsonProperty("stats")
+    private UserStats stats;
+    @JsonProperty("collections")
+    private List<Folder> folders = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -216,14 +221,24 @@ public class DeviantArtUser {
         this.lastStatus = lastStatus;
     }
 
-    @JsonProperty("user_stats")
-    public UserStats getUserStats() {
-        return userStats;
+    @JsonProperty("stats")
+    public UserStats getStats() {
+        return stats;
     }
 
     @JsonProperty("stats")
-    public void setUserStats(UserStats userStats) {
-        this.userStats = userStats;
+    public void setStats(UserStats stats) {
+        this.stats = stats;
+    }
+
+    @JsonProperty("collections")
+    public List<Folder> getFolders() {
+        return folders;
+    }
+
+    @JsonProperty("collections")
+    public void setFolders(List<Folder> folders) {
+        this.folders = folders;
     }
 
     @JsonAnyGetter
