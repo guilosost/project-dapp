@@ -152,15 +152,19 @@
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
 
-
 				<button type="button"
 					onclick="postLikeYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','like', '<c:out value="${youtubeToken}"/>')">
 					<img src="images/favorite(icon).png" alt="icono_favoritos"
 						id="<c:out value="${youtubeVideo.id}"/>">
 				</button>
 
-				<c:set var="conditionVariable" value="true" />
+				<input id="comentario" name="comentario" type="text" maxlength="30"
+					value="" />
+				<br>
+				<input type="button" id="like" name="like"
+					onclick="postCommentYoutube('https://www.googleapis.com/youtube/v3/commentThreads', '${youtubeToken}', '<c:out value="${youtubeVideo.videoSnippet.channelId}"/>', '<c:out value="${youtubeVideo.id.videoId}"/>')">
 
+				<c:set var="conditionVariable" value="true" />
 			</c:forEach>
 			<br>
 			<br>
@@ -189,7 +193,38 @@ function postLikeYoutube(url, videoId, rating, token) {
     fetch(URL,othePram)
     .then(response=>console.info(response.type))
     .catch(error=>console.log(error));
-	
+}
+
+
+function postCommentYoutube(url1, token1, channelId, videoId) {
+	const access_token = token1;
+	const text = document.getElementById("comentario").value;
+	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
+	const URL = url1 + "?part=id&access_token=" + token1;
+	const Data = {
+				  "snippet": {
+				    "channelId": channelId,
+				    "topLevelComment": {
+				      "snippet": {
+				        "textOriginal": text,
+				        "videoId": videoId
+				      }
+				    }
+				  }
+	};
+	const othePram= {
+	        method: 'POST',
+	        //mode: "no-cors",
+	        headers: {
+	        	"content-type":"application/json; charset=UTF-8"
+	             },
+	        body: Data
+	       }; 
+    
+    fetch(URL,othePram)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error));
 }
 
 function postFavDeviantArt(url1, token1, deviid) {
