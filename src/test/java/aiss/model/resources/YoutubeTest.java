@@ -19,13 +19,13 @@ public class YoutubeTest {
 		YoutubeSearch dailySearch = datos.searchYoutubeVideos(query);
 
 		assertNotNull("The search returned null", dailySearch);
-		assertNotNull("The search returned null", dailySearch.getItems());
-		assertFalse("The number of videos of " + query + " is zero", dailySearch.getItems().size() == 0);
+		assertNotNull("The search returned null", dailySearch.getVideoItems());
+		assertFalse("The number of videos of " + query + " is zero", dailySearch.getVideoItems().size() == 0);
 
-		System.out.println("The search for " + query + "'s videos returned " + dailySearch.getItems().size() + " datas.");
+		System.out.println("The search for " + query + "'s videos returned " + dailySearch.getVideoItems().size() + " datas.");
 
-		for (VideoItem l : dailySearch.getItems()) {
-			System.out.println(l.getSnippet().getTitle());
+		for (VideoItem l : dailySearch.getVideoItems()) {
+			System.out.println(l.getVideoSnippet().getTitle());
 		}
 	}
 

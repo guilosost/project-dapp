@@ -17,7 +17,6 @@ function postCommentYoutube(url1, token1, channelId, text, videoId) {
 	const chanid=channelId;
 	const vidid=videoId;
 	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
-	
 }
 
 function postFavDeviantArt(url1, token1, deviid) {
@@ -28,23 +27,19 @@ function postFavDeviantArt(url1, token1, deviid) {
 	if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
 			document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
 		var image = document.getElementById(id).src = "images/favorite(icon).png";
-        const URL = url1 + "fave";
-        const Data = {
-        		
-        		deviationid: id,
-        		access_token: access_token1
-        		
-        };
-        
+        const URL = url1 + "fave?access_token=" + access_token1;
+        const Data = "deviationid=" + id;
+    	console.log(Data);
         const othePram= {
-        		header: {
-        			"content-type":"application/json; charset=UTF-8"
-        		},
-        		body: Data,
-        		method: "POST"
-        		
+        		method: 'POST',
+        		//mode: "no-cors",
+        		headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: Data
         };
         
+        //.then(response=>console.info(response.type))// opaque
         fetch(URL,othePram)
         .then(data=>{return data.json()})
         .then(res=>{console.log(res)})
@@ -53,22 +48,19 @@ function postFavDeviantArt(url1, token1, deviid) {
 	} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
 			document.getElementById(id).src == "https://project-dapp.appspot.com/images/favorite(icon).png") {
 		var image = document.getElementById(id).src = "images/unfavorite(icon).png";
-        const URL = url1 + "unfave";
-        const Data = {
-        		
-        		deviationid: id,
-        		access_token: access_token1
-        		
-        };
+        const URL = url1 + "unfave?access_token=" + access_token1;
+        const Data = "deviationid=" + id;
         
         const othePram= {
-        		header: {
-        			"content-type":"application/json; charset=UTF-8"
-        			},
-        		body: Data,
-        		method: "POST"
+        		method: 'POST',
+        		//mode: "no-cors",
+        		headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: Data
         };
         
+        //.then(response=>console.info(response.type))// opaque
         fetch(URL,othePram)
         .then(data=>{return data.json()})
         .then(res=>{console.log(res)})
@@ -227,7 +219,6 @@ function postCommentYoutube(url1, token1, channelId, text, videoId) {
 	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
 	const URL = url1 + "?part=id&access_token=" + token1;
 	const Data = {
-			{
 				  "snippet": {
 				    "channelId": channelId,
 				    "topLevelComment": {
@@ -237,7 +228,6 @@ function postCommentYoutube(url1, token1, channelId, text, videoId) {
 				      }
 				    }
 				  }
-				}
 	};
 	const othePram= {
     		header: {
