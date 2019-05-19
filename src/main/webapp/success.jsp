@@ -222,6 +222,39 @@ function postFavDeviantArt(url1, token1, deviid) {
 </body>
 
 <script>
+function postCommentYoutube(url1, token1, channelId, text, videoId) {
+	const access_token = token1;
+	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
+	const URL = url1 + "?part=id&access_token=" + token1;
+	const Data = {
+			{
+				  "snippet": {
+				    "channelId": channelId,
+				    "topLevelComment": {
+				      "snippet": {
+				        "textOriginal": text,
+				        "videoId": videoId
+				      }
+				    }
+				  }
+				}
+	};
+	const othePram= {
+    		header: {
+    			"content-type":"application/json; charset=UTF-8"
+    		},
+    		body: Data,
+    		method: "POST"
+    		
+    };
+    
+    fetch(URL,othePram)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error));
+}
+
+
 	function postLikeDailymotion(url1, elm) {
 		const id = elm;
 		const emu = document.getElementById(id).src;
