@@ -14,9 +14,9 @@
 
 function postComentarioDA(url1, token1) {
 	const access_token1 = token1;
-	console.log(deviid + ", " + token1 + " ::::: " + url1 + "fave");
+	console.log(token1 + " ::::: " + url1);
     const URL = url1 + "fave?access_token=" + access_token1;
-    const Data = document.getElementById(id);
+    const Data = document.getElementById("comentario").value;
     console.log(Data);
     const othePram= {
         method: 'POST',

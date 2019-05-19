@@ -14,16 +14,16 @@
 </head>
 
 <body>
-
 	<header class="header">
 		<h1 class="title">
-			<img src="images/logo-dapp70x70(trasparente).png">Project DAPP
-		</h1>
-		<div id="searchDiv">
 			<form id="searchForm" action="SearchController" method="post">
-				<input type="text" name="searchQuery" required /> <input
+				<img class="logo" src="images/logo-dapp70x70(trasparente).png">Project DAPP
+
+				<input style="margin-left:100px" type="text" name="searchQuery" required /> <input
 					type="submit" name="searchBtn" title="search" value="search">
 			</form>
+		</h1>
+
 		</div>
 	</header>
 
