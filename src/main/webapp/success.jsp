@@ -12,12 +12,6 @@
 <title>Success</title>
 <script>
 
-function postCommentYoutube(url1, token1, channelId, text, videoId) {
-	const access_token = token1;
-	const chanid=channelId;
-	const vidid=videoId;
-	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
-}
 
 function postFavDeviantArt(url1, token1, deviid) {
 	//var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -132,7 +126,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 				src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 				allowfullscreen allow="autoplay"></iframe>
 
-			<!-- Esto es el botón de Like -->
+			<!-- Esto es el botï¿½n de Like -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionLikedVideos}"
 				var="dailysFavoritos">
@@ -157,7 +151,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 				</button>
 			</c:if>
 
-			<!-- Esto es el botón de WatchLater -->
+			<!-- Esto es el botï¿½n de WatchLater -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionWatchLaterVideos}"
 				var="dailysWL">
@@ -184,7 +178,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 			<br>
 			<br>
 		</c:forEach>
-		<!-- No puedo meter en el método ${sessionScope["Dailymotion-token"]}, por eso está hecho con ${dailymotionToken}-->
+		<!-- No puedo meter en el mï¿½todo ${sessionScope["Dailymotion-token"]}, por eso estï¿½ hecho con ${dailymotionToken}-->
 
 	</fieldset>
 
@@ -206,6 +200,20 @@ function postFavDeviantArt(url1, token1, deviid) {
 				marginwidth="0" width="340" height="130"
 				src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
 				allowfullscreen allow="autoplay"></iframe>
+			<!-- Esto es el botï¿½n de Like -->
+			<c:set var="conditionVariable" value="no" />
+			<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
+
+
+				<button type="button"
+					onclick="postLikeYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','like', '<c:out value="${youtubeToken}"/>')">
+					<img src="images/favorite(icon).png" alt="icono_favoritos"
+						id="<c:out value="${youtubeVideo.id}"/>">
+				</button>
+
+				<c:set var="conditionVariable" value="true" />
+
+			</c:forEach>
 			<br>
 			<br>
 		</c:forEach>
@@ -214,21 +222,12 @@ function postFavDeviantArt(url1, token1, deviid) {
 </body>
 
 <script>
-function postCommentYoutube(url1, token1, channelId, text, videoId) {
-	const access_token = token1;
-	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
-	const URL = url1 + "?part=id&access_token=" + token1;
-	const Data = {
-				  "snippet": {
-				    "channelId": channelId,
-				    "topLevelComment": {
-				      "snippet": {
-				        "textOriginal": text,
-				        "videoId": videoId
-				      }
-				    }
-				  }
-	};
+function postLikeYoutube(url, videoId, rating, token) {
+	const access_token = token;
+	console.log(videoId + ", " + token + " ::::: " + url + "like");
+	const URL = url + "?id=" + videoId + "&rating=" + rating + "&access_token=" + token;
+	const Data = {};
+	
 	const othePram= {
     		header: {
     			"content-type":"application/json; charset=UTF-8"
@@ -242,7 +241,11 @@ function postCommentYoutube(url1, token1, channelId, text, videoId) {
     .then(data=>{return data.json()})
     .then(res=>{console.log(res)})
     .catch(error=>console.log(error));
+	
 }
+
+
+
 
 
 	function postLikeDailymotion(url1, elm) {
