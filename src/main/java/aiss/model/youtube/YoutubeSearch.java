@@ -33,7 +33,7 @@ public class YoutubeSearch {
     @JsonProperty("pageInfo")
     private PageInfo pageInfo;
     @JsonProperty("items")
-    private List<VideoItem> items = null;
+    private List<VideoItem> videoItems = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -88,13 +88,13 @@ public class YoutubeSearch {
     }
 
     @JsonProperty("items")
-    public List<VideoItem> getItems() {
-        return items;
+    public List<VideoItem> getVideoItems() {
+        return videoItems;
     }
 
     @JsonProperty("items")
-    public void setItems(List<VideoItem> items) {
-        this.items = items;
+    public void setVideoItems(List<VideoItem> videoItems) {
+        this.videoItems = videoItems;
     }
 
     @JsonAnyGetter

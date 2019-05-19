@@ -6,10 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
 
-import aiss.model.unsplash.AccessToken;
-import aiss.model.youtube.VideoItem;
 import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeResource {

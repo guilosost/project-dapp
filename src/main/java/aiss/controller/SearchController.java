@@ -70,9 +70,9 @@ public class SearchController extends HttpServlet {
 		YoutubeResource youtube = new YoutubeResource(youtubeToken);
 		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
 
-		if (youtubeResults.getItems() != null) {
+		if (youtubeResults.getVideoItems() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
-			req.setAttribute("youtubeVideos", youtubeResults.getItems());
+			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
 			req.setAttribute("youtubeToken", youtubeToken);
 		}
 

@@ -204,7 +204,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 		<p>${youtubeToken}</p>
 		<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
 			<h3>
-				<c:out value="${youtubeVideo.snippet.title}" />
+				<c:out value="${youtubeVideo.videoSnippet.title}" />
 				(
 				<c:out value="${youtubeVideo.id.videoId}" />
 				)

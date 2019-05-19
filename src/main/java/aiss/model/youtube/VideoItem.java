@@ -26,7 +26,7 @@ public class VideoItem {
     @JsonProperty("id")
     private Id id;
     @JsonProperty("snippet")
-    private VideoSnippet snippet;
+    private VideoSnippet videoSnippet;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -61,13 +61,13 @@ public class VideoItem {
     }
 
     @JsonProperty("snippet")
-    public VideoSnippet getSnippet() {
-        return snippet;
+    public VideoSnippet getVideoSnippet() {
+        return videoSnippet;
     }
 
     @JsonProperty("snippet")
-    public void setSnippet(VideoSnippet snippet) {
-        this.snippet = snippet;
+    public void setVideoSnippet(VideoSnippet videoSnippet) {
+        this.videoSnippet = videoSnippet;
     }
 
     @JsonAnyGetter
