@@ -126,7 +126,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 				src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 				allowfullscreen allow="autoplay"></iframe>
 
-			<!-- Esto es el bot�n de Like -->
+			<!-- Esto es el boton de Like -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionLikedVideos}"
 				var="dailysFavoritos">
@@ -151,7 +151,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 				</button>
 			</c:if>
 
-			<!-- Esto es el bot�n de WatchLater -->
+			<!-- Esto es el boton de WatchLater -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionWatchLaterVideos}"
 				var="dailysWL">
@@ -178,7 +178,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 			<br>
 			<br>
 		</c:forEach>
-		<!-- No puedo meter en el m�todo ${sessionScope["Dailymotion-token"]}, por eso est� hecho con ${dailymotionToken}-->
+		<!-- No puedo meter en el metodo ${sessionScope["Dailymotion-token"]}, por eso esta hecho con ${dailymotionToken}-->
 
 	</fieldset>
 
@@ -200,7 +200,7 @@ function postFavDeviantArt(url1, token1, deviid) {
 				marginwidth="0" width="340" height="130"
 				src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
 				allowfullscreen allow="autoplay"></iframe>
-			<!-- Esto es el bot�n de Like -->
+			<!-- Esto es el boton de Like -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
 
@@ -226,6 +226,7 @@ function postLikeYoutube(url, videoId, rating, token) {
 	const access_token = token;
 	console.log(videoId + ", " + token + " ::::: " + url + "like");
 	const URL = url + "?id=" + videoId + "&rating=" + rating + "&access_token=" + token;
+	console.log(URL);
 	const Data = {};
 	
 	const othePram= {
@@ -238,8 +239,7 @@ function postLikeYoutube(url, videoId, rating, token) {
     };
     
     fetch(URL,othePram)
-    .then(data=>{return data.json()})
-    .then(res=>{console.log(res)})
+    .then(response=>console.info(response.type))
     .catch(error=>console.log(error));
 	
 }
