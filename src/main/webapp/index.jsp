@@ -27,8 +27,6 @@
 		</div>
 	</header>
 
-
-
 	<p class="texto">Este proyecto va enfocado a facilitar la
 		publicación de imágenes en el ámbito digital. La aplicación reúne
 		cuatro aplicaciones de image hosting service que pueden usarse para
@@ -77,7 +75,7 @@
 	</ul>
 
 	<footer class="footer">
-		<p>SOBRE NOSOTROS</p>
+		<p class="texto">SOBRE NOSOTROS</p>
 	</footer>
 
 </body>

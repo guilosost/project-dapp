@@ -10,59 +10,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Success</title>
-<script>
 
-
-function postFavDeviantArt(url1, token1, deviid) {
-	//var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-	const access_token1 = token1;
-	const id = deviid;
-	console.log(deviid + ", " + token1 + " ::::: " + url1 + "fave");
-	if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
-			document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
-		var image = document.getElementById(id).src = "images/favorite(icon).png";
-        const URL = url1 + "fave?access_token=" + access_token1;
-        const Data = "deviationid=" + id;
-    	console.log(Data);
-        const othePram= {
-        		method: 'POST',
-        		//mode: "no-cors",
-        		headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: Data
-        };
-        
-        //.then(response=>console.info(response.type))// opaque
-        fetch(URL,othePram)
-        .then(data=>{return data.json()})
-        .then(res=>{console.log(res)})
-        .catch(error=>console.log(error));
-        
-	} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
-			document.getElementById(id).src == "https://project-dapp.appspot.com/images/favorite(icon).png") {
-		var image = document.getElementById(id).src = "images/unfavorite(icon).png";
-        const URL = url1 + "unfave?access_token=" + access_token1;
-        const Data = "deviationid=" + id;
-        
-        const othePram= {
-        		method: 'POST',
-        		//mode: "no-cors",
-        		headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: Data
-        };
-        
-        //.then(response=>console.info(response.type))// opaque
-        fetch(URL,othePram)
-        .then(data=>{return data.json()})
-        .then(res=>{console.log(res)})
-        .catch(error=>console.log(error));
-	}
-}
-
-</script>
 </head>
 <body>
 	<fieldset id="deviantArt">
@@ -244,40 +192,85 @@ function postLikeYoutube(url, videoId, rating, token) {
 	
 }
 
+function postFavDeviantArt(url1, token1, deviid) {
+	//var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+	const access_token1 = token1;
+	const id = deviid;
+	console.log(deviid + ", " + token1 + " ::::: " + url1 + "fave");
+	if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
+			document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
+		var image = document.getElementById(id).src = "images/favorite(icon).png";
+        const URL = url1 + "fave?access_token=" + access_token1;
+        const Data = "deviationid=" + id;
+    	console.log(Data);
+        const othePram= {
+        		method: 'POST',
+        		//mode: "no-cors",
+        		headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: Data
+        };
+        
+        //.then(response=>console.info(response.type))// opaque
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
+        
+	} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
+			document.getElementById(id).src == "https://project-dapp.appspot.com/images/favorite(icon).png") {
+		var image = document.getElementById(id).src = "images/unfavorite(icon).png";
+        const URL = url1 + "unfave?access_token=" + access_token1;
+        const Data = "deviationid=" + id;
+        
+        const othePram= {
+        		method: 'POST',
+        		//mode: "no-cors",
+        		headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: Data
+        };
+        
+        //.then(response=>console.info(response.type))// opaque
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
+	}
+}
 
-
-
-
-	function postLikeDailymotion(url1, elm) {
-		const id = elm;
-		const emu = document.getElementById(id).src;
-		console.log(emu);
-		if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
-				document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
-			var image = document.getElementById(id).src = "images/favorite(icon).png";
-	        const URL = url1;
-	        const Data = {};
+function postLikeDailymotion(url1, elm) {
+	const id = elm;
+	const emu = document.getElementById(id).src;
+	console.log(emu);
+	if(document.getElementById(id).src == "http://localhost:8090/images/unfavorite(icon).png" ||
+			document.getElementById(id).src == "https://project-dapp.appspot.com/images/unfavorite(icon).png") {
+		var image = document.getElementById(id).src = "images/favorite(icon).png";
+        const URL = url1;
+        const Data = {};
 	        
-	        const othePram= {
-	        		header: {
-	        			"content-type":"application/json; charset=UTF-8"
-	        		},
-	        		body: Data,
-	        		method: "POST"
-	        };
+        const othePram= {
+        		header: {
+        			"content-type":"application/json; charset=UTF-8"
+        		},
+        		body: Data,
+        		method: "POST"
+        };
 	        
-	        fetch(URL,othePram)
-	        .then(data=>{return data.json()})
-	        .then(res=>{console.log(res)})
-	        .catch(error=>console.log(error));
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
 	        
-		} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
+	} else if(document.getElementById(id).src == "http://localhost:8090/images/favorite(icon).png" ||
 				document.getElementById(id).src == "https://project-dapp.appspot.com/images/favorite(icon).png") {
-			var image = document.getElementById(id).src = "images/unfavorite(icon).png";
-	        const URL = url1;
-	        const Data = {};
+		var image = document.getElementById(id).src = "images/unfavorite(icon).png";
+		const URL = url1;
+        const Data = {};
 	        
-	        const othePram= {
+	    const othePram= {
 	        		header: {
 	        			"content-type":"application/json; charset=UTF-8"
 	        		},
@@ -285,24 +278,24 @@ function postLikeYoutube(url, videoId, rating, token) {
 	        		method: "DELETE"
 	        };
 	        
-	        fetch(URL,othePram)
-	        .then(data=>{return data.json()})
-	        .then(res=>{console.log(res)})
-	        .catch(error=>console.log(error));
-		}
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
 	}
+}
 	
-	function postWTDailymotion(url1, elm) {
-		const id = elm;
-		const emu = document.getElementById(id + "-wt").src;
-		console.log(emu);
-		if(document.getElementById(id + "-wt").src == "http://localhost:8090/images/unwatchlater(icon).png" ||
-				document.getElementById(id + "-wt").src == "https://project-dapp.appspot.com/images/unwatchlater(icon).png") {
-			var image = document.getElementById(id + "-wt").src = "images/watchlater(icon).png";
-	        const URL = url1;
-	        const Data = {};
+function postWTDailymotion(url1, elm) {
+	const id = elm;
+	const emu = document.getElementById(id + "-wt").src;
+	console.log(emu);
+	if(document.getElementById(id + "-wt").src == "http://localhost:8090/images/unwatchlater(icon).png" ||
+			document.getElementById(id + "-wt").src == "https://project-dapp.appspot.com/images/unwatchlater(icon).png") {
+		var image = document.getElementById(id + "-wt").src = "images/watchlater(icon).png";
+        const URL = url1;
+        const Data = {};
 	        
-	        const othePram= {
+        const othePram= {
 	        		header: {
 	        			"content-type":"application/json; charset=UTF-8"
 	        		},
@@ -310,18 +303,18 @@ function postLikeYoutube(url, videoId, rating, token) {
 	        		method: "POST"
 	        };
 	        
-	        fetch(URL,othePram)
-	        .then(data=>{return data.json()})
-	        .then(res=>{console.log(res)})
-	        .catch(error=>console.log(error));
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
 	        
-		} else if(document.getElementById(id + "-wt").src == "http://localhost:8090/images/watchlater(icon).png" ||
+	} else if(document.getElementById(id + "-wt").src == "http://localhost:8090/images/watchlater(icon).png" ||
 				document.getElementById(id + "-wt").src == "https://project-dapp.appspot.com/images/watchlater(icon).png") {
-			var image = document.getElementById(id + "-wt").src = "images/unwatchlater(icon).png";
-	        const URL = url1;
-	        const Data = {};
+		var image = document.getElementById(id + "-wt").src = "images/unwatchlater(icon).png";
+        const URL = url1;
+        const Data = {};
 	        
-	        const othePram= {
+        const othePram= {
 	        		header: {
 	        			"content-type":"application/json; charset=UTF-8"
 	        		},
@@ -329,12 +322,12 @@ function postLikeYoutube(url, videoId, rating, token) {
 	        		method: "DELETE"
 	        };
 	        
-	        fetch(URL,othePram)
-	        .then(data=>{return data.json()})
-	        .then(res=>{console.log(res)})
-	        .catch(error=>console.log(error));
-		}
+        fetch(URL,othePram)
+        .then(data=>{return data.json()})
+        .then(res=>{console.log(res)})
+        .catch(error=>console.log(error));
 	}
+}
 	
 </script>
 </html>
