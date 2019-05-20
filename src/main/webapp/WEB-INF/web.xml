@@ -8,6 +8,29 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+   	<!-- All REST resources will be prefixed by /api  -->
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/api</param-value>
+	</context-param>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>Resteasy</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>aiss.api.ApplicationDAPP</param-value>
+		</init-param>
+	</servlet>		
+	
+	<!-- Servlet mappings -->
+	<!-- All calls to /api/xxx will be sent to the resteasy servlet -->
+	<servlet-mapping>
+		<servlet-name>Resteasy</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
 	<!-- DevianArt Controllers -->
 	<servlet>
 		<description></description>
@@ -31,7 +54,7 @@
 		<url-pattern>/StatsController</url-pattern>
 	</servlet-mapping>
 	<!-- Youtube Controllers -->
-<servlet>
+	<servlet>
 		<description></description>
 		<display-name>YoutubeSearchController</display-name>
 		<servlet-name>YoutubeSearchController</servlet-name>
@@ -74,7 +97,7 @@
 		<servlet-name>DailymotionOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/Dailymotion</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Youtube Oauth -->
 	<servlet>
 		<description></description>
@@ -105,8 +128,8 @@
 	<servlet-mapping>
 		<servlet-name>YoutubeOAuth2Callback</servlet-name>
 		<url-pattern>/oauth2callback/Youtube</url-pattern>
-	</servlet-mapping>	
-	
+	</servlet-mapping>
+
 	<!-- DeviantArt Oauth -->
 	<servlet>
 		<description></description>
