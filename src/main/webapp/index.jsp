@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Project DAPP</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/button.css">
 <link rel="stylesheet" type="text/css" href="css/header-footer.css">
 <link rel="shortcut icon" type="image/png"
@@ -19,7 +20,8 @@
 			<form id="searchForm" action="SearchController" method="post">
 				<img class="logo" src="images/logo-dapp-header(transparente).png">Project DAPP
 				<input style="margin-left: 100px" type="text" name="searchQuery" required />
-				<input type="hidden" name="nextDeviantPage" value="0" /> 
+				<input type="hidden" id="nextDeviantPage" name="nextDeviantPage" value="0" /> 
+				<input type="hidden" id="nextDailymotionPage" name="nextDailymotionPage" value="1" />
 				<input type="submit" name="searchBtn" title="search" value="search">
 			</form>
 		</h1>
@@ -42,8 +44,9 @@
 	</ul>
 
 	<form id="searchForm" action="YoutubeSearchController" method="post">
-		<input style="margin-left: 100px" type="text" name="searchQuery"
-			required /> <input type="submit" name="searchBtn" title="search"
+		<input style="margin-left: 100px" type="text" name="searchQuery" required />
+		<input type="hidden" name="nextYoutubePage" value="" />
+		<input type="submit" name="searchBtn" title="search"
 			value="Youtube">
 	</form>
 

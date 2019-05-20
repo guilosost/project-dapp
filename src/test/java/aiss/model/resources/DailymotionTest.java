@@ -17,7 +17,7 @@ public class DailymotionTest {
 	public void getDailymotionTest() throws UnsupportedEncodingException {
 		String query = "star+wars";
 		DailymotionResource datos = new DailymotionResource("Z3REAEFfQUYFGEZeEQlZCRREAwsaXBIEGVVHX15bW1EX");
-		DailymotionSearch dailySearch = datos.getDailymotionVideos(query);
+		DailymotionSearch dailySearch = datos.getDailymotionVideos(query, 1);
 
 		assertNotNull("The search returned null", dailySearch);
 		assertNotNull("The search returned null", dailySearch.getList());

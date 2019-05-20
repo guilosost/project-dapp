@@ -1,7 +1,9 @@
 @CHARSET "ISO-8859-1";
 
-.login {
-	
+body {
+	width: 99%;
+	background-attachment: fixed;
+	background-image: url("../images/background.png");
 }
 
 h1 {
@@ -12,9 +14,37 @@ h1 {
 	text-align: center;
 }
 
+.image {
+	text-align: center;
+}
+
 .fillable {
 	height: 30px;
-	width: 88%;
+	width: 155%;
+	margin-left: 5px;
+}
+
+.commentbox {
+	position: absolute;
+	bottom: 0;
+}
+
+.commenticon {
+	position: absolute;
+	right: 4px;
+	bottom: 2px;
+}
+
+.resultsSearch {
+	display: flex;
+}
+
+.results {
+	width: 20%;
+	margin-right: 3px;
+	border: 2px solid black;
+	border-radius: 10px;
+	position: relative;
 }
 
 .veinte {
@@ -27,22 +57,4 @@ h1 {
 
 #searchDiv {
 	text-align: center;
-}
-
-fieldset {
-	border: 1px solid gray;
-	width: 22%;
-	margin-right: 1%;
-	float: left;
-}
-
-legend {
-	padding: 0.2em 0.5em;
-	border: 1px solid gray;
-	font-size: 90%;
-	text-align: right;
-}
-
-#flickr img {
-	max-width: 95%;
 }

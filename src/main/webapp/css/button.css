@@ -1,3 +1,8 @@
+.rate-button {
+    background-image: url(../images/background.png);
+    border-radius: 10px;
+}
+
 .deviantart-button {
 	margin-right: 0;
 	margin-left: 0;

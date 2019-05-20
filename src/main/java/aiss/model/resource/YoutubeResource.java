@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
 
-import aiss.model.youtube.ChannelList;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -20,14 +19,14 @@ public class YoutubeResource {
 		this.access_token = access_token;
 	}
 
-	public YoutubeSearch searchYoutubeVideos(String query) throws UnsupportedEncodingException {
+	public YoutubeSearch searchYoutubeVideos(String query, String nextPage) throws UnsupportedEncodingException {
 		// Poner parámetro de entrada en formato correcto
 		String search = URLEncoder.encode(query, "UTF-8");
 
 		// Crear la URL
 		// https://www.googleapis.com/youtube/v3/search?part=snippet&q=dogs&maxresult=10
 		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + search
-				+ "&maxresult=10&access_token=" + access_token;
+				+ "&pageToken=" + nextPage + "&maxResults=5&access_token=" + access_token;
 
 		log.log(Level.FINE, "Youtube URI: " + uri);
 
@@ -36,7 +35,7 @@ public class YoutubeResource {
 
 		// Convertir JSON en .Java
 		YoutubeSearch youtubeSearch = cr.get(YoutubeSearch.class);
-
+		
 		return youtubeSearch;
 	}
 
@@ -72,18 +71,18 @@ public class YoutubeResource {
 		return youtubeDislikedVideos;
 	}
 
-	public ChannelList getWatchLaterVideos() throws UnsupportedEncodingException {
-		String uri = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20"
-				+ "&playlistId=WL&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
-
-		log.log(Level.FINE, "Youtube Watch Later List URI: " + uri);
-
-		ClientResource cr = new ClientResource(uri);
-
-		ChannelList watchLaterVideos = cr.get(ChannelList.class);
-
-		return watchLaterVideos;
-
-	}
+//	public ChannelList getWatchLaterVideos() throws UnsupportedEncodingException {
+//		String uri = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20"
+//				+ "&playlistId=WL&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
+//
+//		log.log(Level.FINE, "Youtube Watch Later List URI: " + uri);
+//
+//		ClientResource cr = new ClientResource(uri);
+//
+//		ChannelList watchLaterVideos = cr.get(ChannelList.class);
+//
+//		return watchLaterVideos;
+//
+//	}
 
 }

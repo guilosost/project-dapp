@@ -18,8 +18,8 @@ public class YoutubeTest {
 	public void getYoutubeTest() throws UnsupportedEncodingException {
 		String query = "star wars";
 		YoutubeResource datos = new YoutubeResource(
-				"ya29.GlsPB_n-hVN_Kx3SKyhD92h0tBUKfEMk7jF3lRgJYJS0eLzBvKDA3dnzgUtRQyyz2ib7OjcA5_J4NikiHpkt8v301oyGV4ifGli57sSL1udF-XrF0jiGDAfm0uS9");
-		YoutubeSearch youtubeSearch = datos.searchYoutubeVideos(query);
+				"ya29.GlsPB8LJieqYPdIrEcwPjOdy_jaF1Jp2c2yVztNtYwX921_aUxjLFzxUfhkbozCrJtdsoSvlnijwAmf3rlyiPPVUyIGMZkRjSeNa4z1YuYB4uqzOyGyqpk_Bb-AY");
+		YoutubeSearch youtubeSearch = datos.searchYoutubeVideos(query, "");
 
 		assertNotNull("The search returned null", youtubeSearch);
 		assertNotNull("The search returned null", youtubeSearch.getVideoItems());
@@ -36,7 +36,7 @@ public class YoutubeTest {
 		
 		assertNotNull("The search returned null", likedVideos);
 		assertNotNull("The search returned null", likedVideos.getItems());
-		assertFalse("The number of videos of " + query + " is zero", likedVideos.getItems().size() == 0);
+		assertFalse("The number of liked videos is zero", likedVideos.getItems().size() == 0);
 
 		System.out.println(
 				"The search for liked videos returned " + likedVideos.getItems().size() + " datas.");

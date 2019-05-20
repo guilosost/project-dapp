@@ -30,6 +30,7 @@ public class SearchController extends HttpServlet {
 		String dailymotionToken = (String) req.getSession().getAttribute("Dailymotion-token");
 		String youtubeToken = (String) req.getSession().getAttribute("Youtube-token");
 		String query = req.getParameter("searchQuery");
+		Integer nextDailymotionPage = Integer.valueOf(req.getParameter("nextDailymotionPage"));
 		Integer nextDeviantPage = Integer.valueOf(req.getParameter("nextDeviantPage"));
 		String query1 = req.getParameter("searchQuery").replace(" ", "_");
 		String query2 = req.getParameter("searchQuery").replace(" ", "+");
@@ -38,7 +39,7 @@ public class SearchController extends HttpServlet {
 		// Search for videos in Dailymotion
 		log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query);
 		DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
-		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
+		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2, nextDailymotionPage);
 		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
 		DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
 		
@@ -49,6 +50,7 @@ public class SearchController extends HttpServlet {
 		if (dailymotionResults.getList() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("dailymotionVideos", dailymotionResults.getList());
+			req.setAttribute("nextDailymotionPage", nextDailymotionPage+1);
 			req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
 			req.setAttribute("dailymotionWatchLaterVideos", dailymotionWatchLaterVideos.getList());
 			req.setAttribute("dailymotionToken", dailymotionToken);

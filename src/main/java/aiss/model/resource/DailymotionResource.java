@@ -21,12 +21,12 @@ public class DailymotionResource {
 		this.access_token = access_token;
 	}
 
-	public DailymotionSearch getDailymotionVideos(String query) throws UnsupportedEncodingException {
+	public DailymotionSearch getDailymotionVideos(String query, Integer page) throws UnsupportedEncodingException {
 		// Poner parámetro de entrada en formato correcto
 		String search = URLEncoder.encode(query, "UTF-8");
 
 		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
-		String uri = "https://api.dailymotion.com/videos?search=" + search + "&fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&limit=5";
+		String uri = "https://api.dailymotion.com/videos?search=" + search + "&page=" + page + "&fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&limit=5";
 
 		log.log(Level.FINE, "Dailymotion URI: " + uri);
 
