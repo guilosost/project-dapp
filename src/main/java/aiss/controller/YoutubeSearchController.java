@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.resource.YoutubeResource;
+import aiss.model.youtube.ChannelList;
 import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeSearchController extends HttpServlet {
@@ -23,7 +24,7 @@ public class YoutubeSearchController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String youtubeToken = (String) req.getSession().getAttribute("Youtube-token");
-		String query = req.getParameter("searchQuery");		
+		String query = req.getParameter("searchQuery");
 
 		RequestDispatcher rd = null;
 
@@ -31,11 +32,13 @@ public class YoutubeSearchController extends HttpServlet {
 		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
 		YoutubeResource youtube = new YoutubeResource(youtubeToken);
 		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
+		ChannelList watchLater = youtube.getWatchLaterVideos();
 
 		if (youtubeResults.getVideoItems() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
 			req.setAttribute("youtubeToken", youtubeToken);
+			req.setAttribute("watchLaterVideos", watchLater.getItems());
 			rd.forward(req, resp);
 		}
 	}

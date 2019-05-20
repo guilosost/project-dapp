@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
 
+import aiss.model.youtube.ChannelList;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -38,10 +39,11 @@ public class YoutubeResource {
 
 		return youtubeSearch;
 	}
-	
+
 	public YoutubeRatedVideoGet getLikedVideos() throws UnsupportedEncodingException {
 		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
-		String uri = "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=21&myRating=like&access_token=" + access_token;
+		String uri = "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=21&myRating=like&access_token="
+				+ access_token;
 
 		log.log(Level.FINE, "Youtube Liked Videos URI: " + uri);
 
@@ -53,10 +55,11 @@ public class YoutubeResource {
 
 		return youtubeLikedVideos;
 	}
-	
+
 	public YoutubeRatedVideoGet getDislikedVideos() throws UnsupportedEncodingException {
 		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
-		String uri = "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=21&myRating=dislike&access_token=" + access_token;
+		String uri = "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=21&myRating=dislike&access_token="
+				+ access_token;
 
 		log.log(Level.FINE, "Youtube Disliked Videos URI: " + uri);
 
@@ -67,6 +70,20 @@ public class YoutubeResource {
 		YoutubeRatedVideoGet youtubeDislikedVideos = cr.get(YoutubeRatedVideoGet.class);
 
 		return youtubeDislikedVideos;
+	}
+
+	public ChannelList getWatchLaterVideos() throws UnsupportedEncodingException {
+		String uri = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20"
+				+ "&playlistId=WL&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
+
+		log.log(Level.FINE, "Youtube Watch Later List URI: " + uri);
+
+		ClientResource cr = new ClientResource(uri);
+
+		ChannelList watchLaterVideos = cr.get(ChannelList.class);
+
+		return watchLaterVideos;
+
 	}
 
 }

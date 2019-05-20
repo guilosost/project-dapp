@@ -22,19 +22,21 @@ function reload(query, deviOffset) {
 </script>
 </head>
 <body>
-<header class="header">
+	<header class="header">
 		<h1 class="title">
 			<form id="searchForm" action="SearchController" method="post">
-				<img class="logo" src="images/logo-dapp-header(transparente).png">Project DAPP
-				<input style="margin-left: 100px" type="text" id="searchQuery" name="searchQuery" required />
-				<input type="hidden" id="nextDeviantPage" name="nextDeviantPage" value="0" /> 
-				<input type="submit" name="searchBtn" title="search" value="search">
-				<img style="margin-bottom: -8px" src="images/reload(icon).png" onclick="reload('${param.searchQuery}', '${nextDeviantPage}')">
+				<img class="logo" src="images/logo-dapp-header(transparente).png">Project
+				DAPP <input style="margin-left: 100px" type="text" id="searchQuery"
+					name="searchQuery" required /> <input type="hidden"
+					id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
+					type="submit" name="searchBtn" title="search" value="search">
+				<img style="margin-bottom: -8px" src="images/reload(icon).png"
+					onclick="reload('${param.searchQuery}', '${nextDeviantPage}')">
 			</form>
 		</h1>
 
 	</header>
-	
+
 	<fieldset id="deviantArt">
 		<legend>
 			DeviantArt search for
@@ -103,7 +105,7 @@ function reload(query, deviOffset) {
 			<iframe frameborder="0" width="100%" height="100%"
 				src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 				allowfullscreen allow="autoplay"></iframe>
-<br>
+			<br>
 			<!-- Esto es el boton de Like -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionLikedVideos}"
@@ -178,7 +180,7 @@ function reload(query, deviOffset) {
 				marginwidth="0" width="340" height="130"
 				src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
 				allowfullscreen allow="autoplay"></iframe>
-			<!-- Esto es el boton de Like -->
+			<!-- Esto es el botón de Like -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
 
@@ -187,13 +189,26 @@ function reload(query, deviOffset) {
 					<img src="images/favorite(icon).png" alt="icono_favoritos"
 						id="<c:out value="${youtubeVideo.id}"/>">
 				</button>
-
+				<!-- Este es el botón de Comentario -->
 				<input id="comentario" name="comentario" type="text" maxlength="30"
 					value="" />
 				<br>
 				<input type="button" id="like" name="like"
 					onclick="postCommentYoutube('https://www.googleapis.com/youtube/v3/commentThreads', '${youtubeToken}', '<c:out value="${youtubeVideo.videoSnippet.channelId}"/>', '<c:out value="${youtubeVideo.id.videoId}"/>')">
 
+				<c:set var="conditionVariable" value="true" />
+			</c:forEach>
+			<!-- Este es el botón de WatchLater -->
+			<!-- https://www.googleapis.com/youtube/v3/playlistItems -->
+			<c:set var="conditionVariable" value="no" />
+			<c:forEach items="${requestScope.watchLaterVideos}" var="youtubeWL">
+
+
+				<button type="button"
+					onclick="postWLYoutube('https://www.googleapis.com/youtube/v3/playlistItems', '${youtubeToken}','<c:out value="${youtubeWL.items.contentDetails.relatedPlaylists.watchLater}"/>', '<c:out value="${youtubeVideo.id.videoId}"/>')">
+					<img src="images/watchlater(icon).png" alt="icono_watchlater"
+						id="<c:out value="${youtubeVideo.id.videoId}"/>-wt">
+				</button>
 				<c:set var="conditionVariable" value="true" />
 			</c:forEach>
 			<br>
@@ -228,23 +243,49 @@ function postLikeYoutube(url, videoId, rating, token) {
 
 function postCommentYoutube(url1, token1, channelId, videoId) {
 	const access_token = token1;
+	const chan = channelId;
+	const vid = videoId;
 	const text = document.getElementById("comentario").value;
-	console.log(chanid + ", " + token1 + "::::: " + url1 + "comment");
-	const URL = url1 + "?part=id&access_token=" + token1;
+	console.log(channelId + ", " + token1 + "::::: " + url1 + "comment");
+	const URL = url1 + "?part=snippet&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
 	const Data = {
-				  "snippet": {
-				    "channelId": channelId,
+			  "snippet": {
+				    "channelId": '"'+chan+'"',
+				    "videoId": '"'+vid+'"',
 				    "topLevelComment": {
 				      "snippet": {
-				        "textOriginal": text,
-				        "videoId": videoId
+				        "textOriginal": '"'+text+'"'
 				      }
 				    }
 				  }
+				};
+	const othePram= {
+	        method: 'POST',
+	        headers: {
+	        	"content-type":"application/json; charset=UTF-8"
+	             },
+	        body: Data
+	       }; 
+    
+    fetch(URL,othePram)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error));
+}
+
+function postWLYoutube(url, token, playlistId, videoId) {
+	const URL = url + "?part&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
+	const Data = {
+			"snippet": {
+			    "playlistId": playlistId,
+			    "resourceId": {
+			      "kind": "youtube#video",
+			      "videoId": videoId
+			    }
+			  }
 	};
 	const othePram= {
 	        method: 'POST',
-	        //mode: "no-cors",
 	        headers: {
 	        	"content-type":"application/json; charset=UTF-8"
 	             },
