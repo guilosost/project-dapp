@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 import aiss.api.resources.ImageResource;
+import aiss.api.resources.MultimediaResource;
 import aiss.api.resources.VideoResource;
 
 public class ApplicationDAPP extends Application {
@@ -17,6 +18,7 @@ public class ApplicationDAPP extends Application {
 	public ApplicationDAPP() {
 		singletons.add(ImageResource.getInstance());
 		singletons.add(VideoResource.getInstance());
+		singletons.add(MultimediaResource.getInstance());
 	}
 
 	public Set<Object> getSingletons() {

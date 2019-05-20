@@ -21,15 +21,17 @@ import org.jboss.resteasy.spi.BadRequestException;
 import aiss.model.Image;
 import aiss.model.repository.ImageRepository;
 import aiss.model.repository.MapImageRepository;
+import aiss.model.repository.VideoRepository;
 import javassist.NotFoundException;
 
 @Path("/images")
 public class ImageResource {
 	public static ImageResource instance = null;
-	ImageRepository repository;
+	ImageRepository imageRepository;
+	VideoRepository videoRepository;
 
 	private ImageResource() {
-		repository = MapImageRepository.getInstance();
+		imageRepository = MapImageRepository.getInstance();
 	}
 
 	public static ImageResource getInstance() {
@@ -42,21 +44,21 @@ public class ImageResource {
 	@Path("/allImages")
 	@Produces("application/json")
 	public Collection<Image> getAllImages() {
-		return repository.getAllImages();
+		return imageRepository.getAllImages();
 	}
 
 	@GET
 	@Path("/image/{query}")
 	@Produces("application/json")
 	public Collection<Image> getImagesByQuery(@PathParam("query") String query) {
-		return repository.getImagesByQuery(query);
+		return imageRepository.getImagesByQuery(query);
 	}
 
 	@GET
 	@Path("/imageId/{id}")
 	@Produces("application/json")
 	public Image get(@PathParam("id") String id) throws NotFoundException {
-		Image b = repository.getImage(id);
+		Image b = imageRepository.getImage(id);
 		if (b == null) {
 			throw new NotFoundException("The image with ID = " + id + " was not found");
 		}
@@ -70,7 +72,7 @@ public class ImageResource {
 		if (image.getId() == null || "".equals(image.getId())) {
 			throw new BadRequestException("The id cannot be null");
 		}
-		repository.addImage(image);
+		imageRepository.addImage(image);
 
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(image.getId());
@@ -82,7 +84,7 @@ public class ImageResource {
 	@PUT
 	@Consumes("application/json")
 	public Response updateImage(Image image) throws NotFoundException {
-		Image oldImage = repository.getImage(image.getId());
+		Image oldImage = imageRepository.getImage(image.getId());
 		if (oldImage == null) {
 			throw new NotFoundException("The image with ID = " + image.getId() + " was not found");
 		}
@@ -105,11 +107,11 @@ public class ImageResource {
 	@DELETE
 	@Path("/imageId/{imageId}")
 	public Response removeImage(@PathParam("imageId") String id) throws NotFoundException {
-		Image toberemoved = repository.getImage(id);
+		Image toberemoved = imageRepository.getImage(id);
 		if (toberemoved == null) {
 			throw new NotFoundException("The image with ID = " + id + " was not found");
 		} else {
-			repository.deleteImage(id);
+			imageRepository.deleteImage(id);
 		}
 		return Response.noContent().build();
 	}
