@@ -1,6 +1,5 @@
 package aiss.model.repository;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,14 +8,14 @@ import java.util.Map;
 
 import aiss.model.Image;
 
-public class MapImageRepository {
+public class MapImageRepository implements ImageRepository {
 	Map<String, Image> imageMap;
 	private static MapImageRepository instance = null;
 	private int index = 0;
 
 	public static MapImageRepository getInstance() {
 		if (instance == null) {
-			instance = MapImageRepository.getInstance();
+			instance = new MapImageRepository();
 			instance.init();
 		}
 		return instance;
@@ -28,24 +27,26 @@ public class MapImageRepository {
 		// Create images
 		Image im1 = new Image();
 		im1.setAutor("Banksy");
-		im1.setId("1234");
+		im1.setId(String.valueOf(index));
 		im1.setTitulo("Graffiti");
-		im1.setUrl("url");
-		im1.setFechaPub("20/05/2019");
 		addImage(im1);
 
-//		Book lpdt = new Book();
-//		lpdt.setTitle("Los pilares de la Tierra");
-//		lpdt.setAuthor("Ken Follett");
-//		lpdt.setIsbn("9788401328510");
-//		lpdt.setRating(8);
-//		lpdt.setPrecio(24.90);
-//		addBook(lpdt);
+		Image im2 = new Image();
+		im2.setAutor("Pepe");
+		im2.setId(String.valueOf(index));
+		im2.setTitulo("Flores");
+		addImage(im2);
 
+		Image im3 = new Image();
+		im3.setAutor("Juan");
+		im3.setId(String.valueOf(index));
+		im3.setTitulo("Barcos");
+		addImage(im3);
 	}
 
 	public void addImage(Image i) {
 		imageMap.put(i.getId(), i);
+		index++;
 	}
 
 	public Collection<Image> getAllImages() {
@@ -57,7 +58,12 @@ public class MapImageRepository {
 	}
 
 	public void updateImage(Image i) {
-		imageMap.put(i.getId(), i);
+		Image image = imageMap.get(i.getId());
+		image.setTitulo(i.getTitulo());
+		image.setAutor(i.getAutor());
+		image.setId(i.getId());
+		imageMap.put(i.getId(), image);
+
 	}
 
 	public void deleteImage(String id) {
@@ -69,6 +75,17 @@ public class MapImageRepository {
 		Collection<Image> mapImages = imageMap.values();
 		for (Image i : mapImages) {
 			if (i.getAutor().equals(autor)) {
+				lista.add(i);
+			}
+		}
+		return lista;
+	}
+
+	public Collection<Image> getImagesByQuery(String query) {
+		List<Image> lista = new ArrayList<>();
+		Collection<Image> mapImages = imageMap.values();
+		for (Image i : mapImages) {
+			if (i.getTitulo().contains(query)) {
 				lista.add(i);
 			}
 		}

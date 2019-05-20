@@ -8,25 +8,23 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-	<!-- All REST resources will be prefixed by /api -->
+   	<!-- All REST resources will be prefixed by /api  -->
 	<context-param>
 		<param-name>resteasy.servlet.mapping.prefix</param-name>
 		<param-value>/api</param-value>
 	</context-param>
 
 	<!-- Servlets -->
-	<!-- ProjectDAPP será la clase que implementará javax.ws.rs.Application -->
-	<!-- para crear los recursos -->
 	<servlet>
 		<servlet-name>Resteasy</servlet-name>
 		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>aiss.api.ProjectDAPP</param-value>
+			<param-value>aiss.api.ApplicationDAPP</param-value>
 		</init-param>
-	</servlet>
-
-	<!-- Servlets mappings -->
+	</servlet>		
+	
+	<!-- Servlet mappings -->
 	<!-- All calls to /api/xxx will be sent to the resteasy servlet -->
 	<servlet-mapping>
 		<servlet-name>Resteasy</servlet-name>
