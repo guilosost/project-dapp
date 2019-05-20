@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
 
+import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeResource {
@@ -36,6 +37,36 @@ public class YoutubeResource {
 		YoutubeSearch youtubeSearch = cr.get(YoutubeSearch.class);
 
 		return youtubeSearch;
+	}
+	
+	public YoutubeRatedVideoGet getLikedVideos() throws UnsupportedEncodingException {
+		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
+		String uri = "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=21&myRating=like&access_token=" + access_token;
+
+		log.log(Level.FINE, "Youtube Liked Videos URI: " + uri);
+
+		// Hacer petición al servicio REST (devuelve objeto JSON)
+		ClientResource cr = new ClientResource(uri);
+
+		// Convertir JSON en .Java
+		YoutubeRatedVideoGet youtubeLikedVideos = cr.get(YoutubeRatedVideoGet.class);
+
+		return youtubeLikedVideos;
+	}
+	
+	public YoutubeRatedVideoGet getDislikedVideos() throws UnsupportedEncodingException {
+		// Crear la URL https://api.dailymotion.com/videos?search=star+wars&limit=10
+		String uri = "https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=21&myRating=dislike&access_token=" + access_token;
+
+		log.log(Level.FINE, "Youtube Disliked Videos URI: " + uri);
+
+		// Hacer petición al servicio REST (devuelve objeto JSON)
+		ClientResource cr = new ClientResource(uri);
+
+		// Convertir JSON en .Java
+		YoutubeRatedVideoGet youtubeDislikedVideos = cr.get(YoutubeRatedVideoGet.class);
+
+		return youtubeDislikedVideos;
 	}
 
 }

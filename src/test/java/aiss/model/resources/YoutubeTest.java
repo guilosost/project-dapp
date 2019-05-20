@@ -8,27 +8,48 @@ import java.io.UnsupportedEncodingException;
 import org.junit.Test;
 
 import aiss.model.resource.YoutubeResource;
+import aiss.model.youtube.RaitingItem;
 import aiss.model.youtube.VideoItem;
+import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
 public class YoutubeTest {
 	@Test
-	public void getDailymotionTest() throws UnsupportedEncodingException {
+	public void getYoutubeTest() throws UnsupportedEncodingException {
 		String query = "star wars";
 		YoutubeResource datos = new YoutubeResource(
-				"ya29.GlsOB7HR9F-ZNmaLqvHXUJgxYbO4t2iAj7I0-F18i1lWlJBaveomY5VtH2IdJQj1AT9YFGeFvms1R772-3dFJ4O1vqnri7fmkGbzLTVi00_izcGmMw7b-obN8uxa");
-		YoutubeSearch dailySearch = datos.searchYoutubeVideos(query);
+				"ya29.GlsPB_n-hVN_Kx3SKyhD92h0tBUKfEMk7jF3lRgJYJS0eLzBvKDA3dnzgUtRQyyz2ib7OjcA5_J4NikiHpkt8v301oyGV4ifGli57sSL1udF-XrF0jiGDAfm0uS9");
+		YoutubeSearch youtubeSearch = datos.searchYoutubeVideos(query);
 
-		assertNotNull("The search returned null", dailySearch);
-		assertNotNull("The search returned null", dailySearch.getVideoItems());
-		assertFalse("The number of videos of " + query + " is zero", dailySearch.getVideoItems().size() == 0);
+		assertNotNull("The search returned null", youtubeSearch);
+		assertNotNull("The search returned null", youtubeSearch.getVideoItems());
+		assertFalse("The number of videos of " + query + " is zero", youtubeSearch.getVideoItems().size() == 0);
 
 		System.out.println(
-				"The search for " + query + "'s videos returned " + dailySearch.getVideoItems().size() + " datas.");
+				"The search for " + query + "'s videos returned " + youtubeSearch.getVideoItems().size() + " datas.");
 
-		for (VideoItem l : dailySearch.getVideoItems()) {
+		for (VideoItem l : youtubeSearch.getVideoItems()) {
 			System.out.println(l.getVideoSnippet().getTitle());
 		}
+		
+		YoutubeRatedVideoGet likedVideos = datos.getLikedVideos();
+		
+		assertNotNull("The search returned null", likedVideos);
+		assertNotNull("The search returned null", likedVideos.getItems());
+		assertFalse("The number of videos of " + query + " is zero", likedVideos.getItems().size() == 0);
+
+		System.out.println(
+				"The search for liked videos returned " + likedVideos.getItems().size() + " datas.");
+		int i = 0;
+		for (RaitingItem l : likedVideos.getItems()) {
+			System.out.println(l.getSnippet().getTitle());
+			i++;
+			if(i>5) {
+				break;
+		}
 	}
+	}
+	
+	
 
 }

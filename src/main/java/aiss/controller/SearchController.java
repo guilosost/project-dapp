@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.dailymotion.DailymotionSearch;
+import aiss.model.dailymotion.List;
 import aiss.model.deviantart.GetFolderByID;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DailymotionResource;
@@ -29,6 +30,7 @@ public class SearchController extends HttpServlet {
 		String dailymotionToken = (String) req.getSession().getAttribute("Dailymotion-token");
 		String youtubeToken = (String) req.getSession().getAttribute("Youtube-token");
 		String query = req.getParameter("searchQuery");
+		Integer nextDeviantPage = Integer.valueOf(req.getParameter("nextDeviantPage"));
 		String query1 = req.getParameter("searchQuery").replace(" ", "_");
 		String query2 = req.getParameter("searchQuery").replace(" ", "+");
 		RequestDispatcher rd = null;
@@ -39,6 +41,10 @@ public class SearchController extends HttpServlet {
 		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2);
 		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
 		DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
+		
+		for(List l : dailymotionResults.getList()) {
+			l.setTitle(l.getTitle().substring(0, 50));
+		}
 
 		if (dailymotionResults.getList() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
@@ -61,14 +67,18 @@ public class SearchController extends HttpServlet {
 
 		// Search for images in DeviantArt
 		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
+		log.log(Level.FINE, "Next page: " + nextDeviantPage);
 
 		if (devianArtToken != null && !"".equals(devianArtToken)) {
 			DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
-			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1);
+			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1, nextDeviantPage);
 			GetFolderByID deviantFavFolder = daResource.getDeviantArtFavs();
+			
+			deviantArtImagesResults.getNextOffset();
 
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("deviantArtImages", deviantArtImagesResults.getResults());
+			req.setAttribute("nextDeviantPage", deviantArtImagesResults.getNextOffset());
 			req.setAttribute("deviantFavFolder", deviantFavFolder.getResults());
 			req.setAttribute("deviantArtToken", devianArtToken);
 			rd.forward(req, resp);

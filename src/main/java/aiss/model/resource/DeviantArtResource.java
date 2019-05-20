@@ -23,14 +23,14 @@ public class DeviantArtResource {
 		this.access_token = access_token;
 	}
 
-	public SearchDeviantArt getDeviantArtImages(String query) throws UnsupportedEncodingException {
+	public SearchDeviantArt getDeviantArtImages(String query, Integer offset) throws UnsupportedEncodingException {
 
 		// Poner parámetro de entrada en formato correcto
 		String search = URLEncoder.encode(query, "UTF-8");
 
 		// Crear la URL https://www.deviantart.com/api/v1/oauth2/browse/
 		// tags?tag=nature&limit=2&access_token=Alph4num3r1ct0k3nv4lu3
-		String uri = "https://www.deviantart.com/api/v1/oauth2/browse/tags?tag=" + search + "&limit=5&access_token="
+		String uri = "https://www.deviantart.com/api/v1/oauth2/browse/tags?tag=" + search + "&limit=5&offset=" + offset + "&access_token="
 				+ access_token;
 
 		log.log(Level.FINE, "DeviantArt URI: " + uri);

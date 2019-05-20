@@ -12,11 +12,13 @@
 <title>Stats</title>
 <script>
 
-function postComentarioDA(url1, token1) {
+function postComentarioDA(url1, token1, id1) {
 	const access_token1 = token1;
+	const devid = id1;
 	console.log(token1 + " ::::: " + url1);
     const URL = url1 + "?access_token=" + access_token1;
-    const Data = "body=" + document.getElementById("comentario").value;
+    const Data = "body=" + document.getElementById(devid).value;
+    document.getElementById(devid).value = "Comentario publicado!";
     console.log(Data);
     const othePram= {
         method: 'POST',
@@ -32,6 +34,17 @@ function postComentarioDA(url1, token1) {
     .then(data=>{return data.json()})
     .then(res=>{console.log(res)})
     .catch(error=>console.log(error));
+}
+
+function changeSize(id) {
+	console.log("Cambiando tamaño de " + id);
+	var image = document.getElementById(id+"-i");
+	console.log(image);
+	if(image.style.width != "100%") {
+    image.style.width = '100%';
+	} else if(image.style.width != "20%") {
+	image.style.width = '20%';
+	}
 }
 </script>
 </head>
@@ -52,14 +65,17 @@ function postComentarioDA(url1, token1) {
 
 		<h3>Mejor imagen: ${deviantArtBestImage.title}</h3>
 		<p>${deviantArtBestImage.deviationid}</p>
-		<img src='<c:out value="${deviantArtBestImage.preview.src}"/>'
+		<img id="${deviantArtBestImage.deviationid}-i"
+			src="${deviantArtBestImage.preview.src}" class="veinte"
+			onclick="changeSize('${deviantArtBestImage.deviationid}')"
 			height="40%" width="40%" />
 		<p>Comentarios: ${deviantArtBestImage.stats.comments}</p>
 		<p>Favoritos: ${deviantArtBestImage.stats.favourites}</p>
 
-		<input id="comentario" name="comentario" type="text" maxlength="30"
-			value="" /> <br> <input type="button" id="like" name="like"
-			onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', '${deviantArtToken}')">
+		<textarea id="${deviantArtBestImage.deviationid}" class="fillable"
+			name="comentario" maxlength="50"></textarea>
+		<img src="images/comment.png" alt="icono_comentar"
+			onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', '${deviantArtToken}', '${deviantArtBestImage.deviationid}')">
 		<br>
 	</fieldset>
 

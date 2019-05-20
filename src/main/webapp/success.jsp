@@ -6,13 +6,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/header-footer.css">
 <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Success</title>
+<script>
+function reload(query, deviOffset) {
+	var q = document.getElementById("searchQuery").value = query;
+	var p = document.getElementById("nextDeviantPage").value = deviOffset;
+	console.log("Query: " + q + ", offset: " + p);
+	document.getElementById("searchForm").submit();
 
+}
+</script>
 </head>
 <body>
+<header class="header">
+		<h1 class="title">
+			<form id="searchForm" action="SearchController" method="post">
+				<img class="logo" src="images/logo-dapp-header(transparente).png">Project DAPP
+				<input style="margin-left: 100px" type="text" id="searchQuery" name="searchQuery" required />
+				<input type="hidden" id="nextDeviantPage" name="nextDeviantPage" value="0" /> 
+				<input type="submit" name="searchBtn" title="search" value="search">
+				<img style="margin-bottom: -8px" src="images/reload(icon).png" onclick="reload('${param.searchQuery}', '${nextDeviantPage}')">
+			</form>
+		</h1>
+
+	</header>
+	
 	<fieldset id="deviantArt">
 		<legend>
 			DeviantArt search for
@@ -26,9 +48,6 @@
 				<c:out value="${deviantArtImage.author.username}" />
 				)
 			</h3>
-			<img src='<c:out value="${deviantArtImage.preview.src}"/>'
-				height="20%" width="20%" />
-
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.deviantFavFolder}" var="deviantsFav">
 				<c:if
@@ -51,6 +70,17 @@
 						id="<c:out value="${deviantArtImage.deviationid}"/>">
 				</button>
 			</c:if>
+			<div style="text-align: center">
+				<img id="${deviantArtImage.deviationid}-i" width="20%"
+					onclick="changeSize('${deviantArtImage.deviationid}')"
+					src='<c:out value="${deviantArtImage.preview.src}"/>'>
+			</div>
+			<br>
+			<textarea id="${deviantArtBestImage.deviationid}" class="fillable"
+				name="comentario" maxlength="50"></textarea>
+			<img src="images/comment.png" alt="icono_comentar"
+				onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', '${deviantArtToken}', '${deviantArtBestImage.deviationid}')">
+
 			<br>
 		</c:forEach>
 	</fieldset>
@@ -70,10 +100,10 @@
 				)
 
 			</h3>
-			<iframe frameborder="0" width="340" height="130"
+			<iframe frameborder="0" width="100%" height="100%"
 				src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 				allowfullscreen allow="autoplay"></iframe>
-
+<br>
 			<!-- Esto es el boton de Like -->
 			<c:set var="conditionVariable" value="no" />
 			<c:forEach items="${requestScope.dailymotionLikedVideos}"
@@ -273,6 +303,41 @@ function postFavDeviantArt(url1, token1, deviid) {
         .then(data=>{return data.json()})
         .then(res=>{console.log(res)})
         .catch(error=>console.log(error));
+	}
+}
+
+function postComentarioDA(url1, token1, id1) {
+	const access_token1 = token1;
+	const devid = id1;
+	console.log(token1 + " ::::: " + url1);
+    const URL = url1 + "?access_token=" + access_token1;
+    const Data = "body=" + document.getElementById(devid + "-c").value;
+    document.getElementById(devid + "-c").value = "¡Comentario publicado con éxito!";
+    console.log(Data);
+    const othePram= {
+        method: 'POST',
+        //mode: "no-cors",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+             },
+        body: Data
+       };
+        
+        //.then(response=>console.info(response.type))// opaque
+    fetch(URL,othePram)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=>console.log(error));
+}
+
+function changeSize(id) {
+	console.log("Cambiando tamaño de " + id);
+	var image = document.getElementById(id+"-i");
+	console.log(image);
+	if(image.style.width != "100%") {
+    image.style.width = '100%';
+	} else if(image.style.width != "20%") {
+	image.style.width = '20%';
 	}
 }
 

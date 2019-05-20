@@ -22,7 +22,7 @@ public class DeviantArtTest {
 		DeviantArtResource datos = new DeviantArtResource("8f2f3bb692b95cbc922e09c1ed032a238feb9f1b8c954af9a6");
 		
 		//Search
-		SearchDeviantArt daSearch = datos.getDeviantArtImages(query);
+		SearchDeviantArt daSearch = datos.getDeviantArtImages(query, 0);
 		
 		assertNotNull("The search returned null", daSearch);
 		assertNotNull("The search returned null", daSearch.getResults());

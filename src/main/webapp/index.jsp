@@ -10,21 +10,20 @@
 <link rel="stylesheet" type="text/css" href="css/button.css">
 <link rel="stylesheet" type="text/css" href="css/header-footer.css">
 <link rel="shortcut icon" type="image/png"
-	href="images/logo-dapp70x70(transparente).png" />
+	href="images/favicon.png" />
 </head>
 
 <body>
 	<header class="header">
 		<h1 class="title">
 			<form id="searchForm" action="SearchController" method="post">
-				<img class="logo" src="images/logo-dapp70x70(transparente).png">Project
-				DAPP <input style="margin-left: 100px" type="text"
-					name="searchQuery" required /> <input type="submit"
-					name="searchBtn" title="search" value="search">
+				<img class="logo" src="images/logo-dapp-header(transparente).png">Project DAPP
+				<input style="margin-left: 100px" type="text" name="searchQuery" required />
+				<input type="hidden" name="nextDeviantPage" value="0" /> 
+				<input type="submit" name="searchBtn" title="search" value="search">
 			</form>
 		</h1>
 
-		</div>
 	</header>
 
 	<p class="texto">Este proyecto va enfocado a facilitar la
