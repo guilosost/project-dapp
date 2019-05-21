@@ -19,6 +19,7 @@ import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.YoutubeResource;
 import aiss.model.youtube.ChannelStats;
+import aiss.model.youtube.ChannelVideosItem;
 import aiss.model.youtube.SearchChannelVideos;
 
 public class StatsController extends HttpServlet {
@@ -84,14 +85,14 @@ public class StatsController extends HttpServlet {
 
 		if (youtubeToken != null && !"".equals(youtubeToken)) {
 			YoutubeResource yResource = new YoutubeResource(youtubeToken);
-			ChannelStats ytStats = yResource.getChannelStats();
-			SearchChannelVideos ytMostViewedVideo = yResource.getMostViewedVideo();
+//			ChannelStats ytStats = yResource.getChannelStats();
+//			ChannelVideosItem ytMostViewedVideo = yResource.getMostViewedVideo();
 
-			log.log(Level.FINE, "Channel ID: " + ytStats.getItems().get(0).getId());
+//			log.log(Level.FINE, "Channel ID: " + ytStats.getItems().get(0).getId());
 
 			rd = req.getRequestDispatcher("/stats.jsp");
-			req.setAttribute("channelStats", ytStats.getItems());
-			req.setAttribute("mostViewedVideo", ytMostViewedVideo.getItems().get(0));
+//			req.setAttribute("channelStats", ytStats.getItems());
+//			req.setAttribute("mostViewedVideo", ytMostViewedVideo);
 			rd.forward(req, resp);
 		} else {
 			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");

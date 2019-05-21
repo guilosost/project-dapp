@@ -2,7 +2,6 @@
 package aiss.model.youtube;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -15,22 +14,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "kind",
     "etag",
-    "nextPageToken",
-    "pageInfo",
-    "items"
+    "id",
+    "statistics"
 })
-public class GetUserVideos {
+public class StatisticsItem {
 
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("etag")
     private String etag;
-    @JsonProperty("nextPageToken")
-    private String nextPageToken;
-    @JsonProperty("pageInfo")
-    private PageInfo pageInfo;
-    @JsonProperty("items")
-    private List<GetUserVideosItem> items = null;
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("statistics")
+    private TrueStatistics statistics;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -54,34 +50,24 @@ public class GetUserVideos {
         this.etag = etag;
     }
 
-    @JsonProperty("nextPageToken")
-    public String getNextPageToken() {
-        return nextPageToken;
+    @JsonProperty("id")
+    public String getId() {
+        return id;
     }
 
-    @JsonProperty("nextPageToken")
-    public void setNextPageToken(String nextPageToken) {
-        this.nextPageToken = nextPageToken;
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
     }
 
-    @JsonProperty("pageInfo")
-    public PageInfo getPageInfo() {
-        return pageInfo;
+    @JsonProperty("statistics")
+    public TrueStatistics getStatistics() {
+        return statistics;
     }
 
-    @JsonProperty("pageInfo")
-    public void setPageInfo(PageInfo pageInfo) {
-        this.pageInfo = pageInfo;
-    }
-
-    @JsonProperty("items")
-    public List<GetUserVideosItem> getItems() {
-        return items;
-    }
-
-    @JsonProperty("items")
-    public void setItems(List<GetUserVideosItem> items) {
-        this.items = items;
+    @JsonProperty("statistics")
+    public void setStatistics(TrueStatistics statistics) {
+        this.statistics = statistics;
     }
 
     @JsonAnyGetter

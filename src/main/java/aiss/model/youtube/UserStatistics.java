@@ -15,22 +15,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "kind",
     "etag",
-    "nextPageToken",
     "pageInfo",
     "items"
 })
-public class GetUserVideos {
+public class UserStatistics {
 
     @JsonProperty("kind")
     private String kind;
     @JsonProperty("etag")
     private String etag;
-    @JsonProperty("nextPageToken")
-    private String nextPageToken;
     @JsonProperty("pageInfo")
     private PageInfo pageInfo;
     @JsonProperty("items")
-    private List<GetUserVideosItem> items = null;
+    private List<StatisticsItem> items = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -54,16 +51,6 @@ public class GetUserVideos {
         this.etag = etag;
     }
 
-    @JsonProperty("nextPageToken")
-    public String getNextPageToken() {
-        return nextPageToken;
-    }
-
-    @JsonProperty("nextPageToken")
-    public void setNextPageToken(String nextPageToken) {
-        this.nextPageToken = nextPageToken;
-    }
-
     @JsonProperty("pageInfo")
     public PageInfo getPageInfo() {
         return pageInfo;
@@ -75,12 +62,12 @@ public class GetUserVideos {
     }
 
     @JsonProperty("items")
-    public List<GetUserVideosItem> getItems() {
+    public List<StatisticsItem> getItems() {
         return items;
     }
 
     @JsonProperty("items")
-    public void setItems(List<GetUserVideosItem> items) {
+    public void setItems(List<StatisticsItem> items) {
         this.items = items;
     }
 

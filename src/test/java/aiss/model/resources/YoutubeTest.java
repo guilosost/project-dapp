@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import aiss.model.resource.YoutubeResource;
 import aiss.model.youtube.GetUserVideos;
+import aiss.model.youtube.GetUserVideosItem;
 import aiss.model.youtube.RaitingItem;
 import aiss.model.youtube.VideoItem;
 import aiss.model.youtube.YoutubeRatedVideoGet;
@@ -18,7 +19,7 @@ public class YoutubeTest {
 	@Test
 	public void getYoutubeTest() throws UnsupportedEncodingException {
 		YoutubeResource datos = new YoutubeResource(
-				"ya29.GlsQB5JvLosCRlA5IHbUQAKRWNwO5mRQrdbTiB1QGBtuCTfmm9JxOZ-9yB8HBILpca9Pdcii3p__C1vuO_VBxPzbjOeSAV3BmVGfDsCXaUBJwl6aqLSnkl4UYxrA");
+				"ya29.GlsQBwb5Akvx428AHlyM8yC8npzN0U8Phpkdg1a_iLCybWX3ajDRBJ3sJ9P1Ucwml3AKh_ifVI8KTwCws9nF1Qm26nbdx5H7v9X4Wr_PZ9uJTdf-UZ9AHa4s5CDd");
 		
 		// Search
 		String query = "star wars";
@@ -71,9 +72,17 @@ public class YoutubeTest {
 				
 				System.out.println("This user have " + userVideos.getItems().size() + " videos uploaded");
 				
-				for(VideoItem vi : userVideos.getItems()) {
-					System.out.println(vi.getVideoSnippet().getTitle());
+				for(GetUserVideosItem vi : userVideos.getItems()) {
+					System.out.println(vi.getSnippet().getTitle());
 				}
+				
+		// Viewest Video
+				GetUserVideosItem viewestVideo = datos.getMostViewedVideo();
+				assertNotNull("The search returned null", viewestVideo);
+				System.out.println("Vídeo más visto: " + viewestVideo.getSnippet().getTitle());
+				
+		//Stats
+				System.out.println("Total views: " + datos.getAllViews());
 	}
 
 }
