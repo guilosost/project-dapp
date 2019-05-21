@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.resource.YoutubeResource;
 import aiss.model.youtube.VideoItem;
+import aiss.model.youtube.ChannelStats;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -41,6 +42,8 @@ public class YoutubeSearchController extends HttpServlet {
 			if(v.getVideoSnippet().getTitle().length() > 40)
 			v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
 		}
+		ChannelStats channelStats = youtube.getChannelStats();
+//		ChannelList watchLater = youtube.getWatchLaterVideos();
 
 		log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
 		log.log(Level.FINE, "Actual page " + nextYoutubePage);
@@ -52,6 +55,7 @@ public class YoutubeSearchController extends HttpServlet {
 			req.setAttribute("youtubeLikedVideos", likedVideos.getItems());
 			req.setAttribute("youtubeDislikedVideos", dislikedVideos.getItems());
 			req.setAttribute("youtubeToken", youtubeToken);
+			req.setAttribute("channelStats", channelStats.getItems());
 //			req.setAttribute("watchLaterVideos", watchLater.getItems());
 			rd.forward(req, resp);
 		}
