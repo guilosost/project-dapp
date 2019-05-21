@@ -122,7 +122,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 				</h3>
 				<div class="video">
 					<iframe frameborder="0" width="99%" height="57%"
-						src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
+						src='https://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
 						allowfullscreen allow="autoplay"></iframe>
 				</div>
 				<br>
@@ -190,7 +190,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 		<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
 			<div class="results" style="background: rgba(255, 0, 0, 0.7)">
 				<h3>
-					<c:out value="${youtubeVideo.videoSnippet.title}" />
+					<p><c:out value="${youtubeVideo.videoSnippet.title}" /></p>
 				</h3>
 				<br>
 				<div class="botonesYT">
@@ -243,9 +243,15 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 				</div>
 				<div class="video"
 					style="margin-right: 4px; margin-bottom: 2px; margin-top: -16px;">
-					<iframe frameborder="0" width="300" height="160"
-						src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
-						allowfullscreen></iframe>
+					<iframe
+						width="300" height="160"
+						src="https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?feature=oembed"
+						frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen data-rocket-lazyload="fitvidscompatible"
+						data-lazy-src="https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?feature=oembed"
+						class="lazyloaded" data-was-processed="true"></iframe>
+					
 				</div>
 				<br>
 				<div class="commentbox">

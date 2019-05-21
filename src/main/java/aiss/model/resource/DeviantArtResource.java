@@ -84,15 +84,19 @@ public class DeviantArtResource {
 		// https://www.deviantart.com/api/v1/oauth2/collections/09A2E495-5D12-9F8B-D319-F97BAC80E7CC
 		// ?username=migyanari&mature_content=false
 
+		// Primero encuentro la carpeta de favoritos
 		DeviantArtUser user = getDeviantArtUserInfo();
 		log.log(Level.FINE, "Folder: " + user.getFolders().get(0).getName());
 		Folder result = user.getFolders().get(0);
+		
 		for (Folder f : user.getFolders()) {
 			log.log(Level.FINE, "Folder: " + f.getName());
 			if (f.getName() == "Featured") {
 				result = f;
 			}
 		}
+		
+		// Luego saco sus elementos
 		String uri = "https://www.deviantart.com/api/v1/oauth2/collections/" + result.getFolderid() + "?username="
 				+ user.getUser().getUsername() + "&mature_content=false&access_token=" + access_token;
 

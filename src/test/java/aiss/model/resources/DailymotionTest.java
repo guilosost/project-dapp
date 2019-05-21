@@ -15,8 +15,9 @@ import aiss.model.resource.DailymotionResource;
 public class DailymotionTest {
 	@Test
 	public void getDailymotionTest() throws UnsupportedEncodingException {
+		// Search
 		String query = "star+wars";
-		DailymotionResource datos = new DailymotionResource("Z3REAEFfQUYFGEZeEQlZCRREAwsaXBIEGVVHX15bW1EX");
+		DailymotionResource datos = new DailymotionResource("dzBbAU8GVEkLWEBaBBdZSUQcHxITGEABF0peDFUZC1dJ");
 		DailymotionSearch dailySearch = datos.getDailymotionVideos(query, 1);
 
 		assertNotNull("The search returned null", dailySearch);
@@ -26,9 +27,10 @@ public class DailymotionTest {
 		System.out.println("The search for " + query + "'s videos returned " + dailySearch.getList().size() + " datas.");
 
 		for (List l : dailySearch.getList()) {
-			System.out.println(l.getId());
+			System.out.println(l.getTitle().substring(0, 30));
 		}
 		
+		// User stats
 		DailymotionUserStats dailyStats = datos.getDailymotionStats();
 		assertNotNull("The search returned null", dailyStats);
 		
@@ -36,21 +38,38 @@ public class DailymotionTest {
 		System.out.println("Total Videos: " + dailyStats.getVideosTotal());
 		System.out.println("Total Views: " + dailyStats.getViewsTotal());
 		
+		// Total Likes
+		System.out.println("Total Likes: " + datos.getDailymotionTotalLikes());
+		
+		// Best video
+		List bestVideo = datos.getBestOwnVideo();
+		assertNotNull("The search of the best video returned null", bestVideo);
+
+		System.out.println("Best Own Video Title: " + bestVideo.getTitle());
+		
+		// Liked videos
 		DailymotionSearch dailyFavs = datos.getLikedVideos();
 		
 		assertNotNull("The search returned null", dailyFavs);
 		assertNotNull("The search returned null", dailyFavs.getList());
 		
-		System.out.println("The search for " + query + "'s fav videos returned " + dailyFavs.getList().size() + " datas.");
+		System.out.println("The search for fav videos returned " + dailyFavs.getList().size() + " datas.");
 
 		for (List l : dailyFavs.getList()) {
-			System.out.println(l.getId());
+			System.out.println(l.getTitle().subSequence(0, 30));
 		}
 		
-		List bestVideo = datos.getBestOwnVideo();
-		assertNotNull("The search returned null", bestVideo);
+		// WatchLater videos
+				DailymotionSearch dailyWT = datos.getWatchLaterVideos();
+				
+				assertNotNull("The search returned null", dailyWT);
+				assertNotNull("The search returned null", dailyWT.getList());
+				
+				System.out.println("The search for watch later videos returned " + dailyWT.getList().size() + " datas.");
 
-		System.out.println("Title: " + bestVideo.getTitle());
+				for (List l : dailyWT.getList()) {
+					System.out.println(l.getTitle().subSequence(0, 30));
+				}
 
 	}
 }

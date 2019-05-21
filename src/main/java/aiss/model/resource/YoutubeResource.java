@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import org.restlet.resource.ClientResource;
 
 import aiss.model.youtube.ChannelStats;
+import aiss.model.youtube.GetUserVideos;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -85,18 +86,13 @@ public class YoutubeResource {
 		return channelStats;
 	}
 
-//	public ChannelList getWatchLaterVideos() throws UnsupportedEncodingException {
-//		String uri = "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=20"
-//				+ "&playlistId=WL&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
-//
-//		log.log(Level.FINE, "Youtube Watch Later List URI: " + uri);
-//
-//		ClientResource cr = new ClientResource(uri);
-//
-//		ChannelList watchLaterVideos = cr.get(ChannelList.class);
-//
-//		return watchLaterVideos;
-//
-//	}
+	public GetUserVideos getOwnYoutubeVideos() throws UnsupportedEncodingException {
+		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet&forMine=true&type=video"
+				+ "&access_token=" + access_token;
 
+		ClientResource cr = new ClientResource(uri);
+		GetUserVideos userVideos = cr.get(GetUserVideos.class);
+
+		return userVideos;
+	}
 }
