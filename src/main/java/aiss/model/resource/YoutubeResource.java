@@ -2,18 +2,21 @@ package aiss.model.resource;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.restlet.resource.ClientResource;
 
 import aiss.model.youtube.ChannelStats;
-import aiss.model.youtube.ChannelVideosItem;
 import aiss.model.youtube.GetUserVideos;
 import aiss.model.youtube.GetUserVideosItem;
 import aiss.model.youtube.SearchChannelVideos;
+import aiss.model.youtube.Statistics;
 import aiss.model.youtube.StatisticsItem;
 import aiss.model.youtube.UserStatistics;
+import aiss.model.youtube.VideoSnippet;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -78,9 +81,9 @@ public class YoutubeResource {
 		return youtubeDislikedVideos;
 	}
 
-//	public ChannelStats getChannelStats() throws UnsupportedEncodingException { // UCQ2pMpd2K2yHS6q40G9oJGQ
-//		String uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCAW-NpUFkMyCNrvRSSGIvDQ"
-//				+ "&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
+//	public Statistics getChannelStats() throws UnsupportedEncodingException { // UCQ2pMpd2K2yHS6q40G9oJGQ
+//		String uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + getUserId()
+//				+ "&access_token=" + access_token;
 //
 //		log.log(Level.FINE, "Youtube ChannelStats URI: " + uri);
 //
@@ -88,7 +91,7 @@ public class YoutubeResource {
 //
 //		ChannelStats channelStats = cr.get(ChannelStats.class);
 //
-//		return channelStats;
+//		return channelStats.getItems().get(0).getStatistics();
 //	}
 
 	public GetUserVideos getOwnYoutubeVideos() throws UnsupportedEncodingException {
@@ -113,68 +116,109 @@ public class YoutubeResource {
 
 		ClientResource cr = new ClientResource(uri);
 		UserStatistics userStatistics = cr.get(UserStatistics.class);
-
 		return userStatistics;
 	}
 
-	public Integer getAllLikes() throws UnsupportedEncodingException {
-		Integer likes = 0;
+//	public Integer getAllLikes() throws UnsupportedEncodingException {
+//		Integer likes = 0;
+//
+//		for (StatisticsItem st : getUserStatistics().getItems()) {
+//			likes += Integer.valueOf(st.getStatistics().getLikeCount());
+//		}
+//
+//		return likes;
+//	}
+//
+//	public Integer getAllDislikes() throws UnsupportedEncodingException {
+//		Integer dislikes = 0;
+//
+//		for (StatisticsItem st : getUserStatistics().getItems()) {
+//			dislikes += Integer.valueOf(st.getStatistics().getDislikeCount());
+//		}
+//
+//		return dislikes;
+//	}
 
-		for (StatisticsItem st : getUserStatistics().getItems()) {
-			likes += Integer.valueOf(st.getStatistics().getLikeCount());
-		}
+//	public Integer getAllViews() throws UnsupportedEncodingException {
+//		Integer views = 0;
+//
+//		for (StatisticsItem st : getUserStatistics().getItems()) {
+//			views += Integer.valueOf(st.getStatistics().getViewCount());
+//		}
+//
+//		return views;
+//	}
+//
+//	public Integer getAllComments() throws UnsupportedEncodingException {
+//		Integer comments = 0;
+//
+//		for (StatisticsItem st : getUserStatistics().getItems()) {
+//			comments += Integer.valueOf(st.getStatistics().getCommentCount());
+//		}
+//
+//		return comments;
+//	}
 
-		return likes;
-	}
+	public List<String> getStats() throws UnsupportedEncodingException {
+		VideoSnippet named = getOwnYoutubeVideos().getItems().get(0).getSnippet();
+		List<StatisticsItem> stats = getUserStatistics().getItems();
 
-	public Integer getAllDislikes() throws UnsupportedEncodingException {
-		Integer dislikes = 0;
-
-		for (StatisticsItem st : getUserStatistics().getItems()) {
-			dislikes += Integer.valueOf(st.getStatistics().getDislikeCount());
-		}
-
-		return dislikes;
-	}
-
-	public Integer getAllViews() throws UnsupportedEncodingException {
-		Integer views = 0;
-
-		for (StatisticsItem st : getUserStatistics().getItems()) {
-			views += Integer.valueOf(st.getStatistics().getViewCount());
-		}
-
-		return views;
-	}
-
-	public Integer getAllComments() throws UnsupportedEncodingException {
 		Integer comments = 0;
-
-		for (StatisticsItem st : getUserStatistics().getItems()) {
+		Integer views = 0;
+		Integer likes = 0;
+		Integer dislikes = 0;
+		for (StatisticsItem st : stats) {
 			comments += Integer.valueOf(st.getStatistics().getCommentCount());
+			views += Integer.valueOf(st.getStatistics().getViewCount());
+
+			likes += Integer.valueOf(st.getStatistics().getLikeCount());
+			dislikes += Integer.valueOf(st.getStatistics().getDislikeCount());
+
 		}
 
-		return comments;
-	}
+		String name = named.getChannelTitle();
+		String id = named.getChannelId();
 
-	public String getUserUsername() throws UnsupportedEncodingException {
-		return getOwnYoutubeVideos().getItems().get(0).getSnippet().getChannelTitle();
-	}
-
-	public String getUserId() throws UnsupportedEncodingException {
-		return getOwnYoutubeVideos().getItems().get(0).getSnippet().getChannelId();
-	}
-
-	public GetUserVideosItem getMostViewedVideo() throws UnsupportedEncodingException {
-//		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet%2Cid&channelId=" + getUserId()
+		// Profile Pic
+//		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet%2Cid&channelId=" + id
 //				+ "&order=viewCount&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
 //
-//		log.log(Level.FINE, "Youtube Most Viewed Video URI: " + uri);
+//		log.log(Level.FINE, "Youtube Get Profile Pic URI: " + uri);
 //
 //		ClientResource cr = new ClientResource(uri);
-//
 //		SearchChannelVideos channelVideos = cr.get(SearchChannelVideos.class);
+//		String url = channelVideos.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl();
 
+		// Subscribers
+		String uri2 = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + id
+				+ "&access_token=" + access_token;
+
+		log.log(Level.FINE, "Youtube ChannelStats URI: " + uri2);
+
+		ClientResource cr2 = new ClientResource(uri2);
+
+		ChannelStats channelStats = cr2.get(ChannelStats.class);
+
+		String subscribers = channelStats.getItems().get(0).getStatistics().getSubscriberCount();
+		
+		List<String> result = new ArrayList<>();
+		result.add(name);
+		result.add(id);
+		result.add(String.valueOf(likes));
+		result.add(String.valueOf(dislikes));
+		result.add(String.valueOf(comments));
+		result.add(String.valueOf(views));
+		result.add(subscribers);
+//		result.add(url);
+
+		return result;
+	}
+
+//	public String getUserId() throws UnsupportedEncodingException {
+//		return getOwnYoutubeVideos().getItems().get(0).getSnippet().getChannelId();
+//	}
+
+	public GetUserVideosItem getMostViewedVideo() throws UnsupportedEncodingException {
 		Integer views = 0, resultViews = 0;
 		StatisticsItem result = getUserStatistics().getItems().get(0);
 		for (StatisticsItem mv : getUserStatistics().getItems()) {
@@ -192,7 +236,21 @@ public class YoutubeResource {
 			}
 		}
 
-		// channelVideos.getItems().get(1);
 		return resultVideo;
 	}
+
+//	public String getProfilePic() throws UnsupportedEncodingException {
+//		String name = getOwnYoutubeVideos().getItems().get(0).getSnippet().getChannelTitle();
+//		String id = getOwnYoutubeVideos().getItems().get(0).getSnippet().getChannelId();
+//
+//		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet%2Cid&channelId=" + id
+//				+ "&order=viewCount&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
+//
+//		log.log(Level.FINE, "Youtube Get Profile Pic URI: " + uri);
+//
+//		ClientResource cr = new ClientResource(uri);
+//		SearchChannelVideos channelVideos = cr.get(SearchChannelVideos.class);
+//		String url = channelVideos.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl();
+//
+//	}
 }

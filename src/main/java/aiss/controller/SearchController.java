@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.dailymotion.DailymotionSearch;
-import aiss.model.dailymotion.List;
+import aiss.model.dailymotion.DailymotionVideo;
 import aiss.model.deviantart.GetFolderByID;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.YoutubeResource;
+import aiss.model.youtube.VideoItem;
+import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
 public class SearchController extends HttpServlet {
@@ -32,8 +34,10 @@ public class SearchController extends HttpServlet {
 		String query = req.getParameter("searchQuery");
 		Integer nextDailymotionPage = Integer.valueOf(req.getParameter("nextDailymotionPage"));
 		Integer nextDeviantPage = Integer.valueOf(req.getParameter("nextDeviantPage"));
+		String nextYoutubePage = req.getParameter("nextYoutubePage");
 		String query1 = req.getParameter("searchQuery").replace(" ", "_");
 		String query2 = req.getParameter("searchQuery").replace(" ", "+");
+
 		RequestDispatcher rd = null;
 
 		// Search for videos in Dailymotion
@@ -43,7 +47,7 @@ public class SearchController extends HttpServlet {
 		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
 		DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
 
-		for (List l : dailymotionResults.getList()) {
+		for (DailymotionVideo l : dailymotionResults.getList()) {
 			l.setTitle(l.getTitle().substring(0, 50));
 		}
 
@@ -55,18 +59,31 @@ public class SearchController extends HttpServlet {
 			req.setAttribute("dailymotionWatchLaterVideos", dailymotionWatchLaterVideos.getList());
 			req.setAttribute("dailymotionToken", dailymotionToken);
 		}
-//
-//		// Search for videos in Youtube
-//		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
-//		YoutubeResource youtube = new YoutubeResource(youtubeToken);
-//		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query);
-//
-//		if (youtubeResults.getVideoItems() != null) {
-//			rd = req.getRequestDispatcher("/success.jsp");
-//			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
-//			req.setAttribute("youtubeToken", youtubeToken);
-//		}
 
+		// Search for videos in Youtube
+		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
+		YoutubeResource youtube = new YoutubeResource(youtubeToken);
+		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query, nextYoutubePage);
+		YoutubeRatedVideoGet likedVideos = youtube.getLikedVideos();
+		YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
+
+		for (VideoItem v : youtubeResults.getVideoItems()) {
+			if (v.getVideoSnippet().getTitle().length() > 40)
+				v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
+		}
+
+		log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
+		log.log(Level.FINE, "Actual page " + nextYoutubePage);
+
+		if (youtubeResults.getVideoItems() != null) {
+			rd = req.getRequestDispatcher("/success.jsp");
+			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
+			req.setAttribute("nextYoutubePage", youtubeResults.getNextPageToken());
+			req.setAttribute("youtubeLikedVideos", likedVideos.getItems());
+			req.setAttribute("youtubeDislikedVideos", dislikedVideos.getItems());
+			req.setAttribute("youtubeToken", youtubeToken);
+		}
+		
 		// Search for images in DeviantArt
 		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
 		log.log(Level.FINE, "Next page: " + nextDeviantPage);
@@ -80,10 +97,10 @@ public class SearchController extends HttpServlet {
 
 			for (int i = 0; i < deviantArtImagesResults.getResults().size(); i++) {
 				String title = deviantArtImagesResults.getResults().get(i).getTitle();
-				if(title.length() > 28) {
+				if (title.length() > 28) {
 					deviantArtImagesResults.getResults().get(i).setTitle(title.substring(0, 28));
 				}
-				
+
 			}
 
 			rd = req.getRequestDispatcher("/success.jsp");

@@ -32,7 +32,7 @@ public class DailymotionSearch {
     @JsonProperty("has_more")
     private Boolean hasMore;
     @JsonProperty("list")
-    private java.util.List<aiss.model.dailymotion.List> list = null;
+    private java.util.List<aiss.model.dailymotion.DailymotionVideo> list = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -87,12 +87,12 @@ public class DailymotionSearch {
     }
 
     @JsonProperty("list")
-    public java.util.List<aiss.model.dailymotion.List> getList() {
+    public java.util.List<aiss.model.dailymotion.DailymotionVideo> getList() {
         return list;
     }
 
     @JsonProperty("list")
-    public void setList(java.util.List<aiss.model.dailymotion.List> list) {
+    public void setList(java.util.List<aiss.model.dailymotion.DailymotionVideo> list) {
         this.list = list;
     }
 

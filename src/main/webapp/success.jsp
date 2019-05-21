@@ -35,10 +35,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 			type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
 			value="1" /> <input type="hidden" id="nextYoutubePage"
 			name="nextYoutubePage" value="" /> <input type="submit"
-			name="searchBtn" title="search" value="search"> <img
-			style="margin-bottom: -8px" src="images/next(icon).png"
-			onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')">
-		</form>
+			name="searchBtn" title="search" value="search"></form>
 		</h1>
 
 	</header>
@@ -268,6 +265,12 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 			</div>
 		</c:forEach>
 	</div>
+	<br><br><br>
+	<footer class="footer">
+	<div style=" margin-right: 5px; display: flex; float: right;">
+	<img src="images/next(icon).png" onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')"></div>
+	<p class="texto">SOBRE NOSOTROS</p>
+	</footer>
 </body>
 
 <script>

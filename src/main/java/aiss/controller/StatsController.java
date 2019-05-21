@@ -1,6 +1,7 @@
 package aiss.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,16 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.dailymotion.DailymotionUserStats;
-import aiss.model.dailymotion.List;
+import aiss.model.dailymotion.DailymotionVideo;
 import aiss.model.deviantart.DeviantArtResult;
 import aiss.model.deviantart.DeviantArtUser;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.YoutubeResource;
-import aiss.model.youtube.ChannelStats;
-import aiss.model.youtube.ChannelVideosItem;
-import aiss.model.youtube.SearchChannelVideos;
+import aiss.model.youtube.GetUserVideos;
+import aiss.model.youtube.GetUserVideosItem;
+import aiss.model.youtube.StatisticsItem;
+import aiss.model.youtube.UserStatistics;
 
 public class StatsController extends HttpServlet {
 
@@ -48,13 +50,11 @@ public class StatsController extends HttpServlet {
 
 			log.log(Level.FINE, deviantUser.getUser().getUsername());
 
-//			rd = req.getRequestDispatcher("/stats.jsp");
 			req.setAttribute("deviantArtUser", deviantUser);
 			req.setAttribute("deviantArtStats", deviantArtStats.getResults());
 			req.setAttribute("deviations", deviantArtStats.getResults().size());
 			req.setAttribute("deviantArtBestImage", bestImage);
 			req.setAttribute("deviantArtToken", deviantArtToken);
-//			rd.forward(req, resp);
 
 		} else {
 			log.info("Trying to access DeviantArt without an access token, redirecting to OAuth servlet");
@@ -65,19 +65,16 @@ public class StatsController extends HttpServlet {
 
 			DailymotionResource spResource = new DailymotionResource(dailymotionToken);
 			DailymotionUserStats dailymotionStats = spResource.getDailymotionStats();
-			List dailyBestVideo = spResource.getBestOwnVideo();
+			DailymotionVideo dailyBestVideo = spResource.getBestOwnVideo();
 			Integer totalLikes = spResource.getDailymotionTotalLikes();
 
 			log.log(Level.FINE, "Username: " + dailymotionStats.getUsername());
 			log.log(Level.FINE, "Title: " + dailyBestVideo.getTitle());
 
-			rd = req.getRequestDispatcher("/stats.jsp");
 			req.setAttribute("dailymotionStats", dailymotionStats);
 			req.setAttribute("bestVideo", dailyBestVideo);
 			req.setAttribute("totalLikes", totalLikes);
 			req.setAttribute("dailymotionToken", dailymotionToken);
-			rd.forward(req, resp);
-
 		} else {
 			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/Dailymotion").forward(req, resp);
@@ -85,14 +82,52 @@ public class StatsController extends HttpServlet {
 
 		if (youtubeToken != null && !"".equals(youtubeToken)) {
 			YoutubeResource yResource = new YoutubeResource(youtubeToken);
-//			ChannelStats ytStats = yResource.getChannelStats();
-//			ChannelVideosItem ytMostViewedVideo = yResource.getMostViewedVideo();
+			//Statistics ytStats = yResource.getChannelStats();
+			GetUserVideos youtubeVideos = yResource.getOwnYoutubeVideos();
+			UserStatistics youtubeStatistics = yResource.getUserStatistics();
+			
+			List<String> stats = yResource.getStats();
+			String youtubeUsername = stats.get(0);
+			String youtubeSubscribers = stats.get(6);
+			String youtubeLikes = stats.get(2);
+			String youtubeDislikes = stats.get(3);
+			String youtubeComments = stats.get(4);
+			String youtubeViews = stats.get(5);
+			//GetUserVideosItem youtubeMostViewed= yResource.getMostViewedVideo();
 
-//			log.log(Level.FINE, "Channel ID: " + ytStats.getItems().get(0).getId());
+			log.log(Level.FINE, "Followers: " + youtubeSubscribers);
+			
+			// Sacando mejor vídeo
+			Integer viewsBestVideo = 0, resultViews = 0;
+			StatisticsItem youtubeMostViewed = youtubeStatistics.getItems().get(0);
+			for (StatisticsItem mv : youtubeStatistics.getItems()) {
+				viewsBestVideo = Integer.valueOf(mv.getStatistics().getViewCount());
+				resultViews = Integer.valueOf(youtubeMostViewed.getStatistics().getViewCount());
+				
+				if (viewsBestVideo > resultViews) {
+					youtubeMostViewed = mv;
+				}
+			}
+
+			String youtubeMostViewedTitle = "";
+			for (GetUserVideosItem gi : youtubeVideos.getItems()) {
+				if (youtubeMostViewed.getId().equals(gi.getId().getVideoId())) {
+					youtubeMostViewedTitle = gi.getSnippet().getTitle();
+				}
+			}
+			
+			//Sacando estadísticas y datos de usuario
 
 			rd = req.getRequestDispatcher("/stats.jsp");
-//			req.setAttribute("channelStats", ytStats.getItems());
-//			req.setAttribute("mostViewedVideo", ytMostViewedVideo);
+			req.setAttribute("youtubeUsername", youtubeUsername);
+			req.setAttribute("youtubeSubscriber", youtubeSubscribers);
+			req.setAttribute("youtubeNumVideos", youtubeVideos.getItems().size());
+			req.setAttribute("youtubeLikes", youtubeLikes);
+			req.setAttribute("youtubeDislikes", youtubeDislikes);
+			req.setAttribute("youtubeComments", youtubeComments);
+			req.setAttribute("youtubeViews", youtubeViews);
+			req.setAttribute("youtubeMostViewed", youtubeMostViewed);
+			req.setAttribute("youtubeMostViewedTitle", youtubeMostViewedTitle);
 			rd.forward(req, resp);
 		} else {
 			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");

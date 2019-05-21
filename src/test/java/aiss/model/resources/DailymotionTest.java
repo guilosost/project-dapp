@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.dailymotion.DailymotionUserStats;
-import aiss.model.dailymotion.List;
+import aiss.model.dailymotion.DailymotionVideo;
 import aiss.model.resource.DailymotionResource;
 
 public class DailymotionTest {
@@ -26,7 +26,7 @@ public class DailymotionTest {
 
 		System.out.println("The search for " + query + "'s videos returned " + dailySearch.getList().size() + " datas.");
 
-		for (List l : dailySearch.getList()) {
+		for (DailymotionVideo l : dailySearch.getList()) {
 			System.out.println(l.getTitle().substring(0, 30));
 		}
 		
@@ -42,7 +42,7 @@ public class DailymotionTest {
 		System.out.println("Total Likes: " + datos.getDailymotionTotalLikes());
 		
 		// Best video
-		List bestVideo = datos.getBestOwnVideo();
+		DailymotionVideo bestVideo = datos.getBestOwnVideo();
 		assertNotNull("The search of the best video returned null", bestVideo);
 
 		System.out.println("Best Own Video Title: " + bestVideo.getTitle());
@@ -55,7 +55,7 @@ public class DailymotionTest {
 		
 		System.out.println("The search for fav videos returned " + dailyFavs.getList().size() + " datas.");
 
-		for (List l : dailyFavs.getList()) {
+		for (DailymotionVideo l : dailyFavs.getList()) {
 			System.out.println(l.getTitle().subSequence(0, 30));
 		}
 		
@@ -67,7 +67,7 @@ public class DailymotionTest {
 				
 				System.out.println("The search for watch later videos returned " + dailyWT.getList().size() + " datas.");
 
-				for (List l : dailyWT.getList()) {
+				for (DailymotionVideo l : dailyWT.getList()) {
 					System.out.println(l.getTitle().subSequence(0, 30));
 				}
 

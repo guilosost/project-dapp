@@ -21,8 +21,8 @@
 	
 	"Youtube": { 
         "tokenUrl": "https://accounts.google.com/o/oauth2/token",
-        "clientId": "133193217682-k72c1n6jor7io71cfgqhmvmcip27ldfr.apps.googleusercontent.com",
-        "clientSecret": "vwqy6s8p2wntG90Q1XA4qBSf",
+        "clientId": "336325352847-6ea24g7c00jho8aof8u3lk06n0bbak52.apps.googleusercontent.com",
+        "clientSecret": "jRAhUTOA8Tg5Fw1X24gby0gR",
         "authorizationFormUrl": "https://accounts.google.com/o/oauth2/auth",
         "scopes": ["https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube.force-ssl"]
     }
