@@ -42,15 +42,15 @@ public class SearchController extends HttpServlet {
 		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2, nextDailymotionPage);
 		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
 		DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
-		
-		for(List l : dailymotionResults.getList()) {
+
+		for (List l : dailymotionResults.getList()) {
 			l.setTitle(l.getTitle().substring(0, 50));
 		}
 
 		if (dailymotionResults.getList() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("dailymotionVideos", dailymotionResults.getList());
-			req.setAttribute("nextDailymotionPage", nextDailymotionPage+1);
+			req.setAttribute("nextDailymotionPage", nextDailymotionPage + 1);
 			req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
 			req.setAttribute("dailymotionWatchLaterVideos", dailymotionWatchLaterVideos.getList());
 			req.setAttribute("dailymotionToken", dailymotionToken);
@@ -75,8 +75,16 @@ public class SearchController extends HttpServlet {
 			DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
 			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1, nextDeviantPage);
 			GetFolderByID deviantFavFolder = daResource.getDeviantArtFavs();
-			
+
 			deviantArtImagesResults.getNextOffset();
+
+			for (int i = 0; i < deviantArtImagesResults.getResults().size(); i++) {
+				String title = deviantArtImagesResults.getResults().get(i).getTitle();
+				if(title.length() > 28) {
+					deviantArtImagesResults.getResults().get(i).setTitle(title.substring(0, 28));
+				}
+				
+			}
 
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("deviantArtImages", deviantArtImagesResults.getResults());

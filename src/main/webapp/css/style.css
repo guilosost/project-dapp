@@ -18,25 +18,35 @@ h1 {
 	text-align: center;
 }
 
+.video {
+    margin-left: 4px;
+}
+
 .fillable {
 	height: 30px;
-	width: 155%;
-	margin-left: 5px;
+    width: 85%;
+    border-radius: 7px;
+    margin-top: 2px;
+    margin-bottom: -2px;
+    margin-left: 4px;
 }
 
 .commentbox {
 	position: absolute;
 	bottom: 0;
+    border-top: 2px solid black;
+    width: 100%;
 }
 
 .commenticon {
 	position: absolute;
-	right: 4px;
+	right: 5px;
 	bottom: 2px;
 }
 
 .resultsSearch {
 	display: flex;
+    margin-top: -22px;
 }
 
 .results {
@@ -49,10 +59,14 @@ h1 {
 
 .veinte {
 	width: 20%;
+    border-radius: 4px;
 }
 
-.cien {
-	width: 100%;
+.cien {    
+	width: 99%;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #searchDiv {

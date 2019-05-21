@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import aiss.model.resource.YoutubeResource;
+import aiss.model.youtube.VideoItem;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -35,7 +36,11 @@ public class YoutubeSearchController extends HttpServlet {
 		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query, nextYoutubePage);
 		YoutubeRatedVideoGet likedVideos = youtube.getLikedVideos();
 		YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
-//		ChannelList watchLater = youtube.getWatchLaterVideos();
+
+		for (VideoItem v : youtubeResults.getVideoItems()) {
+			if(v.getVideoSnippet().getTitle().length() > 40)
+			v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
+		}
 
 		log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
 		log.log(Level.FINE, "Actual page " + nextYoutubePage);

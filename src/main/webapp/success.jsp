@@ -26,44 +26,50 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 </head>
 <body>
 	<header class="header">
-		<h1 class="title">
-			<form id="searchForm" action="SearchController" method="post">
-				<img class="logo" src="images/logo-dapp-header(transparente).png">Project
-				DAPP <input style="margin-left: 100px" type="text" id="searchQuery"
-					name="searchQuery" required /> <input type="hidden"
-					id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
-					type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
-					value="1" /> <input type="hidden" id="nextYoutubePage"
-					name="nextYoutubePage" value="" /> <input type="submit"
-					name="searchBtn" title="search" value="search"> <img
-					style="margin-bottom: -8px" src="images/reload(icon).png"
-					onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')">
-			</form>
+		<a class="title" href="index.jsp"><h1 class="title">
+				<form id="searchForm" action="SearchController" method="post">
+					<img class="logo" src="images/logo-dapp-header(transparente).png">Project
+					DAPP</a><input style="margin-left: 100px" type="text" id="searchQuery"
+			name="searchQuery" required /> <input type="hidden"
+			id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
+			type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
+			value="1" /> <input type="hidden" id="nextYoutubePage"
+			name="nextYoutubePage" value="" /> <input type="submit"
+			name="searchBtn" title="search" value="search"> <img
+			style="margin-bottom: -8px" src="images/next(icon).png"
+			onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')">
+		</form>
 		</h1>
 
 	</header>
 
-	<h2>DeviantArt</h2>
+	<h2>
+		<img src="images/DeviantArtLogo.png" alt="logo_deviantart">
+	</h2>
 	<div class="resultsSearch">
 
 		<br>
 		<c:forEach items="${requestScope.deviantArtImages}"
 			var="deviantArtImage">
 			<div class="results" style="background: rgba(24, 204, 63, 0.7)">
-				<h3>
+				<h3 style="margin-left: 3px;">
 					<c:out value="${deviantArtImage.title}" />
-					(
-					<c:out value="${deviantArtImage.author.username}" />
-					)
+					<br>
+					<p style="margin-top: 0; margin-bottom: -10px">
+						By: <a
+							href="https://www.deviantart.com/<c:out value="${deviantArtImage.author.username}" />"
+							target="_blank" style="color: palevioletred;"><c:out
+								value="${deviantArtImage.author.username}" /></a>
+					</p>
 				</h3>
 				<c:set var="conditionVariable" value="no" />
-				<div id="photoandlike">
+				<div id="like">
 					<c:forEach items="${requestScope.deviantFavFolder}"
 						var="deviantsFav">
 						<c:if
 							test="${deviantsFav.deviationid == deviantArtImage.deviationid  && conditionVariable == 'no'}">
 
-							<button class="rate-button" type="button"
+							<button class="deviant-rate-button" type="button"
 								onclick="postFavDeviantArt('https://www.deviantart.com/api/v1/oauth2/collections/', '<c:out value="${deviantArtToken}"/>','<c:out value="${deviantArtImage.deviationid}"/>')">
 								<img src="images/favorite(icon).png" alt="icono_favoritos"
 									id="<c:out value="${deviantArtImage.deviationid}"/>">
@@ -74,17 +80,17 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 					</c:forEach>
 					<c:if test="${conditionVariable == 'no'}">
 
-						<button class="rate-button" type="button"
+						<button class="deviant-rate-button" type="button"
 							onclick="postFavDeviantArt('https://www.deviantart.com/api/v1/oauth2/collections/', '<c:out value="${deviantArtToken}"/>','<c:out value="${deviantArtImage.deviationid}"/>')">
 							<img src="images/unfavorite(icon).png" alt="icono_favoritos"
 								id="<c:out value="${deviantArtImage.deviationid}"/>">
 						</button>
 					</c:if>
-					<center>
-						<img id="${deviantArtImage.deviationid}-i" width="20%"
-							onclick="changeSize('${deviantArtImage.deviationid}')"
-							src='<c:out value="${deviantArtImage.preview.src}"/>'>
-					</center>
+				</div>
+				<div class="image">
+					<img id="${deviantArtImage.deviationid}-i" class="veinte"
+						onclick="changeSize('${deviantArtImage.deviationid}')"
+						src='<c:out value="${deviantArtImage.preview.src}"/>'>
 				</div>
 				<br>
 				<div class="commentbox">
@@ -93,7 +99,8 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 						class="fillable" name="comentario" maxlength="50"></textarea>
 				</div>
 				<div class="commenticon">
-					<img style="border-radius: 5px;" src="images/comment.png" alt="icono_comentar"
+					<img style="border-radius: 5px;" src="images/comment.png"
+						alt="icono_comentar"
 						onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtImage.deviationid}', '${deviantArtToken}', '${deviantArtImage.deviationid}')">
 				</div>
 
@@ -102,153 +109,159 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 		</c:forEach>
 	</div>
 
-	<h2>Dailymotion</h2>
+	<h2>
+		<img src="images/DailymotionLogo.png" alt="logo_deviantart">
+	</h2>
 	<div class="resultsSearch">
 
-		<br>
 		<c:forEach items="${requestScope.dailymotionVideos}"
 			var="dailymotionVideo">
-			<div class="results">
-				<h3>
+			<div class="results" style="background: rgba(0, 170, 255, 0.7)">
+				<h3 style="margin-left: 3px;">
 					<c:out value="${dailymotionVideo.title}" />
 				</h3>
-				<iframe frameborder="0" width="100%" height="57%"
-					src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
-					allowfullscreen allow="autoplay"></iframe>
+				<div class="video">
+					<iframe frameborder="0" width="99%" height="57%"
+						src='http://www.dailymotion.com/embed/video/<c:out value="${dailymotionVideo.id}"/>'
+						allowfullscreen allow="autoplay"></iframe>
+				</div>
 				<br>
-				<!-- Esto es el boton de Like -->
-				<c:set var="conditionVariable" value="no" />
-				<c:forEach items="${requestScope.dailymotionLikedVideos}"
-					var="dailysFavoritos">
-					<c:if
-						test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'no'}">
+				<div class="botonesDaily">
+					<!-- Esto es el boton de Like -->
+					<c:set var="conditionVariable" value="no" />
+					<c:forEach items="${requestScope.dailymotionLikedVideos}"
+						var="dailysFavoritos">
+						<c:if
+							test="${dailysFavoritos.id == dailymotionVideo.id  && conditionVariable == 'no'}">
 
-						<button class="rate-button" type="button"
+							<button class="daily-button" type="button"
+								onclick="postLikeDailymotion('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
+								<img src="images/favorite(icon).png" alt="icono_favoritos"
+									id="<c:out value="${dailymotionVideo.id}"/>">
+							</button>
+
+							<c:set var="conditionVariable" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:if test="${conditionVariable == 'no'}">
+
+						<button class="daily-button" type="button"
 							onclick="postLikeDailymotion('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
-							<img src="images/favorite(icon).png" alt="icono_favoritos"
+							<img src="images/unfavorite(icon).png" alt="icono_favoritos"
 								id="<c:out value="${dailymotionVideo.id}"/>">
 						</button>
-
-						<c:set var="conditionVariable" value="true" />
 					</c:if>
-				</c:forEach>
-				<c:if test="${conditionVariable == 'no'}">
 
-					<button class="rate-button" type="button"
-						onclick="postLikeDailymotion('https://api.dailymotion.com/me/likes/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
-						<img src="images/unfavorite(icon).png" alt="icono_favoritos"
-							id="<c:out value="${dailymotionVideo.id}"/>">
-					</button>
-				</c:if>
+					<!-- Esto es el boton de WatchLater -->
+					<c:set var="conditionVariable" value="no" />
+					<c:forEach items="${requestScope.dailymotionWatchLaterVideos}"
+						var="dailysWL">
+						<c:if
+							test="${dailysWL.id == dailymotionVideo.id  && conditionVariable == 'no'}">
 
-				<!-- Esto es el boton de WatchLater -->
-				<c:set var="conditionVariable" value="no" />
-				<c:forEach items="${requestScope.dailymotionWatchLaterVideos}"
-					var="dailysWL">
-					<c:if
-						test="${dailysWL.id == dailymotionVideo.id  && conditionVariable == 'no'}">
+							<button class="daily-button" type="button"
+								onclick="postWTDailymotion('https://api.dailymotion.com/me/watchlater/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
+								<img src="images/watchlater(icon).png" alt="icono_watchlater"
+									id="<c:out value="${dailymotionVideo.id}"/>-wt">
+							</button>
 
-						<button class="rate-button" type="button"
+							<c:set var="conditionVariable" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:if test="${conditionVariable == 'no'}">
+
+						<button class="daily-button" type="button"
 							onclick="postWTDailymotion('https://api.dailymotion.com/me/watchlater/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
-							<img src="images/watchlater(icon).png" alt="icono_watchlater"
+							<img src="images/unwatchlater(icon).png" alt="icono_watchlater"
 								id="<c:out value="${dailymotionVideo.id}"/>-wt">
 						</button>
-
-						<c:set var="conditionVariable" value="true" />
 					</c:if>
-				</c:forEach>
-				<c:if test="${conditionVariable == 'no'}">
-
-					<button class="rate-button" type="button"
-						onclick="postWTDailymotion('https://api.dailymotion.com/me/watchlater/<c:out value="${dailymotionVideo.id}"/>?access_token=${dailymotionToken}', '<c:out value="${dailymotionVideo.id}"/>')">
-						<img src="images/unwatchlater(icon).png" alt="icono_watchlater"
-							id="<c:out value="${dailymotionVideo.id}"/>-wt">
-					</button>
-				</c:if>
-				<br> <br>
+				</div>
 			</div>
 		</c:forEach>
 		<!-- No puedo meter en el metodo ${sessionScope["Dailymotion-token"]}, por eso esta hecho con ${dailymotionToken}-->
 
 	</div>
 
-	<fieldset id="youtube">
-		<legend>
-			Youtube search for
-			<c:out value="${param.searchQuery}" />
-		</legend>
-		<p>${youtubeToken}</p>
+	<h2>
+		<img src="images/YouTubeLogo.png" alt="logo_youtube">
+	</h2>
+	<div class="resultsSearch">
 		<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
-			<h3>
-				<c:out value="${youtubeVideo.videoSnippet.title}" />
-			</h3>
+			<div class="results" style="background: rgba(255, 0, 0, 0.7)">
+				<h3>
+					<c:out value="${youtubeVideo.videoSnippet.title}" />
+				</h3>
+				<br>
+				<div class="botonesYT">
+					<!-- Esto es el boton de Like -->
+					<c:set var="conditionVariable" value="no" />
+					<c:forEach items="${requestScope.youtubeLikedVideos}"
+						var="youtubeLikedVideo">
+						<c:if
+							test="${youtubeLikedVideo.id == youtubeVideo.id.videoId  && conditionVariable == 'no'}">
 
-			<!-- Esto es el boton de Like -->
-			<c:set var="conditionVariable" value="no" />
-			<c:forEach items="${requestScope.youtubeLikedVideos}"
-				var="youtubeLikedVideo">
-				<c:if
-					test="${youtubeLikedVideo.id == youtubeVideo.id.videoId  && conditionVariable == 'no'}">
+							<button class="rate-button" type="button"
+								onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','like', '<c:out value="${youtubeToken}"/>')">
+								<img src="images/favorite(icon).png" alt="icono_like"
+									id="<c:out value="${youtubeVideo.id.videoId}"/>-like">
+							</button>
 
-					<button class="rate-button" type="button"
-						onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','like', '<c:out value="${youtubeToken}"/>')">
-						<img src="images/favorite(icon).png" alt="icono_favoritos"
-							id="<c:out value="${youtubeVideo.id.videoId}"/>-like">
-					</button>
+							<c:set var="conditionVariable" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:if test="${conditionVariable == 'no'}">
+						<button class="rate-button" type="button"
+							onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','like', '<c:out value="${youtubeToken}"/>')">
+							<img src="images/unfavorite(icon).png" alt="icono_like"
+								id="<c:out value="${youtubeVideo.id.videoId}"/>-like">
+						</button>
+					</c:if>
+					<!-- Esto es el boton de Dislike -->
+					<c:set var="conditionVariable" value="no" />
+					<c:forEach items="${requestScope.youtubeDislikedVideos}"
+						var="youtubeDislikedVideo">
+						<c:if
+							test="${youtubeDislikedVideo.id == youtubeVideo.id.videoId  && conditionVariable == 'no'}">
 
-					<c:set var="conditionVariable" value="true" />
-				</c:if>
-			</c:forEach>
-			<c:if test="${conditionVariable == 'no'}">
-				<button class="rate-button" type="button"
-					onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','like', '<c:out value="${youtubeToken}"/>')">
-					<img src="images/unfavorite(icon).png" alt="icono_favoritos"
-						id="<c:out value="${youtubeVideo.id.videoId}"/>-like">
-				</button>
-			</c:if>
+							<button class="rate-button" type="button"
+								onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','dislike', '<c:out value="${youtubeToken}"/>')">
+								<img src="images/disfavorite(icon).png" alt="icono_dislike"
+									id="<c:out value="${youtubeVideo.id.videoId}"/>-dislike">
+							</button>
 
-
-			<!-- Esto es el boton de Dislike -->
-			<c:set var="conditionVariable" value="no" />
-			<c:forEach items="${requestScope.youtubeDislikedVideos}"
-				var="youtubeDislikedVideo">
-				<c:if
-					test="${youtubeDislikedVideo.id == youtubeVideo.id.videoId  && conditionVariable == 'no'}">
-
-					<button class="rate-button" type="button"
-						onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','dislike', '<c:out value="${youtubeToken}"/>')">
-						<img src="images/disfavorite(icon).png" alt="icono_dislike"
-							id="<c:out value="${youtubeVideo.id.videoId}"/>-dislike">
-					</button>
-
-					<c:set var="conditionVariable" value="true" />
-				</c:if>
-			</c:forEach>
-			<c:if test="${conditionVariable == 'no'}">
-				<button class="rate-button" type="button"
-					onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','dislike', '<c:out value="${youtubeToken}"/>')">
-					<img src="images/disunfavorite(icon).png" alt="icono_dislike"
-						id="<c:out value="${youtubeVideo.id.videoId}"/>-dislike">
-				</button>
-			</c:if>
-			<br>
-
-
-			<iframe frameborder="0" scrolling="no" marginheight="0"
-				marginwidth="0" width="340" height="130"
-				src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
-				allowfullscreen allow="autoplay"></iframe>
-			<br>
-			<textarea id="${youtubeVideo.id.videoId}-c"
-				onclick="emptyBox(${youtubeVideo.id.videoId})" class="fillable"
-				name="comentario" maxlength="50"></textarea>
-			<img src="images/comment.png" alt="icono_comentar"
-				onclick="postCommentYoutube('https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&access_token=${youtubeToken}', '${youtubeVideo.id.videoId}', '${youtubeVideo.videoSnippet.channelId}')">
-
-			<br>
+							<c:set var="conditionVariable" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:if test="${conditionVariable == 'no'}">
+						<button class="rate-button" type="button"
+							onclick="postRateYoutube('https://www.googleapis.com/youtube/v3/videos/rate', '<c:out value="${youtubeVideo.id.videoId}"/>','dislike', '<c:out value="${youtubeToken}"/>')">
+							<img src="images/disunfavorite(icon).png" alt="icono_dislike"
+								id="<c:out value="${youtubeVideo.id.videoId}"/>-dislike">
+						</button>
+					</c:if>
+				</div>
+				<div class="video"
+					style="margin-right: 4px; margin-bottom: 2px; margin-top: -16px;">
+					<iframe frameborder="0" width="300" height="160"
+						src='https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com"'
+						allowfullscreen></iframe>
+				</div>
+				<br>
+				<div class="commentbox">
+					<textarea id="${youtubeVideo.id.videoId}-c"
+						onclick="emptyBox(${youtubeVideo.id.videoId})" class="fillable"
+						name="comentario" maxlength="50"></textarea>
+				</div>
+				<div class="commenticon">
+					<img style="border-radius: 5px;" src="images/comment.png"
+						alt="icono_comentar"
+						onclick="postCommentYoutube('https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&access_token=${youtubeToken}', '${youtubeVideo.id.videoId}', '${youtubeVideo.videoSnippet.channelId}')">
+				</div>
+				<br>
+			</div>
 		</c:forEach>
-
-	</fieldset>
+	</div>
 </body>
 
 <script>
@@ -452,11 +465,26 @@ function changeSize(id) {
 	console.log("Cambiando tamaño de " + id);
 	var image = document.getElementById(id+"-i");
 	console.log(image);
-	if(image.style.width != "100%") {
-    image.style.width = '100%';
+	/* if(image.style.width != "99%") {
+    image.style.width = '99%';/* 
+    image.style.margin-bottom = '5px';
+    image.style.margin-top = '5px';
+    image.style.border-radius = '4px'; 
 	} else if(image.style.width != "20%") {
-	image.style.width = '20%';
+	image.style.width = '20%';/* 
+    image.style.margin-bottom = 'none';
+    image.style.margin-top = 'none';
+    image.style.border-radius = 'none';
+	} */
+	
+	if(image.classList.contains("veinte")) {
+		image.classList.remove("veinte");
+		image.classList.add("cien");
+	} else if(image.classList.contains("cien")) {
+		image.classList.remove("cien");
+		image.classList.add("veinte");
 	}
+
 }
 
 function postLikeDailymotion(url1, elm) {
