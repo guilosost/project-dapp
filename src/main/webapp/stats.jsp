@@ -101,5 +101,16 @@ function changeSize(id) {
 		<p>Views: ${bestVideo.viewsTotal}</p>
 	</fieldset>
 
+	<fieldset id="youtube">
+		<legend>Youtube Channel Stats</legend>
+		<p>Token: ${youtubeToken}</p>
+		<c:forEach items="${requestScope.ytStats.items}" var="stat">
+			<p>View Count: ${stat.statistics.viewCount}</p>
+			<p>Comment Count: ${stat.statistics.commentCount}</p>
+			<p>Subscriber Count: ${stat.statistics.subscriberCount}</p>
+			<p>Video Count: ${stat.statistics.videoCount}</p>
+		</c:forEach>
+	</fieldset>
+
 </body>
 </html>

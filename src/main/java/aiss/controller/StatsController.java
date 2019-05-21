@@ -17,6 +17,8 @@ import aiss.model.deviantart.DeviantArtUser;
 import aiss.model.deviantart.SearchDeviantArt;
 import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
+import aiss.model.resource.YoutubeResource;
+import aiss.model.youtube.ChannelStats;
 
 public class StatsController extends HttpServlet {
 
@@ -27,6 +29,7 @@ public class StatsController extends HttpServlet {
 
 		String deviantArtToken = (String) req.getSession().getAttribute("DeviantArt-token");
 		String dailymotionToken = (String) req.getSession().getAttribute("Dailymotion-token");
+		String youtubeToken = (String) req.getSession().getAttribute("Youtube-token");
 		RequestDispatcher rd = null;
 
 		if (deviantArtToken != null && !"".equals(deviantArtToken)) {
@@ -40,7 +43,7 @@ public class StatsController extends HttpServlet {
 
 				log.log(Level.FINE, r.getStats().getFavourites().toString());
 			}
-			
+
 			log.log(Level.FINE, deviantUser.getUser().getUsername());
 
 //			rd = req.getRequestDispatcher("/stats.jsp");
@@ -77,6 +80,20 @@ public class StatsController extends HttpServlet {
 			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
 			req.getRequestDispatcher("/AuthController/Dailymotion").forward(req, resp);
 		}
+
+//		if (youtubeToken != null && !"".equals(youtubeToken)) {
+//			YoutubeResource yResource = new YoutubeResource(youtubeToken);
+//			ChannelStats ytStats = yResource.getChannelStats();
+//
+//			log.log(Level.FINE, "Channel ID: " + ytStats.getItems().get(0).getId());
+//
+//			rd = req.getRequestDispatcher("/stats.jsp");
+//			req.setAttribute("channelStats", ytStats.getItems());
+//			rd.forward(req, resp);
+//		} else {
+//			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
+//			req.getRequestDispatcher("/AuthController/Youtube").forward(req, resp);
+//		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

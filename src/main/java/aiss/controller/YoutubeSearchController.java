@@ -55,7 +55,6 @@ public class YoutubeSearchController extends HttpServlet {
 			req.setAttribute("youtubeLikedVideos", likedVideos.getItems());
 			req.setAttribute("youtubeDislikedVideos", dislikedVideos.getItems());
 			req.setAttribute("youtubeToken", youtubeToken);
-			req.setAttribute("channelStats", channelStats.getItems());
 //			req.setAttribute("watchLaterVideos", watchLater.getItems());
 			rd.forward(req, resp);
 		}

@@ -72,8 +72,8 @@ public class YoutubeResource {
 		return youtubeDislikedVideos;
 	}
 
-	public ChannelStats getChannelStats() throws UnsupportedEncodingException {
-		String uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCQ2pMpd2K2yHS6q40G9oJGQ"
+	public ChannelStats getChannelStats() throws UnsupportedEncodingException { // UCQ2pMpd2K2yHS6q40G9oJGQ
+		String uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCAW-NpUFkMyCNrvRSSGIvDQ"
 				+ "&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
 
 		log.log(Level.FINE, "Youtube ChannelStats URI: " + uri);
