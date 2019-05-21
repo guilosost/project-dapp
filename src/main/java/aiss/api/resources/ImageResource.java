@@ -72,7 +72,13 @@ public class ImageResource {
 		if (image.getId() == null || "".equals(image.getId())) {
 			throw new BadRequestException("The id cannot be null");
 		}
-		imageRepository.addImage(image);
+		for (Image m : imageRepository.getAllImages()) {
+			if (m.getId().equals(image.getId())) {
+				throw new IllegalArgumentException("Ya existe un recurso con la ID seleccionada.");
+			} else {
+				imageRepository.addImage(image);
+			}
+		}
 
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(image.getId());
