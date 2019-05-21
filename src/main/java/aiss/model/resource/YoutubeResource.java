@@ -9,6 +9,7 @@ import org.restlet.resource.ClientResource;
 
 import aiss.model.youtube.ChannelStats;
 import aiss.model.youtube.GetUserVideos;
+import aiss.model.youtube.SearchChannelVideos;
 import aiss.model.youtube.YoutubeRatedVideoGet;
 import aiss.model.youtube.YoutubeSearch;
 
@@ -94,5 +95,18 @@ public class YoutubeResource {
 		GetUserVideos userVideos = cr.get(GetUserVideos.class);
 
 		return userVideos;
+	}
+
+	public SearchChannelVideos getMostViewedVideo() throws UnsupportedEncodingException {
+		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet%2Cid&channelId=UCQ2pMpd2K2yHS6q40G9oJGQ"
+				+ "" + "&order=viewCount&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
+
+		log.log(Level.FINE, "Youtube Most Viewed Video URI: " + uri);
+
+		ClientResource cr = new ClientResource(uri);
+
+		SearchChannelVideos channelVideos = cr.get(SearchChannelVideos.class);
+
+		return channelVideos;
 	}
 }
