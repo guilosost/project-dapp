@@ -19,6 +19,7 @@ import aiss.model.resource.DailymotionResource;
 import aiss.model.resource.DeviantArtResource;
 import aiss.model.resource.YoutubeResource;
 import aiss.model.youtube.ChannelStats;
+import aiss.model.youtube.SearchChannelVideos;
 
 public class StatsController extends HttpServlet {
 
@@ -81,19 +82,21 @@ public class StatsController extends HttpServlet {
 			req.getRequestDispatcher("/AuthController/Dailymotion").forward(req, resp);
 		}
 
-//		if (youtubeToken != null && !"".equals(youtubeToken)) {
-//			YoutubeResource yResource = new YoutubeResource(youtubeToken);
-//			ChannelStats ytStats = yResource.getChannelStats();
-//
-//			log.log(Level.FINE, "Channel ID: " + ytStats.getItems().get(0).getId());
-//
-//			rd = req.getRequestDispatcher("/stats.jsp");
-//			req.setAttribute("channelStats", ytStats.getItems());
-//			rd.forward(req, resp);
-//		} else {
-//			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
-//			req.getRequestDispatcher("/AuthController/Youtube").forward(req, resp);
-//		}
+		if (youtubeToken != null && !"".equals(youtubeToken)) {
+			YoutubeResource yResource = new YoutubeResource(youtubeToken);
+			ChannelStats ytStats = yResource.getChannelStats();
+			SearchChannelVideos ytMostViewedVideo = yResource.getMostViewedVideo();
+
+			log.log(Level.FINE, "Channel ID: " + ytStats.getItems().get(0).getId());
+
+			rd = req.getRequestDispatcher("/stats.jsp");
+			req.setAttribute("channelStats", ytStats.getItems());
+			req.setAttribute("mostViewedVideo", ytMostViewedVideo.getItems().get(0));
+			rd.forward(req, resp);
+		} else {
+			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
+			req.getRequestDispatcher("/AuthController/Youtube").forward(req, resp);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
