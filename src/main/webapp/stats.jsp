@@ -6,111 +6,124 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/header-footer.css">
 <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Stats</title>
-<script>
-
-function postComentarioDA(url1, token1, id1) {
-	const access_token1 = token1;
-	const devid = id1;
-	console.log(token1 + " ::::: " + url1);
-    const URL = url1 + "?access_token=" + access_token1;
-    const Data = "body=" + document.getElementById(devid).value;
-    document.getElementById(devid).value = "Comentario publicado!";
-    console.log(Data);
-    const othePram= {
-        method: 'POST',
-        //mode: "no-cors",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-             },
-        body: Data
-       };
-        
-        //.then(response=>console.info(response.type))// opaque
-    fetch(URL,othePram)
-    .then(data=>{return data.json()})
-    .then(res=>{console.log(res)})
-    .catch(error=>console.log(error));
+<style>
+h3 {
+	text-decoration: underline;
 }
-
-function changeSize(id) {
-	console.log("Cambiando tamaño de " + id);
-	var image = document.getElementById(id+"-i");
-	console.log(image);
-	if(image.style.width != "100%") {
-    image.style.width = '100%';
-	} else if(image.style.width != "20%") {
-	image.style.width = '20%';
-	}
-}
-</script>
+</style>
 </head>
 <body>
+	<header class="header">
+		<a class="title" href="index.jsp"><h1 class="title">
+				<form id="searchForm" action="SearchController" method="post">
+					<img class="logo" src="images/logo-dapp-header(transparente).png">Project
+					DAPP</a><input style="margin-left: 100px" type="text" id="searchQuery"
+			name="searchQuery" required /> <input type="hidden"
+			id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
+			type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
+			value="1" /> <input type="hidden" id="nextYoutubePage"
+			name="nextYoutubePage" value="" /> <input type="submit"
+			name="searchBtn" title="search" value="search"></form>
+		</h1>
 
-	<fieldset id="deviantArt">
-		<legend> DeviantArt User Stats </legend>
-		<h3>
-			${deviantArtUser.user.username} <img
-				src='${deviantArtUser.user.usericon}' height="10%" width="10%" />
-		</h3>
-		<p>Deviations: ${deviations}</p>
-		<p>Comentarios: ${deviantArtUser.stats.userComments}</p>
-		<p>Favoritos: ${deviantArtUser.stats.userFavourites}</p>
-		<p>Visitas al perfil: ${deviantArtUser.stats.profilePageviews}</p>
-		<p>Comentarios en el perfil:
-			${deviantArtUser.stats.profileComments}</p>
+	</header>
+	<div class="flex">
+		<fieldset style="background: rgba(24, 204, 63, 0.7); margin-top: 5px;" id="deviantArt">
+			<legend>
+				<img src="images/DeviantArtLogo.png" alt="logo_deviantart">
+			</legend>
+			<h3>
+				${deviantArtUser.user.username}<img
+					src='${deviantArtUser.user.usericon}' height="10%" width="10%"
+					style="margin-bottom: -10px;" />
+			</h3>
+			<p>
+				<b>Deviations:</b> ${deviations}<br> <b>Your Comments:</b>
+				${deviantArtUser.stats.userComments}<br> <b>Your Favorites:</b>
+				${deviantArtUser.stats.userFavourites}
+			</p>
+			<p>
+				<b>Profile Views:</b> ${deviantArtUser.stats.profilePageviews}<br>
+				<b>Profile Comments:</b> ${deviantArtUser.stats.profileComments}
+			</p>
 
-		<h3>Mejor imagen: ${deviantArtBestImage.title}</h3>
-		<p>${deviantArtBestImage.deviationid}</p>
-		<img id="${deviantArtBestImage.deviationid}-i"
-			src="${deviantArtBestImage.preview.src}" class="veinte"
-			onclick="changeSize('${deviantArtBestImage.deviationid}')"
-			height="40%" width="40%" />
-		<p>Comentarios: ${deviantArtBestImage.stats.comments}</p>
-		<p>Favoritos: ${deviantArtBestImage.stats.favourites}</p>
+			<h3>Best Image: ${deviantArtBestImage.title}</h3>
+			<img id="${deviantArtBestImage.deviationid}-i"
+				src="${deviantArtBestImage.preview.src}"
+				onclick="changeSize('${deviantArtBestImage.deviationid}')" />
+			<p>
+				<b>Comments:</b> ${deviantArtBestImage.stats.comments}<br> <b>Favorites:</b>
+				${deviantArtBestImage.stats.favourites}
+			</p>
+		</fieldset>
 
-		<textarea id="${deviantArtBestImage.deviationid}" class="fillable"
-			name="comentario" maxlength="50"></textarea>
-		<img src="images/comment.png" alt="icono_comentar"
-			onclick="postComentarioDA('https://www.deviantart.com/api/v1/oauth2/comments/post/deviation/${deviantArtBestImage.deviationid}', '${deviantArtToken}', '${deviantArtBestImage.deviationid}')">
-		<br>
-	</fieldset>
+		<fieldset style="background: rgba(0, 170, 255, 0.7); margin-top: 10px;"
+			id="dailymotion">
+			<legend>
+				<img src="images/DailymotionLogo.png" alt="logo_dailymotion">
+			</legend>
+			<h3>${dailymotionStats.username}</h3>
+			<p>
+				<b>Followers:</b> ${dailymotionStats.followersTotal}<br> <b>Videos:</b>
+				${dailymotionStats.videosTotal}
+			</p>
+			<p>
+				<b>Total Views:</b> ${dailymotionStats.viewsTotal}<br> <b>Total
+					Likes:</b> ${totalLikes}
+			</p>
+			<h3>Viewest Video: ${bestVideo.title}</h3>
 
-	<fieldset id="dailymotion">
-		<legend> Dailymotion User Stats </legend>
-		<h3>${dailymotionStats.username}</h3>
-		<img src='${dailymotionStats.avatar190Url}' />
-		<p>Followers: ${dailymotionStats.followersTotal}</p>
-		<p>Videos: ${dailymotionStats.videosTotal}</p>
-		<p>Total Views: ${dailymotionStats.viewsTotal}</p>
-		<p>Total Likes: ${totalLikes}</p>
-	</fieldset>
+			<iframe frameborder="0" width="345" height="190"
+				src='http://www.dailymotion.com/embed/video/${bestVideo.id}'
+				allowfullscreen allow="autoplay"></iframe>
 
-	<fieldset id="dailymotion">
-		<legend> Dailymotion Viewest Video </legend>
-		<h3>${bestVideo.title}</h3>
-		<p>${dailymotionToken}</p>
-		<iframe frameborder="0" width="340" height="130"
-			src='http://www.dailymotion.com/embed/video/${bestVideo.id}'
-			allowfullscreen allow="autoplay"></iframe>
+			<p>
+				<b>Views:</b> ${bestVideo.viewsTotal}<br> <b>Likes:</b>
+				${bestVideo.likesTotal}
+			</p>
+		</fieldset>
 
-		<p>Likes: ${bestVideo.likesTotal}</p>
-		<p>Views: ${bestVideo.viewsTotal}</p>
-	</fieldset>
+		<fieldset style="background: rgba(255, 0, 0, 0.7); margin-top: 7px;"
+			id="youtube">
+			<legend>
+				<img src="images/YouTubeLogo.png" alt="logo_youtube">
+			</legend>
+			<h3>${youtubeUsername}</h3>
+			<p>
+				<b>Subscribers:</b> ${youtubeSubscriber}<br> <b>Videos:</b>
+				${youtubeNumVideos}
+			</p>
+			<p>
+				<b>Total Views:</b> ${youtubeViews}<br> <b>Total Likes:</b>
+				${youtubeLikes}<br> <b>Total Dislikes:</b> ${youtubeDislikes}<br>
+				<b>Total Comments:</b> ${youtubeComments}
+			</p>
+			<h3>Viewest Video: ${youtubeMostViewedTitle}</h3>
 
-	<fieldset id="youtube">
-		<legend>Youtube Channel Stats</legend>
-		<p>Token: ${youtubeToken}</p>
-		<c:forEach items="${requestScope.ytStats.items}" var="stat">
-			<p>View Count: ${stat.statistics.viewCount}</p>
-			<p>Comment Count: ${stat.statistics.commentCount}</p>
-			<p>Subscriber Count: ${stat.statistics.subscriberCount}</p>
-			<p>Video Count: ${stat.statistics.videoCount}</p>
-		</c:forEach>
-	</fieldset>
+			<iframe width="345" height="190"
+				src="https://www.youtube.com/embed/<c:out value="${youtubeMostViewed.id}"/>?feature=oembed"
+				frameborder="0"
+				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen data-rocket-lazyload="fitvidscompatible"
+				data-lazy-src="https://www.youtube.com/embed/<c:out value="${youtubeMostViewed.id}"/>?feature=oembed"
+				class="lazyloaded" data-was-processed="true"></iframe>
 
+			<p>
+				<b>Views:</b> ${youtubeMostViewed.statistics.viewCount}<br> <b>Likes:</b>
+				${youtubeMostViewed.statistics.likeCount}<br> <b>Dislikes:</b>
+				${youtubeMostViewed.statistics.dislikeCount}<br> <b>Comments:</b>
+				${youtubeMostViewed.statistics.commentCount}
+			</p>
+		</fieldset>
+	</div>
+
+	<footer class="footer">
+		<p class="texto">SOBRE NOSOTROS</p>
+	</footer>
 </body>
 </html>

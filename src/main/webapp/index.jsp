@@ -22,12 +22,12 @@
 				<input style="margin-left: 100px" type="text" name="searchQuery" required />
 				<input type="hidden" id="nextDeviantPage" name="nextDeviantPage" value="0" /> 
 				<input type="hidden" id="nextDailymotionPage" name="nextDailymotionPage" value="1" />
+				<input type="hidden" name="nextYoutubePage" value="" />
 				<input type="submit" name="searchBtn" title="search" value="search">
 			</form>
 		</h1>
-
 	</header>
-
+<div style="background: rgb(255,255,255,0.7); border-radius: 11px;">
 	<p class="texto">Este proyecto va enfocado a facilitar la
 		publicación de imágenes en el ámbito digital. La aplicación reúne
 		cuatro aplicaciones de image hosting service que pueden usarse para
@@ -81,6 +81,7 @@
 				<li><c:out value='${sessionScope["Youtube-token"]}' /></li>
 			</ul></li>
 	</ul>
+</div>
 
 	<footer class="footer">
 		<p class="texto">SOBRE NOSOTROS</p>

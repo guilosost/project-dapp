@@ -9,7 +9,7 @@ import org.restlet.resource.ClientResource;
 
 import aiss.model.dailymotion.DailymotionSearch;
 import aiss.model.dailymotion.DailymotionUserStats;
-import aiss.model.dailymotion.List;
+import aiss.model.dailymotion.DailymotionVideo;
 
 public class DailymotionResource {
 
@@ -68,14 +68,14 @@ public class DailymotionResource {
 		DailymotionSearch dailymotionBestVideo = cr.get(DailymotionSearch.class);
 		
 		Integer likes = 0;
-		for (List daily : dailymotionBestVideo.getList()) {
+		for (DailymotionVideo daily : dailymotionBestVideo.getList()) {
 			likes += daily.getLikesTotal();
 		}
 		
 		return likes;
 	}
 	
-	public List getBestOwnVideo() throws UnsupportedEncodingException {
+	public DailymotionVideo getBestOwnVideo() throws UnsupportedEncodingException {
 		String uri = "https://api.dailymotion.com/user/me/videos?fields=id,likes_total,owner.url,owner.username,title,views_last_day,views_last_month,views_last_week,views_total&access_token=" + access_token;
 
 		log.log(Level.FINE, "Dailymotion Best Video URI: " + uri);
@@ -87,8 +87,8 @@ public class DailymotionResource {
 		DailymotionSearch dailymotionBestVideo = cr.get(DailymotionSearch.class);
 		
 
-		List bestVideo = null;
-		for (List daily : dailymotionBestVideo.getList()) {
+		DailymotionVideo bestVideo = null;
+		for (DailymotionVideo daily : dailymotionBestVideo.getList()) {
 			if (bestVideo == null) {
 				bestVideo = daily;
 			} else if (bestVideo != null && daily.getViewsTotal() > bestVideo.getViewsTotal()) {

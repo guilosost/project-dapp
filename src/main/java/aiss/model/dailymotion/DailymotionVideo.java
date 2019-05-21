@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "views_last_week",
     "views_total"
 })
-public class List {
+public class DailymotionVideo {
 
     @JsonProperty("id")
     private String id;
