@@ -160,47 +160,50 @@ public class YoutubeResource {
 //	}
 
 	public List<String> getStats() throws UnsupportedEncodingException {
-		VideoSnippet named = getOwnYoutubeVideos().getItems().get(0).getSnippet();
-		List<StatisticsItem> stats = getUserStatistics().getItems();
-
 		Integer comments = 0;
 		Integer views = 0;
 		Integer likes = 0;
 		Integer dislikes = 0;
-		for (StatisticsItem st : stats) {
-			comments += Integer.valueOf(st.getStatistics().getCommentCount());
-			views += Integer.valueOf(st.getStatistics().getViewCount());
+		String name = "";
+		String id = "";
+		String subscribers = "";
+		
+		List<GetUserVideosItem> items = getOwnYoutubeVideos().getItems();
+		if (!items.isEmpty()) {
+			VideoSnippet named = items.get(0).getSnippet();
+			List<StatisticsItem> stats = getUserStatistics().getItems();
 
-			likes += Integer.valueOf(st.getStatistics().getLikeCount());
-			dislikes += Integer.valueOf(st.getStatistics().getDislikeCount());
+			comments = 0;
+			views = 0;
+			likes = 0;
+			dislikes = 0;
+
+			for (StatisticsItem st : stats) {
+				comments += Integer.valueOf(st.getStatistics().getCommentCount());
+				views += Integer.valueOf(st.getStatistics().getViewCount());
+
+				likes += Integer.valueOf(st.getStatistics().getLikeCount());
+				dislikes += Integer.valueOf(st.getStatistics().getDislikeCount());
+
+			}
+
+			name = named.getChannelTitle();
+			id = named.getChannelId();
+
+			// Subscribers
+			String uri2 = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + id + "&access_token="
+					+ access_token;
+
+			log.log(Level.FINE, "Youtube ChannelStats URI: " + uri2);
+
+			ClientResource cr2 = new ClientResource(uri2);
+
+			ChannelStats channelStats = cr2.get(ChannelStats.class);
+
+			subscribers = channelStats.getItems().get(0).getStatistics().getSubscriberCount();
 
 		}
 
-		String name = named.getChannelTitle();
-		String id = named.getChannelId();
-
-		// Profile Pic
-//		String uri = "https://www.googleapis.com/youtube/v3/search?part=snippet%2Cid&channelId=" + id
-//				+ "&order=viewCount&key=AIzaSyB9D0D-rCyoI_nOqtMhn_u1F0BPv2g_odo";
-//
-//		log.log(Level.FINE, "Youtube Get Profile Pic URI: " + uri);
-//
-//		ClientResource cr = new ClientResource(uri);
-//		SearchChannelVideos channelVideos = cr.get(SearchChannelVideos.class);
-//		String url = channelVideos.getItems().get(0).getSnippet().getThumbnails().getMedium().getUrl();
-
-		// Subscribers
-		String uri2 = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + id
-				+ "&access_token=" + access_token;
-
-		log.log(Level.FINE, "Youtube ChannelStats URI: " + uri2);
-
-		ClientResource cr2 = new ClientResource(uri2);
-
-		ChannelStats channelStats = cr2.get(ChannelStats.class);
-
-		String subscribers = channelStats.getItems().get(0).getStatistics().getSubscriberCount();
-		
 		List<String> result = new ArrayList<>();
 		result.add(name);
 		result.add(id);
@@ -209,7 +212,6 @@ public class YoutubeResource {
 		result.add(String.valueOf(comments));
 		result.add(String.valueOf(views));
 		result.add(subscribers);
-//		result.add(url);
 
 		return result;
 	}

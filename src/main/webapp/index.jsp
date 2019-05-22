@@ -15,7 +15,7 @@
 
 <body>
 	<header class="header">
-		<h1 class="title-header">
+		<h1 class="title-index">
 			<form id="searchForm" action="SearchController" method="post">
 				<img class="logo" src="images/logo-dapp-header(transparente).png">Project
 				DAPP <input style="margin-left: 100px" type="text"
@@ -62,7 +62,7 @@
 	</div>
 
 	<footer class="footer">
-		<a href="aboutus.html" class="texto">SOBRE NOSOTROS </a>
+		<a href="aboutus.html" class="texto" style="color: white;">SOBRE NOSOTROS </a>
 	</footer>
 
 </body>

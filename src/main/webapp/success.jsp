@@ -269,14 +269,14 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	<footer class="footer">
 	<div style=" margin-right: 5px; display: flex; float: right;">
 	<img src="images/next(icon).png" onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')"></div>
-	<a href="aboutus.html" class="texto">SOBRE NOSOTROS </a>
+	<a href="aboutus.html" class="texto" style="color: white;">SOBRE NOSOTROS </a>
 	</footer>
 </body>
 
 <script>
 function emptyBox(id) {
 	console.log("Me activo");
-	if(document.getElementById(videoId + "-c").value == "ï¿½Comentario publicado con ï¿½xito!") {
+	if(document.getElementById(videoId + "-c").value == "¡Comentario publicado con éxito!") {
 		document.getElementById(videoId + "-c").value = "";	
 	}
 }
@@ -285,7 +285,7 @@ function postCommentYoutube(url1, videoId, channelId) {
 	const chan = channelId;
 	const vid = videoId;
 	const text = document.getElementById(videoId + "-c").value;
-	document.getElementById(videoId + "-c").value = "ï¿½Comentario publicado con ï¿½xito!";
+	document.getElementById(videoId + "-c").value = "¡Comentario publicado con éxito!";
 	console.log("Channel" + channelId + " ::::: " + "Video " + videoId);
 	console.log(url1);
 	const URL = url1;
@@ -452,7 +452,7 @@ function postComentarioDA(url1, token1, id1) {
 	console.log(token1 + " ::::: " + url1);
     const URL = url1 + "?access_token=" + access_token1;
     const Data = "body=" + document.getElementById(devid + "-c").value;
-    document.getElementById(devid + "-c").value = "ï¿½Comentario publicado con ï¿½xito!";
+    document.getElementById(devid + "-c").value = "¡Comentario publicado con éxito!";
     console.log(Data);
     const othePram= {
         method: 'POST',
@@ -471,20 +471,9 @@ function postComentarioDA(url1, token1, id1) {
 }
 
 function changeSize(id) {
-	console.log("Cambiando tamaï¿½o de " + id);
+	console.log("Cambiando tamaño de " + id);
 	var image = document.getElementById(id+"-i");
 	console.log(image);
-	/* if(image.style.width != "99%") {
-    image.style.width = '99%';/* 
-    image.style.margin-bottom = '5px';
-    image.style.margin-top = '5px';
-    image.style.border-radius = '4px'; 
-	} else if(image.style.width != "20%") {
-	image.style.width = '20%';/* 
-    image.style.margin-bottom = 'none';
-    image.style.margin-top = 'none';
-    image.style.border-radius = 'none';
-	} */
 	
 	if(image.classList.contains("veinte")) {
 		image.classList.remove("veinte");

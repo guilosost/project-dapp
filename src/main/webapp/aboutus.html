@@ -10,16 +10,16 @@
 </head>
 <body>
 	<header class="header">
-		<h1 class="title-index">
-			<form id="searchForm" action="SearchController" method="post">
-				<img class="logo" src="images/logo-dapp-header(transparente).png">Project
-				DAPP <input style="margin-left: 100px" type="text"
-					name="searchQuery" required /> <input type="hidden"
-					id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
-					type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
-					value="1" /> <input type="hidden" name="nextYoutubePage" value="" />
-				<input type="submit" name="searchBtn" title="search" value="search">
-			</form>
+		<a class="title-index" href="index.jsp"><h1 class="title">
+				<form id="searchForm" action="SearchController" method="post">
+					<img class="logo" src="images/logo-dapp-header(transparente).png">Project
+					DAPP</a><input style="margin-left: 100px" type="text" id="searchQuery"
+			name="searchQuery" required /> <input type="hidden"
+			id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
+			type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
+			value="1" /> <input type="hidden" id="nextYoutubePage"
+			name="nextYoutubePage" value="" /> <input type="submit"
+			name="searchBtn" title="search" value="search"></form>
 		</h1>
 	</header>
 	<div style="background: rgb(255, 255, 255, 0.7); border-radius: 11px;">
@@ -41,7 +41,7 @@
 	</div>
 
 	<footer class="footer">
-		<a href="aboutus.html" class="texto">SOBRE NOSOTROS </a>
+		<p class="texto">SOBRE NOSOTROS </p>
 	</footer>
 
 </body>

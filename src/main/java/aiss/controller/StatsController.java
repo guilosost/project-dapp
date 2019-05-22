@@ -56,9 +56,6 @@ public class StatsController extends HttpServlet {
 			req.setAttribute("deviantArtBestImage", bestImage);
 			req.setAttribute("deviantArtToken", deviantArtToken);
 
-		} else {
-			log.info("Trying to access DeviantArt without an access token, redirecting to OAuth servlet");
-			req.getRequestDispatcher("/AuthController/DeviantArt").forward(req, resp);
 		}
 
 		if (dailymotionToken != null && !"".equals(dailymotionToken)) {
@@ -75,17 +72,14 @@ public class StatsController extends HttpServlet {
 			req.setAttribute("bestVideo", dailyBestVideo);
 			req.setAttribute("totalLikes", totalLikes);
 			req.setAttribute("dailymotionToken", dailymotionToken);
-		} else {
-			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
-			req.getRequestDispatcher("/AuthController/Dailymotion").forward(req, resp);
 		}
 
 		if (youtubeToken != null && !"".equals(youtubeToken)) {
 			YoutubeResource yResource = new YoutubeResource(youtubeToken);
-			//Statistics ytStats = yResource.getChannelStats();
 			GetUserVideos youtubeVideos = yResource.getOwnYoutubeVideos();
 			UserStatistics youtubeStatistics = yResource.getUserStatistics();
-			
+
+			// Sacando estadísticas y datos de usuario
 			List<String> stats = yResource.getStats();
 			String youtubeUsername = stats.get(0);
 			String youtubeSubscribers = stats.get(6);
@@ -93,32 +87,35 @@ public class StatsController extends HttpServlet {
 			String youtubeDislikes = stats.get(3);
 			String youtubeComments = stats.get(4);
 			String youtubeViews = stats.get(5);
-			//GetUserVideosItem youtubeMostViewed= yResource.getMostViewedVideo();
 
 			log.log(Level.FINE, "Followers: " + youtubeSubscribers);
-			
+
 			// Sacando mejor vídeo
 			Integer viewsBestVideo = 0, resultViews = 0;
-			StatisticsItem youtubeMostViewed = youtubeStatistics.getItems().get(0);
-			for (StatisticsItem mv : youtubeStatistics.getItems()) {
-				viewsBestVideo = Integer.valueOf(mv.getStatistics().getViewCount());
-				resultViews = Integer.valueOf(youtubeMostViewed.getStatistics().getViewCount());
-				
-				if (viewsBestVideo > resultViews) {
-					youtubeMostViewed = mv;
+			List<StatisticsItem> items = youtubeStatistics.getItems();
+
+			if (!items.isEmpty()) {
+				StatisticsItem youtubeMostViewed = youtubeStatistics.getItems().get(0);
+				for (StatisticsItem mv : youtubeStatistics.getItems()) {
+					viewsBestVideo = Integer.valueOf(mv.getStatistics().getViewCount());
+					resultViews = Integer.valueOf(youtubeMostViewed.getStatistics().getViewCount());
+
+					if (viewsBestVideo > resultViews) {
+						youtubeMostViewed = mv;
+					}
 				}
+
+				String youtubeMostViewedTitle = "";
+				for (GetUserVideosItem gi : youtubeVideos.getItems()) {
+					if (youtubeMostViewed.getId().equals(gi.getId().getVideoId())) {
+						youtubeMostViewedTitle = gi.getSnippet().getTitle();
+					}
+				}
+
+				req.setAttribute("youtubeMostViewed", youtubeMostViewed);
+				req.setAttribute("youtubeMostViewedTitle", youtubeMostViewedTitle);
 			}
 
-			String youtubeMostViewedTitle = "";
-			for (GetUserVideosItem gi : youtubeVideos.getItems()) {
-				if (youtubeMostViewed.getId().equals(gi.getId().getVideoId())) {
-					youtubeMostViewedTitle = gi.getSnippet().getTitle();
-				}
-			}
-			
-			//Sacando estadísticas y datos de usuario
-
-			rd = req.getRequestDispatcher("/stats.jsp");
 			req.setAttribute("youtubeUsername", youtubeUsername);
 			req.setAttribute("youtubeSubscriber", youtubeSubscribers);
 			req.setAttribute("youtubeNumVideos", youtubeVideos.getItems().size());
@@ -126,13 +123,11 @@ public class StatsController extends HttpServlet {
 			req.setAttribute("youtubeDislikes", youtubeDislikes);
 			req.setAttribute("youtubeComments", youtubeComments);
 			req.setAttribute("youtubeViews", youtubeViews);
-			req.setAttribute("youtubeMostViewed", youtubeMostViewed);
-			req.setAttribute("youtubeMostViewedTitle", youtubeMostViewedTitle);
-			rd.forward(req, resp);
-		} else {
-			log.info("Trying to access Dailymotion without an access token, redirecting to OAuth servlet");
-			req.getRequestDispatcher("/AuthController/Youtube").forward(req, resp);
 		}
+
+		rd = req.getRequestDispatcher("/stats.jsp");
+		rd.forward(req, resp);
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

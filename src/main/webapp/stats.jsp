@@ -123,7 +123,7 @@ h3 {
 	</div>
 
 	<footer class="footer">
-		<a href="aboutus.html" class="texto">SOBRE NOSOTROS </a>
+		<a href="aboutus.html" class="texto" style="color: white;">SOBRE NOSOTROS </a>
 	</footer>
 </body>
 </html>
