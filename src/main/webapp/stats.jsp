@@ -19,7 +19,7 @@ h3 {
 </head>
 <body>
 	<header class="header">
-		<a class="title" href="index.jsp"><h1 class="title">
+		<a class="title-index" href="index.jsp"><h1 class="title">
 				<form id="searchForm" action="SearchController" method="post">
 					<img class="logo" src="images/logo-dapp-header(transparente).png">Project
 					DAPP</a><input style="margin-left: 100px" type="text" id="searchQuery"
