@@ -41,17 +41,17 @@ public class SearchController extends HttpServlet {
 		RequestDispatcher rd = null;
 
 		// Search for videos in Dailymotion
-		log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query);
-		DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
-		DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2, nextDailymotionPage);
-		DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
-		DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
+		if (dailymotionToken != null && !"".equals(dailymotionToken)) {
+			log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query);
+			DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
+			DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2, nextDailymotionPage);
+			DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
+			DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
 
-		for (DailymotionVideo l : dailymotionResults.getList()) {
-			l.setTitle(l.getTitle().substring(0, 50));
-		}
+			for (DailymotionVideo l : dailymotionResults.getList()) {
+				l.setTitle(l.getTitle().substring(0, 50));
+			}
 
-		if (dailymotionResults.getList() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("dailymotionVideos", dailymotionResults.getList());
 			req.setAttribute("nextDailymotionPage", nextDailymotionPage + 1);
@@ -61,21 +61,21 @@ public class SearchController extends HttpServlet {
 		}
 
 		// Search for videos in Youtube
-		log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
-		YoutubeResource youtube = new YoutubeResource(youtubeToken);
-		YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query, nextYoutubePage);
-		YoutubeRatedVideoGet likedVideos = youtube.getLikedVideos();
-		YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
+		if (youtubeToken != null && !"".equals(youtubeToken)) {
+			log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
+			YoutubeResource youtube = new YoutubeResource(youtubeToken);
+			YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query, nextYoutubePage);
+			YoutubeRatedVideoGet likedVideos = youtube.getLikedVideos();
+			YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
 
-		for (VideoItem v : youtubeResults.getVideoItems()) {
-			if (v.getVideoSnippet().getTitle().length() > 40)
-				v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
-		}
+			for (VideoItem v : youtubeResults.getVideoItems()) {
+				if (v.getVideoSnippet().getTitle().length() > 40)
+					v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
+			}
 
-		log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
-		log.log(Level.FINE, "Actual page " + nextYoutubePage);
+			log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
+			log.log(Level.FINE, "Actual page " + nextYoutubePage);
 
-		if (youtubeResults.getVideoItems() != null) {
 			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
 			req.setAttribute("nextYoutubePage", youtubeResults.getNextPageToken());
@@ -83,12 +83,11 @@ public class SearchController extends HttpServlet {
 			req.setAttribute("youtubeDislikedVideos", dislikedVideos.getItems());
 			req.setAttribute("youtubeToken", youtubeToken);
 		}
-		
-		// Search for images in DeviantArt
-		log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
-		log.log(Level.FINE, "Next page: " + nextDeviantPage);
 
+		// Search for images in DeviantArt
 		if (devianArtToken != null && !"".equals(devianArtToken)) {
+			log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
+			log.log(Level.FINE, "Next page: " + nextDeviantPage);
 			DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
 			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1, nextDeviantPage);
 			GetFolderByID deviantFavFolder = daResource.getDeviantArtFavs();
@@ -103,17 +102,13 @@ public class SearchController extends HttpServlet {
 
 			}
 
-			rd = req.getRequestDispatcher("/success.jsp");
 			req.setAttribute("deviantArtImages", deviantArtImagesResults.getResults());
 			req.setAttribute("nextDeviantPage", deviantArtImagesResults.getNextOffset());
 			req.setAttribute("deviantFavFolder", deviantFavFolder.getResults());
 			req.setAttribute("deviantArtToken", devianArtToken);
-			rd.forward(req, resp);
-		} else {
-			log.info("Trying to access DeviantArt without an access token, redirecting to OAuth servlet");
-			req.getRequestDispatcher("/AuthController/DeviantArt").forward(req, resp);
 		}
-
+		rd = req.getRequestDispatcher("/success.jsp");
+		rd.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

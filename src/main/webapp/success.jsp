@@ -26,7 +26,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 </head>
 <body>
 	<header class="header">
-		<a class="title" href="index.jsp"><h1 class="title">
+		<a class="title-header" href="index.jsp"><h1 class="title">
 				<form id="searchForm" action="SearchController" method="post">
 					<img class="logo" src="images/logo-dapp-header(transparente).png">Project
 					DAPP</a><input style="margin-left: 100px" type="text" id="searchQuery"
@@ -269,7 +269,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	<footer class="footer">
 	<div style=" margin-right: 5px; display: flex; float: right;">
 	<img src="images/next(icon).png" onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')"></div>
-	<p class="texto">SOBRE NOSOTROS</p>
+	<a href="aboutus.html" class="texto">SOBRE NOSOTROS </a>
 	</footer>
 </body>
 

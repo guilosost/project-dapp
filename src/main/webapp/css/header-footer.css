@@ -1,4 +1,4 @@
-.title-index {
+.title-header {
 	text-align: -webkit-center;
 	text-decoration: none;
 	font-size: 65px;
@@ -67,6 +67,10 @@
 		Roboto, Ubuntu, "Helvetica Neue", sans-serif;
 	margin-left: 200px;
 	margin-right: 200px;
+}
+
+a .texto {
+	color: white;
 }
 
 .buscador {

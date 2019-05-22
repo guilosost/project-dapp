@@ -9,11 +9,17 @@
 <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
-
 	<header class="header">
-		<h1 class="title-aboutus">
-			<img class="logo" src="images/logo-dapp-header(transparente).png">Project
-			DAPP
+		<h1 class="title-index">
+			<form id="searchForm" action="SearchController" method="post">
+				<img class="logo" src="images/logo-dapp-header(transparente).png">Project
+				DAPP <input style="margin-left: 100px" type="text"
+					name="searchQuery" required /> <input type="hidden"
+					id="nextDeviantPage" name="nextDeviantPage" value="0" /> <input
+					type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
+					value="1" /> <input type="hidden" name="nextYoutubePage" value="" />
+				<input type="submit" name="searchBtn" title="search" value="search">
+			</form>
 		</h1>
 	</header>
 	<div style="background: rgb(255, 255, 255, 0.7); border-radius: 11px;">

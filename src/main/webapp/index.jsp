@@ -15,7 +15,7 @@
 
 <body>
 	<header class="header">
-		<h1 class="title-index">
+		<h1 class="title-header">
 			<form id="searchForm" action="SearchController" method="post">
 				<img class="logo" src="images/logo-dapp-header(transparente).png">Project
 				DAPP <input style="margin-left: 100px" type="text"
