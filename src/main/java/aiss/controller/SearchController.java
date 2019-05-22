@@ -40,75 +40,81 @@ public class SearchController extends HttpServlet {
 
 		RequestDispatcher rd = null;
 
-		// Search for videos in Dailymotion
-		if (dailymotionToken != null && !"".equals(dailymotionToken)) {
-			log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query);
-			DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
-			DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2, nextDailymotionPage);
-			DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
-			DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
+		if ((dailymotionToken != null && !"".equals(dailymotionToken))
+				|| (youtubeToken != null && !"".equals(youtubeToken))
+				|| (devianArtToken != null && !"".equals(devianArtToken))) {
+			// Search for videos in Dailymotion
+			if (dailymotionToken != null && !"".equals(dailymotionToken)) {
+				log.log(Level.FINE, "Searching for Dailymotion videos that contain " + query);
+				DailymotionResource dailymotion = new DailymotionResource(dailymotionToken);
+				DailymotionSearch dailymotionResults = dailymotion.getDailymotionVideos(query2, nextDailymotionPage);
+				DailymotionSearch dailymotionLikedVideos = dailymotion.getLikedVideos();
+				DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
 
-			for (DailymotionVideo l : dailymotionResults.getList()) {
-				l.setTitle(l.getTitle().substring(0, 50));
-			}
-
-			rd = req.getRequestDispatcher("/success.jsp");
-			req.setAttribute("dailymotionVideos", dailymotionResults.getList());
-			req.setAttribute("nextDailymotionPage", nextDailymotionPage + 1);
-			req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
-			req.setAttribute("dailymotionWatchLaterVideos", dailymotionWatchLaterVideos.getList());
-			req.setAttribute("dailymotionToken", dailymotionToken);
-		}
-
-		// Search for videos in Youtube
-		if (youtubeToken != null && !"".equals(youtubeToken)) {
-			log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
-			YoutubeResource youtube = new YoutubeResource(youtubeToken);
-			YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query, nextYoutubePage);
-			YoutubeRatedVideoGet likedVideos = youtube.getLikedVideos();
-			YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
-
-			for (VideoItem v : youtubeResults.getVideoItems()) {
-				if (v.getVideoSnippet().getTitle().length() > 40)
-					v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
-			}
-
-			log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
-			log.log(Level.FINE, "Actual page " + nextYoutubePage);
-
-			rd = req.getRequestDispatcher("/success.jsp");
-			req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
-			req.setAttribute("nextYoutubePage", youtubeResults.getNextPageToken());
-			req.setAttribute("youtubeLikedVideos", likedVideos.getItems());
-			req.setAttribute("youtubeDislikedVideos", dislikedVideos.getItems());
-			req.setAttribute("youtubeToken", youtubeToken);
-		}
-
-		// Search for images in DeviantArt
-		if (devianArtToken != null && !"".equals(devianArtToken)) {
-			log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
-			log.log(Level.FINE, "Next page: " + nextDeviantPage);
-			DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
-			SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1, nextDeviantPage);
-			GetFolderByID deviantFavFolder = daResource.getDeviantArtFavs();
-
-			deviantArtImagesResults.getNextOffset();
-
-			for (int i = 0; i < deviantArtImagesResults.getResults().size(); i++) {
-				String title = deviantArtImagesResults.getResults().get(i).getTitle();
-				if (title.length() > 28) {
-					deviantArtImagesResults.getResults().get(i).setTitle(title.substring(0, 28));
+				for (DailymotionVideo l : dailymotionResults.getList()) {
+					l.setTitle(l.getTitle().substring(0, 50));
 				}
 
+				rd = req.getRequestDispatcher("/success.jsp");
+				req.setAttribute("dailymotionVideos", dailymotionResults.getList());
+				req.setAttribute("nextDailymotionPage", nextDailymotionPage + 1);
+				req.setAttribute("dailymotionLikedVideos", dailymotionLikedVideos.getList());
+				req.setAttribute("dailymotionWatchLaterVideos", dailymotionWatchLaterVideos.getList());
+				req.setAttribute("dailymotionToken", dailymotionToken);
 			}
 
-			req.setAttribute("deviantArtImages", deviantArtImagesResults.getResults());
-			req.setAttribute("nextDeviantPage", deviantArtImagesResults.getNextOffset());
-			req.setAttribute("deviantFavFolder", deviantFavFolder.getResults());
-			req.setAttribute("deviantArtToken", devianArtToken);
+			// Search for videos in Youtube
+			if (youtubeToken != null && !"".equals(youtubeToken)) {
+				log.log(Level.FINE, "Searching for Youtube videos that contain " + query);
+				YoutubeResource youtube = new YoutubeResource(youtubeToken);
+				YoutubeSearch youtubeResults = youtube.searchYoutubeVideos(query, nextYoutubePage);
+				YoutubeRatedVideoGet likedVideos = youtube.getLikedVideos();
+				YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
+
+				for (VideoItem v : youtubeResults.getVideoItems()) {
+					if (v.getVideoSnippet().getTitle().length() > 40)
+						v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
+				}
+
+				log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
+				log.log(Level.FINE, "Actual page " + nextYoutubePage);
+
+				rd = req.getRequestDispatcher("/success.jsp");
+				req.setAttribute("youtubeVideos", youtubeResults.getVideoItems());
+				req.setAttribute("nextYoutubePage", youtubeResults.getNextPageToken());
+				req.setAttribute("youtubeLikedVideos", likedVideos.getItems());
+				req.setAttribute("youtubeDislikedVideos", dislikedVideos.getItems());
+				req.setAttribute("youtubeToken", youtubeToken);
+			}
+
+			// Search for images in DeviantArt
+			if (devianArtToken != null && !"".equals(devianArtToken)) {
+				log.log(Level.FINE, "Searching for DeviantArt images that contain " + query);
+				log.log(Level.FINE, "Next page: " + nextDeviantPage);
+				DeviantArtResource daResource = new DeviantArtResource(devianArtToken);
+				SearchDeviantArt deviantArtImagesResults = daResource.getDeviantArtImages(query1, nextDeviantPage);
+				GetFolderByID deviantFavFolder = daResource.getDeviantArtFavs();
+
+				deviantArtImagesResults.getNextOffset();
+
+				for (int i = 0; i < deviantArtImagesResults.getResults().size(); i++) {
+					String title = deviantArtImagesResults.getResults().get(i).getTitle();
+					if (title.length() > 28) {
+						deviantArtImagesResults.getResults().get(i).setTitle(title.substring(0, 28));
+					}
+
+				}
+
+				req.setAttribute("deviantArtImages", deviantArtImagesResults.getResults());
+				req.setAttribute("nextDeviantPage", deviantArtImagesResults.getNextOffset());
+				req.setAttribute("deviantFavFolder", deviantFavFolder.getResults());
+				req.setAttribute("deviantArtToken", devianArtToken);
+			}
+			rd = req.getRequestDispatcher("/success.jsp");
+			rd.forward(req, resp);
+		} else {
+			req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		}
-		rd = req.getRequestDispatcher("/success.jsp");
-		rd.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

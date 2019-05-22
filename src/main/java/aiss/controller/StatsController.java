@@ -66,7 +66,6 @@ public class StatsController extends HttpServlet {
 			Integer totalLikes = spResource.getDailymotionTotalLikes();
 
 			log.log(Level.FINE, "Username: " + dailymotionStats.getUsername());
-			log.log(Level.FINE, "Title: " + dailyBestVideo.getTitle());
 
 			req.setAttribute("dailymotionStats", dailymotionStats);
 			req.setAttribute("bestVideo", dailyBestVideo);
