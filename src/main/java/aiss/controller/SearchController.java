@@ -52,8 +52,9 @@ public class SearchController extends HttpServlet {
 				DailymotionSearch dailymotionWatchLaterVideos = dailymotion.getWatchLaterVideos();
 
 				for (DailymotionVideo l : dailymotionResults.getList()) {
-					if(l.getTitle().length() > 50)
-					l.setTitle(l.getTitle().substring(0, 50));
+					if (l.getTitle().length() > 50) {
+						l.setTitle(l.getTitle().substring(0, 50));
+					}
 				}
 
 				rd = req.getRequestDispatcher("/success.jsp");
