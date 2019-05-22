@@ -26,7 +26,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 </head>
 <body>
 	<header class="header">
-		<a class="title-header" href="index.jsp"><h1 class="title">
+		<a class="title-index" href="index.jsp"><h1 class="title">
 				<form id="searchForm" action="SearchController" method="post">
 					<img class="logo" src="images/logo-dapp-header(transparente).png">Project
 					DAPP</a><input style="margin-left: 100px" type="text" id="searchQuery"
@@ -276,7 +276,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 <script>
 function emptyBox(id) {
 	console.log("Me activo");
-	if(document.getElementById(videoId + "-c").value == "¡Comentario publicado con éxito!") {
+	if(document.getElementById(videoId + "-c").value == "ï¿½Comentario publicado con ï¿½xito!") {
 		document.getElementById(videoId + "-c").value = "";	
 	}
 }
@@ -285,7 +285,7 @@ function postCommentYoutube(url1, videoId, channelId) {
 	const chan = channelId;
 	const vid = videoId;
 	const text = document.getElementById(videoId + "-c").value;
-	document.getElementById(videoId + "-c").value = "¡Comentario publicado con éxito!";
+	document.getElementById(videoId + "-c").value = "ï¿½Comentario publicado con ï¿½xito!";
 	console.log("Channel" + channelId + " ::::: " + "Video " + videoId);
 	console.log(url1);
 	const URL = url1;
@@ -452,7 +452,7 @@ function postComentarioDA(url1, token1, id1) {
 	console.log(token1 + " ::::: " + url1);
     const URL = url1 + "?access_token=" + access_token1;
     const Data = "body=" + document.getElementById(devid + "-c").value;
-    document.getElementById(devid + "-c").value = "¡Comentario publicado con éxito!";
+    document.getElementById(devid + "-c").value = "ï¿½Comentario publicado con ï¿½xito!";
     console.log(Data);
     const othePram= {
         method: 'POST',
@@ -471,7 +471,7 @@ function postComentarioDA(url1, token1, id1) {
 }
 
 function changeSize(id) {
-	console.log("Cambiando tamaño de " + id);
+	console.log("Cambiando tamaï¿½o de " + id);
 	var image = document.getElementById(id+"-i");
 	console.log(image);
 	/* if(image.style.width != "99%") {
