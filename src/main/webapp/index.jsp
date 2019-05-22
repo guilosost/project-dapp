@@ -27,7 +27,7 @@
 			</form>
 		</h1>
 	</header>
-	<div style="background: rgb(255, 255, 255, 0.7); border-radius: 11px;">
+	<div>
 		<ul id="button" class="logins">
 			<li style="float: left;"><a href="/AuthController/DeviantArt">
 					<button class="deviantart-button" role="link">Login
