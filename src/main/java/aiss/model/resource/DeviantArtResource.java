@@ -60,7 +60,6 @@ public class DeviantArtResource {
 
 		// Convertir JSON en .Java
 		SearchDeviantArt deviantArtSearch = cr.get(SearchDeviantArt.class);
-
 		return deviantArtSearch;
 	}
 

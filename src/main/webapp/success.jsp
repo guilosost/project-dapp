@@ -35,13 +35,15 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 			type="hidden" id="nextDailymotionPage" name="nextDailymotionPage"
 			value="1" /> <input type="hidden" id="nextYoutubePage"
 			name="nextYoutubePage" value="" /> <input type="submit"
-			name="searchBtn" title="search" value="search"></form>
+			name="searchBtn" title="search" value="search">
+		</form>
 		</h1>
 
 	</header>
 
 	<h2>
-		<img src="images/DeviantArtLogo.png" alt="logo_deviantart" style="cursor: auto;">
+		<img src="images/DeviantArtLogo.png" alt="logo_deviantart"
+			style="cursor: auto;">
 	</h2>
 	<div class="resultsSearch">
 
@@ -107,7 +109,8 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	</div>
 
 	<h2>
-		<img src="images/DailymotionLogo.png" alt="logo_deviantart" style="cursor: auto;">
+		<img src="images/DailymotionLogo.png" alt="logo_deviantart"
+			style="cursor: auto;">
 	</h2>
 	<div class="resultsSearch">
 
@@ -181,13 +184,16 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	</div>
 
 	<h2>
-		<img src="images/YouTubeLogo.png" alt="logo_youtube" style="cursor: auto;">
+		<img src="images/YouTubeLogo.png" alt="logo_youtube"
+			style="cursor: auto;">
 	</h2>
 	<div class="resultsSearch">
 		<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
 			<div class="results" style="background: rgba(255, 0, 0, 0.7)">
 				<h3>
-					<p><c:out value="${youtubeVideo.videoSnippet.title}" /></p>
+					<p>
+						<c:out value="${youtubeVideo.videoSnippet.title}" />
+					</p>
 				</h3>
 				<br>
 				<div class="botonesYT">
@@ -240,15 +246,14 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 				</div>
 				<div class="video"
 					style="margin-right: 4px; margin-bottom: 2px; margin-top: -16px;">
-					<iframe
-						width="300" height="160"
+					<iframe width="300" height="160"
 						src="https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?feature=oembed"
 						frameborder="0"
 						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen data-rocket-lazyload="fitvidscompatible"
 						data-lazy-src="https://www.youtube.com/embed/<c:out value="${youtubeVideo.id.videoId}"/>?feature=oembed"
 						class="lazyloaded" data-was-processed="true"></iframe>
-					
+
 				</div>
 				<br>
 				<div class="commentbox">
@@ -265,11 +270,16 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 			</div>
 		</c:forEach>
 	</div>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<footer class="footer">
-	<div style=" margin-right: 5px; display: flex; float: right;">
-	<img src="images/next(icon).png" onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')"></div>
-	<a href="aboutus.html" class="texto" style="color: white;">SOBRE NOSOTROS </a>
+		<div style="margin-right: 5px; display: flex; float: right;">
+			<img src="images/next(icon).png"
+				onclick="reload('${param.searchQuery}', '${requestScope.nextDeviantPage}', '${requestScope.nextYoutubePage}', '${requestScope.nextDailymotionPage}')">
+		</div>
+		<a href="aboutus.html" class="texto" style="color: white;">SOBRE
+			NOSOTROS </a>
 	</footer>
 </body>
 
