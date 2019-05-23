@@ -6,6 +6,10 @@ body {
 	background-image: url("../images/background.png");
 }
 
+img {
+	cursor: pointer;
+}
+
 h1 {
 	font-size: 2em;
 	font-weight: bold;

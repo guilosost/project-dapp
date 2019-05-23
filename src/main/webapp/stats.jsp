@@ -35,7 +35,7 @@ h3 {
 	<div class="flex">
 		<fieldset style="background: rgba(24, 204, 63, 0.7); margin-top: 5px;" id="deviantArt">
 			<legend>
-				<img src="images/DeviantArtLogo.png" alt="logo_deviantart">
+				<img src="images/DeviantArtLogo.png" alt="logo_deviantart" style="cursor: default;">
 			</legend>
 			<h3>
 				${deviantArtUser.user.username}<img
@@ -65,7 +65,7 @@ h3 {
 		<fieldset style="background: rgba(0, 170, 255, 0.7); margin-top: 10px;"
 			id="dailymotion">
 			<legend>
-				<img src="images/DailymotionLogo.png" alt="logo_dailymotion">
+				<img src="images/DailymotionLogo.png" alt="logo_dailymotion" style="cursor: default;">
 			</legend>
 			<h3>${dailymotionStats.username}</h3>
 			<p>
@@ -91,7 +91,7 @@ h3 {
 		<fieldset style="background: rgba(255, 0, 0, 0.7); margin-top: 7px;"
 			id="youtube">
 			<legend>
-				<img src="images/YouTubeLogo.png" alt="logo_youtube">
+				<img src="images/YouTubeLogo.png" alt="logo_youtube" style="cursor: default;">
 			</legend>
 			<h3>${youtubeUsername}</h3>
 			<p>

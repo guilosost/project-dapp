@@ -41,7 +41,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	</header>
 
 	<h2>
-		<img src="images/DeviantArtLogo.png" alt="logo_deviantart">
+		<img src="images/DeviantArtLogo.png" alt="logo_deviantart" style="cursor: auto;">
 	</h2>
 	<div class="resultsSearch">
 
@@ -107,7 +107,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	</div>
 
 	<h2>
-		<img src="images/DailymotionLogo.png" alt="logo_deviantart">
+		<img src="images/DailymotionLogo.png" alt="logo_deviantart" style="cursor: auto;">
 	</h2>
 	<div class="resultsSearch">
 
@@ -181,7 +181,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 	</div>
 
 	<h2>
-		<img src="images/YouTubeLogo.png" alt="logo_youtube">
+		<img src="images/YouTubeLogo.png" alt="logo_youtube" style="cursor: auto;">
 	</h2>
 	<div class="resultsSearch">
 		<c:forEach items="${requestScope.youtubeVideos}" var="youtubeVideo">
