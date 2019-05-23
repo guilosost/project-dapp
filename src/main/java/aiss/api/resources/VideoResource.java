@@ -82,7 +82,7 @@ public class VideoResource {
 
 	@PUT
 	@Consumes("application/json")
-	public Response updateImage(Video video) throws NotFoundException {
+	public Response updateVideo(Video video) throws NotFoundException {
 		Video oldVideo = repository.getVideo(video.getId());
 		if (oldVideo == null) {
 			throw new NotFoundException("The image with ID = " + video.getId() + " was not found");
@@ -105,7 +105,7 @@ public class VideoResource {
 
 	@DELETE
 	@Path("/videoId/{videoId}")
-	public Response removeImage(@PathParam("videoId") String id) throws NotFoundException {
+	public Response removeVideo(@PathParam("videoId") String id) throws NotFoundException {
 		Video toberemoved = repository.getVideo(id);
 		if (toberemoved == null) {
 			throw new NotFoundException("The video with ID = " + id + " was not found");
