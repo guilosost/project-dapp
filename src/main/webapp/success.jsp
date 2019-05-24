@@ -94,7 +94,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 				<br>
 				<div class="commentbox">
 					<textarea id="${deviantArtImage.deviationid}-c"
-						onclick="emptyBox(${deviantArtImage.deviationid})"
+						onclick="emptyBox('${deviantArtImage.deviationid}')"
 						class="fillable" name="comentario" maxlength="50"></textarea>
 				</div>
 				<div class="commenticon">
@@ -258,7 +258,7 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 				<br>
 				<div class="commentbox">
 					<textarea id="${youtubeVideo.id.videoId}-c"
-						onclick="emptyBox(${youtubeVideo.id.videoId})" class="fillable"
+						onclick="emptyBox('${youtubeVideo.id.videoId}')" class="fillable"
 						name="comentario" maxlength="50"></textarea>
 				</div>
 				<div class="commenticon">
@@ -286,8 +286,10 @@ function reload(query, deviOffset, youtubePage, dailyPage) {
 <script>
 function emptyBox(id) {
 	console.log("Me activo");
-	if(document.getElementById(videoId + "-c").value == "¡Comentario publicado con éxito!") {
-		document.getElementById(videoId + "-c").value = "";	
+	var texto = document.getElementById(id + "-c").value;
+	console.log(texto);
+	if(texto === "¡Comentario publicado con éxito!") {
+		document.getElementById(id + "-c").value = "";	
 	}
 }
 
