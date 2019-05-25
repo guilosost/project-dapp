@@ -108,8 +108,8 @@ public class MapMultimediaRepository implements MultimediaRepository {
 
 		Multimedia m = new Multimedia();
 		m.setId(String.valueOf(mIndex));
-		m.setListImage(imageMap.values());
-		m.setListVideo(videoMap.values());
+		m.setImages(imageMap);
+		m.setVideos(videoMap);
 		addMultimedia(m);
 
 	}
@@ -118,48 +118,48 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		return multimediaMap.values();
 	}
 
-	public Collection<Multimedia> getMultimediaByQuery(String query) {
-		Multimedia m = new Multimedia();
-		List<Multimedia> lista = new ArrayList<>();
-		List<Image> listaI = new ArrayList<>();
-		List<Video> listaV = new ArrayList<>();
-		Collection<Multimedia> mapMultimedia = multimediaMap.values();
-		for (Multimedia mu : mapMultimedia) {
-			Collection<Image> i = mu.getListImage();
-			Collection<Video> v = mu.getListVideo();
-			for (Image im : i) {
-				if (im.getTitulo().contains(query)) {
-					listaI.add(im);
-				}
-			}
-			for (Video vi : v) {
-				if (vi.getTitulo().contains(query)) {
-					listaV.add(vi);
-				}
-			}
-		}
-		m.setListImage(listaI);
-		m.setListVideo(listaV);
-		lista.add(m);
-		return lista;
-	}
+//	public Collection<Multimedia> getMultimediaByQuery(String query) {
+//		Multimedia m = new Multimedia();
+//		List<Multimedia> lista = new ArrayList<>();
+//		List<Image> listaI = new ArrayList<>();
+//		List<Video> listaV = new ArrayList<>();
+//		Collection<Multimedia> mapMultimedia = multimediaMap.values();
+//		for (Multimedia mu : mapMultimedia) {
+//			Collection<Image> i = mu.getImages().values();
+//			Collection<Video> v = mu.getVideos().values();
+//			for (Image im : i) {
+//				if (im.getTitulo().contains(query)) {
+//					listaI.add(im);
+//				}
+//			}
+//			for (Video vi : v) {
+//				if (vi.getTitulo().contains(query)) {
+//					listaV.add(vi);
+//				}
+//			}
+//		}
+//		m.setImages(listaI);
+//		m.setVideos(listaV);
+//		lista.add(m);
+//		return lista;
+//	}
 
 	public void addMultimedia(Multimedia m) {
 		multimediaMap.put(m.getId(), m);
 		mIndex++;
 	}
 
-	public void addImage(Image i) {
-		imageMap.put(i.getId(), i);
-		imageIndex++;
-	}
-
 	public Collection<Image> getAllImages() {
-		return imageMap.values();
+		return multimediaMap.get("0").getImages().values();
 	}
 
 	public Image getImage(String id) {
 		return imageMap.get(id);
+	}
+
+	public void addImage(Image i) {
+		imageMap.put(i.getId(), i);
+		imageIndex++;
 	}
 
 	public void updateImage(Image i) {
@@ -188,7 +188,7 @@ public class MapMultimediaRepository implements MultimediaRepository {
 
 	public Collection<Image> getImagesByQuery(String query) {
 		List<Image> lista = new ArrayList<>();
-		Collection<Image> mapImages = imageMap.values();
+		Collection<Image> mapImages = multimediaMap.get("0").getImages().values();
 		for (Image i : mapImages) {
 			if (i.getTitulo().contains(query)) {
 				lista.add(i);
@@ -197,20 +197,20 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		return lista;
 	}
 
-	public void addVideo(Video i) {
-		// TODO Auto-generated method stub
-		videoMap.put(i.getId(), i);
-		videoIndex++;
-	}
-
 	public Collection<Video> getAllVideos() {
 		// TODO Auto-generated method stub
-		return videoMap.values();
+		return multimediaMap.get("0").getVideos().values();
 	}
 
 	public Video getVideo(String id) {
 		// TODO Auto-generated method stub
 		return videoMap.get(id);
+	}
+
+	public void addVideo(Video i) {
+		// TODO Auto-generated method stub
+		videoMap.put(i.getId(), i);
+		videoIndex++;
 	}
 
 	public void updateVideo(Video v) {
