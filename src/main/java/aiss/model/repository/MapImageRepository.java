@@ -42,6 +42,24 @@ public class MapImageRepository implements ImageRepository {
 		im3.setId(String.valueOf(index));
 		im3.setTitulo("Barcos");
 		addImage(im3);
+
+		Image im4 = new Image();
+		im4.setAutor("Luis");
+		im4.setId(String.valueOf(index));
+		im4.setTitulo("Océano");
+		addImage(im4);
+
+		Image im5 = new Image();
+		im5.setAutor("Álvaro");
+		im5.setId(String.valueOf(index));
+		im5.setTitulo("Cascada");
+		addImage(im5);
+		
+		Image im6 = new Image();
+		im6.setAutor("Miguel");
+		im6.setId(String.valueOf(index));
+		im6.setTitulo("CSS");
+		addImage(im6);
 	}
 
 	public void addImage(Image i) {

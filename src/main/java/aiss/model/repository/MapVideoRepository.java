@@ -29,9 +29,9 @@ public class MapVideoRepository implements VideoRepository {
 
 		// Create videos
 		Video v1 = new Video();
-		v1.setAutor("Chains of Agony");
+		v1.setAutor("Gonzalo");
 		v1.setId(String.valueOf(index));
-		v1.setTitulo("Gonzalo");
+		v1.setTitulo("Chains of Agony");
 		addVideo(v1);
 
 		Video v2 = new Video();
@@ -45,6 +45,24 @@ public class MapVideoRepository implements VideoRepository {
 		v3.setId(String.valueOf(index));
 		v3.setTitulo("Montañas");
 		addVideo(v3);
+		
+		Video v4 = new Video();
+		v4.setAutor("Alejandro");
+		v4.setId(String.valueOf(index));
+		v4.setTitulo("Lagos");
+		addVideo(v4);
+
+		Video v5 = new Video();
+		v5.setAutor("Sara");
+		v5.setId(String.valueOf(index));
+		v5.setTitulo("Sagres");
+		addVideo(v5);
+		
+		Video v6 = new Video();
+		v6.setAutor("Victoria");
+		v6.setId(String.valueOf(index));
+		v6.setTitulo("New Zelland");
+		addVideo(v6);
 
 	}
 

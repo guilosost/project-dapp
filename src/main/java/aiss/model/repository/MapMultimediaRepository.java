@@ -51,11 +51,29 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		im3.setTitulo("Barcos");
 		addImage(im3);
 
+		Image im4 = new Image();
+		im4.setAutor("Luis");
+		im4.setId(String.valueOf(imageIndex));
+		im4.setTitulo("Océano");
+		addImage(im4);
+
+		Image im5 = new Image();
+		im5.setAutor("Álvaro");
+		im5.setId(String.valueOf(imageIndex));
+		im5.setTitulo("Cascada");
+		addImage(im5);
+
+		Image im6 = new Image();
+		im6.setAutor("Miguel");
+		im6.setId(String.valueOf(imageIndex));
+		im6.setTitulo("CSS");
+		addImage(im6);
+
 		// Create videos
 		Video v1 = new Video();
-		v1.setAutor("Chains of Agony");
+		v1.setAutor("Gonzalo");
 		v1.setId(String.valueOf(videoIndex));
-		v1.setTitulo("Gonzalo");
+		v1.setTitulo("Chains of Agony");
 		addVideo(v1);
 
 		Video v2 = new Video();
@@ -69,6 +87,24 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		v3.setId(String.valueOf(videoIndex));
 		v3.setTitulo("Montañas");
 		addVideo(v3);
+
+		Video v4 = new Video();
+		v4.setAutor("Alejandro");
+		v4.setId(String.valueOf(videoIndex));
+		v4.setTitulo("Lagos");
+		addVideo(v4);
+
+		Video v5 = new Video();
+		v5.setAutor("Sara");
+		v5.setId(String.valueOf(videoIndex));
+		v5.setTitulo("Sagres");
+		addVideo(v5);
+
+		Video v6 = new Video();
+		v6.setAutor("Victoria");
+		v6.setId(String.valueOf(videoIndex));
+		v6.setTitulo("New Zelland");
+		addVideo(v6);
 
 		Multimedia m = new Multimedia();
 		m.setId(String.valueOf(mIndex));

@@ -1,15 +1,20 @@
 package aiss.api.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
@@ -19,6 +24,7 @@ import javax.ws.rs.core.UriInfo;
 import org.jboss.resteasy.spi.BadRequestException;
 
 import aiss.model.Image;
+import aiss.model.ListItems;
 import aiss.model.repository.ImageRepository;
 import aiss.model.repository.MapImageRepository;
 import aiss.model.repository.VideoRepository;
@@ -43,8 +49,20 @@ public class ImageResource {
 	@GET
 	@Path("/allImages")
 	@Produces("application/json")
-	public Collection<Image> getAllImages() {
-		return imageRepository.getAllImages();
+	public ListItems<Image> getAllImages(@QueryParam("startIndex") @DefaultValue("0") int startIndex,
+			@QueryParam("maxItems") @DefaultValue("5") int maxItems) {
+		List<Image> results = new ArrayList<>(imageRepository.getAllImages());
+		 
+		maxItems = maxItems <= 10 ? maxItems : 10;
+		// Si al sumarle el máximo de items por página al índice inicial supera 
+		// el número total de items habrá que paginar y se mostrarán maxItems items.
+		// Sino, se mostrarán los resultados obtenidos.
+		int endIndex = startIndex + maxItems < results.size() ? startIndex + maxItems : results.size();
+		// Por cada página se mostrará una sublista de los items.
+		ListItems<Image> res = new ListItems<Image>(results.size(), startIndex, maxItems,
+				results.subList(startIndex, endIndex));
+
+		return res;
 	}
 
 	@GET
@@ -72,12 +90,17 @@ public class ImageResource {
 		if (image.getId() == null || "".equals(image.getId())) {
 			throw new BadRequestException("The id cannot be null");
 		}
+		boolean exc = false;
 		for (Image m : imageRepository.getAllImages()) {
 			if (m.getId().equals(image.getId())) {
-				throw new IllegalArgumentException("Ya existe un recurso con la ID seleccionada.");
-			} else {
-				imageRepository.addImage(image);
+				exc = true;
+				break;
 			}
+		}
+		if (exc == true) {
+			throw new IllegalArgumentException("La ID que intenta introducir ya está en uso.");
+		} else {
+			imageRepository.addImage(image);
 		}
 
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
