@@ -62,6 +62,7 @@ public class MapImageRepository implements ImageRepository {
 		addImage(im6);
 	}
 
+
 	public void addImage(Image i) {
 		imageMap.put(i.getId(), i);
 		index++;

@@ -49,18 +49,17 @@ public class ImageResource {
 	@GET
 	@Path("/allImages")
 	@Produces("application/json")
-	public ListItems<Image> getAllImages(@QueryParam("startIndex") @DefaultValue("0") int startIndex,
-			@QueryParam("maxItems") @DefaultValue("5") int maxItems) {
+	public ListItems<Image> getAllImages(@QueryParam("startIndex") @DefaultValue("0") int offset,
+			@QueryParam("maxItems") @DefaultValue("5") int limit) {
 		List<Image> results = new ArrayList<>(imageRepository.getAllImages());
-		 
-		maxItems = maxItems <= 10 ? maxItems : 10;
-		// Si al sumarle el máximo de items por página al índice inicial supera 
+
+		limit = limit <= 10 ? limit : 10;
+		// Si al sumarle el máximo de items por página al índice inicial supera
 		// el número total de items habrá que paginar y se mostrarán maxItems items.
 		// Sino, se mostrarán los resultados obtenidos.
-		int endIndex = startIndex + maxItems < results.size() ? startIndex + maxItems : results.size();
+		int endIndex = offset + limit < results.size() ? offset + limit : results.size();
 		// Por cada página se mostrará una sublista de los items.
-		ListItems<Image> res = new ListItems<Image>(results.size(), startIndex, maxItems,
-				results.subList(startIndex, endIndex));
+		ListItems<Image> res = new ListItems<Image>(results.size(), offset, limit, results.subList(offset, endIndex));
 
 		return res;
 	}
