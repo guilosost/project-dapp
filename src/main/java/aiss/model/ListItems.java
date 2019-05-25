@@ -5,21 +5,21 @@ import java.util.List;
 public class ListItems<T> {
 
 	private Integer itemsTotales;
-	private Integer offset; // Número de índice inicial
-	private Integer limit; // Límite de objetos por página
+	private Integer startIndex;
+	private Integer maxItems;
 	private List<T> items;
 
 	public ListItems(Integer itemsTotales, List<T> items) {
 		this.itemsTotales = itemsTotales;
-		this.offset = 0; 
-		this.limit = 5; 
+		this.startIndex = 0;
+		this.maxItems = 5;
 		this.items = items;
 	}
 
 	public ListItems(Integer itemsTotales, Integer startIndex, Integer maxItems, List<T> items) {
 		this.itemsTotales = itemsTotales;
-		this.offset = startIndex;
-		this.limit = maxItems;
+		this.startIndex = startIndex;
+		this.maxItems = maxItems;
 		this.items = items;
 	}
 
@@ -32,19 +32,19 @@ public class ListItems<T> {
 	}
 
 	public Integer getStartIndex() {
-		return offset;
+		return startIndex;
 	}
 
 	public void setStartIndex(Integer startIndex) {
-		this.offset = startIndex;
+		this.startIndex = startIndex;
 	}
 
 	public Integer getMaxItems() {
-		return limit;
+		return maxItems;
 	}
 
 	public void setMaxItems(Integer maxItems) {
-		this.limit = maxItems;
+		this.maxItems = maxItems;
 	}
 
 	public List<T> getItems() {
@@ -61,8 +61,8 @@ public class ListItems<T> {
 		int result = 1;
 		result = prime * result + ((items == null) ? 0 : items.hashCode());
 		result = prime * result + ((itemsTotales == null) ? 0 : itemsTotales.hashCode());
-		result = prime * result + ((limit == null) ? 0 : limit.hashCode());
-		result = prime * result + ((offset == null) ? 0 : offset.hashCode());
+		result = prime * result + ((maxItems == null) ? 0 : maxItems.hashCode());
+		result = prime * result + ((startIndex == null) ? 0 : startIndex.hashCode());
 		return result;
 	}
 
@@ -85,15 +85,15 @@ public class ListItems<T> {
 				return false;
 		} else if (!itemsTotales.equals(other.itemsTotales))
 			return false;
-		if (limit == null) {
-			if (other.limit != null)
+		if (maxItems == null) {
+			if (other.maxItems != null)
 				return false;
-		} else if (!limit.equals(other.limit))
+		} else if (!maxItems.equals(other.maxItems))
 			return false;
-		if (offset == null) {
-			if (other.offset != null)
+		if (startIndex == null) {
+			if (other.startIndex != null)
 				return false;
-		} else if (!offset.equals(other.offset))
+		} else if (!startIndex.equals(other.startIndex))
 			return false;
 		return true;
 	}

@@ -1,13 +1,12 @@
 package aiss.model;
 
 import java.util.Collection;
-import java.util.Map;
 
 public class Multimedia {
 
 	private String id;
-	private Map<String, Video> videos;
-	private Map<String, Image> images;
+	private Collection<Video> listVideo;
+	private Collection<Image> listImage;
 
 	public Multimedia() {
 
@@ -21,20 +20,20 @@ public class Multimedia {
 		this.id = id;
 	}
 
-	public Map<String, Video> getVideos() {
-		return videos;
+	public Collection<Video> getListVideo() {
+		return listVideo;
 	}
 
-	public void setVideos(Map<String, Video> videos) {
-		this.videos = videos;
+	public void setListVideo(Collection<Video> listVideo) {
+		this.listVideo = listVideo;
 	}
 
-	public Map<String, Image> getImages() {
-		return images;
+	public Collection<Image> getListImage() {
+		return listImage;
 	}
 
-	public void setImages(Map<String, Image> images) {
-		this.images = images;
+	public void setListImage(Collection<Image> listImage) {
+		this.listImage = listImage;
 	}
 
 }
