@@ -15,9 +15,14 @@
 <script>
 function reload(query, deviOffset, youtubePage, dailyPage) {
 	var q = document.getElementById("searchQuery").value = query;
-	var o = document.getElementById("nextDeviantPage").value = deviOffset;
+	if(!(deviOffset === "")) {
+		var o = document.getElementById("nextDeviantPage").value = deviOffset;
+	}
+	if(!(dailyPage === "")) {
+		var d = document.getElementById("nextDailymotionPage").value = dailyPage;
+	}
+		
 	var p = document.getElementById("nextYoutubePage").value = youtubePage;
-	var d = document.getElementById("nextDailymotionPage").value = dailyPage;
 	console.log("Query: " + q + ", offset: " + o + ", page: " + p + ", daily: " + d);
 	document.getElementById("searchForm").submit();
 

@@ -74,8 +74,8 @@ public class SearchController extends HttpServlet {
 				YoutubeRatedVideoGet dislikedVideos = youtube.getDislikedVideos();
 
 				for (VideoItem v : youtubeResults.getVideoItems()) {
-					if (v.getVideoSnippet().getTitle().length() > 40)
-						v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 40));
+					if (v.getVideoSnippet().getTitle().length() > 50)
+						v.getVideoSnippet().setTitle(v.getVideoSnippet().getTitle().substring(0, 45));
 				}
 
 				log.log(Level.FINE, "Next page " + youtubeResults.getNextPageToken());
