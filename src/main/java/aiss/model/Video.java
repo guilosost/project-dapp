@@ -1,8 +1,5 @@
 package aiss.model;
 
-import javax.ws.rs.Path;
-
-
 public class Video {
 
 	private String id;

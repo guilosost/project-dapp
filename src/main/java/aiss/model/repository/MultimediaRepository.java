@@ -35,8 +35,12 @@ public interface MultimediaRepository {
 	public void deleteVideo(String id);
 
 	public Collection<Video> getVideosByQuery(String query);
+	
+	public Collection<Video> getVideosAutor(String autor);
 
 	public Collection<Multimedia> getMultimediaByQuery(String query);
+
+	public Collection<Multimedia> getMultimediaAutor(String autor);
 
 	public void addMultimedia(Multimedia m);
 

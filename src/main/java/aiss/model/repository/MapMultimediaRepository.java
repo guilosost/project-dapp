@@ -68,6 +68,12 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		im6.setId(String.valueOf(imageIndex));
 		im6.setTitulo("CSS");
 		addImage(im6);
+		
+		Image im7 = new Image();
+		im7.setAutor("Guillermo");
+		im7.setId(String.valueOf(imageIndex));
+		im7.setTitulo("Prueba 1");
+		addImage(im7);
 
 		// Create videos
 		Video v1 = new Video();
@@ -105,6 +111,12 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		v6.setId(String.valueOf(videoIndex));
 		v6.setTitulo("New Zelland");
 		addVideo(v6);
+		
+		Video v7 = new Video();
+		v7.setAutor("Guillermo");
+		v7.setId(String.valueOf(videoIndex));
+		v7.setTitulo("Prueba 2");
+		addVideo(v7);
 
 		Multimedia m = new Multimedia();
 		m.setId(String.valueOf(mIndex));
@@ -128,12 +140,38 @@ public class MapMultimediaRepository implements MultimediaRepository {
 			Collection<Image> i = mu.getImages().values();
 			Collection<Video> v = mu.getVideos().values();
 			for (Image im : i) {
-				if (im.getTitulo().contains(query)) {
+				if (im.getTitulo().toLowerCase().contains(query.toLowerCase())) {
 					listaI.put(im.getId(), im);
 				}
 			}
 			for (Video vi : v) {
-				if (vi.getTitulo().contains(query)) {
+				if (vi.getTitulo().toLowerCase().contains(query.toLowerCase())) {
+					listaV.put(vi.getId(), vi);
+				}
+			}
+		}
+		m.setImages(listaI);
+		m.setVideos(listaV);
+		lista.put(m.getId(), m);
+		return lista.values();
+	}
+	
+	public Collection<Multimedia> getMultimediaAutor(String autor) {
+		Multimedia m = new Multimedia();
+		Map<String, Multimedia> lista = new HashMap<>();
+		Map<String, Image> listaI = new HashMap<>();
+		Map<String, Video> listaV = new HashMap<>();
+		Collection<Multimedia> mapMultimedia = multimediaMap.values();
+		for (Multimedia mu : mapMultimedia) {
+			Collection<Image> i = mu.getImages().values();
+			Collection<Video> v = mu.getVideos().values();
+			for (Image im : i) {
+				if (im.getAutor().toLowerCase().contains(autor.toLowerCase())) {
+					listaI.put(im.getId(), im);
+				}
+			}
+			for (Video vi : v) {
+				if (vi.getAutor().toLowerCase().contains(autor.toLowerCase())) {
 					listaV.put(vi.getId(), vi);
 				}
 			}
@@ -179,7 +217,7 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		List<Image> lista = new ArrayList<>();
 		Collection<Image> mapImages = imageMap.values();
 		for (Image i : mapImages) {
-			if (i.getAutor().equals(autor)) {
+			if (i.getAutor().toLowerCase().contains(autor.toLowerCase())) {
 				lista.add(i);
 			}
 		}
@@ -190,7 +228,7 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		List<Image> lista = new ArrayList<>();
 		Collection<Image> mapImages = multimediaMap.get("0").getImages().values();
 		for (Image i : mapImages) {
-			if (i.getTitulo().contains(query)) {
+			if (i.getTitulo().toLowerCase().contains(query.toLowerCase())) {
 				lista.add(i);
 			}
 		}
@@ -198,23 +236,19 @@ public class MapMultimediaRepository implements MultimediaRepository {
 	}
 
 	public Collection<Video> getAllVideos() {
-		// TODO Auto-generated method stub
 		return multimediaMap.get("0").getVideos().values();
 	}
 
 	public Video getVideo(String id) {
-		// TODO Auto-generated method stub
 		return videoMap.get(id);
 	}
 
 	public void addVideo(Video i) {
-		// TODO Auto-generated method stub
 		videoMap.put(i.getId(), i);
 		videoIndex++;
 	}
 
 	public void updateVideo(Video v) {
-		// TODO Auto-generated method stub
 		Video video = videoMap.get(v.getId());
 		video.setTitulo(v.getTitulo());
 		video.setAutor(v.getAutor());
@@ -223,16 +257,25 @@ public class MapMultimediaRepository implements MultimediaRepository {
 	}
 
 	public void deleteVideo(String id) {
-		// TODO Auto-generated method stub
 		videoMap.remove(id);
 	}
 
-	public Collection<Video> getVideosByQuery(String query) {
-		// TODO Auto-generated method stub
+	public Collection<Video> getVideosAutor(String autor) {
 		List<Video> lista = new ArrayList<>();
 		Collection<Video> mapVideos = videoMap.values();
 		for (Video v : mapVideos) {
-			if (v.getTitulo().contains(query)) {
+			if (v.getAutor().toLowerCase().contains(autor.toLowerCase())) {
+				lista.add(v);
+			}
+		}
+		return lista;
+	}
+
+	public Collection<Video> getVideosByQuery(String query) {
+		List<Video> lista = new ArrayList<>();
+		Collection<Video> mapVideos = videoMap.values();
+		for (Video v : mapVideos) {
+			if (v.getTitulo().toLowerCase().contains(query.toLowerCase())) {
 				lista.add(v);
 			}
 		}

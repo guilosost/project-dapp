@@ -12,7 +12,7 @@ public class ListItems<T> {
 	public ListItems(Integer itemsTotales, List<T> items) {
 		this.itemsTotales = itemsTotales;
 		this.offset = 0;
-		this.limit = 5;
+		this.limit = items.size();
 		this.items = items;
 	}
 
@@ -74,7 +74,7 @@ public class ListItems<T> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ListItems<T> other = (ListItems<T>) obj;
+		ListItems<?> other = (ListItems<?>) obj;
 		if (items == null) {
 			if (other.items != null)
 				return false;
