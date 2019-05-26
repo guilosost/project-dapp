@@ -16,10 +16,10 @@ public class ListItems<T> {
 		this.items = items;
 	}
 
-	public ListItems(Integer itemsTotales, Integer startIndex, Integer maxItems, List<T> items) {
+	public ListItems(Integer itemsTotales, Integer offset, Integer limit, List<T> items) {
 		this.itemsTotales = itemsTotales;
-		this.offset = startIndex;
-		this.limit = maxItems;
+		this.offset = offset;
+		this.limit = limit;
 		this.items = items;
 	}
 
