@@ -36,7 +36,7 @@ public interface MultimediaRepository {
 
 	public Collection<Video> getVideosByQuery(String query);
 
-//	public Collection<Multimedia> getMultimediaByQuery(String query);
+	public Collection<Multimedia> getMultimediaByQuery(String query);
 
 	public void addMultimedia(Multimedia m);
 

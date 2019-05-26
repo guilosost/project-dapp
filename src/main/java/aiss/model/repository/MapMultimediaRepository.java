@@ -118,31 +118,31 @@ public class MapMultimediaRepository implements MultimediaRepository {
 		return multimediaMap.values();
 	}
 
-//	public Collection<Multimedia> getMultimediaByQuery(String query) {
-//		Multimedia m = new Multimedia();
-//		List<Multimedia> lista = new ArrayList<>();
-//		List<Image> listaI = new ArrayList<>();
-//		List<Video> listaV = new ArrayList<>();
-//		Collection<Multimedia> mapMultimedia = multimediaMap.values();
-//		for (Multimedia mu : mapMultimedia) {
-//			Collection<Image> i = mu.getImages().values();
-//			Collection<Video> v = mu.getVideos().values();
-//			for (Image im : i) {
-//				if (im.getTitulo().contains(query)) {
-//					listaI.add(im);
-//				}
-//			}
-//			for (Video vi : v) {
-//				if (vi.getTitulo().contains(query)) {
-//					listaV.add(vi);
-//				}
-//			}
-//		}
-//		m.setImages(listaI);
-//		m.setVideos(listaV);
-//		lista.add(m);
-//		return lista;
-//	}
+	public Collection<Multimedia> getMultimediaByQuery(String query) {
+		Multimedia m = new Multimedia();
+		Map<String, Multimedia> lista = new HashMap<>();
+		Map<String, Image> listaI = new HashMap<>();
+		Map<String, Video> listaV = new HashMap<>();
+		Collection<Multimedia> mapMultimedia = multimediaMap.values();
+		for (Multimedia mu : mapMultimedia) {
+			Collection<Image> i = mu.getImages().values();
+			Collection<Video> v = mu.getVideos().values();
+			for (Image im : i) {
+				if (im.getTitulo().contains(query)) {
+					listaI.put(im.getId(), im);
+				}
+			}
+			for (Video vi : v) {
+				if (vi.getTitulo().contains(query)) {
+					listaV.put(vi.getId(), vi);
+				}
+			}
+		}
+		m.setImages(listaI);
+		m.setVideos(listaV);
+		lista.put(m.getId(), m);
+		return lista.values();
+	}
 
 	public void addMultimedia(Multimedia m) {
 		multimediaMap.put(m.getId(), m);

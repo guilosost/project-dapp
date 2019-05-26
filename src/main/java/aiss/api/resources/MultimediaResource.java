@@ -50,41 +50,41 @@ public class MultimediaResource {
 	@GET
 	@Path("/all")
 	@Produces("application/json")
-	public ListItems<Multimedia> getAll(@QueryParam("startIndex") @DefaultValue("0") int startIndex,
-			@QueryParam("maxItems") @DefaultValue("5") int maxItems) {
+	public ListItems<Multimedia> getAll(@QueryParam("offset") @DefaultValue("0") int offset,
+			@QueryParam("limit") @DefaultValue("5") int limit) {
 		List<Multimedia> results = new ArrayList<>(multiRepository.getAll());
 
-		maxItems = maxItems <= 10 ? maxItems : 10;
+		limit = limit <= 10 ? limit : 10;
 		// Si al sumarle el máximo de items por página al índice inicial supera
 		// el número total de items habrá que paginar y se mostrarán maxItems items.
 		// Sino, se mostrarán los resultados obtenidos.
-		int endIndex = startIndex + maxItems < results.size() ? startIndex + maxItems : results.size();
+		Integer endIndex = offset + limit < results.size() ? offset + limit : results.size();
 		// Por cada página se mostrará una sublista de los items.
-		ListItems<Multimedia> res = new ListItems<Multimedia>(results.size(), startIndex, maxItems,
-				results.subList(startIndex, endIndex));
+		ListItems<Multimedia> res = new ListItems<Multimedia>(results.size(), offset, limit,
+				results.subList(offset, endIndex));
 
 		return res;
 	}
 
-//	@GET
-//	@Path("/all/{query}")
-//	@Produces("application/json")
-//	public Collection<Multimedia> getAllByQuery(@PathParam("query") String query) {
-//		return multiRepository.getMultimediaByQuery(query);
-//	}
+	@GET
+	@Path("/all/{query}")
+	@Produces("application/json")
+	public Collection<Multimedia> getAllByQuery(@PathParam("query") String query) {
+		return multiRepository.getMultimediaByQuery(query);
+	}
 
 	@GET
 	@Path("/allImages")
 	@Produces("application/json")
-	public ListItems<Image> getAllImages(@QueryParam("startIndex") @DefaultValue("0") int offset,
-			@QueryParam("maxItems") @DefaultValue("5") int limit) {
+	public ListItems<Image> getAllImages(@QueryParam("offset") @DefaultValue("0") int offset,
+			@QueryParam("limit") @DefaultValue("5") int limit) {
 		List<Image> results = new ArrayList<>(multiRepository.getAllImages());
 
 		limit = limit <= 10 ? limit : 10;
 		// Si al sumarle el máximo de items por página al índice inicial supera
 		// el número total de items habrá que paginar y se mostrarán maxItems items.
 		// Sino, se mostrarán los resultados obtenidos.
-		int endIndex = offset + limit < results.size() ? offset + limit : results.size();
+		Integer endIndex = offset + limit < results.size() ? offset + limit : results.size();
 		// Por cada página se mostrará una sublista de los items.
 		ListItems<Image> res = new ListItems<Image>(results.size(), offset, limit, results.subList(offset, endIndex));
 
@@ -110,6 +110,7 @@ public class MultimediaResource {
 	}
 
 	@POST
+	@Path("/addImage")
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response addImage(@Context UriInfo uriInfo, Image image) {
@@ -137,6 +138,7 @@ public class MultimediaResource {
 	}
 
 	@PUT
+	@Path("/updateImage")
 	@Consumes("application/json")
 	public Response updateImage(Image image) throws NotFoundException {
 		Image oldImage = multiRepository.getImage(image.getId());
@@ -160,7 +162,7 @@ public class MultimediaResource {
 	}
 
 	@DELETE
-	@Path("/imageId/{imageId}")
+	@Path("/deleteImage/{imageId}")
 	public Response removeImage(@PathParam("imageId") String id) throws NotFoundException {
 		Image toberemoved = multiRepository.getImage(id);
 		if (toberemoved == null) {
@@ -174,15 +176,15 @@ public class MultimediaResource {
 	@GET
 	@Path("/allVideos")
 	@Produces("application/json")
-	public ListItems<Video> getAllVideos(@QueryParam("startIndex") @DefaultValue("0") int offset,
-			@QueryParam("maxItems") @DefaultValue("5") int limit) {
+	public ListItems<Video> getAllVideos(@QueryParam("offset") @DefaultValue("0") int offset,
+			@QueryParam("limit") @DefaultValue("5") int limit) {
 		List<Video> results = new ArrayList<>(multiRepository.getAllVideos());
 
 		limit = limit <= 10 ? limit : 10;
 		// Si al sumarle el máximo de items por página al índice inicial supera
 		// el número total de items habrá que paginar y se mostrarán maxItems items.
 		// Sino, se mostrarán los resultados obtenidos.
-		int endIndex = offset + limit < results.size() ? offset + limit : results.size();
+		Integer endIndex = offset + limit < results.size() ? offset + limit : results.size();
 		// Por cada página se mostrará una sublista de los items.
 		ListItems<Video> res = new ListItems<Video>(results.size(), offset, limit, results.subList(offset, endIndex));
 
@@ -208,13 +210,26 @@ public class MultimediaResource {
 	}
 
 	@POST
+	@Path("/addVideo")
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response addVideo(@Context UriInfo uriInfo, Video video) {
 		if (video.getId() == null || "".equals(video.getId())) {
 			throw new BadRequestException("The id cannot be null");
 		}
-		multiRepository.addVideo(video);
+
+		boolean exc = false;
+		for (Video v : multiRepository.getAllVideos()) {
+			if (v.getId().equals(video.getId())) {
+				exc = true;
+				break;
+			}
+		}
+		if (exc == true) {
+			throw new IllegalArgumentException("La ID que intenta introducir ya está en uso.");
+		} else {
+			multiRepository.addVideo(video);
+		}
 
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
 		URI uri = ub.build(video.getId());
@@ -224,6 +239,7 @@ public class MultimediaResource {
 	}
 
 	@PUT
+	@Path("/updateVideo")
 	@Consumes("application/json")
 	public Response updateVideo(Video video) throws NotFoundException {
 		Video oldVideo = multiRepository.getVideo(video.getId());
@@ -247,7 +263,7 @@ public class MultimediaResource {
 	}
 
 	@DELETE
-	@Path("/videoId/{videoId}")
+	@Path("/deleteVideo/{videoId}")
 	public Response removeVideo(@PathParam("videoId") String id) throws NotFoundException {
 		Video toberemoved = multiRepository.getVideo(id);
 		if (toberemoved == null) {
