@@ -1,0 +1,542 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: ProjectDAPP's API
+  description: This is the ProjectDAPP's API implementation.
+  
+  contact: 
+    email: proyectdapp@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    
+host: project-dapp.appspot.com
+basePath: /api/m
+schemes:
+ - https
+
+definitions:
+  ListItems:
+    type: object
+    properties:
+      itemsTotales:
+        type: integer
+        example: 1
+      startIndex:
+        type: integer
+        example: 0
+      maxItems:
+        type: integer
+        example: 5
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "0"
+            titulo:
+              type: string
+              example: "Swagger es confuso"
+            autor:
+              type: string
+              example: "Yanes"
+    required:
+      - itemsTotales
+      
+  Items:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "0"
+            titulo:
+              type: string
+              example: "Soy lo que buscas"
+            autor:
+              type: string
+              example: "Search"
+    required:
+      - itemsTotales
+      
+  ItemIV:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "0"
+      titulo:
+        type: string
+        example: "Soy lo que buscas"
+      autor:
+        type: string
+        example: "Search"
+    required:
+      - id
+      
+  ListMultimedia:
+    type: object
+    properties:
+      itemsTotales:
+        type: integer
+        example: 1
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "0"
+            videos:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "0"
+                  titulo:
+                    type: string
+                    example: "Soy uno de tus vídeos"
+                  autor:
+                    type: string
+                    example: "Alguien"
+            images:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "0"
+                  titulo:
+                    type: string
+                    example: "Soy una de tus imágenes"
+                  autor:
+                    type: string
+                    example: "Alguien más"
+      startIndex:
+        type: integer
+        example: 0
+      maxItems:
+        type: integer
+        example: 1
+    required:
+      - itemsTotales
+  
+  Multimedia:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "null"
+      videos:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "0"
+            titulo:
+              type: string
+              example: "Soy uno de tus vídeos"
+            autor:
+              type: string
+              example: "Alguien"
+      images:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "0"
+            titulo:
+              type: string
+              example: "Soy una de tus imágenes"
+            autor:
+              type: string
+              example: "Alguien más"
+    required:
+      - items
+      
+
+tags:
+  - name: Image Resource
+    description: Peticiones disponible para el recurso Image
+  - name: Video Resource
+    description: Peticiones disponibles para el recurso Video
+  - name: Multimedia Resource
+    description: Peticiones disponibles para el recurso Multimedia
+
+paths:
+  /all:
+    get:
+      tags: 
+      - Multimedia Resource
+      summary: "Devuelve todo el multimedia."
+      description: Devuelve todo el multimedia disponible en el repositorio.
+      operationId: getAll
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListMultimedia'
+  
+  /all/query/{query}:
+    get:
+      tags: 
+      - Multimedia Resource
+      summary: "Devuelve multimedia según el título."
+      description: Devuelve todo el multimedia que contenga la query en el título.
+      operationId: getAllByQuery
+      parameters:
+      - name: query
+        in: path
+        description: Título de lo que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Multimedia'
+            
+  /all/author/{author}:
+    get:
+      tags: 
+      - Multimedia Resource
+      summary: "Devuelve multimedia según el autor."
+      description: Devuelve todo el multimedia cuyo autor presente coincidencias con author.
+      operationId: getAllByAuthor
+      parameters:
+      - name: author
+        in: path
+        description: Autor de lo que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Multimedia'
+
+  /images:
+    get:
+      tags: 
+      - Image Resource
+      summary: "Devuelve todas las imágenes."
+      description: Devuelve todas las imágenes disponibles dentro de multimedia.
+      operationId: getAllImages
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListItems'
+            
+  /images/page/{page}:
+    get:
+      tags: 
+      - Image Resource
+      summary: "Devuelve todas las imágenes de forma paginada."
+      description: Devuelve la lista de imágenes paginada empezando por la página page.
+      operationId: getImagesByPage
+      parameters:
+      - name: page
+        in: path
+        description: Página a la que se quiere acceder.
+        required: true
+        type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListItems'
+  
+  /images/query/{query}:
+    get:
+      tags: 
+      - Image Resource
+      summary: "Devuelve imágenes según el título."
+      description: Devuelve las imágenes que contengan la query en el título.
+      operationId: getImagesByQuery
+      parameters:
+      - name: query
+        in: path
+        description: Título de la imagen que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+            
+  /images/author/{author}:
+    get:
+      tags: 
+      - Image Resource
+      summary: "Devuelve imágenes según el autor."
+      description: Devuelve las imágenes cuyo autor presente coincidencias con author.
+      operationId: getImagesByAuthor
+      parameters:
+      - name: author
+        in: path
+        description: Autor de la imagen que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+            
+  /images/id/{id}:
+    get:
+      tags: 
+      - Image Resource
+      summary: "Devuelve una imagen según su ID."
+      description: Devuelve la imagen cuyo ID coincida con el indicado.
+      operationId: getImageById
+      parameters:
+      - name: id
+        in: path
+        description: ID de la imagen que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+          
+  /addImage:
+    post:
+      tags:
+      - Image Resource
+      summary: "Añade una nueva imagen."
+      description: ""
+      operationId: addImage
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Imagen a añadir."
+        required: true
+        schema:
+          $ref: "#/definitions/ItemIV"
+      responses:
+        405:
+          description: "Invalid input"
+          
+  /updateImage:
+    put:
+      tags:
+      - Image Resource
+      summary: "Actualiza una imagen existente."
+      description: ""
+      operationId: updateImage
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Imagen a actualizar."
+        required: true
+        schema:
+          $ref: "#/definitions/ItemIV"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Imagen not found"
+        405:
+          description: "Validation exception"
+          
+  /deleteImage/{imageId}:
+    delete:
+      tags:
+      - Image Resource
+      summary: "Elimina una imagen."
+      description: ""
+      operationId: removeImage
+      produces:
+      - "application/json"
+      parameters:
+      - name: "imageId"
+        in: "path"
+        description: "ID de la imagen a eliminar."
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Image not found"
+            
+  /videos:
+    get:
+      tags: 
+      - Video Resource
+      summary: "Devuelve todos los vídeos."
+      description: Devuelve todos los vídeos disponibles dentro de multimedia.
+      operationId: getAllVideos
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListItems'
+            
+  /videos/page/{page}:
+    get:
+      tags: 
+      - Video Resource
+      summary: "Devuelve todos los vídeos de forma paginada."
+      description: Devuelve la lista de vídeos paginada empezando por la página page.
+      operationId: getVideosByPage
+      parameters:
+      - name: page
+        in: path
+        description: Página a la que se quiere acceder.
+        required: true
+        type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ListItems'
+  
+  /videos/query/{query}:
+    get:
+      tags: 
+      - Video Resource
+      summary: "Devuelve vídeos según el título."
+      description: Devuelve los vídeos que contengan la query en el título.
+      operationId: getVideosByQuery
+      parameters:
+      - name: query
+        in: path
+        description: Título del vídeo que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+            
+  /videos/author/{author}:
+    get:
+      tags: 
+      - Video Resource
+      summary: "Devuelve vídeos según el autor."
+      description: Devuelve las imágenes cuyo autor presente coincidencias con author.
+      operationId: getVideosByAuthor
+      parameters:
+      - name: author
+        in: path
+        description: Autor del vídeo que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+            
+  /videos/id/{id}:
+    get:
+      tags: 
+      - Video Resource
+      summary: "Devuelve un vídeo según su ID."
+      description: Devuelve el vídeo cuyo ID coincida con el indicado.
+      operationId: getVideoById
+      parameters:
+      - name: id
+        in: path
+        description: ID del vídeo que se busca.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+
+  /addVideo:
+    post:
+      tags:
+      - Video Resource
+      summary: "Añade un nuevo vídeo."
+      description: ""
+      operationId: addVideo
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Vídeo a añadir."
+        required: true
+        schema:
+          $ref: "#/definitions/ItemIV"
+      responses:
+        405:
+          description: "Invalid input"
+          
+  /updateVideo:
+    put:
+      tags:
+      - Video Resource
+      summary: "Actualiza un vídeo existente."
+      description: ""
+      operationId: updateVideo
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Vídeo a actualizar."
+        required: true
+        schema:
+          $ref: "#/definitions/ItemIV"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Video not found"
+        405:
+          description: "Validation exception"
+          
+  /deleteVideo/{videoId}:
+    delete:
+      tags:
+      - Video Resource
+      summary: "Elimina un vídeo."
+      description: ""
+      operationId: removeVideo
+      produces:
+      - "application/json"
+      parameters:
+      - name: "videoId"
+        in: "path"
+        description: "ID del vídeo a eliminar."
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Video not found"
